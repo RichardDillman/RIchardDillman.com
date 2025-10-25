@@ -1,0 +1,186 @@
+---
+title: "Creating readable names"
+date: "2021-01-14"
+description: "I have seen a proliferation of easy meaningless words that look like documentation but explain very l..."
+tags: ["beginners", "codequality", "javascript"]
+coverImage: "/images/blog/creating-readable-names.jpeg"
+---
+
+
+I have seen a proliferation of easy meaningless words that look like documentation but explain very little. Naming is one of our most challenging problems. The importance of meaningful names cannot be overstated and should not be an afterthought. Attention to naming increases code readability and trust. Well-named methods and variables are more likely to be reused, and creating reusable code is the purpose of creating shared libraries.
+
+## Combining words
+
+* **Camel**: (camelCase)
+* **Kebab**: (kebab-case)
+* **Pascal**: (PascalCase)
+* **Snake**: (snake_case)
+* **Screaming Snake**: (SCREAMING_SNAKE_CASE)
+
+Each language has its preferred cases for various things. Always follow the lining standards for your language. I use JavaScript and Python so here are those.
+
+### Javascript
+
+* **Camel**: variables, methods, and functions
+* **Pascal**: types, classes, and constructors
+* **Screaming Snake Case**: global immutable constants
+
+### Python
+
+* **Snake Case**: variables, methods, and functions
+* **Pascal**: types, classes, and constructors
+* **Screaming Snake Case**: global immutable constants
+
+## Meaningless words:
+
+Never use the following words. They add no meaning to the name and can always be replaced with a better, more specific term.
+
+* code
+* data
+* meta
+* mutate
+* parse
+* payload
+* transform
+* util
+
+Consider the difference between two methods called **getArticle** and **getArticleData**. As an outsider reading that API, if there is nothing else known about those methods, it would be very difficult to know which one to use in each situation. The word **data** is adding no information.
+
+One could say that people should just read the documentation if they want to know the method details. **getArticleData** becomes tough to understand when nested within other functions.
+
+For example:
+
+```JavaScript
+function getAuthors(id) {
+  const data = service.getArticleData(id);
+  const article = service.getArticle(id);
+  return article.getAuthors(data);
+}
+```
+
+Although we can see this method is supposed to get the authors of an article, the internal logic is difficult to read because it is unclear what the internal methods do. The word Data doesn't add enough meaning to warrant, adding it to the name.
+
+Consider the difference between the three methods __mutate__, __transform__, and __parse__. Having not read the implementation of those methods, you can not know the convention for what these words mean within the context of the project. It is challenging to see the purpose of those methods or the order in which they should be used.
+
+For example:
+
+```JavaScript
+function getArticle(uri) {
+  return Article.fetch(uri)
+    .then(mutateAuthors)
+    .then(parseAuthors) // bug: authors should have been parsed before being mutated
+    .then(transform);
+}
+```
+
+Although it is evident that this method gets an article (of some unknown state and type), finding bugs with the ordering or functionality of this method is impossible without resorting to debugger statements or console logs. It is forcing the developer to run the code to understand the expected values between each step.
+
+## Obfuscation
+
+When the purpose of the function or variable name is to hide or limit understanding (i.e., black boxes, facades, moderators), then obviously this does not apply. The words referred to here as having low informational value may be useful in those cases where we're deliberately trying to hide.
+
+For example:
+
+```JavaScript
+return getArticle()
+  .then(applyTransformations(options));
+```
+
+In this case, we're deliberately hiding what the transformations are behind a layer of obfuscation or abstraction. There are many reasons this is valuable, including preserving the right to change the contents of the functionality in the future dramatically.
+
+## Acronyms, Initialism, Abbreviations, and Disemvoweling
+
+Shortened words are a constant source of confusion. It is generally better to enter the full name and not the abbreviation, but there are cases where it would be redundant to do so, as in the case of well-known acronyms like AMP or HTML. In this case, stick to the camel case and only capitalize the first letter of the acronym, especially when the initialism is beginning.
+
+## Single Characters
+
+Single-character names should be avoided, even within a loop where the temptation to use an “I” for the iterator.  Think of the group you are looping over. Doesn’t the following make a lot more sense?
+
+```Javascript
+for (const dog in dogs) {
+  console.log(`${dog}: ${dogs[dog]}`);
+}
+```
+
+## Better Verbs:
+
+* **get**: Retrieve some state.
+* **set**: Change some state.
+* **reset**: Reset some state to its default value.
+* **add**: Add new content to some state.
+* **remove**: Delete some existing state.
+* **apply**: In-memory replacements
+* **compose**: Create a new dataset from existing information.
+* **fetch**:  Retrieve some state from an external data store.
+* **handle**: Deal with an action.  Often used in callbacks.
+* **is/has**: A pre-verb to denote a boolean.
+* **$**: A pre-verb to indicate a JQuery reference.
+
+## Duplication
+
+Any named item that is a child should not duplicate its parent name, nor should it repeat any synonym of that patents name. In the following example, we see breakpoints.  We know that breakpoints refer to widths, and as our project is mobile-first, we know they are all minimum widths.
+
+**BAD**
+```JavaScript
+$breakpoints = {
+  minWidthLg: “1440px”,
+  minWidthMd: “1200px”,
+  minWidthSm: “992px”,
+  minWidthXs: “768px”,
+  minWidthXxs: “500px”
+};
+```
+
+**GOOD**
+```JavaScript
+$breakpoints = {
+    xl: “1440px”,
+    lg: “1200px”,
+    md: “992px”,
+    sm: “768px”,
+    xs: “500px”
+};
+```
+
+## Classes
+
+Classes must be named with an appropriate proper singular noun in PascalCase, and tell us that this variable contains a type with properties and methods.
+
+```JavaScript
+class Animal { }
+class Dog extends Animal { }
+class Dachshunds extends Dog { }
+```
+
+## Class Methods and properties
+
+Class methods and properties use the verb + noun convention, but the methods can get away with omitting the noun in some cases.  In this case, the noun is the parent class.  User.get() assumes you are getting the user User.name assumes a user name.
+
+```JavaScript
+Dog.getName()
+Dog.setColor()
+Dog.wagTail()
+```
+
+## Numbers, Strings, and Objects
+
+Name all Numbers, strings, and objects with the most appropriate singular noun.
+
+## Booleans
+
+The names for booleans are in the form of a question, asking what it is or has or can be.  So our verbs are: is, has, can, or will.
+
+## Arrays
+
+Name arrays with a plural noun, allowing us to address each child as a singular noun.  If need be, you can replace plural with a collection name birds becomes **flockOfBirds**.
+
+## Functions
+
+Functions are always actions. So we start with a verb then add a noun. Verb + Noun results in a command for a thing. 
+
+```JavaScript
+getBirds();
+goHome()
+```
+
+Some languages have their own rules around specific types of things (TypeScript prefers interfaces begin with a capital I). I am mostly interested in language-agnostic naming. Do you have any preferences around naming? Bring them up in the comments, and let’s discuss!

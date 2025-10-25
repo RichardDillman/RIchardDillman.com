@@ -1,0 +1,183 @@
+# Claude Scaffold PRD (Single Block, Copy Ready)
+name: Personal Brand Website (Richard Dillman)
+version: 1.0
+framework: Next.js 15
+hosting: Vercel
+style: TailwindCSS
+content: MDX or Contentlayer
+owner: Richard Dillman
+authoring_agent: Claude Code
+
+## Overview
+A personal brand website that showcases engineering leadership, performance focus, and mentoring. Tone is conversational, credible, human. Goal is minimalism, clarity, speed.
+
+## Objectives
+- Present Richard as a hands on engineering leader
+- Highlight performance, SEO, and architecture work
+- Provide clear paths to connect
+- Keep content easy to update
+
+## Success Metrics
+- LCP under 2.5s
+- Lighthouse 95 plus
+- Accessibility 100
+- Build under 60s on Vercel
+
+## Site Map
+/
+/about
+/experience
+/projects
+/blog
+/contact
+/uses
+
+## Pages
+
+<task id="home">
+  name: Home
+  goal: introduce Richard quickly
+  includes:
+    - headline: "Hi, I am Richard. Senior Director of Engineering"
+    - subheadline: "I build fast, reliable, scalable web platforms"
+    - cta: Resume, LinkedIn, GitHub, Contact
+    - optional_photo: true
+  components:
+    - Hero.tsx
+    - SocialLinks.tsx
+</task>
+
+<task id="about">
+  name: About
+  goal: background and philosophy
+  includes:
+    - short bio 2 to 3 paragraphs
+    - leadership style
+    - personal interests
+  components:
+    - AboutSection.tsx
+</task>
+
+<task id="experience">
+  name: Experience
+  goal: credibility by results
+  includes:
+    - 3 to 5 role cards
+    - title, company, years
+    - 1 to 2 measurable outcomes per role
+  components:
+    - ExperienceList.tsx
+    - ExperienceCard.tsx
+</task>
+
+<task id="projects">
+  name: Projects
+  goal: show technical depth
+  includes:
+    - grid of project cards
+    - each has Problem, Solution, Outcome
+    - stack list
+  components:
+    - ProjectGrid.tsx
+    - ProjectCard.tsx
+</task>
+
+<task id="blog">
+  name: Writing
+  goal: publish MDX posts
+  includes:
+    - PostList.tsx
+    - PostLayout.tsx
+  storage:
+    - /content/posts/*.mdx
+</task>
+
+<task id="contact">
+  name: Contact
+  goal: simple outreach
+  includes:
+    - email link with spam protection
+    - LinkedIn, GitHub, BlueSky, X
+    - optional contact form via API route
+  components:
+    - ContactForm.tsx
+</task>
+
+<task id="uses">
+  name: Uses
+  goal: share daily tools and stack
+  includes:
+    - software, hardware, favorite libs
+  components:
+    - UsesList.tsx
+</task>
+
+## Global Components
+
+<task id="global_layout">
+  components:
+    - Layout.tsx
+    - Header.tsx
+    - Footer.tsx
+    - SEO.tsx
+</task>
+
+<task id="theme">
+  goal: light and dark mode
+  includes:
+    - Tailwind config
+    - ThemeToggle.tsx
+</task>
+
+## Tech
+framework: Next.js 15 App Router
+styling: TailwindCSS
+hosting: Vercel
+content: MDX or Contentlayer
+analytics: Vercel Analytics or Plausible
+seo: next-seo and dynamic OG image route
+a11y: keyboard nav and aria labels
+
+## Non Functional
+performance: LCP under 2.5s
+accessibility: WCAG AA
+seo: 95 plus Lighthouse
+maintainability: static and modular
+
+## File Structure
+/app
+  /about/page.tsx
+  /experience/page.tsx
+  /projects/page.tsx
+  /blog/[slug]/page.tsx
+  /contact/page.tsx
+  /uses/page.tsx
+  layout.tsx
+  globals.css
+/components
+  Hero.tsx
+  Header.tsx
+  Footer.tsx
+  ExperienceCard.tsx
+  ProjectCard.tsx
+  PostList.tsx
+  ContactForm.tsx
+  ThemeToggle.tsx
+/content
+  /posts/first-post.mdx
+/public
+  /images/profile.jpg
+  favicon.ico
+/seo.config.ts
+/tailwind.config.js
+/next.config.js
+/package.json
+
+## Tasks
+<tasklist>
+  <task>Initialize Next.js with TypeScript and Tailwind</task>
+  <task>Create pages and base components</task>
+  <task>Add next-seo and analytics</task>
+  <task>Seed MDX content</task>
+  <task>Deploy to Vercel</task>
+</tasklist>

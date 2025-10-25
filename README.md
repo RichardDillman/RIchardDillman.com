@@ -1,30 +1,62 @@
-# Personal website
+# richarddillman.com
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Personal website and blog built with Next.js 15, React 19, TypeScript, and Tailwind CSS.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/richard-dillmans-projects/v0-personal-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/iKGyOwSfwVf)
+## Getting Started
 
-## Overview
+```bash
+# Install dependencies
+pnpm install
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+# Run development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Run production server
+pnpm start
+
+# Lint code
+pnpm lint
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Tech Stack
+
+- **Framework:** Next.js 15 with App Router
+- **Language:** TypeScript 5
+- **Styling:** Tailwind CSS 3
+- **Content:** Contentlayer for MDX blog posts
+- **Deployment:** Vercel
+- **Package Manager:** pnpm
+
+## Project Structure
+
+```
+├── app/                  # Next.js app directory
+│   ├── about/           # About page
+│   ├── blog/            # Blog listing and posts
+│   ├── contact/         # Contact page
+│   ├── experience/      # Experience page
+│   ├── projects/        # Projects page
+│   ├── uses/            # Uses page
+│   ├── layout.tsx       # Root layout
+│   ├── page.tsx         # Home page
+│   └── globals.css      # Global styles
+├── components/          # React components
+├── content/             # MDX content
+│   └── posts/          # Blog posts
+├── public/              # Static assets
+│   └── images/         # Image files
+└── contentlayer.config.ts  # Contentlayer configuration
+```
+
+## Development
+
+The site uses Turbopack for faster development builds. All pages are server-rendered by default for optimal performance and SEO.
 
 ## Deployment
 
-Your project is live at:
-
-**[https://vercel.com/richard-dillmans-projects/v0-personal-website](https://vercel.com/richard-dillmans-projects/v0-personal-website)**
-
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.dev/chat/projects/iKGyOwSfwVf](https://v0.dev/chat/projects/iKGyOwSfwVf)**
-
-## How It Works
-
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+Automatically deployed to Vercel on push to main branch.

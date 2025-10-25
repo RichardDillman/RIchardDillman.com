@@ -1,0 +1,132 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About | Richard Dillman",
+  description: "Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic. I love building fast, reliable products and helping others grow.",
+};
+
+export default function AboutPage() {
+  return (
+    <div className="py-12">
+      <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold mb-8">About Me</h1>
+
+        <div className="prose prose-neutral dark:prose-invert max-w-none">
+          <div className="text-lg leading-relaxed space-y-6">
+            <p>
+              I love building fast, reliable products, and helping others grow while I
+              do it. I'm passionate about SEO, Page Speed, and clean, scalable
+              code. At The Muse, I lead with curiosity, clarity, and care, bridging
+              tech and business. Nearly a decade later, my code still powers ads
+              on sites like Vogue, GQ, Wired, and The New Yorker.
+            </p>
+
+            <p>
+              I'm a <strong>Senior Director of Engineering</strong> focused on
+              mentorship, performance optimization, and build speed. My stack centers
+              on TypeScript and Next.js, but I've spent decades working across the
+              web platform, from Python/Tornado monoliths to modern React architectures,
+              from state government systems to global media properties.
+            </p>
+
+            <p>
+              Over the past 20+ years, I've built systems that serve millions of users
+              daily. At <strong>Condé Nast</strong>, I modernized ad delivery infrastructure
+              across 30+ publications reaching 229M+ monthly users. At{" "}
+              <strong>The Muse</strong>, I've led engineering through multiple platform
+              migrations, cutting build times from 45 minutes to 75 seconds and
+              driving significant improvements in SEO, revenue, and user engagement.
+            </p>
+
+            <p>
+              Before that, I founded <strong>CatalpaSoft</strong>, where I built
+              child welfare platforms that accelerated foster care placements by 50%
+              across thousands of families. Earlier still, I helped build systems for
+              the State of Indiana, Everyday Health, and organizations serving millions
+              of people seeking critical information.
+            </p>
+
+            <h2 className="text-2xl font-bold mt-12 mb-4">How I Lead</h2>
+
+            <p>
+              I believe great engineering leadership means staying technical while
+              scaling people and systems. I write code, review PRs, debug production
+              issues, and mentor engineers, from junior ICs to senior architects. I've
+              even formalized <strong>Claude Code</strong> as a structured contributor
+              on my team, treating AI as a force multiplier that still requires tight
+              direction and thorough review.
+            </p>
+
+            <p>
+              I care deeply about the fundamentals: <strong>Web Vitals</strong>,{" "}
+              <strong>Lighthouse scores</strong>, accessibility, observability, and
+              developer experience. I've built experimentation into workflows so we
+              can measure what we ship. I've standardized linting, typing, testing,
+              and formatting pipelines across teams to improve velocity and reduce
+              bugs.
+            </p>
+
+            <p>
+              Most importantly, I lead with <strong>curiosity, clarity, and care</strong>.
+              I ask questions, explain decisions, and make sure everyone (engineers,
+              product managers, designers, and stakeholders) understands not just{" "}
+              <em>what</em> we're building, but <em>why</em>.
+            </p>
+
+            <h2 className="text-2xl font-bold mt-12 mb-4">Outside of Work</h2>
+
+            <p>
+              When I'm not optimizing build pipelines or debugging Core Web Vitals,
+              you'll find me gardening, playing Elder Scrolls Online, reading about
+              Egyptology, or experimenting with bookbinding and typography. I'm
+              fascinated by craft, systems, and the intersection of art and
+              engineering.
+            </p>
+
+            <h2 className="text-2xl font-bold mt-12 mb-4">Let's Connect</h2>
+
+            <p>
+              I write occasionally on{" "}
+              <a
+                href="https://dev.to/richarddillman"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+              >
+                dev.to
+              </a>
+              , share updates on{" "}
+              <a
+                href="https://www.linkedin.com/in/richarddillman/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+              >
+                LinkedIn
+              </a>
+              , and maintain projects on{" "}
+              <a
+                href="https://github.com/richardDillman/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+              >
+                GitHub
+              </a>
+              . If you want to talk about engineering leadership, performance
+              optimization, or how to work effectively with AI agents, feel free to{" "}
+              <Link
+                href="/contact"
+                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+              >
+                reach out
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

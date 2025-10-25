@@ -1,0 +1,135 @@
+---
+title: "Why Your React Component Is a Hot Mess (and How to Fix It)"
+date: "2025-06-25"
+description: "Writing React components is kind of like doing laundry. Sure, you could toss everything in together..."
+tags: ["react", "programming", "webdev", "javascript"]
+coverImage: "/images/blog/why-your-react-component-is-a-hot-mess.jpeg"
+---
+
+Writing React components is kind of like doing laundry. Sure, you could toss everything in together and hope for the best… but you'll probably end up with pink socks and runtime errors. A clean, consistent order inside your functional components helps your code stay readable, maintainable, and most importantly, not broken.
+
+React’s [Rules of Hooks](https://reactjs.org/docs/hooks-rules.html) are like those “do not put metal in the microwave” warnings. They exist because someone did put `useEffect` inside a `for` loop, and things caught fire.
+
+Let’s walk through a solid, time-tested order for organizing logic inside a functional component. You won’t always need every section, but knowing the ideal flow can save you from future debugging-induced hair loss.
+
+## Why Hook Order Matters
+
+React tracks hooks by position, not by name. Think of it like calling roll in class, if someone swaps seats, the teacher starts marking the wrong student absent.
+
+If your hook order changes between renders (say, putting a hook inside an `if` statement), React gets confused. Confused React is not fun React. You’ll likely see this cryptic gem:
+
+```vbnet
+React has encountered a hook call that is inconsistent with previous renders.
+```
+
+## 1 Hooks - Built-in (useState, useEffect, etc.)
+**Why they go first:**
+
+React’s built-in hooks need to run in the exact same order every time. No surprises, no detours, no mystery meat. Putting them right at the top ensures everything is predictable and in line with React’s rules.
+
+```jsx
+function ExampleComponent() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("Guest");
+}
+```
+
+Think of this section as the “meet the characters” part of a movie. Everyone’s introduced early, so the plot (i.e., the render) makes sense.
+
+## 2 Custom Hooks
+**Why they’re next:**
+
+Custom hooks are like those helpful friends who show up with a toolbox and a pot of coffee. They usually rely on built-in hooks, so we want the foundation laid before they come in and start tightening bolts.
+
+```jsx
+const user = useUser();
+const theme = useTheme();
+```
+
+Stacking them under the built-ins gives you a nice clean "hooks zone" where all the magic starts.
+
+## 3 Derived Data (from props or state)
+**Why it goes here:**
+
+Once you’ve got your raw ingredients (props, destructured props, and state), it’s time to prep them. Derived variables are like chopping onions, not exciting, but necessary before you start cooking the actual dish.
+
+```jsx
+const { user } = props;
+const isLoggedIn = Boolean(user);
+const displayName = user?.name?.trim() ?? "Anonymous";
+```
+
+Put these right after hooks so you’re always working with declared and up-to-date values.
+
+## 4 Callbacks (useCallback, useMemo, useRef, etc.)
+**What now:**
+
+Callbacks and memoized values depend on state or props, and you want them nicely memoized before you start rendering or passing them down. Think of this as labeling your leftovers before you put them in the fridge.
+
+Note: If it can be easily done, move these outside the component, but if they rely on the hooks or modify them, don't.
+
+```jsx
+const handleClick = useCallback(() => {
+  setCount((prev) => prev + 1);
+}, []);
+```
+
+Keeps things neat. Prevents unnecessary re-renders. Your future self will thank you.
+
+## 5 Effects (useEffect, useLayoutEffect, etc.)
+**Why are they down here:**
+
+Effects are the "cleanup crew" running after shadow dom has been generated the browser. Effects are hooks so order still matters. Even if you wind up not needing a hook it is still counted. They need to be after other types of hooks, or data, but before any conditional logic.
+
+```jsx
+useEffect(() => {
+  console.log("Component mounted or count changed");
+}, [count]);
+```
+
+## 6 Conditional Logic (Conditionals, loops, fragments, etc.)
+**Why it's here:**
+
+Before React can draw the UI, you might need to make decisions, like whether to show a login prompt or a dashboard. This is where that logic lives.
+
+**Critical rule:**
+Never put conditionals above your hooks. That’s how you get runtime gremlins.
+
+```jsx
+if (!isLoggedIn) {
+  return <LoginPrompt />;
+}
+
+const items = [1, 2, 3].map((item) => (
+  <li key={item}>{item}</li>
+));
+```
+
+This section is your last prep before serving the dish.
+
+## 7 Return JSX
+**Why is this last:**
+
+It’s the final product! The visual output. The “ta-da!” moment. This is what the user sees, and it should be the last thing, after all your setup work.
+
+```jsx
+return (
+  <div>
+    <h1>Hello, {displayName}!</h1>
+    <button onClick={handleClick}>Click me ({count})</button>
+    <ul>{items}</ul>
+  </div>
+);
+```
+
+## Final Thoughts
+
+React won’t force you to follow this order, but following a logical structure helps future-you (or your teammates) understand what’s happening and reduces the chance of hook-related surprises.
+
+Want to enforce it automatically? Tools like ESLint (with [eslint-plugin-react-hooks](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)) and Prettier can keep your components nice and tidy.
+
+Working with an LLM like Claude or ChatGPT? Add this structure to its [coding style guide](https://www.anthropic.com/engineering/claude-code-best-practices#1-customize-your-setup) so your AI pair-programmer doesn’t throw spaghetti at your component tree.
+
+> Bonus dad joke: What do you call a TV vaccination?
+> A screenshot.
+

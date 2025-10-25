@@ -1,0 +1,50 @@
+---
+title: "How to write a readable commit message."
+date: "2020-08-09"
+description: "Having a good guideline for creating commits and sticking to it makes working with Git and collaborat..."
+tags: ["git", "codequality", "beginners"]
+coverImage: "/images/blog/how-to-write-a-readable-commit-message.jpeg"
+---
+
+
+Having a good guideline for creating commits and sticking to it makes working with Git and collaborating with others a lot easier.
+
+## Subject
+
+The subject should be around 50 characters or less. You want it to fit in an email subject line.  If you need to explain why you made some decisions or tradeoffs, those comments should be in the code.
+
+* An adequately worded commit should fit grammatically into the sentence below:
+  * If applied, this commit will **[Subject]**
+* Use an [imperative mood](https://en.wikipedia.org/wiki/Imperative_mood). These changes will not be applied right away
+* Capitalize the first letter
+* No punctuation at the end
+* Consider using a [conventional commits](https://www.conventionalcommits.org/) prefix like [karma](https://www.conventionalcommits.org/):
+  * **feat**: a new feature for the user, not a new feature for a build script
+  * **fix**: bug fix for the user, not a fix to a build script
+  * **docs**: changes to the documentation
+  * **style**: formatting, missing semicolons, etc.; no production code change
+  * **refactor**: refactoring production code, e.g., renaming a variable
+  * **test**: adding missing criteria, refactoring tests; no production code change
+  * **chore**: updating grunt tasks etc.; no production code change
+* A scope or section of the codebase can optionally follow the prefix
+
+
+Instead of writing down everything you did, think of each commit as a command. These are instructions to your future self. Git will apply your commits to the codebase, not you, and only once the PR is approved and merged.
+
+```Bash
+git commit -m "feat(login): Add a google OAuth endpoint"
+```
+
+## Body
+
+If you need to offer more information within your commit (code examples, external references, documentation,  explain complexity), you could do it here. But most times, this information belongs either in the code or the final pull request. Please keep this as short as possible. It is not a blog post. Focus on the following:
+
+* Give the reasons why you made this change
+* Explain the way things worked before this change (and what was wrong with that)
+* Describe why you decided to solve it the way you did
+* Describe how the code works differently now than it did before
+
+```bash
+git commit -m "feat(login): Add a google OAuth endpoint" -m "This includes the handler, routes, and templates."
+```
+

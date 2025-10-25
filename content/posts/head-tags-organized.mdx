@@ -1,0 +1,143 @@
+---
+title: "Head tags organized"
+date: "2021-01-14"
+description: "Order (still) matters  A minimal number of tags are allowed within the HEAD of HTML documents. Those..."
+tags: ["html", "performance", "javascript", "css"]
+coverImage: "/images/blog/head-tags-organized.jpeg"
+---
+
+Order (still) matters
+
+A minimal number of tags are allowed within the HEAD of HTML documents. Those tags are title, style, base, link, meta, script, and noscript. Oddly enough, these elements’ order can drastically alter the loading of your document and its dependencies. Here are some things I have discovered trying to scratch out better performance within the sites I work on.
+
+## 1: Character Encodings
+
+The meta tag for the charset declaration should fit entirely within the first 1024 bytes of the file. If the charset is included later in the code, the HTML will be re-parsed once encountered, wasting precious time before rendering anything. So always put it first. The same reasoning applies to the viewport and other meta tags that describe how a page should render.
+
+```HTML
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+## 2: Title Tag
+
+The title tag’s purpose is to declare the name of the document. It will replace the URL within the browser's tab, so it is good to place it as early as possible to avoid confusion if the user notices when the tab name updates.
+
+```HTML
+<title>Page Title</title>
+```
+
+## 3: Preconnected Links
+
+Here we are focused on third-party domains that we know for sure will be requested. Preconnect will handle the DNS lookup, navigate the connection, and any redirects necessary to reach the targets. It will not download any content. Requesting these connections is particularly helpful on slow connections to establish the route as early as possible. However, this can be costly for mobile devices as multiple connections can consume unnecessary bandwidth.  Only preconnect to servers you are certain will be needed, such as analytics, your CDN, or your static asset site.
+
+```HTML
+<link rel="preconnect" href="https://www.google-analytics.com" />
+```
+
+## 4: Synchronous Scripts
+
+Synchronous scripts include any JavaScript that must run before the page renders, such as populating the dataLayer. Here we include script blocks and external scripts but not deferred or async ones. No matter where it is, any script in the head will block applying CSS, even after the CSS. The browser must process anything that might modify the DOM before processing your styles.  So you should add those synchronous scripts before your style sheet.
+
+```HTML
+<script>...</script>
+<script src="app.js"></script>
+```
+
+## 5: Synchronous CSS
+
+This includes inline style blocks and style sheets that are used for rendering. Consider using media queries and breaking your styles into multiple files. The media attribute will let the browser know if this CSS is going to be render-blocking or not.
+
+Inline styles are parsed first. It is important that we remember that styles are parsed as they are encountered.
+
+```HTML
+<style>...</style>
+```
+
+External files are requested and parsed next.
+
+```HTML
+<link href="style.css" rel="stylesheet">
+```
+
+Next to be requested and parsed are the styles with media queries. If they match your current breakpoint, orientation, or pixel density.
+
+```HTML
+<link href="other.css" rel="stylesheet" media="(min-width:768px)">
+```
+
+Next up for request and parsing are the print style sheets.
+
+```HTML
+<link href="print.css" rel="stylesheet" media="print">
+```
+
+Stylesheets with media queries that do not match the current environment will not be requested.
+
+```HTML
+<link href="other.css" rel="stylesheet" media="(min-width:1024px)">
+```
+
+Knowing this, you can also trick the browser into loading non-critical CSS a bit later with the onLoad method. By pretending this is a print sheet, it will load after all other CSS but before any containing media queries. Once its load event fires, the media changes to all. With this being async, that will happen after the DOM has been parsed and images begin loading.
+
+```HTML
+<link rel="stylesheet" href="lazy.css" media="print" onload="this.media='all'">
+```
+
+## 6: Preloaded Links
+
+We should preload as few files as possible. These should be visual elements that are required for above the fold rendering. This includes items like fonts, hero images, or icons.  As for fonts, you most likely only need the woff2 version. Also, consider loading the fonts from your own server.
+
+```HTML
+<link rel="preload" as="font" href="font.woff2" type="font/woff2" />
+```
+
+## 7: Asynchronous or deferred Scripts
+
+All other scripts[?] requested, such as those that add interaction handlers, go here. We should put these at the bottom of the body to allow for quicker parsing of the DOM. But if you must put them in the head due to CMS or framework restrictions, place them here, and set them to either async or defer depending on your need.
+
+```HTML
+<script src="foo.js" async></script>
+<script src="bar.js" defer></script>
+```
+
+## 8: Prefetched Links
+
+These are assets that you know for sure you will need later within this page's render cycle. This includes things that you want in place before they are needed. This could include logos in the footer, Twitter feeds, or videos.
+
+```HTML
+<link rel="prefetch" href="jwpplayer.js" />
+```
+
+## 9: Prerendered Links
+
+Entire content pages that you are reasonably certain that your user will visit next. You can download the assets for that page before it is even requested. I would render things like login, search, cart, or the next page in a series.
+
+```HTML
+<link rel="prerender" href="/search/" />
+```
+
+## 10: Non-rendering assets
+
+This includes meta tags and scripts that do not affect rendering in any way, such as OpenGraph, manifests, structured data. These tags are for bots and sharing in social media but are not necessary to render the page. To include a script in this spot it must be inline as this content will be inspected in the first pass through the document.
+
+```HTML
+<link rel="shortcut icon" href="icon.png" />
+<link rel="apple-touch-icon-precomposed" href="icon.png" />
+<meta name="apple-mobile-web-app-title" content="Company Name" />
+<link rel="canonical" href="https://companyname.com" />
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="icon.png">
+<meta name="twitter:description" content="">
+<script type="application/ld+json">
+{
+  "@context": "https://json-ld.org/contexts/person.jsonld",
+  "@id": "http://dbpedia.org/resource/John_Lennon",
+  "name": "John Lennon",
+  "born": "1940-10-09",
+  "spouse": "http://dbpedia.org/resource/Cynthia_Lennon"
+}
+</script>
+```
+
+Those are the most common tags that could be in your head. Do you wonder about any not listed here? Bring them up in the comments, and let’s discuss!

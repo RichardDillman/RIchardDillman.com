@@ -1,30 +1,17 @@
-import { Header } from "@/components/header"
-import { Hero } from "@/components/hero"
-import { About } from "@/components/about"
-import { Skills } from "@/components/skills"
-import { Projects } from "@/components/projects"
-import { Contact } from "@/components/contact"
-import { Footer } from "@/components/footer"
-import type { Metadata } from "next/types"
-
-export const metadata: Metadata = {
-  title: "Richard Dillman - Software Engineer",
-  description:
-    "Richard Dillman's personal website showcasing his skills, projects, and experience as a software engineer.",
-}
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  )
+    <section className="py-20 text-center">
+      <h1 className="text-4xl font-bold mb-3">Hi, I am Richard</h1>
+      <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+        Senior Director of Engineering. I build fast, reliable web platforms that focus on performance, SEO, and developer experience.
+      </p>
+      <div className="space-x-4">
+        <Link href="/about" className="underline">About</Link>
+        <Link href="/projects" className="underline">Projects</Link>
+        <Link href="/contact" className="underline">Contact</Link>
+      </div>
+    </section>
+  );
 }

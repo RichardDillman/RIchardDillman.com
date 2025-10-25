@@ -1,0 +1,86 @@
+# Implementation PRD - richarddillman.com
+
+## Currently Implemented
+- ✓ Next.js 15 with App Router
+- ✓ TypeScript with strict mode
+- ✓ Tailwind CSS with dark mode config
+- ✓ Contentlayer for MDX
+- ✓ All page routes created (/, /about, /experience, /projects, /blog, /contact, /uses)
+- ✓ Basic Header with navigation
+- ✓ Basic Footer
+- ✓ Sample home page with placeholder content
+
+## Implementation Backlog
+
+### Phase 1: Core Pages
+1. **Home page components**
+   - Hero.tsx - Main hero section with headline and photo
+   - SocialLinks.tsx - GitHub, LinkedIn, BlueSky, X links
+
+2. **About page**
+   - AboutSection.tsx with bio (2-3 paragraphs)
+   - Leadership style
+   - Personal interests
+
+3. **Experience page**
+   - ExperienceList.tsx - Container for experience cards
+   - ExperienceCard.tsx - Individual role cards
+   - Content: 3-5 role cards with title, company, years, measurable outcomes
+
+### Phase 2: Technical Showcase
+4. **Projects page**
+   - ProjectGrid.tsx - Grid layout for projects
+   - ProjectCard.tsx - Individual project cards (Problem, Solution, Outcome, Stack)
+
+5. **Blog**
+   - PostList.tsx - Blog post listing
+   - PostLayout.tsx - Individual post layout with MDX rendering
+   - Integrate Contentlayer for post generation
+
+### Phase 3: Engagement
+6. **Contact page**
+   - ContactForm.tsx with spam-protected email
+   - Social links (LinkedIn, GitHub, BlueSky, X)
+   - Optional: API route for contact form submission
+
+7. **Uses page**
+   - UsesList.tsx - Daily tools and tech stack
+   - Categories: Software, Hardware, Favorite libs
+
+### Phase 4: Polish & Features
+8. **Theme System**
+   - ThemeToggle.tsx - Dark mode switcher
+   - Integrate next-themes
+   - Persist user preference
+
+9. **SEO & Meta**
+   - seo.config.ts - Global SEO configuration
+   - SEO.tsx component for per-page meta
+   - Dynamic OG image generation route
+   - next-seo integration
+
+10. **Performance Optimization**
+    - Image optimization
+    - Font optimization
+    - Code splitting review
+    - Lighthouse audit to hit 95+ score
+
+11. **Analytics**
+    - Vercel Analytics integration
+    - Plausible tracker setup
+    - Privacy-focused implementation
+
+12. **Accessibility**
+    - Keyboard navigation testing
+    - ARIA labels audit
+    - Screen reader testing
+    - Target: WCAG AA compliance, Lighthouse A11y 100
+
+## Success Criteria
+- LCP under 2.5s
+- Lighthouse Performance 95+
+- Lighthouse Accessibility 100
+- Lighthouse SEO 95+
+- Build time under 60s on Vercel
+- Mobile-responsive all breakpoints
+- Dark mode fully functional
