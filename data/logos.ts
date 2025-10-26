@@ -12,7 +12,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Indiana Department of Health',
     slug: 'indiana-health',
-    file: 'indiana-health.svg',
+    file: 'indiana-health.png',
     period: '1999-2005',
     category: 'government'
   },
@@ -21,21 +21,21 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Indiana Heart Gallery',
     slug: 'indiana-heart-gallery',
-    file: 'indiana-heart-gallery.svg',
+    file: 'indiana-heart-gallery.png',
     period: '2005-2007',
     category: 'other'
   },
   {
     name: 'International Medical Group',
     slug: 'img-global',
-    file: 'img-global.svg',
+    file: 'img-global.png',
     period: '2005-2007',
     category: 'health'
   },
   {
     name: 'RASK Corporation',
     slug: 'rask-corp',
-    file: 'rask-corp.svg',
+    file: 'rask-corp.png',
     period: '2005-2007',
     category: 'other'
   },
@@ -60,7 +60,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'The Shade Store',
     slug: 'the-shade-store',
-    file: 'the-shade-store.svg',
+    file: 'the-shade-store.png',
     period: '2010-2011',
     category: 'retail'
   },
@@ -69,7 +69,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Everyday Health',
     slug: 'everyday-health',
-    file: 'everyday-health.svg',
+    file: 'everyday-health.png',
     period: '2012-2015',
     category: 'health',
     prominence: 'major'
@@ -77,35 +77,35 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'What to Expect',
     slug: 'what-to-expect',
-    file: 'what-to-expect.svg',
+    file: 'what-to-expect.png',
     period: '2012-2015',
     category: 'health'
   },
   {
     name: 'MedPage Today',
     slug: 'medpage-today',
-    file: 'medpage-today.svg',
+    file: 'medpage-today.png',
     period: '2012-2015',
     category: 'health'
   },
   {
     name: 'Diabetes Daily',
     slug: 'diabetes-daily',
-    file: 'diabetes-daily.svg',
+    file: 'diabetes-daily.png',
     period: '2012-2015',
     category: 'health'
   },
   {
     name: 'Jillian Michaels',
     slug: 'jillian-michaels',
-    file: 'jillian-michaels.svg',
+    file: 'jillian-michaels.png',
     period: '2012-2015',
     category: 'health'
   },
   {
     name: 'SparkAmerica',
     slug: 'spark-america',
-    file: 'spark-america.svg',
+    file: 'spark-america.png',
     period: '2012-2015',
     category: 'health'
   },
@@ -114,7 +114,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Vogue',
     slug: 'vogue',
-    file: 'vogue.svg',
+    file: 'vogue.png',
     period: '2015-2018',
     category: 'media',
     prominence: 'major'
@@ -122,7 +122,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Wired',
     slug: 'wired',
-    file: 'wired.svg',
+    file: 'wired.png',
     period: '2015-2018',
     category: 'tech',
     prominence: 'major'
@@ -130,7 +130,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'The New Yorker',
     slug: 'the-new-yorker',
-    file: 'the-new-yorker.svg',
+    file: 'the-new-yorker.png',
     period: '2015-2018',
     category: 'media',
     prominence: 'major'
@@ -138,7 +138,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'GQ',
     slug: 'gq',
-    file: 'gq.svg',
+    file: 'gq.png',
     period: '2015-2018',
     category: 'media',
     prominence: 'major'
@@ -146,7 +146,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Vanity Fair',
     slug: 'vanity-fair',
-    file: 'vanity-fair.svg',
+    file: 'vanity-fair.png',
     period: '2015-2018',
     category: 'media',
     prominence: 'major'
@@ -154,77 +154,77 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Architectural Digest',
     slug: 'architectural-digest',
-    file: 'architectural-digest.svg',
+    file: 'architectural-digest.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Allure',
     slug: 'allure',
-    file: 'allure.svg',
+    file: 'allure.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Ars Technica',
     slug: 'ars-technica',
-    file: 'ars-technica.svg',
+    file: 'ars-technica.png',
     period: '2015-2018',
     category: 'tech'
   },
   {
     name: 'Bon Appétit',
     slug: 'bon-appetit',
-    file: 'bon-appetit.svg',
+    file: 'bon-appetit.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Condé Nast Traveler',
     slug: 'conde-nast-traveler',
-    file: 'conde-nast-traveler.svg',
+    file: 'conde-nast-traveler.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Epicurious',
     slug: 'epicurious',
-    file: 'epicurious.svg',
+    file: 'epicurious.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Glamour',
     slug: 'glamour',
-    file: 'glamour.svg',
+    file: 'glamour.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Pitchfork',
     slug: 'pitchfork',
-    file: 'pitchfork.svg',
+    file: 'pitchfork.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Self',
     slug: 'self',
-    file: 'self.svg',
+    file: 'self.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Teen Vogue',
     slug: 'teen-vogue',
-    file: 'teen-vogue.svg',
+    file: 'teen-vogue.png',
     period: '2015-2018',
     category: 'media'
   },
   {
     name: 'Them',
     slug: 'them',
-    file: 'them.svg',
+    file: 'them.png',
     period: '2015-2018',
     category: 'media'
   },
@@ -233,7 +233,7 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'The Muse',
     slug: 'the-muse',
-    file: 'the-muse.svg',
+    file: 'the-muse.png',
     period: '2018-2025',
     category: 'career',
     prominence: 'major'
@@ -241,14 +241,14 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Fairy God Boss',
     slug: 'fairy-god-boss',
-    file: 'fairy-god-boss.svg',
+    file: 'fairy-god-boss.png',
     period: '2018-2025',
     category: 'career'
   },
   {
     name: 'Purpose Jobs',
     slug: 'purpose-jobs',
-    file: 'purpose-jobs.svg',
+    file: 'purpose-jobs.png',
     period: '2018-2025',
     category: 'career'
   },

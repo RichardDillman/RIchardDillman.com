@@ -49,9 +49,19 @@
 ### Pages (Completed)
 - [x] `app/layout.tsx` - Root layout with Header/Footer, Inter font
 - [x] `app/globals.css` - Global styles with Tailwind directives
-- [x] `app/page.tsx` - Home page (basic placeholder)
+- [x] `app/page.tsx` - **Home page with Hero and TechStackPreview**
+  - Professional headshot in circular frame
+  - Three CTA buttons (Experience, Projects, Contact)
+  - Condensed tech stack preview showing primary technologies
+  - CTA to full /stack page
+- [x] `app/stack/page.tsx` - **Full tech stack page**
+  - 60+ technologies across 7 categories
+  - Primary focus highlight section
+  - Organized by Languages, Frontend, Backend, DevOps, Performance, Testing, Tools
 - [x] `app/about/page.tsx` - Full about page with bio, leadership style, interests
-- [x] `app/experience/page.tsx` - Experience page with all roles and achievements
+- [x] `app/experience/page.tsx` - **Experience page with LogoMontage**
+  - All roles and achievements
+  - Brand logos montage at bottom (32 companies)
 - [x] `app/contact/page.tsx` - Contact page with obfuscated email and social links
 - [x] `app/projects/page.tsx` - **Projects showcase with 9 major technical achievements**
   - Expandable disclosure pattern with Problem/Solution/Outcome
@@ -97,21 +107,27 @@
 ## 🚧 In Progress / Not Started
 
 ### Pages (Empty Routes)
-- [ ] `app/uses/page.tsx` - Tech stack and tools page (directory exists, needs page)
+- [x] `app/stack/page.tsx` - **Full tech stack page with 60+ technologies**
+  - Complete TechStack component with all categories
+  - SEO optimized for tech skills and tools
 
 ### Components Needed
-- [ ] `components/Hero.tsx` - Main hero section for home page
+- [x] `components/Hero.tsx` - Main hero section with headshot and CTAs
+- [x] `components/TechStack.tsx` - Tech stack showcase with 60+ technologies
+- [x] `components/TechStackPreview.tsx` - Condensed preview for home page with CTA
+- [x] `components/LogoMontage.tsx` - Brand logos montage (32 companies)
 - [ ] `components/SocialLinks.tsx` - Social media links component
 - [ ] `components/ThemeToggle.tsx` - Dark mode switcher
 - [ ] `components/SEO.tsx` - SEO meta tags component (or use next-seo directly)
 
 ### Data Structures Needed
-- [ ] `data/uses.ts` - Tech stack, tools, software, hardware data
+- [x] `data/techStack.ts` - Tech stack, tools, frameworks data (60+ technologies across 7 categories)
+- [x] `data/logos.ts` - Brand logos for portfolio montage (32 companies)
 
 ### Content Needed
-- [ ] Improve home page with proper Hero component
-- [ ] Document tech stack for /uses page
-- [ ] Add profile photo to `/public/images/` for about/home pages
+- [x] Improve home page with proper Hero component
+- [x] Document tech stack for home page
+- [x] Add profile photo to `/public/images/` (homepage-hero.webp)
 - [ ] Write additional blog posts (currently have 7 from dev.to)
 
 ### Features & Integrations
@@ -219,6 +235,11 @@ Based on PRD and current state, here's the recommended order:
 - Projects use expandable Disclosure pattern (React 19 + Headless UI)
 - **Blog system fully functional** with 7 posts imported from dev.to
 - Blog posts use MDX with syntax highlighting and responsive embeds
+- **Home page redesigned** with professional Hero component and TechStack showcase
+- **Hero component** features circular headshot, tagline, and three CTAs
+- **TechStack component** showcases 45+ technologies across 7 categories
+- **LogoMontage component** displays 32 brand logos on experience page
+- 32 brand logos downloaded (30 PNG, 2 SVG) from career history
 - Dark mode configured but toggle UI not yet implemented
 - Resume available in docs/Resume.pdf for reference
 - **Complete career history** documented in docs/career-history.md (32+ websites, 1999-2025)

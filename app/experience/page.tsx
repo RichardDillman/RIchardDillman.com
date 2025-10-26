@@ -1,4 +1,5 @@
 import ExperienceList from "@/components/ExperienceList";
+import { LogoMontage } from "@/components/LogoMontage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,6 +20,15 @@ export default function ExperiencePage() {
       </div>
 
       <ExperienceList />
+
+      {/* Brand logos montage */}
+      <div className="mt-24">
+        <LogoMontage
+          title="Brands I've Worked With"
+          description="26 years building high-traffic platforms for world-class organizations"
+          showPeriods={false}
+        />
+      </div>
     </div>
   );
 }
