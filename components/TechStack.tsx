@@ -7,9 +7,9 @@ export default function TechStack() {
     <section className="border-t border-neutral-200 dark:border-neutral-800">
       {/* Primary Technologies Highlight */}
       <div className="mb-12 p-6 bg-card border border-border rounded-lg shadow-sm">
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+        <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
           Primary Focus
-        </h3>
+        </h2>
         <div className="flex flex-wrap gap-3">
           {primaryTech.map((tech) => (
             <span
@@ -26,9 +26,9 @@ export default function TechStack() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {techStack.map((category) => (
           <div key={category.name} className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold text-foreground mb-4">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
               {category.name}
-            </h3>
+            </h2>
             <ul className="space-y-3">
               {category.items.map((item) => (
                 <li key={item.name} className="group">

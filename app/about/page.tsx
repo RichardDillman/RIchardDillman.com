@@ -42,9 +42,9 @@ export default function AboutPage() {
             </p>
           </div>
 
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
-          <div className="text-lg leading-relaxed space-y-6">
-            <p>
+        <div className="bg-card border border-border rounded-lg shadow-sm p-8 md:p-12">
+          <div className="prose prose-neutral dark:prose-invert max-w-none text-lg leading-relaxed space-y-6">
+            <p className="mt-0">
               I love building fast, reliable products, and helping others grow while I
               do it. I'm passionate about SEO, Page Speed, and clean, scalable
               code. At The Muse, I lead with curiosity, clarity, and care, bridging
