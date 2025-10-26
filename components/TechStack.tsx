@@ -4,15 +4,7 @@ export default function TechStack() {
   const primaryTech = getPrimaryTech();
 
   return (
-    <section className="py-16 border-t border-neutral-200 dark:border-neutral-800">
-      <div className="mb-12">
-        <h2 className="text-3xl font-bold mb-4">Tech Stack</h2>
-        <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl">
-          26 years of experience with modern frameworks, performance optimization, and scalable architecture.
-          Here's what I work with:
-        </p>
-      </div>
-
+    <section className="border-t border-neutral-200 dark:border-neutral-800">
       {/* Primary Technologies Highlight */}
       <div className="mb-12 p-6 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
         <h3 className="text-sm font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-4">

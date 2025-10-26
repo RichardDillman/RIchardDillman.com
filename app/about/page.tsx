@@ -11,7 +11,14 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8">About Me</h1>
+          <div className="mb-12 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="text-gradient">About Me</span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic.
+            </p>
+          </div>
 
         <div className="prose prose-neutral dark:prose-invert max-w-none">
           <div className="text-lg leading-relaxed space-y-6">

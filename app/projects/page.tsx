@@ -15,9 +15,11 @@ export default function ProjectsPage() {
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
       {/* Header */}
-      <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Technical Projects</h1>
-        <p className="text-lg text-neutral-600 dark:text-neutral-400">
+      <header className="mb-12 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <span className="text-gradient">Technical Projects</span>
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           26 years of solving complex technical challenges at scale. From government digital transformation
           to premium media platforms serving hundreds of millions of users.
         </p>

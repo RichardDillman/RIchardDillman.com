@@ -40,7 +40,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-12 animate-slide-up">
+          <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="text-gradient">Let's Build Something Together</span>
             </h1>

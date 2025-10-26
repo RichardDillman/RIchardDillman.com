@@ -19,14 +19,15 @@ export default function BlogPage() {
     <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Blog</h1>
-        <p className="text-lg text-neutral-600 dark:text-neutral-400">
-          Technical writing on React, performance optimization, web development, and engineering leadership.
-          Originally published on <a href="https://dev.to/richarddillman" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">dev.to</a>.
-        </p>
-      </header>
+          <header className="mb-12 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="text-gradient">Experience & Skills</span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+              Technical writing on React, performance optimization, web development, and engineering leadership.
+              Originally published on <a href="https://dev.to/richarddillman" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">dev.to</a>.
+            </p>
+          </header>
 
       {/* Posts List */}
       <div className="space-y-8">
