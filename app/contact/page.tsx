@@ -40,8 +40,9 @@ const contactLinks = [
 
 export default function ContactPage() {
   return (
-    <div className="py-12">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+      <div className="container mx-auto px-6">
+        <div className="max-w-2xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">Get in Touch</h1>
         <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-12 leading-relaxed">
           I'm always happy to discuss engineering leadership, performance optimization,
@@ -86,6 +87,7 @@ export default function ContactPage() {
             engineering roles, consulting opportunities, or speaking engagements, please
             include relevant details in your initial message.
           </p>
+        </div>
         </div>
       </div>
     </div>

@@ -16,9 +16,11 @@ export default function BlogPage() {
   );
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-12">
-      {/* Header */}
-      <header className="mb-12">
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+      <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <header className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Blog</h1>
         <p className="text-lg text-neutral-600 dark:text-neutral-400">
           Technical writing on React, performance optimization, web development, and engineering leadership.
@@ -83,6 +85,8 @@ export default function BlogPage() {
             </Link>
           </article>
         ))}
+      </div>
+        </div>
       </div>
     </main>
   );
