@@ -59,7 +59,7 @@ export default function Header() {
                 key={link.href}
                 variant="ghost"
                 asChild
-                className={isScrolled ? "text-foreground hover:text-accent" : "text-primary-foreground hover:text-accent"}
+                className={`transition-all duration-300 hover:bg-accent hover:text-accent-foreground ${isScrolled ? "text-foreground" : "text-primary-foreground"}`}
               >
                 <Link href={link.href}>
                   {link.label}
@@ -75,7 +75,7 @@ export default function Header() {
                 variant="ghost"
                 size="icon"
                 aria-label="Toggle menu"
-                className={isScrolled ? "" : "text-primary-foreground hover:text-primary-foreground"}
+                className={`hover:bg-transparent ${isScrolled ? "" : "text-primary-foreground hover:text-primary-foreground"}`}
               >
                 {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
@@ -92,7 +92,7 @@ export default function Header() {
                     variant="ghost"
                     asChild
                     onClick={() => setOpen(false)}
-                    className="justify-start text-foreground hover:text-accent"
+                    className="justify-start text-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                   >
                     <Link href={link.href}>
                       {link.label}
