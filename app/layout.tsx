@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL('https://richarddillman.com'),
   title: "Richard Dillman",
   description: "Engineering leadership, performance, and mentorship."
 };

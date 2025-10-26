@@ -7,6 +7,28 @@ import { compareDesc } from "date-fns";
 export const metadata: Metadata = {
   title: "Blog | Richard Dillman",
   description: "Technical writing on React, performance optimization, web development, and engineering leadership.",
+  openGraph: {
+    title: "Blog | Richard Dillman",
+    description: "Technical writing on React, performance optimization, web development, and engineering leadership.",
+    url: "https://richarddillman.com/blog",
+    siteName: "Richard Dillman",
+    images: [
+      {
+        url: "/api/og?title=Blog&description=Technical writing on React, performance optimization, and engineering leadership",
+        width: 1200,
+        height: 630,
+        alt: "Richard Dillman Blog",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Richard Dillman",
+    description: "Technical writing on React, performance optimization, web development, and engineering leadership.",
+    images: ["/api/og?title=Blog&description=Technical writing on React, performance optimization, and engineering leadership"],
+  },
 };
 
 export default function BlogPage() {

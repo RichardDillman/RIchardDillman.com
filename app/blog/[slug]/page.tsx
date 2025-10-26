@@ -27,9 +27,36 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description || "Technical writing on engineering and web development")}`;
+
   return {
     title: `${post.title} | Richard Dillman`,
     description: post.description || post.title,
+    openGraph: {
+      title: post.title,
+      description: post.description || post.title,
+      url: `https://richarddillman.com/blog/${post.slug}`,
+      siteName: "Richard Dillman",
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      locale: "en_US",
+      type: "article",
+      publishedTime: post.date,
+      authors: ["Richard Dillman"],
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description || post.title,
+      images: [ogImageUrl],
+    },
   };
 }
 

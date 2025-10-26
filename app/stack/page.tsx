@@ -4,6 +4,28 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Tech Stack | Richard Dillman",
   description: "Technologies, tools, and frameworks I use. 26 years of experience with TypeScript, React, Next.js, Node.js, and modern web development.",
+  openGraph: {
+    title: "Tech Stack | Richard Dillman",
+    description: "Modern frameworks, performance optimization, and scalable architecture. Technologies I use to build fast, reliable web platforms.",
+    url: "https://richarddillman.com/stack",
+    siteName: "Richard Dillman",
+    images: [
+      {
+        url: "/api/og?title=Tech Stack&description=TypeScript, React, Next.js, and modern web development tools",
+        width: 1200,
+        height: 630,
+        alt: "Richard Dillman Tech Stack",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tech Stack | Richard Dillman",
+    description: "Modern frameworks, performance optimization, and scalable architecture. Technologies I use to build fast, reliable web platforms.",
+    images: ["/api/og?title=Tech Stack&description=TypeScript, React, Next.js, and modern web development tools"],
+  },
 };
 
 export default function StackPage() {

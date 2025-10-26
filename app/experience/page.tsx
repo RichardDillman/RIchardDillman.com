@@ -7,6 +7,28 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Experience | Richard Dillman",
   description: "Engineering leadership roles at The Muse, Condé Nast, Everyday Health, and CatalpaSoft. 20+ years building fast, scalable web platforms.",
+  openGraph: {
+    title: "Experience | Richard Dillman",
+    description: "Engineering leadership roles at The Muse, Condé Nast, Everyday Health, and CatalpaSoft.",
+    url: "https://richarddillman.com/experience",
+    siteName: "Richard Dillman",
+    images: [
+      {
+        url: "/api/og?title=Experience&description=20+ years building fast, scalable web platforms",
+        width: 1200,
+        height: 630,
+        alt: "Richard Dillman Experience",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Experience | Richard Dillman",
+    description: "Engineering leadership roles at The Muse, Condé Nast, Everyday Health, and CatalpaSoft.",
+    images: ["/api/og?title=Experience&description=20+ years building fast, scalable web platforms"],
+  },
 };
 
 export default function ExperiencePage() {
@@ -25,7 +47,7 @@ export default function ExperiencePage() {
             size="lg"
             className="bg-blue-500 hover:bg-blue-600 text-white"
           >
-            <a href="/about/resume.pdf" download>
+            <a href="/images/resume.pdf" download>
               <Download className="w-4 h-4 mr-2" />
               Download Full Resume
             </a>

@@ -6,6 +6,28 @@ import { Card, CardContent } from "@/components/ui/card";
 export const metadata: Metadata = {
   title: "Contact | Richard Dillman",
   description: "Get in touch with Richard Dillman. Connect on LinkedIn, GitHub, or dev.to.",
+  openGraph: {
+    title: "Contact | Richard Dillman",
+    description: "Get in touch. Open to exciting opportunities, collaborations, and conversations about engineering.",
+    url: "https://richarddillman.com/contact",
+    siteName: "Richard Dillman",
+    images: [
+      {
+        url: "/api/og?title=Let's Build Something Together&description=Open to opportunities, collaborations, and conversations about engineering",
+        width: 1200,
+        height: 630,
+        alt: "Contact Richard Dillman",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | Richard Dillman",
+    description: "Get in touch. Open to exciting opportunities, collaborations, and conversations about engineering.",
+    images: ["/api/og?title=Let's Build Something Together&description=Open to opportunities, collaborations, and conversations about engineering"],
+  },
 };
 
 const contactLinks = [
