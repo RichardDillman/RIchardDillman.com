@@ -101,13 +101,13 @@ export default async function BlogPostPage({ params }: PageProps) {
           prose-h2:text-2xl prose-h2:mb-3 prose-h2:mt-8
           prose-h3:text-xl prose-h3:mb-2 prose-h3:mt-6
           prose-p:mb-4 prose-p:leading-7
-          prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-          prose-code:bg-neutral-100 dark:prose-code:bg-neutral-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
-          prose-pre:bg-neutral-900 prose-pre:text-neutral-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
+          prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+          prose-code:bg-muted prose-code:text-foreground prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
+          prose-pre:bg-primary/5 prose-pre:border prose-pre:border-border/50 prose-pre:text-foreground/80 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
           prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-4
           prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-4
           prose-li:mb-2
-          prose-blockquote:border-l-4 prose-blockquote:border-neutral-300 dark:prose-blockquote:border-neutral-700 prose-blockquote:pl-4 prose-blockquote:italic
+          prose-blockquote:border-l-4 prose-blockquote:border-border prose-blockquote:pl-4 prose-blockquote:italic
           prose-img:rounded-lg prose-img:shadow-md
         ">
           <MDXContent />

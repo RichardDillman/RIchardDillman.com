@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
-import { SiDevdotto } from "react-icons/si";
+import { Mail, Github, Linkedin, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title: "Contact | Richard Dillman",
@@ -11,29 +12,25 @@ const contactLinks = [
   {
     name: "Email",
     href: "mailto:&#114;&#100;&#105;&#108;&#108;&#109;&#097;&#110;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;",
-    icon: FaEnvelope,
-    display: "rdillman [at] gmail [dot] com",
-    description: "Send me an email"
+    icon: Mail,
+    description: "rdillman [at] gmail [dot] com"
   },
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/richarddillman/",
-    icon: FaLinkedin,
-    display: "linkedin.com/in/richarddillman",
-    description: "Connect professionally"
+    icon: Linkedin,
+    description: "Connect with me"
   },
   {
     name: "GitHub",
     href: "https://github.com/richardDillman/",
-    icon: FaGithub,
-    display: "github.com/richardDillman",
+    icon: Github,
     description: "Check out my code"
   },
   {
     name: "Dev.to",
     href: "https://dev.to/richarddillman",
-    icon: SiDevdotto,
-    display: "dev.to/richarddillman",
+    icon: BookOpen,
     description: "Read my writing"
   }
 ];
@@ -42,52 +39,56 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">Get in Touch</h1>
-        <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-12 leading-relaxed">
-          I'm always happy to discuss engineering leadership, performance optimization,
-          web architecture, or how to work effectively with AI agents. Feel free to
-          reach out through any of these channels.
-        </p>
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-12 animate-slide-up">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="text-gradient">Let's Build Something Together</span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Open to exciting opportunities, collaborations, and conversations about engineering
+            </p>
+          </div>
 
-        <div className="space-y-4">
-          {contactLinks.map((link) => {
-            const Icon = link.icon;
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                target={link.name !== "Email" ? "_blank" : undefined}
-                rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
-                className="flex items-start gap-4 p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-all group"
-              >
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/30 transition-colors">
-                  <Icon className="w-6 h-6 text-neutral-700 dark:text-neutral-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400" />
-                </div>
-                <div className="flex-grow">
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
-                    {link.name}
-                  </h3>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">
-                    {link.description}
-                  </p>
-                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-mono">
-                    {link.display}
-                  </p>
-                </div>
-              </a>
-            );
-          })}
-        </div>
+          <Card className="border-border/50 shadow-xl">
+            <CardContent className="p-8 md:p-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {contactLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      target={link.name !== "Email" ? "_blank" : undefined}
+                      rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
+                      className="group"
+                    >
+                      <div className="p-6 bg-muted/50 rounded-lg hover:bg-accent/10 transition-all duration-300 hover:scale-105">
+                        <Icon className="w-8 h-8 text-accent mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <h3 className="font-bold text-foreground mb-1">{link.name}</h3>
+                        <p className="text-sm text-muted-foreground">{link.description}</p>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
 
-        <div className="mt-12 p-6 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">About Response Time</h2>
-          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            I typically respond within 1-2 business days. If you're reaching out about
-            engineering roles, consulting opportunities, or speaking engagements, please
-            include relevant details in your initial message.
+              <div className="pt-6 border-t border-border">
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full md:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
+                >
+                  <a href="https://calendly.com/richarddillman" target="_blank" rel="noopener noreferrer">
+                    Schedule a Call
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <p className="text-muted-foreground mt-12">
+            Based in Indianapolis, IN • Available for remote opportunities
           </p>
-        </div>
         </div>
       </div>
     </div>
