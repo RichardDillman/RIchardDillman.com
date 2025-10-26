@@ -25,7 +25,7 @@ export const experiences: Experience[] = [
     roles: [
       {
         title: "Senior Director of Engineering",
-        period: "Full-time",
+        period: "Jan 2022 - Sep 2025",
         description: "Led engineering at The Muse, building job search platforms that help people find work they actually want. Spanned technical planning, mentoring, hands-on architecture, and cross-functional collaboration with Product, Design, and leadership.",
         achievements: [
           {
@@ -55,7 +55,7 @@ export const experiences: Experience[] = [
       },
       {
         title: "Staff Engineer, Director of Application Development",
-        period: "Full-time",
+        period: "Jun 2020 - Dec 2021",
         description: "Led engineering strategy and product delivery across The Muse. Set architectural direction, guided roadmap priorities, mentored engineers, and improved development velocity.",
         achievements: [
           {
@@ -81,7 +81,7 @@ export const experiences: Experience[] = [
       },
       {
         title: "Staff Engineer",
-        period: "Full-time",
+        period: "Mar 2019 - May 2020",
         achievements: [
           {
             text: "Deployed structured data (JSON-LD) and performance refactors",
@@ -113,7 +113,7 @@ export const experiences: Experience[] = [
       },
       {
         title: "Senior Application Engineer",
-        period: "Full-time",
+        period: "Dec 2018 - Feb 2019",
         description: "Worked with Director of Engineering to shape technical strategy, extend platforms, and lead new product development. Modernized legacy systems using Node, React, Python, AWS, Postgres.",
         achievements: [
           {
@@ -141,7 +141,7 @@ export const experiences: Experience[] = [
     roles: [
       {
         title: "Senior Software Engineer, Ad Tech, Monetization",
-        period: "Full-time",
+        period: "Jul 2015 - Nov 2018",
         description: "Led ad-platform modernization across Condé Nast's premier brands (Vogue, The New Yorker, Wired, GQ, Bon Appétit, Vanity Fair, etc.) where every millisecond of latency impacted global revenue and user trust.",
         achievements: [
           {
@@ -179,7 +179,7 @@ export const experiences: Experience[] = [
     roles: [
       {
         title: "Front End Engineer",
-        period: "Full-time",
+        period: "Jan 2012 - Jul 2015",
         description: "Built and optimized consumer health platforms reaching 30M+ monthly users, delivering performance, accessibility, and monetization improvements.",
         achievements: [
           {
@@ -213,7 +213,7 @@ export const experiences: Experience[] = [
     roles: [
       {
         title: "Sr Software Engineer / CEO",
-        period: "Full-time",
+        period: "Jan 2003 - Jan 2012",
         description: "Founded and led software firm specializing in digital solutions for foster care and child welfare agencies. Designed and delivered web platforms adopted statewide and across the Midwest.",
         achievements: [
           {

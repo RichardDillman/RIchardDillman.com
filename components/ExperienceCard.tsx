@@ -1,4 +1,5 @@
 import { Experience } from "@/data/experience";
+import { ChevronRight } from "lucide-react";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -6,46 +7,51 @@ interface ExperienceCardProps {
 
 export default function ExperienceCard({ experience }: ExperienceCardProps) {
   return (
-    <div className="border border-neutral-200 dark:border-neutral-800 rounded-lg p-6 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
-      <div className="mb-4">
-        <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-          {experience.company}
-        </h3>
-        <div className="flex flex-col sm:flex-row sm:justify-between text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-          <span>{experience.location}</span>
-          <span>{experience.period}</span>
-        </div>
-      </div>
-
-      <div className="space-y-6">
-        {experience.roles.map((role, roleIndex) => (
-          <div key={roleIndex} className="border-l-2 border-neutral-200 dark:border-neutral-800 pl-4">
-            <h4 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
-              {role.title}
-            </h4>
-
-            {role.description && (
-              <p className="text-neutral-600 dark:text-neutral-400 mb-3 leading-relaxed">
-                {role.description}
+    <div className="space-y-4">
+      {experience.roles.map((role, roleIndex) => (
+        <div
+          key={roleIndex}
+          className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+        >
+          {/* Header with title and date badge */}
+          <div className="flex items-start justify-between gap-4 mb-3">
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
+                {role.title}
+              </h3>
+              <p className="text-base text-neutral-600 dark:text-neutral-400">
+                {experience.company}
               </p>
-            )}
+            </div>
+            <span className="px-3 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full whitespace-nowrap">
+              {role.period}
+            </span>
+          </div>
 
-            <ul className="space-y-2">
-              {role.achievements.map((achievement, achIndex) => (
-                <li key={achIndex} className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600 mr-2 -translate-y-0.5" />
+          {role.description && (
+            <p className="text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed">
+              {role.description}
+            </p>
+          )}
+
+          {/* Achievements with chevron bullets */}
+          <ul className="space-y-2">
+            {role.achievements.map((achievement, achIndex) => (
+              <li key={achIndex} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                <ChevronRight className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                <span>
                   {achievement.text}
                   {achievement.metrics && (
                     <span className="ml-2 font-semibold text-emerald-700 dark:text-emerald-400">
                       ({achievement.metrics})
                     </span>
                   )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 }
