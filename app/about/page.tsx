@@ -46,25 +46,25 @@ export default function AboutPage() {
           <div className="prose prose-neutral dark:prose-invert max-w-none text-lg leading-relaxed space-y-6">
             <p className="mt-0">
               I love building fast, reliable products, and helping others grow while I
-              do it. I'm passionate about SEO, Page Speed, and clean, scalable
+              do it. I&apos;m passionate about SEO, Page Speed, and clean, scalable
               code. At The Muse, I lead with curiosity, clarity, and care, bridging
               tech and business. Nearly a decade later, my code still powers ads
               on sites like Vogue, GQ, Wired, and The New Yorker.
             </p>
 
             <p>
-              I'm a <strong>Senior Director of Engineering</strong> focused on
+              I&apos;m a <strong>Senior Director of Engineering</strong> focused on
               mentorship, performance optimization, and build speed. My stack centers
-              on TypeScript and Next.js, but I've spent decades working across the
+              on TypeScript and Next.js, but I&apos;ve spent decades working across the
               web platform, from Python/Tornado monoliths to modern React architectures,
               from state government systems to global media properties.
             </p>
 
             <p>
-              Over the past 20+ years, I've built systems that serve millions of users
+              Over the past 20+ years, I&apos;ve built systems that serve millions of users
               daily. At <strong>Condé Nast</strong>, I modernized ad delivery infrastructure
               across 30+ publications reaching 229M+ monthly users. At{" "}
-              <strong>The Muse</strong>, I've led engineering through multiple platform
+              <strong>The Muse</strong>, I&apos;ve led engineering through multiple platform
               migrations, cutting build times from 45 minutes to 75 seconds and
               driving significant improvements in SEO, revenue, and user engagement.
             </p>
@@ -82,7 +82,7 @@ export default function AboutPage() {
             <p>
               I believe great engineering leadership means staying technical while
               scaling people and systems. I write code, review PRs, debug production
-              issues, and mentor engineers, from junior ICs to senior architects. I've
+              issues, and mentor engineers, from junior ICs to senior architects. I&apos;ve
               even formalized <strong>Claude Code</strong> as a structured contributor
               on my team, treating AI as a force multiplier that still requires tight
               direction and thorough review.
@@ -91,8 +91,8 @@ export default function AboutPage() {
             <p>
               I care deeply about the fundamentals: <strong>Web Vitals</strong>,{" "}
               <strong>Lighthouse scores</strong>, accessibility, observability, and
-              developer experience. I've built experimentation into workflows so we
-              can measure what we ship. I've standardized linting, typing, testing,
+              developer experience. I&apos;ve built experimentation into workflows so we
+              can measure what we ship. I&apos;ve standardized linting, typing, testing,
               and formatting pipelines across teams to improve velocity and reduce
               bugs.
             </p>
@@ -101,20 +101,20 @@ export default function AboutPage() {
               Most importantly, I lead with <strong>curiosity, clarity, and care</strong>.
               I ask questions, explain decisions, and make sure everyone (engineers,
               product managers, designers, and stakeholders) understands not just{" "}
-              <em>what</em> we're building, but <em>why</em>.
+              <em>what</em> we&apos;re building, but <em>why</em>.
             </p>
 
             <h2 className="text-2xl font-bold mt-12 mb-4">Outside of Work</h2>
 
             <p>
-              When I'm not optimizing build pipelines or debugging Core Web Vitals,
-              you'll find me gardening, playing Elder Scrolls Online, reading about
-              Egyptology, or experimenting with bookbinding and typography. I'm
+              When I&apos;m not optimizing build pipelines or debugging Core Web Vitals,
+              you&apos;ll find me gardening, playing Elder Scrolls Online, reading about
+              Egyptology, or experimenting with bookbinding and typography. I&apos;m
               fascinated by craft, systems, and the intersection of art and
               engineering.
             </p>
 
-            <h2 className="text-2xl font-bold mt-12 mb-4">Let's Connect</h2>
+            <h2 className="text-2xl font-bold mt-12 mb-4">Let&apos;s Connect</h2>
 
             <p>
               I write occasionally on{" "}

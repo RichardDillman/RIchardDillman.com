@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import TechStackPreview from "@/components/TechStackPreview";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

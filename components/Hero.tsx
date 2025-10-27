@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -34,14 +33,14 @@ export default function Hero() {
             {/* Content */}
             <div className="flex-1 text-center md:text-left">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary-foreground">
-                Hi, I'm Richard Dillman
+                Hi, I&apos;m Richard Dillman
               </h1>
               <p className="text-xl md:text-2xl text-primary-foreground/90 mb-6 leading-relaxed">
                 Senior Director of Engineering • Mentor • Performance optimizer • Build speed fanatic
               </p>
               <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl">
                 I build fast, reliable web platforms that focus on performance, SEO, and developer experience.
-                26 years of experience from state government systems to Condé Nast's premier brands.
+                26 years of experience from state government systems to Condé Nast&apos;s premier brands.
               </p>
 
               {/* CTA Buttons */}
