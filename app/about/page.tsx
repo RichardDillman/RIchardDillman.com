@@ -38,7 +38,7 @@ export default function AboutPage() {
               <span>About Me</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic.
+              Leader, Mentor, performance optimizer, build speed fanatic.
             </p>
           </div>
 
@@ -53,11 +53,9 @@ export default function AboutPage() {
             </p>
 
             <p>
-              I&apos;m a <strong>Senior Director of Engineering</strong> focused on
-              mentorship, performance optimization, and build speed. My stack centers
-              on TypeScript and Next.js, but I&apos;ve spent decades working across the
-              web platform, from Python/Tornado monoliths to modern React architectures,
-              from state government systems to global media properties.
+              I&apos;m focused on mentorship, performance optimization, and build speed. My stack centers on
+              TypeScript and Next.js, but I&apos;ve spent decades working across the web platform, from Python/Tornado
+              monoliths to modern React architectures, from state government systems to global media properties.
             </p>
 
             <p>
