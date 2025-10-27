@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
+import { generateBlogSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Blog | Richard Dillman",
@@ -37,8 +38,15 @@ export default function BlogPage() {
     compareDesc(new Date(a.date), new Date(b.date))
   );
 
+  const blogSchema = generateBlogSchema();
+
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <header className="mb-12 text-center">
@@ -111,6 +119,7 @@ export default function BlogPage() {
       </div>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

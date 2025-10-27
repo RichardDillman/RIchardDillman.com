@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ProjectDisclosure } from "@/components/ProjectDisclosure";
 import { projects, getAllTags } from "@/data/projects";
+import { generateProjectsItemListSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Projects | Richard Dillman",
@@ -32,9 +33,15 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   const tags = getAllTags();
+  const projectsSchema = generateProjectsItemListSchema(projects);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }}
+      />
+      <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
       {/* Header */}
@@ -203,6 +210,7 @@ export default function ProjectsPage() {
       </footer>
       </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

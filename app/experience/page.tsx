@@ -3,6 +3,8 @@ import { LogoMontage } from "@/components/LogoMontage";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
+import { experiences } from "@/data/experience";
+import { generateExperienceItemListSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Experience | Richard Dillman",
@@ -32,8 +34,15 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
+  const experienceSchema = generateExperienceItemListSchema(experiences);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(experienceSchema) }}
+      />
+      <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <header className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -69,6 +78,7 @@ export default function ExperiencePage() {
           />
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

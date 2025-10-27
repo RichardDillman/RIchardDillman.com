@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mail, Github, Linkedin, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { generateContactPageSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Contact | Richard Dillman",
@@ -58,8 +59,15 @@ const contactLinks = [
 ];
 
 export default function ContactPage() {
+  const contactPageSchema = generateContactPageSchema();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
+      />
+      <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
@@ -113,6 +121,7 @@ export default function ContactPage() {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

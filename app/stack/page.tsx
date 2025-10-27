@@ -1,5 +1,7 @@
 import TechStack from "@/components/TechStack";
 import type { Metadata } from "next";
+import { techStack } from "@/data/techStack";
+import { generateTechStackItemListSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Tech Stack | Richard Dillman",
@@ -29,8 +31,15 @@ export const metadata: Metadata = {
 };
 
 export default function StackPage() {
+  const techStackSchema = generateTechStackItemListSchema(techStack);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(techStackSchema) }}
+      />
+      <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <header className="mb-12 text-center">
 
@@ -44,6 +53,7 @@ export default function StackPage() {
         </header>
         <TechStack />
       </div>
-    </div>
+      </div>
+    </>
   );
 }

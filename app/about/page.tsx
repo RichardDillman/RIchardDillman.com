@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { generatePersonSchema } from "@/lib/structured-data";
+import { generateProfilePageSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "About | Richard Dillman",
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const personSchema = generatePersonSchema();
+  const profilePageSchema = generateProfilePageSchema();
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
       />
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
