@@ -4,6 +4,7 @@ import { allPosts } from "contentlayer/generated";
 import Link from "next/link";
 import Image from "next/image";
 import { getMDXComponent } from "next-contentlayer/hooks";
+import { generateBlogPostingSchema } from "@/lib/structured-data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -70,8 +71,22 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const MDXContent = getMDXComponent(post.body.code);
 
+  const blogPostSchema = generateBlogPostingSchema({
+    title: post.title,
+    description: post.description || post.title,
+    slug: post.slug,
+    date: post.date,
+    tags: post.tags,
+    coverImage: post.coverImage,
+  });
+
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }}
+      />
+      <main className="max-w-3xl mx-auto px-4 py-12">
       {/* Back Link */}
       <Link
         href="/blog"
@@ -165,6 +180,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
         </div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }

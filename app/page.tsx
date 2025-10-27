@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import type { Metadata } from "next";
+import { generatePersonSchema, generateWebSiteSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Richard Dillman | Engineering Leadership & Performance",
@@ -29,7 +30,20 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const personSchema = generatePersonSchema();
+  const websiteSchema = generateWebSiteSchema();
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <Hero />
+    </>
   );
 }

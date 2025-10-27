@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { generatePersonSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "About | Richard Dillman",
@@ -29,8 +30,15 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const personSchema = generatePersonSchema();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           <div className="mb-12 text-center">
@@ -156,6 +164,7 @@ export default function AboutPage() {
         </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
