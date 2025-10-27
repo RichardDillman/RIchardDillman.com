@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ProjectDisclosure } from "@/components/ProjectDisclosure";
 import { projects, getAllTags } from "@/data/projects";
 
@@ -67,10 +68,46 @@ export default function ProjectsPage() {
         {projects.map((project) => (
           <ProjectDisclosure
             key={project.id}
+            id={project.id}
             title={project.title}
             summary={project.summary}
             details={
               <div className="space-y-6 pt-4">
+                {/* Schema Markup */}
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "CreativeWork",
+                      "name": project.title,
+                      "description": project.summary,
+                      "about": project.problem,
+                      "creator": {
+                        "@type": "Person",
+                        "name": "Richard Dillman",
+                        "url": "https://richarddillman.com"
+                      },
+                      "mentions": {
+                        "@type": "Organization",
+                        "name": project.company
+                      },
+                      "dateCreated": project.period,
+                      "keywords": project.tags.join(", ")
+                    })
+                  }}
+                />
+
+                {/* Context Breadcrumb */}
+                <div className="pb-3 border-b border-neutral-200 dark:border-neutral-800">
+                  <Link
+                    href="/experience"
+                    className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    Part of my work at {project.company} • {project.period}
+                  </Link>
+                </div>
+
                 {/* Problem */}
                 <div>
                   <h4 className="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
@@ -132,6 +169,16 @@ export default function ProjectsPage() {
                   <p>
                     {project.company} • {project.period}
                   </p>
+                </div>
+
+                {/* Back to Experience Button */}
+                <div className="pt-4 flex justify-center">
+                  <Link
+                    href="/experience"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950 rounded-lg transition-colors"
+                  >
+                    ← Back to Experience
+                  </Link>
                 </div>
               </div>
             }

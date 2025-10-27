@@ -129,6 +129,71 @@ export const projects: Project[] = [
     metrics: "10x increase in organic SEO traffic",
     stack: ["Next.js", "JSON-LD", "Schema.org", "SEO", "Server-Side Rendering"],
     tags: ["SEO", "Growth", "Structured Data"]
+  },
+  {
+    id: "the-muse-ai-search-maya",
+    title: "AI-Powered Content Discovery Tool (Maya)",
+    summary: "The Muse - AI search tool surfacing 24,000+ articles with natural language queries",
+    company: "The Muse",
+    period: "2024",
+    problem: "Over 24,000 articles from The Muse and FGB were difficult for users to discover through traditional search and navigation. Article content represented significant value but wasn't being surfaced effectively, limiting engagement and monetization opportunities. Users needed a more intuitive way to find relevant career advice.",
+    solution: "Designed and led development of Maya, an AI-powered content discovery tool that uses natural language processing to surface relevant articles. Built with React.js and Next.js, integrating with article APIs to provide intelligent search results. Positioned platform for AI-first search future while maintaining performance standards.",
+    outcome: "Increased article pageviews by 3,500 unique users per month. Boosted organic reach and created PR-driven traffic opportunities. Opened new top-of-funnel monetization paths by improving content discoverability. Demonstrated technical leadership in emerging AI technologies.",
+    metrics: "+3,500 unique users/month, 24K articles surfaced",
+    stack: ["React.js", "Next.js", "APIs", "AI/ML", "Natural Language Processing"],
+    tags: ["AI/ML", "Product", "Innovation", "User Experience"]
+  },
+  {
+    id: "the-muse-two-paned-search",
+    title: "Two-Paned Job Search UX Redesign",
+    summary: "The Muse - Revolutionary split-pane interface increasing applications 50%",
+    company: "The Muse",
+    period: "2024",
+    problem: "Job seekers had to click into separate pages to view job details, then use back button to return to search results. This multi-tab workflow created friction, interrupted browsing flow, and reduced application conversion. Users lost context switching between search and detail views.",
+    solution: "Revamped job search UX to two-pane layout allowing jobseekers to browse listings and view details in same tab. Implemented inline navigation that updates URL for SEO while maintaining smooth UX. Created new indexable URLs for each job view state while keeping user in browsing mode.",
+    outcome: "50% increase in job applications per user by reducing navigation friction. Improved SEO through new indexable job detail URLs. Enhanced user experience by maintaining search context while exploring opportunities. Demonstrated impact of thoughtful UX on core conversion metrics.",
+    metrics: "+50% applications per user",
+    stack: ["React.js", "Next.js", "TypeScript", "UX Design", "SEO"],
+    tags: ["UX", "Product", "Conversion", "SEO"]
+  },
+  {
+    id: "the-muse-direct-apply-forms",
+    title: "Dynamic Direct Apply Forms with Multi-ATS Integration",
+    summary: "The Muse - JSON-driven application forms integrated with partner ATS platforms",
+    company: "The Muse",
+    period: "2023",
+    problem: "Google prioritizes sites with direct application capability in Google Jobs search results. The Muse needed to enable on-site applications without rebuilding forms for each partner's unique requirements. Each ATS had different fields, validation rules, and security requirements for handling PII.",
+    solution: "Partnered with multiple third-party applicant tracking systems and built dynamic form generator consuming JSON schema definitions. Created system supporting custom fields, validation rules, display ordering, and PII security. Implemented multi-phase approach with technical documentation, partner coordination, and POC variants for each ATS integration.",
+    outcome: "Clickthrough rate increased 15% and job applications increased 10% by reducing friction. Achieved Google Jobs prioritization improving organic discovery. Built scalable platform supporting unlimited ATS partners without custom development for each integration.",
+    metrics: "+15% CTR, +10% job applies",
+    stack: ["React.js", "Next.js", "TypeScript", "JSON", "APIs", "Jest"],
+    tags: ["Integration", "Product", "Conversion", "APIs"]
+  },
+  {
+    id: "the-muse-company-profiles",
+    title: "Company Profile Pages Performance & SEO Transformation",
+    summary: "The Muse - Lighthouse scores to all-green across performance, accessibility, and SEO",
+    company: "The Muse",
+    period: "2023",
+    problem: "Company profile pages built on legacy monolith (CoffeeScript, Python, Tornado) had poor performance scores hurting SEO rankings and user experience. Mobile Lighthouse scores: Performance 62, Accessibility 96, Best Practices 83, SEO 89. Slow load times reduced engagement and conversion for job seekers researching employers.",
+    solution: "Replatformed Company Profile pages as server-side rendering microfrontend using Next.js, TypeScript, Docker, AWS ECS, and CircleCI. Replaced legacy stack with modern standards while maintaining feature parity. Focused optimization efforts on Core Web Vitals and accessibility compliance.",
+    outcome: "Achieved all-green Lighthouse scores: Performance 91 (+29), Accessibility 100 (+4), Best Practices 92 (+9), SEO 96 (+7). Dramatically improved page load times and user experience. Enhanced SEO rankings leading to increased organic traffic to company profiles and job listings.",
+    metrics: "Lighthouse: Perf 62→91, A11y 96→100, BP 83→92, SEO 89→96",
+    stack: ["Next.js", "TypeScript", "React.js", "Docker", "AWS ECS", "CircleCI"],
+    tags: ["Performance", "SEO", "Migration", "Accessibility"]
+  },
+  {
+    id: "the-muse-search-ux-refresh",
+    title: "Job Search Experience Complete UX & Technical Rebuild",
+    summary: "The Muse - Modern search interface with 21.9% increase in clicks and perfect Web Vitals",
+    company: "The Muse",
+    period: "2021-2022",
+    problem: "Job search experience felt dated and didn't align with The Muse's modern approach to job seeking. Technical debt in search page architecture limited ability to iterate quickly and add features. Poor Core Web Vitals hurt SEO rankings. User engagement metrics showed room for improvement in browsing and discovery.",
+    solution: "Complete UX refresh redesigning search interface from ground up while rebuilding technical architecture. Migrated to Next.js, Koa, Storybook, TypeScript, CSS Modules, and Docker. Collaborated with Product and Design teams to reimagine job discovery experience. Focused on performance optimization achieving perfect Core Web Vitals scores.",
+    outcome: "Increased job tile views 8.7%, tile views per unique visitor 20%, and job tile clicks 21.9%. Achieved exceptional Core Web Vitals: LCP 2.23s, FID 0.02s, CLS 0 (perfect). Improved SEO rankings through performance gains. Created scalable, maintainable platform for future search innovations.",
+    metrics: "+21.9% clicks, +20% views/user, LCP 2.23s, FID 0.02s, CLS 0",
+    stack: ["Next.js", "TypeScript", "Koa", "Storybook", "CSS Modules", "Docker"],
+    tags: ["UX", "Performance", "Product", "Architecture"]
   }
 ];
 

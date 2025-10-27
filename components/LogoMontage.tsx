@@ -37,7 +37,7 @@ export function LogoMontage({
               </h3>
             )}
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-12 items-center justify-items-center">
               {logos.map((logo) => (
                 <LogoItem key={logo.slug} logo={logo} />
               ))}
@@ -50,31 +50,23 @@ export function LogoMontage({
 }
 
 function LogoItem({ logo }: { logo: BrandLogo }) {
-  const sizeClasses = logo.prominence === 'major'
-    ? 'h-12 w-auto max-w-[160px]' // Larger for major brands
-    : 'h-10 w-auto max-w-[120px]'; // Standard size
-
   return (
-    <div
-      className="group relative transition-all duration-300"
-      title={logo.name}
-    >
+    <div className="group relative transition-all duration-300 flex flex-col items-center justify-center w-full mx-auto">
       {/* Logo Image */}
-      <div className={`relative ${sizeClasses} grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300`}>
+      <span title={logo.name} className="inline-block">
         <Image
           src={`/images/logos/${logo.file}`}
           alt={`${logo.name} logo`}
-          width={160}
-          height={48}
-          className="object-contain w-full h-full"
+          width={140}
+          height={0}
+          style={{ width: '140px', height: 'auto' }}
+          className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
         />
-      </div>
+      </span>
 
-      {/* Hover Tooltip */}
-      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-        <div className="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-xs px-2 py-1 rounded whitespace-nowrap">
-          {logo.name}
-        </div>
+      {/* Logo Title */}
+      <div className="mt-2 text-xs text-center text-neutral-600 dark:text-neutral-400">
+        {logo.name}
       </div>
     </div>
   );
