@@ -137,6 +137,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           prose-blockquote:border-l-4 prose-blockquote:border-border prose-blockquote:pl-4 prose-blockquote:italic
           prose-img:rounded-lg prose-img:shadow-md
         ">
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <MDXContent />
         </div>
       </article>

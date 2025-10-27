@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is richarddillman.com - a personal website and blog built with Next.js 15, React 19, TypeScript, and Tailwind CSS. The site is deployed on Vercel and uses Contentlayer for MDX-based blog content.
+This is richarddillman.com - a personal website and blog built with Next.js 16, React 19, TypeScript, and Tailwind CSS. The site is deployed on Vercel and uses Contentlayer for MDX-based blog content.
 
 **IMPORTANT:** Check `docs/progress.md` for current implementation status, completed features, and priority next steps.
 
@@ -32,7 +32,9 @@ The dev server runs on http://localhost:3000 by default.
 ## Architecture
 
 ### Tech Stack
-- **Framework:** Next.js 15 with App Router
+- **Framework:** Next.js 16 with App Router
+- **Bundler:** Turbopack (default in Next.js 16)
+- **Compiler:** React Compiler (enabled for auto-memoization)
 - **Language:** TypeScript 5
 - **Styling:** Tailwind CSS 3 with dark mode support
 - **Content:** Contentlayer for MDX blog posts
@@ -68,7 +70,7 @@ contentlayer.config.ts # Contentlayer configuration for MDX processing
 
 ### Key Patterns
 
-**App Router:** This project uses Next.js 15's App Router. All routes are defined by the folder structure in the `app/` directory. Each route should have a `page.tsx` file.
+**App Router:** This project uses Next.js 16's App Router. All routes are defined by the folder structure in the `app/` directory. Each route should have a `page.tsx` file.
 
 **Layout:** The root layout (`app/layout.tsx`) wraps all pages with the Header and Footer components, and applies the Inter font globally.
 
@@ -81,7 +83,11 @@ contentlayer.config.ts # Contentlayer configuration for MDX processing
 ## Important Configuration Details
 
 ### Next.js Config
-The `next.config.ts` wraps the config with Contentlayer's `withContentlayer()` function to enable MDX processing.
+The `next.config.ts` includes:
+- `reactCompiler: true` - Enables the stable React Compiler for automatic memoization
+- `turbopack: {}` - Acknowledges Turbopack as default bundler (compatible with Contentlayer's webpack usage)
+- Wrapped with Contentlayer's `withContentlayer()` function to enable MDX processing
+- Compiler optimizations for production (remove React properties, console statements)
 
 ### Tailwind Config
 - Uses `darkMode: "class"` for manual dark mode toggling
@@ -89,17 +95,18 @@ The `next.config.ts` wraps the config with Contentlayer's `withContentlayer()` f
 - Extends default theme with custom CSS variables for colors
 
 ### ESLint Config
-Uses Next.js recommended ESLint config with TypeScript support via the flat config format (`eslint.config.mjs`).
+Uses Next.js 16's ESLint config with TypeScript support via the flat config format (`eslint.config.mjs`). The config directly imports from `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript` instead of using `next lint`.
 
 ### pnpm Notes
 After initial install, you may need to run `pnpm approve-builds` to enable build scripts for certain dependencies (contentlayer, esbuild, sharp, protobufjs, unrs-resolver).
 
 ## Known Issues
 
-**Contentlayer + Next.js 15:** Contentlayer's peer dependency expects Next.js 12 or 13, but the project uses Next.js 15. This causes peer dependency warnings during install but does not affect functionality. Monitor the Contentlayer repository for official Next.js 15 support.
+**Contentlayer + Next.js 16:** Contentlayer's peer dependency expects Next.js 12 or 13, but the project uses Next.js 16. This causes peer dependency warnings during install but does not affect functionality. Testing confirms full compatibility with Next.js 16's Turbopack and React Compiler.
 
 ## Additional Dependencies
 
+- **babel-plugin-react-compiler:** Required for React Compiler (Next.js 16+)
 - **next-seo:** For managing SEO meta tags
 - **next-themes:** For dark mode support
 - **framer-motion:** For animations
