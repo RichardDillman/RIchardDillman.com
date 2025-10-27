@@ -68,6 +68,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
+  // eslint-disable-next-line react-hooks/static-components -- Static generation creates component once per build
   const MDXContent = getMDXComponent(post.body.code);
 
   return (
