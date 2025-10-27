@@ -64,7 +64,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-gradient">Let's Build Something Together</span>
+              <span>Let's Build Something Together</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Open to exciting opportunities, collaborations, and conversations about engineering

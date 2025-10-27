@@ -131,10 +131,6 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
-  }
-
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out forwards;
   }

@@ -1,0 +1,8 @@
+# Target modern browsers only
+# This affects PostCSS/Autoprefixer CSS output
+
+Chrome >= 102
+Safari >= 18.5
+Edge >= 138
+iOS >= 18.5
+not dead

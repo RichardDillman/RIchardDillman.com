@@ -1,6 +1,6 @@
 import ExperienceList from "@/components/ExperienceList";
 import { LogoMontage } from "@/components/LogoMontage";
-import { Briefcase, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 
@@ -37,7 +37,7 @@ export default function ExperiencePage() {
       <div className="container mx-auto px-6">
         <header className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-gradient">Experience & Skills</span>
+            <span>Experience & Skills</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
             A decade of building and leading engineering teams
@@ -55,7 +55,6 @@ export default function ExperiencePage() {
         </header>
 
         <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-          <Briefcase className="w-6 h-6 text-blue-500" />
           Professional Experience
         </h2>
 
