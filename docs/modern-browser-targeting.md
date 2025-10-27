@@ -4,6 +4,15 @@
 
 This project is configured to target only modern browsers, which reduces bundle size by eliminating unnecessary polyfills and legacy code transformations.
 
+## Dependency Management
+
+The project uses pnpm overrides to resolve peer dependency conflicts with Contentlayer's outdated dependencies:
+
+- `@opentelemetry/api`: Pinned to ^1.4.1 (compatible with Contentlayer's OpenTelemetry dependencies)
+- `esbuild`: Pinned to ^0.18.20 (required by Contentlayer)
+
+These overrides eliminate peer dependency warnings while maintaining full compatibility.
+
 ## Target Browsers
 
 The site targets the following modern browsers:
