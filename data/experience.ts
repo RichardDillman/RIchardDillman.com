@@ -1,6 +1,7 @@
 export interface Achievement {
   text: string;
   metrics?: string;
+  projectId?: string; // Links to project ID in projects.ts
 }
 
 export interface Role {
@@ -30,19 +31,23 @@ export const experiences: Experience[] = [
         achievements: [
           {
             text: "Led final migration from Python/Tornado/CoffeeScript to Next.js/TypeScript/SCSS with Claude Code",
-            metrics: "Build times: 45+ min → 75 sec"
+            metrics: "Build times: 45+ min → 75 sec",
+            projectId: "the-muse-migration"
           },
           {
             text: "White-labeled Multi-tenant Job Search site",
-            metrics: "Projected: $153K-$230K/year/tenant"
+            metrics: "Projected: $153K-$230K/year/tenant",
+            projectId: "the-muse-white-label"
           },
           {
             text: "Replaced infinite scroll with paginated search, improving Google crawlability",
-            metrics: "+74K/month SEO visits"
+            metrics: "+74K/month SEO visits",
+            projectId: "the-muse-seo-pagination"
           },
           {
             text: "Migrated to new ad partner with improved layouts and formats",
-            metrics: "+15% revenue"
+            metrics: "+15% revenue",
+            projectId: "the-muse-ad-optimization"
           },
           {
             text: "Enhanced Search Engagement with Personalized Features",
@@ -85,11 +90,13 @@ export const experiences: Experience[] = [
         achievements: [
           {
             text: "Deployed structured data (JSON-LD) and performance refactors",
-            metrics: "10x increase in organic SEO traffic"
+            metrics: "10x increase in organic SEO traffic",
+            projectId: "the-muse-structured-data"
           },
           {
             text: "Improved Core Web Vitals to green, boosting rankings and conversions",
-            metrics: "90%+ green"
+            metrics: "90%+ green",
+            projectId: "the-muse-core-web-vitals"
           },
           {
             text: "Modularized monolithic repos and overhauled CI/CD pipelines",
@@ -146,7 +153,8 @@ export const experiences: Experience[] = [
         achievements: [
           {
             text: "Rebuilt cross-brand ad delivery infrastructure for 30+ global publications",
-            metrics: "Ad viewability: 45% → 85%"
+            metrics: "Ad viewability: 45% → 85%",
+            projectId: "conde-nast-ad-platform"
           },
           {
             text: "Optimized monetization pipelines, increasing inventory fill and yield",
@@ -184,7 +192,8 @@ export const experiences: Experience[] = [
         achievements: [
           {
             text: "Reduced page load time and cut network requests, improving engagement and Core Web Vitals",
-            metrics: "-54% load time, -53% requests"
+            metrics: "-54% load time, -53% requests",
+            projectId: "everyday-health-performance"
           },
           {
             text: "Increased ad click-through rate while reducing impressions, driving higher programmatic yield",
@@ -218,7 +227,8 @@ export const experiences: Experience[] = [
         achievements: [
           {
             text: "Cut statewide foster/adoption processing time, accelerating placements",
-            metrics: "50%+ faster for 12K+ children, 3K foster households"
+            metrics: "50%+ faster for 12K+ children, 3K foster households",
+            projectId: "catalpasoft-foster-care"
           },
           {
             text: "Eliminated manual paperwork and replaced data-entry roles with automated systems",

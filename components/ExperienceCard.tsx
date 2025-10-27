@@ -1,5 +1,6 @@
 import { Experience } from "@/data/experience";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -45,6 +46,15 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
                     <span className="ml-2 font-semibold text-emerald-700 dark:text-emerald-400">
                       ({achievement.metrics})
                     </span>
+                  )}
+                  {achievement.projectId && (
+                    <Link
+                      href={`/projects#${achievement.projectId}`}
+                      className="ml-2 inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-colors"
+                    >
+                      <ArrowRight className="w-3 h-3" />
+                      <span className="text-xs">Read case study</span>
+                    </Link>
                   )}
                 </span>
               </li>
