@@ -275,7 +275,9 @@ export const experiences: Experience[] = [
     companyLogos: [
       "state-of-indiana.svg",
       "indiana-health.png",
-      "indiana-heart-gallery.png"
+      "indiana-heart-gallery.png",
+      "rask-corp.png",
+      "framing-4-yourself.svg"
     ],
     location: "Indianapolis, IN",
     period: "Jan 2003 - Jan 2012",
