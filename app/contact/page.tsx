@@ -74,13 +74,14 @@ export default function ContactPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span>Let&apos;s Build Something Together</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
               Open to exciting opportunities, collaborations, and conversations about engineering
             </p>
           </div>
 
           <Card className="border-border/50 shadow-xl">
             <CardContent className="p-8 md:p-12">
+              <h2 className="sr-only">Contact Methods</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {contactLinks.map((link) => {
                   const Icon = link.icon;
@@ -92,10 +93,10 @@ export default function ContactPage() {
                       rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
                       className="group"
                     >
-                      <div className="p-6 bg-muted/50 rounded-lg hover:bg-accent/10 transition-all duration-300 hover:scale-105">
-                        <Icon className="w-8 h-8 text-accent mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                      <div className="p-6 bg-blue-50 dark:bg-blue-950/50 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-all duration-300 hover:scale-105">
+                        <Icon className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
                         <h3 className="font-bold text-foreground mb-1">{link.name}</h3>
-                        <p className="text-sm text-muted-foreground">{link.description}</p>
+                        <p className="text-sm text-neutral-700 dark:text-neutral-300">{link.description}</p>
                       </div>
                     </a>
                   );
@@ -106,7 +107,7 @@ export default function ContactPage() {
                 <Button
                   asChild
                   size="lg"
-                  className="w-full md:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
+                  className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   <a href="https://calendly.com/richarddillman" target="_blank" rel="noopener noreferrer">
                     Schedule a Call
@@ -116,7 +117,7 @@ export default function ContactPage() {
             </CardContent>
           </Card>
 
-          <p className="text-muted-foreground mt-12">
+          <p className="text-neutral-700 dark:text-neutral-300 mt-12">
             Based in Indianapolis, IN • Available for remote opportunities
           </p>
         </div>

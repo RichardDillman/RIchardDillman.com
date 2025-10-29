@@ -36,7 +36,7 @@ export default function Hero() {
                 Hi, I&apos;m Richard Dillman
               </h1>
               <p className="text-xl md:text-2xl text-primary-foreground/90 mb-6 leading-relaxed">
-                Senior Director of Engineering • Mentor • Performance optimizer • Build speed fanatic
+                Leader• Mentor • Performance optimizer • Build speed fanatic
               </p>
               <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl">
                 I build fast, reliable web platforms that focus on performance, SEO, and developer experience.
@@ -47,7 +47,7 @@ export default function Hero() {
               <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-8">
                 <Link
                   href="/experience"
-                  className="px-6 py-3 bg-accent hover:bg-accent/90 text-accent-foreground rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
                 >
                   View Experience
                 </Link>
@@ -59,7 +59,7 @@ export default function Hero() {
                 </Link>
                 <Link
                   href="/contact"
-                  className="px-6 py-3 bg-transparent border-2 border-primary-foreground/60 text-primary-foreground rounded-lg font-semibold hover:bg-primary-foreground/10 transition-all hover:-translate-y-0.5"
+                  className="px-6 py-3 bg-transparent border-2 border-primary-foreground text-primary-foreground rounded-lg font-semibold hover:bg-primary-foreground/10 transition-all hover:-translate-y-0.5"
                 >
                   Get in Touch
                 </Link>

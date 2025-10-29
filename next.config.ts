@@ -1,11 +1,11 @@
 import type { NextConfig } from 'next';
-import { withContentlayer } from 'next-contentlayer';
+import { withContentCollections } from '@content-collections/next';
 
 const nextConfig: NextConfig = {
   // Enable React Compiler for automatic memoization (Next.js 16+)
   reactCompiler: true,
 
-  // Turbopack is default in Next.js 16 - empty config acknowledges webpack usage from Contentlayer
+  // Turbopack is default in Next.js 16
   turbopack: {},
 
   // Target modern browsers only - reduces bundle size
@@ -19,4 +19,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withContentlayer(nextConfig);
+export default withContentCollections(nextConfig);

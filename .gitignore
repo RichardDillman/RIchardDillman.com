@@ -338,3 +338,12 @@ $RECYCLE.BIN/
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# contentlayer generated files (legacy)
+.contentlayer
+
+# content-collections generated files
+.content-collections
+
+# lighthouse ci reports
+.lighthouseci

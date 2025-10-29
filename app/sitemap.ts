@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { allPosts } from 'contentlayer/generated';
+import { allPosts } from 'content-collections-generated';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://richarddillman.com';
