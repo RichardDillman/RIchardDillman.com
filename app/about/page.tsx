@@ -128,7 +128,7 @@ export default function AboutPage() {
                 href="https://dev.to/richarddillman"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+                className="text-blue-700 dark:text-blue-400 hover:underline font-medium"
               >
                 dev.to
               </a>
@@ -137,7 +137,7 @@ export default function AboutPage() {
                 href="https://www.linkedin.com/in/richarddillman/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+                className="text-blue-700 dark:text-blue-400 hover:underline font-medium"
               >
                 LinkedIn
               </a>
@@ -146,7 +146,7 @@ export default function AboutPage() {
                 href="https://github.com/richardDillman/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+                className="text-blue-700 dark:text-blue-400 hover:underline font-medium"
               >
                 GitHub
               </a>
@@ -154,7 +154,7 @@ export default function AboutPage() {
               optimization, or how to work effectively with AI agents, feel free to{" "}
               <Link
                 href="/contact"
-                className="text-emerald-600 dark:text-emerald-400 hover:underline"
+                className="text-blue-700 dark:text-blue-400 hover:underline font-medium"
               >
                 reach out
               </Link>

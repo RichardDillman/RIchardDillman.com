@@ -47,7 +47,7 @@ export default function ProjectsPage() {
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          <span>Technical Projects</span>
+          <span>My random thoughts</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           26 years of solving complex technical challenges at scale. From government digital transformation
@@ -192,22 +192,6 @@ export default function ProjectsPage() {
           />
         ))}
       </div>
-
-      {/* Footer CTA */}
-      <footer className="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Interested in working together?</h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-            I am open to technical leadership roles, engineering consulting, and advisory positions.
-          </p>
-          <a
-            href="/contact"
-            className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Get in Touch
-          </a>
-        </div>
-      </footer>
       </div>
       </div>
       </main>

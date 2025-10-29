@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { allPosts } from "contentlayer/generated";
+import { allPosts } from "content-collections-generated";
 import { compareDesc } from "date-fns";
 import { generateBlogSchema } from "@/lib/structured-data";
 
@@ -93,7 +93,7 @@ export default function BlogPage() {
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 text-xs bg-neutral-100 dark:bg-neutral-800 rounded"
+                      className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded font-medium"
                     >
                       {tag}
                     </span>

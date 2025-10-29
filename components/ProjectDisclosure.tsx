@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
+import { useEffect } from "react";
 
 interface ProjectDisclosureProps {
   title: string;
@@ -11,50 +10,55 @@ interface ProjectDisclosureProps {
 }
 
 export function ProjectDisclosure({ title, summary, details, id }: ProjectDisclosureProps) {
-  const [open, setOpen] = useState(false);
-
-  // Check hash on mount and when hash changes
   useEffect(() => {
-    const checkHash = () => {
-      if (id && typeof window !== 'undefined') {
-        const hash = window.location.hash.substring(1);
-        setOpen(hash === id);
+    if (!id || typeof window === "undefined") return;
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      const el = document.getElementById(id) as HTMLDetailsElement | null;
+      if (!el) return;
+
+      // Open + scroll if this is the targeted element
+      if (hash === id) {
+        el.open = true;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     };
 
-    // Check immediately on mount (handles both hard refresh and client-side navigation)
-    checkHash();
+    // Run immediately (handles SSR hydration + refresh)
+    handleHashChange();
 
-    // Also listen for hash changes
-    window.addEventListener('hashchange', checkHash);
-    return () => window.removeEventListener('hashchange', checkHash);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, [id]);
 
   return (
-    <Disclosure
-      as="section"
+    <details
       id={id}
-      className={`border rounded-2xl p-6 bg-white dark:bg-neutral-900 scroll-mt-24 transition-shadow duration-300 ${
-        open
-          ? 'shadow-xl border-blue-200 dark:border-blue-800'
-          : 'shadow-sm hover:shadow-md'
-      }`}
+      className="group border rounded-2xl p-6 bg-white dark:bg-neutral-900 transition-shadow duration-300 scroll-mt-24 open:shadow-xl open:border-blue-200 dark:open:border-blue-800 shadow-sm hover:shadow-md"
     >
-      <DisclosureButton
-        as="div"
-        className="flex justify-between items-center cursor-pointer select-none"
-        onClick={() => setOpen(!open)}
-      >
+      <summary className="flex justify-between items-center cursor-pointer select-none list-none">
         <div>
           <h3 className="text-lg font-semibold">{title}</h3>
           <p className="text-sm text-neutral-500">{summary}</p>
         </div>
-        <span className="text-blue-600 text-sm">{open ? "Hide" : "View"}</span>
-      </DisclosureButton>
+        <span className="text-blue-600 text-sm transition-colors group-open:text-blue-400">
+          <span className="sr-only">Toggle details for {title}</span>
+          <span aria-hidden="true" className="font-medium">
+            View&nbsp;
+            <span className="group-open:hidden">+</span>
+            <span className="hidden group-open:inline">–</span>
+          </span>
+        </span>
+      </summary>
 
-      <DisclosurePanel static={open} className="mt-4 text-sm text-neutral-700 dark:text-neutral-300">
+      <div
+        className="mt-4 text-sm text-neutral-700 dark:text-neutral-300"
+        role="region"
+        aria-labelledby={id}
+      >
         {details}
-      </DisclosurePanel>
-    </Disclosure>
+      </div>
+    </details>
   );
 }

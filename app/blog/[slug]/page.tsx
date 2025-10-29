@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { allPosts } from "contentlayer/generated";
+import { allPosts } from "content-collections-generated";
 import Link from "next/link";
 import Image from "next/image";
-import { getMDXComponent } from "next-contentlayer/hooks";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { generateBlogPostingSchema } from "@/lib/structured-data";
 
 interface PageProps {
@@ -69,7 +69,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  const MDXContent = getMDXComponent(post.body.code);
 
   const blogPostSchema = generateBlogPostingSchema({
     title: post.title,
@@ -102,7 +101,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="mb-6 overflow-hidden rounded-lg">
               <Image
                 src={post.coverImage}
-                alt={post.title}
+                alt={post.coverImageAlt || ""}
                 width={1200}
                 height={600}
                 className="w-full h-auto object-cover"
@@ -127,7 +126,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                  className="px-3 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded-full font-medium"
                 >
                   {tag}
                 </span>
@@ -152,8 +151,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           prose-blockquote:border-l-4 prose-blockquote:border-border prose-blockquote:pl-4 prose-blockquote:italic
           prose-img:rounded-lg prose-img:shadow-md
         ">
-          {/* eslint-disable-next-line react-hooks/static-components */}
-          <MDXContent />
+          <MDXRemote source={post.content} />
         </div>
       </article>
 
