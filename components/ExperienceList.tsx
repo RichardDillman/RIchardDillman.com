@@ -4,10 +4,9 @@ import { brandLogos } from "@/data/logos";
 import Image from "next/image";
 
 export default function ExperienceList() {
-  // Helper to get brand name from logo filename
-  const getBrandName = (filename: string) => {
-    const logo = brandLogos.find(l => l.file === filename);
-    return logo?.name || filename;
+  // Helper to get logo object from filename
+  const getLogo = (filename: string) => {
+    return brandLogos.find(l => l.file === filename);
   };
 
   return (
@@ -21,17 +20,24 @@ export default function ExperienceList() {
             </h2>
             {experience.companyLogos && experience.companyLogos.length > 0 && (
               <div className="flex flex-wrap items-center gap-3">
-                {experience.companyLogos.map((logo, idx) => {
-                  const brandName = getBrandName(logo);
+                {experience.companyLogos.map((logoFilename, idx) => {
+                  const logo = getLogo(logoFilename);
+                  const brandName = logo?.name || logoFilename;
+                  // Calculate width for 24px height based on aspect ratio
+                  const displayHeight = 24;
+                  const aspectRatio = logo ? logo.width / logo.height : 1;
+                  const displayWidth = Math.round(displayHeight * aspectRatio);
+                  // Prefetch first company's logos (above the fold)
+                  const isPriority = expIndex === 0;
                   return (
-                    <span key={idx} title={brandName} className="inline-block" style={{ height: '24px', width: 'auto' }}>
+                    <span key={idx} title={brandName} className="inline-block">
                       <Image
-                        src={`/images/logos/${logo}`}
+                        src={`/images/logos/${logoFilename}`}
                         alt={`${brandName} logo`}
-                        width={100}
-                        height={24}
-                        style={{ width: 'auto', height: '24px' }}
+                        width={displayWidth}
+                        height={displayHeight}
                         className="object-contain"
+                        priority={isPriority}
                       />
                     </span>
                   );

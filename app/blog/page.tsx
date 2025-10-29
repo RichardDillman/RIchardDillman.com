@@ -63,7 +63,7 @@ export default function BlogPage() {
 
       {/* Posts List */}
       <div className="space-y-8">
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <article key={post.slug} className="border-b border-neutral-200 dark:border-neutral-800 pb-8 last:border-0">
             <Link href={`/blog/${post.slug}`} className="group">
               {post.coverImage && (
@@ -74,6 +74,7 @@ export default function BlogPage() {
                     width={800}
                     height={400}
                     className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                    priority={index === 0}
                   />
                 </div>
               )}
