@@ -56,10 +56,10 @@ export default function ExperiencePage() {
           <Button
             asChild
             size="lg"
-            className="bg-blue-500 hover:bg-blue-600 text-white"
+            className="bg-blue-700 hover:bg-blue-800 text-white font-semibold"
           >
-            <a href="/images/resume.pdf" download>
-              <Download className="w-4 h-4 mr-2" />
+            <a href="/images/resume.pdf" download className="flex items-center">
+              <Download className="w-4 h-4 mr-2" aria-hidden="true" />
               Download Full Resume
             </a>
           </Button>
