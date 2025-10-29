@@ -109,8 +109,9 @@ async function captureScreenshot(website: Website): Promise<void> {
 
     console.log(`   ✅ Saved: ${outputPath}`);
 
-  } catch (error: any) {
-    console.error(`   ❌ Error capturing ${website.name}:`, error.message);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`   ❌ Error capturing ${website.name}:`, message);
   } finally {
     await browser.close();
   }
@@ -134,12 +135,13 @@ async function main() {
     try {
       await captureScreenshot(website);
       successfulSites.push(website.name);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
       failedSites.push({
         name: website.name,
         url: website.url,
         year: website.endYear,
-        error: error.message
+        error: message
       });
       console.log(`   ⚠️  Will need manual capture`);
     }
