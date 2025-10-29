@@ -37,6 +37,7 @@ export default function Home() {
 
   return (
     <>
+      <link rel="preload" as="image" href="/images/hero-bg.jpg" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}

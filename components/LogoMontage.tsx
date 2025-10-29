@@ -57,8 +57,8 @@ function LogoItem({ logo }: { logo: BrandLogo }) {
         <Image
           src={`/images/logos/${logo.file}`}
           alt={`${logo.name} logo`}
-          width={140}
-          height={0}
+          width={logo.width}
+          height={logo.height}
           style={{ width: '140px', height: 'auto' }}
           className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
         />
