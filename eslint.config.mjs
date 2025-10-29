@@ -6,6 +6,7 @@ const eslintConfig = [{
     ".next/**",
     "node_modules/**",
     ".contentlayer/**",
+    ".content-collections/**",
     "out/**",
     "build/**",
   ],
