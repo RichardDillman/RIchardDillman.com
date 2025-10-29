@@ -2,49 +2,49 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateProfilePageSchema } from '@/lib/structured-data';
 
-export const metadata: Metadata = {
-  title: 'About | Richard Dillman',
-  description:
-    'Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic. I love building fast, reliable products and helping others grow.',
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const profilePageSchema = generateProfilePageSchema();
+
+  return {
     title: 'About | Richard Dillman',
     description:
-      'Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic.',
-    url: 'https://richarddillman.com/about',
-    siteName: 'Richard Dillman',
-    images: [
-      {
-        url: '/api/og?title=About&description=Senior Director of Engineering focused on mentorship, performance optimization, and build speed',
-        width: 1200,
-        height: 630,
-        alt: 'About Richard Dillman',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'About | Richard Dillman',
-    description:
-      'Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic.',
-    images: [
-      '/api/og?title=About&description=Senior Director of Engineering focused on mentorship, performance optimization, and build speed',
-    ],
-  },
-};
+      'Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic. I love building fast, reliable products and helping others grow.',
+    openGraph: {
+      title: 'About | Richard Dillman',
+      description:
+        'Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic.',
+      url: 'https://richarddillman.com/about',
+      siteName: 'Richard Dillman',
+      images: [
+        {
+          url: '/api/og?title=About&description=Senior Director of Engineering focused on mentorship, performance optimization, and build speed',
+          width: 1200,
+          height: 630,
+          alt: 'About Richard Dillman',
+        },
+      ],
+      locale: 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'About | Richard Dillman',
+      description:
+        'Senior Director of Engineering. Mentor, performance optimizer, build speed fanatic.',
+      images: [
+        '/api/og?title=About&description=Senior Director of Engineering focused on mentorship, performance optimization, and build speed',
+      ],
+    },
+    other: {
+      'script:ld+json': JSON.stringify(profilePageSchema),
+    },
+  };
+}
 
 export const dynamic = 'force-static';
 
 export default function AboutPage() {
-  const profilePageSchema = generateProfilePageSchema();
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
-      />
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto">
@@ -169,6 +169,5 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </>
   );
 }
