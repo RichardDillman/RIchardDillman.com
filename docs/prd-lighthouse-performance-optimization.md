@@ -51,8 +51,16 @@ Recent Lighthouse CI testing revealed critical performance and accessibility iss
 - Over Budget: **500-530KB per page**
 
 **Root Causes:**
+- **Architectural Mismatch**: Site is 95% static content but serving 780KB of client-side JavaScript
+  - `/about`: 100% static text (no interactivity needed)
+  - `/blog`: Static blog post listings (no interactivity needed)
+  - `/blog/[slug]`: Static MDX content (no interactivity needed)
+  - `/experience`: Static timeline (no interactivity needed)
+  - `/stack`: Static technology list (no interactivity needed)
+  - `/contact`: Static contact info (no interactivity needed)
+  - `/projects`: **Only page with interactivity** (ProjectDisclosure component)
 - Next.js client-side JavaScript includes all routes
-- Unused dependencies bundled in production
+- Unused dependencies bundled in production (framer-motion, etc.)
 - Large third-party libraries not code-split
 - MDX runtime overhead with next-mdx-remote
 - Potentially duplicated React code across chunks
@@ -146,6 +154,43 @@ Total:               ~780KB
 
 ### Sprint 2: Bundle Size Optimization (Week 3-4)
 
+#### Phase 0: Architectural Realignment (HIGHEST PRIORITY)
+**Key Insight:** Site is 95% static content but serving 780KB of client-side JS. Only `/projects` needs interactivity.
+
+1. **Audit Client Components**
+   ```bash
+   # Find all 'use client' directives
+   grep -r "use client" app/ components/
+
+   # Question: Does this component actually need client-side JS?
+   # - User interaction (clicks, hovers, state changes)? → Keep client
+   # - Just rendering static content? → Convert to Server Component
+   ```
+
+2. **Convert Static Pages to Server Components**
+   - `/about`: Remove all client-side JS (100% server-rendered HTML)
+   - `/blog`: Server Component for listing, no client JS needed
+   - `/blog/[slug]`: MDX can be server-rendered with `next-mdx-remote/rsc`
+   - `/experience`: Server Component for timeline
+   - `/stack`: Server Component for tech list
+   - `/contact`: Server Component for contact info
+
+3. **Isolate Interactivity to Minimal Client Components**
+   - `/projects`: Keep `ProjectDisclosure` as Client Component
+   - Only load interactive JS on pages that need it
+   - Consider if framer-motion is essential or can be replaced with CSS animations
+
+4. **Measure Impact**
+   ```bash
+   # Expected results after Phase 0:
+   # - /about: 0KB client JS (was 754KB) → 100% reduction
+   # - /blog: 0KB client JS (was 782KB) → 100% reduction
+   # - /projects: ~50KB client JS (was 757KB) → 93% reduction
+   # - Overall average: ~10KB client JS (was 780KB) → 99% reduction
+   ```
+
+**Expected Impact:** This single architectural change could achieve the entire 780KB → 250KB target (and beyond).
+
 #### Phase 1: Analysis
 ```bash
 # Install bundle analyzer
@@ -215,14 +260,17 @@ ANALYZE=true pnpm build
 ```
 
 **Deliverables:**
-- ✅ JS bundle ≤250KB on all pages
+- ✅ Most pages with 0KB client-side JS (Server Components only)
+- ✅ `/projects` page with <50KB client-side JS (interactive components only)
+- ✅ Average JS bundle <50KB across all pages (was 780KB)
 - ✅ Bundle analyzer report showing improvements
-- ✅ Documentation of optimization techniques
-- ✅ Updated dependencies list
+- ✅ Documentation of Server Component migration
+- ✅ Audit of remaining client-side dependencies
 
 **Expected Impact:**
-- 780KB → 250KB = **68% reduction**
-- Estimated timeline: **2-3 weeks**
+- **Phase 0 alone:** 780KB → <50KB = **94% reduction** (most pages → 0KB)
+- **After all phases:** <50KB average = **>93% reduction**
+- Estimated timeline: **2-3 weeks** (Phase 0 can be done in Week 1)
 
 ---
 
@@ -418,10 +466,12 @@ Week 8:    Production Deployment
 ## Open Questions
 
 1. **Should we paginate blog posts** or keep them as single pages?
-2. **What's the acceptable trade-off** between bundle size and feature richness?
-3. **Do we need all third-party libraries** (framer-motion, etc)?
+2. ~~**What's the acceptable trade-off** between bundle size and feature richness?~~ **ANSWERED:** No trade-off needed - site is 95% static, just eliminate unnecessary client JS
+3. ~~**Do we need all third-party libraries** (framer-motion, etc)?~~ **ANSWERED:** Audit in Phase 0 - most pages don't need ANY client libraries
 4. **Should experience/projects move to database** instead of static data?
-5. **Is server-side rendering helping or hurting** bundle size?
+5. ~~**Is server-side rendering helping or hurting** bundle size?~~ **ANSWERED:** SSR is good, client-side hydration is the problem - use Server Components
+6. **Can we achieve <50KB total client JS** by using Server Components everywhere except `/projects`?
+7. **Should framer-motion be replaced with CSS animations** to eliminate the dependency entirely?
 
 ---
 
