@@ -217,6 +217,7 @@ import Script from "next/script"
 export default function AboutPage() {
 return (
 <>
+
 <Script
 id="ld-json-about"
 type="application/ld+json"
