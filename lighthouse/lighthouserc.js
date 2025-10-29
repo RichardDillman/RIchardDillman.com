@@ -3,7 +3,8 @@ module.exports = {
     collect: {
       // Spin up local Next.js server and collect URLs
       startServerCommand: "pnpm run build && pnpm run start",
-      numberOfRuns: 3,
+      // Use 1 run for fast local/PR checks, 3 runs for merge to main (set via CI env)
+      numberOfRuns: process.env.CI_MERGE_TO_MAIN === 'true' ? 3 : 1,
       url: [
         "http://localhost:3000/",
         "http://localhost:3000/about",
@@ -12,7 +13,7 @@ module.exports = {
         "http://localhost:3000/experience",
         "http://localhost:3000/contact",
         "http://localhost:3000/stack",
-        "https://richard-dillman-com.vercel.app/blog/why-your-react-component-is-a-hot-mess"
+        "http://localhost:3000/blog/why-your-react-component-is-a-hot-mess"
       ],
       settings: {
         preset: "desktop",

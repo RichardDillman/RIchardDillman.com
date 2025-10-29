@@ -46,6 +46,8 @@ jobs:
         run: pnpm run test:lhci
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          # Run 3x on merge to main, 1x on PRs for fast feedback
+          CI_MERGE_TO_MAIN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
 
       - name: Upload Lighthouse results
         uses: actions/upload-artifact@v4
