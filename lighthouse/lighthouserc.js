@@ -52,8 +52,15 @@ module.exports = {
         "resource-summary:image:size": ["warn", { maxNumericValue: 500000 }], // 500KB images
       },
     },
-    upload: {
-      target: "temporary-public-storage",
-    },
+    upload: process.env.GITHUB_REF === 'refs/heads/main'
+      ? {
+          // On main branch: save reports to filesystem for regression tracking
+          target: "filesystem",
+          outputDir: "./lighthouse-reports",
+        }
+      : {
+          // On PRs: use temporary public storage (7-day retention)
+          target: "temporary-public-storage",
+        },
   },
 };

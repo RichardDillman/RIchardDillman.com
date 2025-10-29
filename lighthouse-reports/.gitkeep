@@ -1,0 +1,2 @@
+# This file ensures the lighthouse-reports directory is tracked by git
+# Reports will be auto-committed here when changes merge to main

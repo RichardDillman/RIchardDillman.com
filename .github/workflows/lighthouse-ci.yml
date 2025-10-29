@@ -53,9 +53,23 @@ jobs:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           # Run 3x on merge to main, 1x on PRs for fast feedback
           CI_MERGE_TO_MAIN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          GITHUB_REF: ${{ github.ref }}
 
-      # Note: Results are uploaded to temporary-public-storage automatically
-      # and visible in the GitHub Actions logs with shareable URLs
+      # On main branch: commit reports for regression tracking
+      - name: Commit Lighthouse reports
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update Lighthouse performance reports [skip ci]'
+          file_pattern: 'lighthouse-reports/**/*'
+          commit_user_name: 'github-actions[bot]'
+          commit_user_email: 'github-actions[bot]@users.noreply.github.com'
+          skip_dirty_check: false
+          skip_fetch: false
+          skip_checkout: false
+
+      # Note: On PRs, results are uploaded to temporary-public-storage automatically
+      # and visible in the GitHub Actions logs with shareable URLs (7-day retention)
 
   # Optional: Check Vercel build time
   vercel-build-check:
