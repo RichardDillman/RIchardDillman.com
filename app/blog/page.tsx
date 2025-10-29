@@ -70,7 +70,7 @@ export default function BlogPage() {
                 <div className="mb-4 overflow-hidden rounded-lg">
                   <Image
                     src={post.coverImage}
-                    alt={post.title}
+                    alt={post.coverImageAlt || ""}
                     width={800}
                     height={400}
                     className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
