@@ -55,6 +55,22 @@ jobs:
           CI_MERGE_TO_MAIN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           GITHUB_REF: ${{ github.ref }}
 
+      # On main branch: manually stage report files before commit
+      - name: Stage Lighthouse reports
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "=== Files in lighthouse-reports/ before staging ==="
+          ls -lah lighthouse-reports/
+          echo ""
+          echo "=== Git status before staging ==="
+          git status
+          echo ""
+          echo "=== Adding files to git ==="
+          git add -A lighthouse-reports/
+          echo ""
+          echo "=== Git status after staging ==="
+          git status
+
       # On main branch: commit reports for regression tracking
       - name: Commit Lighthouse reports
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -62,10 +78,9 @@ jobs:
         with:
           commit_message: 'chore: update Lighthouse performance reports [skip ci]'
           file_pattern: 'lighthouse-reports/**/*'
-          add_options: '-A'  # Required to stage untracked files (new reports)
           commit_user_name: 'github-actions[bot]'
           commit_user_email: 'github-actions[bot]@users.noreply.github.com'
-          skip_dirty_check: false
+          skip_dirty_check: true  # We already staged files manually
           skip_fetch: false
           skip_checkout: false
 
