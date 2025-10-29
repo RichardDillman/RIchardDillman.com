@@ -1,10 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { href: "/about", label: "About" },
@@ -16,93 +14,57 @@ const navLinks = [
 ];
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-card/95 backdrop-blur-md shadow-lg'
-          : ''
-      }`}
-      style={!isScrolled ? {
-        backgroundImage: `linear-gradient(rgba(30, 58, 95, 1), rgba(30, 58, 95, 1))`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      } : {
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1))`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
+    <nav className="sticky top-0 left-0 right-0 z-50 bg-[rgb(30,58,95)] backdrop-blur-md shadow-lg">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold">
-            <span className={isScrolled ? undefined : "text-primary-foreground"}>
-              Richard Dillman
-            </span>
+          <Link href="/" className="text-xl font-bold text-white">
+            Richard Dillman
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Button
+              <Link
                 key={link.href}
-                variant="ghost"
-                asChild
-                className={`transition-all duration-300 hover:bg-accent hover:text-accent-foreground ${isScrolled ? "text-foreground" : "text-primary-foreground"}`}
+                href={link.href}
+                className="px-4 py-2 text-white hover:bg-white/10 rounded-md transition-colors"
               >
-                <Link href={link.href}>
-                  {link.label}
-                </Link>
-              </Button>
+                {link.label}
+              </Link>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Toggle menu"
-                className={`hover:bg-transparent ${isScrolled ? "" : "text-primary-foreground hover:text-primary-foreground"}`}
-              >
-                {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[240px] sm:w-[300px]">
-              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-              <SheetDescription className="sr-only">
-                Navigate to different sections of the site
-              </SheetDescription>
-              <nav className="flex flex-col gap-2 mt-8">
-                {navLinks.map((link) => (
-                  <Button
-                    key={link.href}
-                    variant="ghost"
-                    asChild
-                    onClick={() => setOpen(false)}
-                    className="justify-start text-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-                  >
-                    <Link href={link.href}>
-                      {link.label}
-                    </Link>
-                  </Button>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-white hover:bg-white/10 rounded-md transition-colors"
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden pb-4">
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-4 py-2 text-white hover:bg-white/10 rounded-md transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

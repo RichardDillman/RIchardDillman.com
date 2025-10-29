@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect } from "react";
-
 interface ProjectDisclosureProps {
   title: string;
   summary: string;
@@ -10,28 +6,6 @@ interface ProjectDisclosureProps {
 }
 
 export function ProjectDisclosure({ title, summary, details, id }: ProjectDisclosureProps) {
-  useEffect(() => {
-    if (!id || typeof window === "undefined") return;
-
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      const el = document.getElementById(id) as HTMLDetailsElement | null;
-      if (!el) return;
-
-      // Open + scroll if this is the targeted element
-      if (hash === id) {
-        el.open = true;
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    };
-
-    // Run immediately (handles SSR hydration + refresh)
-    handleHashChange();
-
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, [id]);
-
   return (
     <details
       id={id}
