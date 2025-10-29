@@ -9,6 +9,9 @@ import type {
   ContactPage,
   Blog,
 } from 'schema-dts';
+import type { Experience, Role } from '@/data/experience';
+import type { Project } from '@/data/projects';
+import type { TechCategory, TechItem } from '@/data/techStack';
 
 /**
  * Generates JSON-LD structured data for a Person (Richard Dillman)
@@ -206,14 +209,14 @@ export function generateContactPageSchema(): WithContext<ContactPage> {
 /**
  * Generates JSON-LD structured data for Experience page (ItemList)
  */
-export function generateExperienceItemListSchema(experiences: any[]): WithContext<ItemList> {
+export function generateExperienceItemListSchema(experiences: Experience[]): WithContext<ItemList> {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     url: 'https://richarddillman.com/experience',
     name: 'Professional Experience - Richard Dillman',
     itemListElement: experiences.flatMap((exp, expIndex) =>
-      exp.roles.map((role: any, roleIndex: number) => ({
+      exp.roles.map((role: Role, roleIndex: number) => ({
         '@type': 'ListItem' as const,
         position: expIndex * 10 + roleIndex + 1,
         item: {
@@ -234,7 +237,7 @@ export function generateExperienceItemListSchema(experiences: any[]): WithContex
 /**
  * Generates JSON-LD structured data for Projects page (ItemList)
  */
-export function generateProjectsItemListSchema(projects: any[]): WithContext<ItemList> {
+export function generateProjectsItemListSchema(projects: Project[]): WithContext<ItemList> {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -260,9 +263,9 @@ export function generateProjectsItemListSchema(projects: any[]): WithContext<Ite
 /**
  * Generates JSON-LD structured data for Tech Stack page (ItemList)
  */
-export function generateTechStackItemListSchema(techStack: any[]): WithContext<ItemList> {
+export function generateTechStackItemListSchema(techStack: TechCategory[]): WithContext<ItemList> {
   const allItems = techStack.flatMap((category) =>
-    category.items.filter((item: any) => item.primary).map((item: any) => item.name)
+    category.items.filter((item: TechItem) => item.primary).map((item: TechItem) => item.name)
   );
 
   return {
