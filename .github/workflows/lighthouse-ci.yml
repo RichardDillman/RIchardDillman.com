@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write  # Required to commit Lighthouse reports back to repo
   pull-requests: write
   issues: write
 
