@@ -25,7 +25,7 @@ export default function Hero() {
                   fill
                   sizes="(max-width: 768px) 192px, 256px"
                   className="object-cover"
-                  priority
+                  priority={true}
                 />
               </div>
             </div>
