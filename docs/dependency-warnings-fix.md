@@ -42,6 +42,7 @@ Added `pnpm.onlyBuiltDependencies` to approve required build scripts:
 ```
 
 These packages require build scripts to run during installation:
+
 - **contentlayer**: Processes MDX content at build time
 - **esbuild**: JavaScript/TypeScript bundler
 - **sharp**: High-performance image processing
@@ -60,6 +61,7 @@ enable-pre-post-scripts=true
 ## Results
 
 ### Before
+
 ```
 WARN  Issues with peer dependencies found
 ├─┬ @opentelemetry/core 1.13.0
@@ -74,6 +76,7 @@ WARN  Issues with peer dependencies found
 ```
 
 ### After
+
 ```
 Done in 1.5s using pnpm v10.18.2
 ```
@@ -83,6 +86,7 @@ Done in 1.5s using pnpm v10.18.2
 ## Verification
 
 Build succeeds with optimal bundle sizes:
+
 - First Load JS: **102 kB** (shared)
 - Most pages: **102-112 kB** total
 
@@ -95,6 +99,7 @@ Build succeeds with optimal bundle sizes:
 ## One Remaining "Warning"
 
 The `next-contentlayer` peer dependency expecting Next.js 12/13 is unavoidable since Contentlayer hasn't been updated for Next.js 15. However:
+
 - This warning only appears with verbose output during initial installs
 - **It does NOT appear during normal `pnpm install`**
 - Everything functions perfectly despite the version mismatch
@@ -103,6 +108,7 @@ The `next-contentlayer` peer dependency expecting Next.js 12/13 is unavoidable s
 ## Maintenance
 
 When updating dependencies:
+
 - The overrides ensure consistency across all OpenTelemetry packages
 - Build scripts will automatically run for approved packages
 - No manual intervention needed for routine updates

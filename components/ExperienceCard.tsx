@@ -1,13 +1,13 @@
-import { Role } from "@/data/experience";
-import { ChevronRight, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Role } from '@/data/experience';
+import { ChevronRight, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface ExperienceCardProps {
   role: Role;
   company: string;
 }
 
-export default function ExperienceCard({ role, company }: ExperienceCardProps) {
+export default function ExperienceCard({ role }: ExperienceCardProps) {
   return (
     <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
       {/* Header with title and date badge */}
@@ -31,7 +31,10 @@ export default function ExperienceCard({ role, company }: ExperienceCardProps) {
       {/* Achievements with chevron bullets */}
       <ul className="space-y-2">
         {role.achievements.map((achievement, achIndex) => (
-          <li key={achIndex} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+          <li
+            key={achIndex}
+            className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed"
+          >
             <ChevronRight className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
             <span>
               {achievement.text}

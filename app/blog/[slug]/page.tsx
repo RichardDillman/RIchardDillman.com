@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { allPosts } from "content-collections-generated";
-import Link from "next/link";
-import Image from "next/image";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { generateBlogPostingSchema } from "@/lib/structured-data";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { allPosts } from 'content-collections-generated';
+import Link from 'next/link';
+import Image from 'next/image';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { generateBlogPostingSchema } from '@/lib/structured-data';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!post) {
     return {
-      title: "Post Not Found",
+      title: 'Post Not Found',
     };
   }
 
-  const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description || "Technical writing on engineering and web development")}`;
+  const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description || 'Technical writing on engineering and web development')}`;
 
   return {
     title: `${post.title} | Richard Dillman`,
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: post.title,
       description: post.description || post.title,
       url: `https://richarddillman.com/blog/${post.slug}`,
-      siteName: "Richard Dillman",
+      siteName: 'Richard Dillman',
       images: [
         {
           url: ogImageUrl,
@@ -46,14 +46,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           alt: post.title,
         },
       ],
-      locale: "en_US",
-      type: "article",
+      locale: 'en_US',
+      type: 'article',
       publishedTime: post.date,
-      authors: ["Richard Dillman"],
+      authors: ['Richard Dillman'],
       tags: post.tags,
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: post.title,
       description: post.description || post.title,
       images: [ogImageUrl],
@@ -68,7 +68,6 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) {
     notFound();
   }
-
 
   const blogPostSchema = generateBlogPostingSchema({
     title: post.title,
@@ -86,57 +85,55 @@ export default async function BlogPostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }}
       />
       <main className="max-w-3xl mx-auto px-4 py-12">
-      {/* Back Link */}
-      <Link
-        href="/blog"
-        className="inline-flex items-center text-blue-600 hover:underline mb-8"
-      >
-        ← Back to Blog
-      </Link>
+        {/* Back Link */}
+        <Link href="/blog" className="inline-flex items-center text-blue-600 hover:underline mb-8">
+          ← Back to Blog
+        </Link>
 
-      {/* Article Header */}
-      <article>
-        <header className="mb-8">
-          {post.coverImage && (
-            <div className="mb-6 overflow-hidden rounded-lg">
-              <Image
-                src={post.coverImage}
-                alt={post.coverImageAlt || ""}
-                width={1200}
-                height={600}
-                className="w-full h-auto object-cover"
-                priority
-              />
+        {/* Article Header */}
+        <article>
+          <header className="mb-8">
+            {post.coverImage && (
+              <div className="mb-6 overflow-hidden rounded-lg">
+                <Image
+                  src={post.coverImage}
+                  alt={post.coverImageAlt || ''}
+                  width={1200}
+                  height={600}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+            )}
+            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+
+            <div className="flex items-center gap-4 text-sm text-neutral-500 mb-4">
+              <time dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
             </div>
-          )}
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
 
-          <div className="flex items-center gap-4 text-sm text-neutral-500 mb-4">
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-          </div>
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded-full font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </header>
 
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded-full font-medium"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </header>
-
-        {/* MDX Content */}
-        <div className="prose prose-neutral dark:prose-invert max-w-none
+          {/* MDX Content */}
+          <div
+            className="prose prose-neutral dark:prose-invert max-w-none
           prose-headings:font-bold
           prose-h1:text-3xl prose-h1:mb-4
           prose-h2:text-2xl prose-h2:mb-3 prose-h2:mt-8
@@ -150,34 +147,32 @@ export default async function BlogPostPage({ params }: PageProps) {
           prose-li:mb-2
           prose-blockquote:border-l-4 prose-blockquote:border-border prose-blockquote:pl-4 prose-blockquote:italic
           prose-img:rounded-lg prose-img:shadow-md
-        ">
-          <MDXRemote source={post.content} />
-        </div>
-      </article>
-
-      {/* Footer */}
-      <footer className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-        <p className="text-sm text-neutral-500">
-          Originally published on{" "}
-          <a
-            href="https://dev.to/richarddillman"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
+        "
           >
-            dev.to
-          </a>
-        </p>
+            <MDXRemote source={post.content} />
+          </div>
+        </article>
 
-        <div className="mt-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center text-blue-600 hover:underline"
-          >
-            ← Back to all posts
-          </Link>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+          <p className="text-sm text-neutral-500">
+            Originally published on{' '}
+            <a
+              href="https://dev.to/richarddillman"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              dev.to
+            </a>
+          </p>
+
+          <div className="mt-8">
+            <Link href="/blog" className="inline-flex items-center text-blue-600 hover:underline">
+              ← Back to all posts
+            </Link>
+          </div>
+        </footer>
       </main>
     </>
   );

@@ -1,12 +1,12 @@
-import ExperienceCard from "./ExperienceCard";
-import { experiences } from "@/data/experience";
-import { brandLogos } from "@/data/logos";
-import Image from "next/image";
+import ExperienceCard from './ExperienceCard';
+import { experiences } from '@/data/experience';
+import { brandLogos } from '@/data/logos';
+import Image from 'next/image';
 
 export default function ExperienceList() {
   // Helper to get logo object from filename
   const getLogo = (filename: string) => {
-    return brandLogos.find(l => l.file === filename);
+    return brandLogos.find((l) => l.file === filename);
   };
 
   return (
@@ -49,11 +49,7 @@ export default function ExperienceList() {
           {/* Role Cards */}
           <div className="space-y-6">
             {experience.roles.map((role, roleIndex) => (
-              <ExperienceCard
-                key={roleIndex}
-                role={role}
-                company={experience.company}
-              />
+              <ExperienceCard key={roleIndex} role={role} company={experience.company} />
             ))}
           </div>
         </div>

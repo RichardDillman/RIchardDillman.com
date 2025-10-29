@@ -13,7 +13,7 @@ const posts = defineCollection({
     coverImage: z.string().optional(),
     coverImageAlt: z.string().optional(),
   }),
-  transform: async (document, context) => {
+  transform: async (document) => {
     return {
       ...document,
       content: document.content,

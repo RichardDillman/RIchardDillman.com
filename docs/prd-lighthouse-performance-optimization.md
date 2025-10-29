@@ -12,6 +12,7 @@
 Recent Lighthouse CI testing revealed critical performance and accessibility issues across richarddillman.com. While the site successfully migrated from Contentlayer to Content Collections, several optimization opportunities were identified that impact user experience, SEO rankings, and accessibility compliance.
 
 **Key Findings:**
+
 - ❌ 4 pages fail accessibility targets (91-99% vs 100% target)
 - ⚠️ JavaScript bundles 3x over budget (780KB vs 250KB target)
 - ⚠️ HTML documents significantly oversized on content-heavy pages
@@ -24,15 +25,16 @@ Recent Lighthouse CI testing revealed critical performance and accessibility iss
 
 **Impact:** Legal risk, reduced user base, poor SEO
 
-| Page | Current Score | Target | Gap | Severity |
-|------|---------------|--------|-----|----------|
-| `/projects` | 98% | 100% | -2% | Medium |
-| `/blog` | 99% | 100% | -1% | Low |
-| `/experience` | 96% | 100% | -4% | High |
-| `/stack` | 96% | 100% | -4% | High |
-| Production blog | 91% | 100% | -9% | Critical |
+| Page            | Current Score | Target | Gap | Severity |
+| --------------- | ------------- | ------ | --- | -------- |
+| `/projects`     | 98%           | 100%   | -2% | Medium   |
+| `/blog`         | 99%           | 100%   | -1% | Low      |
+| `/experience`   | 96%           | 100%   | -4% | High     |
+| `/stack`        | 96%           | 100%   | -4% | High     |
+| Production blog | 91%           | 100%   | -9% | Critical |
 
 **Root Causes:**
+
 - Missing ARIA labels on interactive elements
 - Insufficient color contrast ratios
 - Missing alt text on images
@@ -46,11 +48,13 @@ Recent Lighthouse CI testing revealed critical performance and accessibility iss
 **Impact:** Slow page loads, poor mobile experience, increased bounce rate
 
 **Current State:**
+
 - Bundle Size: **750-780KB** (3x over budget)
 - Target: **≤250KB**
 - Over Budget: **500-530KB per page**
 
 **Root Causes:**
+
 - **Architectural Mismatch**: Site is 95% static content but serving 780KB of client-side JavaScript
   - `/about`: 100% static text (no interactivity needed)
   - `/blog`: Static blog post listings (no interactivity needed)
@@ -66,6 +70,7 @@ Recent Lighthouse CI testing revealed critical performance and accessibility iss
 - Potentially duplicated React code across chunks
 
 **Breakdown (Estimated):**
+
 ```
 Next.js Runtime:     ~200KB
 React 19 + ReactDOM: ~150KB
@@ -82,15 +87,16 @@ Total:               ~780KB
 
 **Impact:** Slower initial page load, SEO penalties, poor mobile experience
 
-| Page | Current Size | Target | Over Budget | Severity |
-|------|--------------|--------|-------------|----------|
-| `/experience` | 84KB | 18KB | **+366%** | Critical |
-| `/projects` | 67KB | 18KB | **+272%** | Critical |
-| `/stack` | 33KB | 18KB | **+83%** | High |
-| `/blog` | 22KB | 18KB | **+26%** | Medium |
-| `/contact` | 18.5KB | 18KB | **+2.7%** | Low |
+| Page          | Current Size | Target | Over Budget | Severity |
+| ------------- | ------------ | ------ | ----------- | -------- |
+| `/experience` | 84KB         | 18KB   | **+366%**   | Critical |
+| `/projects`   | 67KB         | 18KB   | **+272%**   | Critical |
+| `/stack`      | 33KB         | 18KB   | **+83%**    | High     |
+| `/blog`       | 22KB         | 18KB   | **+26%**    | Medium   |
+| `/contact`    | 18.5KB       | 18KB   | **+2.7%**   | Low      |
 
 **Root Causes:**
+
 - Large inline JSON data for projects/experience
 - Embedded structured data (JSON-LD)
 - Long text content without pagination
@@ -101,18 +107,20 @@ Total:               ~780KB
 ## Goals & Success Metrics
 
 ### Primary Goals
+
 1. **Achieve 100% accessibility** on all pages
 2. **Reduce JS bundle to ≤250KB** (68% reduction)
 3. **Reduce HTML to ≤18KB** on all pages
 
 ### Success Metrics
-| Metric | Current | Target | Timeline |
-|--------|---------|--------|----------|
-| Accessibility Score | 91-99% | 100% | Sprint 1 (Week 1-2) |
-| JS Bundle Size | 780KB | 250KB | Sprint 2-3 (Week 3-6) |
-| HTML Document Size | 22-84KB | 18KB | Sprint 2 (Week 3-4) |
-| Performance Score | Unknown | ≥95% | Sprint 3 (Week 5-6) |
-| Lighthouse CI Passing | ❌ | ✅ | End of Sprint 3 |
+
+| Metric                | Current | Target | Timeline              |
+| --------------------- | ------- | ------ | --------------------- |
+| Accessibility Score   | 91-99%  | 100%   | Sprint 1 (Week 1-2)   |
+| JS Bundle Size        | 780KB   | 250KB  | Sprint 2-3 (Week 3-6) |
+| HTML Document Size    | 22-84KB | 18KB   | Sprint 2 (Week 3-4)   |
+| Performance Score     | Unknown | ≥95%   | Sprint 3 (Week 5-6)   |
+| Lighthouse CI Passing | ❌      | ✅     | End of Sprint 3       |
 
 ---
 
@@ -121,6 +129,7 @@ Total:               ~780KB
 ### Sprint 1: Accessibility Fixes (Week 1-2)
 
 #### Tasks
+
 1. **Audit with axe DevTools**
    - Install browser extension
    - Run on all failing pages
@@ -145,6 +154,7 @@ Total:               ~780KB
    - Configure pre-commit hooks
 
 **Deliverables:**
+
 - ✅ 100% accessibility score on all pages
 - ✅ axe DevTools reports with 0 violations
 - ✅ Updated components with proper ARIA
@@ -155,9 +165,11 @@ Total:               ~780KB
 ### Sprint 2: Bundle Size Optimization (Week 3-4)
 
 #### Phase 0: Architectural Realignment (HIGHEST PRIORITY)
+
 **Key Insight:** Site is 95% static content but serving 780KB of client-side JS. Only `/projects` needs interactivity.
 
 1. **Audit Client Components**
+
    ```bash
    # Find all 'use client' directives
    grep -r "use client" app/ components/
@@ -192,6 +204,7 @@ Total:               ~780KB
 **Expected Impact:** This single architectural change could achieve the entire 780KB → 250KB target (and beyond).
 
 #### Phase 1: Analysis
+
 ```bash
 # Install bundle analyzer
 pnpm add -D @next/bundle-analyzer
@@ -201,16 +214,15 @@ ANALYZE=true pnpm build
 ```
 
 #### Phase 2: Code Splitting
+
 1. **Dynamic Imports for Heavy Components**
+
    ```tsx
    // Before
-   import { ProjectDisclosure } from '@/components/ProjectDisclosure'
+   import { ProjectDisclosure } from '@/components/ProjectDisclosure';
 
    // After
-   const ProjectDisclosure = dynamic(
-     () => import('@/components/ProjectDisclosure'),
-     { ssr: true }
-   )
+   const ProjectDisclosure = dynamic(() => import('@/components/ProjectDisclosure'), { ssr: true });
    ```
 
 2. **Route-based Code Splitting**
@@ -219,6 +231,7 @@ ANALYZE=true pnpm build
    - Use `next/dynamic` for below-the-fold content
 
 3. **Third-Party Library Optimization**
+
    ```tsx
    // Replace date-fns with smaller alternatives
    // Before: import { format } from 'date-fns'
@@ -230,6 +243,7 @@ ANALYZE=true pnpm build
    ```
 
 #### Phase 3: MDX Optimization
+
 1. **Evaluate MDX Compilation Strategy**
    - Consider compiling MDX at build time instead of runtime
    - Explore `@next/mdx` as lighter alternative to `next-mdx-remote`
@@ -240,6 +254,7 @@ ANALYZE=true pnpm build
    - Consider lighter alternatives to `rehype-prism-plus`
 
 #### Phase 4: Production Optimizations
+
 ```js
 // next.config.ts
 {
@@ -260,6 +275,7 @@ ANALYZE=true pnpm build
 ```
 
 **Deliverables:**
+
 - ✅ Most pages with 0KB client-side JS (Server Components only)
 - ✅ `/projects` page with <50KB client-side JS (interactive components only)
 - ✅ Average JS bundle <50KB across all pages (was 780KB)
@@ -268,6 +284,7 @@ ANALYZE=true pnpm build
 - ✅ Audit of remaining client-side dependencies
 
 **Expected Impact:**
+
 - **Phase 0 alone:** 780KB → <50KB = **94% reduction** (most pages → 0KB)
 - **After all phases:** <50KB average = **>93% reduction**
 - Estimated timeline: **2-3 weeks** (Phase 0 can be done in Week 1)
@@ -277,27 +294,25 @@ ANALYZE=true pnpm build
 ### Sprint 3: HTML Size Optimization (Week 5-6)
 
 #### Phase 1: Data Pagination
+
 1. **Experience Page**
+
    ```tsx
    // Current: All experience loaded at once (84KB)
    // Solution: Paginate or lazy-load older roles
 
    export default function ExperiencePage() {
-     const [showAll, setShowAll] = useState(false)
-     const visibleExperience = showAll
-       ? allExperience
-       : allExperience.slice(0, 3)
+     const [showAll, setShowAll] = useState(false);
+     const visibleExperience = showAll ? allExperience : allExperience.slice(0, 3);
 
      return (
        <>
-         {visibleExperience.map(exp => <ExperienceCard />)}
-         {!showAll && (
-           <button onClick={() => setShowAll(true)}>
-             Show More
-           </button>
-         )}
+         {visibleExperience.map((exp) => (
+           <ExperienceCard />
+         ))}
+         {!showAll && <button onClick={() => setShowAll(true)}>Show More</button>}
        </>
-     )
+     );
    }
    ```
 
@@ -307,15 +322,15 @@ ANALYZE=true pnpm build
    - Reduce inline data, fetch on interaction
 
 #### Phase 2: Structured Data Optimization
+
 1. **Move JSON-LD to External Files**
+
    ```tsx
    // Before: Inline in every page
-   <script type="application/ld+json">
-     {JSON.stringify(largeSchema)}
-   </script>
+   <script type="application/ld+json">{JSON.stringify(largeSchema)}</script>;
 
    // After: Import only what's needed
-   import { personSchema } from '@/lib/schemas'
+   import { personSchema } from '@/lib/schemas';
    ```
 
 2. **Minimize Structured Data**
@@ -324,6 +339,7 @@ ANALYZE=true pnpm build
    - Consider server-side injection
 
 #### Phase 3: Content Optimization
+
 1. **Text Compression**
    - Enable gzip/brotli on Vercel
    - Ensure Next.js compression is active
@@ -334,12 +350,14 @@ ANALYZE=true pnpm build
    - Use Tailwind's JIT mode effectively
 
 **Deliverables:**
+
 - ✅ All pages ≤18KB HTML
 - ✅ Pagination on content-heavy pages
 - ✅ Optimized structured data
 - ✅ Measured improvement in FCP/LCP
 
 **Expected Impact:**
+
 - `/experience`: 84KB → 18KB = **78% reduction**
 - `/projects`: 67KB → 18KB = **73% reduction**
 - `/stack`: 33KB → 18KB = **45% reduction**
@@ -349,6 +367,7 @@ ANALYZE=true pnpm build
 ## Technical Approach
 
 ### Bundle Analysis Commands
+
 ```bash
 # Analyze production bundle
 ANALYZE=true pnpm build
@@ -361,6 +380,7 @@ pnpm dev --turbo
 ```
 
 ### Lighthouse Testing
+
 ```bash
 # Run local tests
 pnpm test:lhci
@@ -373,6 +393,7 @@ lighthouse https://richarddillman.com --view
 ```
 
 ### Accessibility Testing
+
 ```bash
 # Install axe CLI
 npm install -g @axe-core/cli
@@ -386,6 +407,7 @@ axe http://localhost:3000/projects
 ## Dependencies & Risks
 
 ### Dependencies
+
 - [ ] Bundle analyzer results
 - [ ] axe DevTools audit reports
 - [ ] Design approval for pagination changes
@@ -393,12 +415,12 @@ axe http://localhost:3000/projects
 
 ### Risks & Mitigations
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Breaking changes from optimization | High | Medium | Comprehensive testing, gradual rollout |
-| Accessibility fixes break design | Medium | Low | Work with design team, maintain visual parity |
-| Bundle splitting affects performance | High | Low | Monitor Core Web Vitals, A/B test |
-| MDX migration breaks blog posts | High | Medium | Test all posts, maintain Contentlayer compatibility layer |
+| Risk                                 | Impact | Probability | Mitigation                                                |
+| ------------------------------------ | ------ | ----------- | --------------------------------------------------------- |
+| Breaking changes from optimization   | High   | Medium      | Comprehensive testing, gradual rollout                    |
+| Accessibility fixes break design     | Medium | Low         | Work with design team, maintain visual parity             |
+| Bundle splitting affects performance | High   | Low         | Monitor Core Web Vitals, A/B test                         |
+| MDX migration breaks blog posts      | High   | Medium      | Test all posts, maintain Contentlayer compatibility layer |
 
 ---
 
@@ -407,10 +429,12 @@ axe http://localhost:3000/projects
 ### Lighthouse CI Setup (Implemented)
 
 **Smart Testing Strategy:**
+
 - **Feature branches/PRs:** 1 run per URL (fast feedback, <5 min)
 - **Merge to main:** 3 runs per URL (comprehensive quality gate, statistical accuracy)
 
 **Report Storage & History:**
+
 - **PRs:** Results uploaded to `temporary-public-storage` (7-day retention)
   - Shareable URLs in GitHub Actions logs
   - Fast feedback without polluting git history
@@ -420,12 +444,14 @@ axe http://localhost:3000/projects
   - Permanent historical record for regression tracking
 
 **Configuration:**
+
 - Located in `lighthouse/lighthouserc.js`
 - Workflow: `.github/workflows/lighthouse-ci.yml`
 - Tests 8 URLs: home, about, projects, blog, blog post, experience, contact, stack
 - Desktop preset with throttling disabled for consistent CI results
 
 **Current Metrics Tracked:**
+
 - Performance scores
 - Accessibility compliance
 - JavaScript bundle sizes
@@ -433,6 +459,7 @@ axe http://localhost:3000/projects
 - Core Web Vitals (LCP, FCP, TBT, CLS)
 
 **What's Missing:**
+
 - ❌ Automated regression detection (comparing new reports to baseline)
 - ❌ Alert notifications when performance degrades
 - ❌ Trend visualization over time
@@ -442,6 +469,7 @@ axe http://localhost:3000/projects
 ## Testing Strategy
 
 ### Pre-Deployment Testing
+
 1. **Lighthouse CI** (automated)
    - All pages must score 95%+ performance
    - 100% accessibility required
@@ -461,6 +489,7 @@ axe http://localhost:3000/projects
    - Compare before/after metrics
 
 ### Post-Deployment Monitoring
+
 - Vercel Analytics for real-user metrics
 - Sentry for error tracking
 - Lighthouse CI on every PR with historical tracking on main
@@ -470,6 +499,7 @@ axe http://localhost:3000/projects
 ## Success Criteria
 
 ### Must Have (Sprint 1-3)
+
 - ✅ 100% accessibility score on all pages
 - ✅ JS bundle ≤250KB
 - ✅ HTML ≤18KB on all pages
@@ -477,6 +507,7 @@ axe http://localhost:3000/projects
 - ✅ No regression in visual design
 
 ### Nice to Have (Future Sprints)
+
 - 🎯 Performance score ≥98%
 - 🎯 Core Web Vitals "Good" on all metrics
 - 🎯 Bundle size ≤200KB
@@ -486,6 +517,7 @@ axe http://localhost:3000/projects
 ### Backlog / Future Enhancements
 
 #### CSS-Only Project Highlighting (Zero JS)
+
 **Status:** 💡 Proposed
 **Priority:** Low
 **Effort:** Small (~30 min)
@@ -493,16 +525,20 @@ axe http://localhost:3000/projects
 Replace the removed JavaScript auto-open functionality with pure CSS highlighting when navigating to projects via hash links (e.g., `/projects#my-project`).
 
 **Benefits:**
+
 - Visual feedback for hash navigation (`:target` pseudo-class)
 - Enhanced UX without any JavaScript overhead
 - Smooth transitions between states
 - Accessible (keyboard navigation via `:focus-within`)
 
 **Implementation:**
+
 ```css
 details {
   border: 1px solid transparent;
-  transition: box-shadow 0.3s, border-color 0.3s;
+  transition:
+    box-shadow 0.3s,
+    border-color 0.3s;
 }
 
 /* Initial glow when linked by hash */
@@ -525,6 +561,7 @@ details:focus-within ~ details:target {
 ```
 
 **Acceptance Criteria:**
+
 - ✅ Navigating to `/projects#project-id` highlights the targeted project
 - ✅ Highlight persists until user interacts with another project
 - ✅ Smooth visual transitions (0.3s)
@@ -532,6 +569,7 @@ details:focus-within ~ details:target {
 - ✅ Accessible via keyboard navigation
 
 **Related Work:**
+
 - Part of Sprint 2 client-side JS elimination
 - Complements the Server Component conversion of ProjectDisclosure
 
@@ -567,6 +605,7 @@ Week 8:    Production Deployment
 ## Appendix: Current Lighthouse Results
 
 ### Test Summary (2025-10-29)
+
 - **Pages Tested:** 7 local + 1 production
 - **Total Runs:** 24 (3 runs per page)
 - **Status:** ❌ Failed
@@ -574,52 +613,61 @@ Week 8:    Production Deployment
 ### Detailed Results
 
 #### Home Page (`/`)
+
 - Performance: ✅ (assumed >95%)
 - Accessibility: ✅ 100%
 - JS Bundle: ⚠️ 782KB (target: 250KB)
 - HTML Size: ✅ ~15KB
 
 #### About Page (`/about`)
+
 - Performance: ✅ (assumed >95%)
 - Accessibility: ✅ 100%
 - JS Bundle: ⚠️ 754KB (target: 250KB)
 - HTML Size: ✅ ~14KB
 
 #### Projects Page (`/projects`)
+
 - Performance: ✅ (assumed >95%)
 - Accessibility: ❌ 98% (target: 100%)
 - JS Bundle: ⚠️ 757KB (target: 250KB)
 - HTML Size: ❌ 67KB (target: 18KB)
 
 #### Blog Page (`/blog`)
+
 - Performance: ✅ (assumed >95%)
 - Accessibility: ❌ 99% (target: 100%)
 - JS Bundle: ⚠️ 782KB (target: 250KB)
 - HTML Size: ⚠️ 22KB (target: 18KB)
 
 #### Experience Page (`/experience`)
+
 - Performance: ✅ (assumed >95%)
 - Accessibility: ❌ 96% (target: 100%)
 - JS Bundle: ⚠️ 782KB (target: 250KB)
 - HTML Size: ❌ 84KB (target: 18KB)
 
 #### Contact Page (`/contact`)
+
 - Performance: ✅ (assumed >95%)
 - Accessibility: ✅ 100%
 - JS Bundle: ⚠️ 754KB (target: 250KB)
 - HTML Size: ⚠️ 18.5KB (target: 18KB)
 
 #### Stack Page (`/stack`)
+
 - Performance: ✅ (assumed >95%)
 - Accessibility: ❌ 96% (target: 100%)
 - JS Bundle: ⚠️ 754KB (target: 250KB)
 - HTML Size: ⚠️ 33KB (target: 18KB)
 
 #### Production Blog Post
+
 - Performance: ⚠️ (needs investigation)
 - Accessibility: ❌ 91% (target: 100%)
 
 ### Full Reports
+
 - [Home](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1761707782361-45785.report.html)
 - [About](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1761707782756-77688.report.html)
 - [Projects](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1761707783158-80874.report.html)

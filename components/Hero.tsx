@@ -40,8 +40,9 @@ export default function Hero() {
                 Leader• Mentor • Performance optimizer • Build speed fanatic
               </p>
               <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl">
-                I build fast, reliable web platforms that focus on performance, SEO, and developer experience.
-                26 years of experience from state government systems to Condé Nast&apos;s premier brands.
+                I build fast, reliable web platforms that focus on performance, SEO, and developer
+                experience. 26 years of experience from state government systems to Condé
+                Nast&apos;s premier brands.
               </p>
 
               {/* CTA Buttons */}

@@ -5,6 +5,7 @@ This directory contains historical Lighthouse CI performance reports from **LIVE
 ## Purpose
 
 These reports serve as performance baselines for continuous improvement. After each merge to `main`, we test the **live production site** (richard-dillman-com.vercel.app) and store results here. This creates a permanent historical record of:
+
 - Performance scores
 - Accessibility compliance
 - JavaScript bundle sizes
@@ -16,6 +17,7 @@ These reports serve as performance baselines for continuous improvement. After e
 ## Report Structure
 
 Reports are saved as HTML and JSON files with timestamps, allowing you to:
+
 - Track performance trends over time
 - Identify when regressions were introduced
 - Compare metrics before and after optimizations
@@ -42,6 +44,7 @@ Reports are saved as HTML and JSON files with timestamps, allowing you to:
 ## Viewing Reports
 
 Open any `.report.html` file in your browser to see the full Lighthouse audit with:
+
 - Overall scores (Performance, Accessibility, Best Practices, SEO)
 - Detailed metrics and opportunities
 - Screenshots and filmstrip views

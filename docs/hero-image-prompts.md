@@ -20,6 +20,7 @@ Use these prompts with an AI image generator (like DALL-E, Midjourney, or Stable
 **Article Summary**: Guidelines for writing clear, meaningful variable and function names in code. Focuses on avoiding meaningless words and improving code documentation through better naming conventions.
 
 **Prompt**:
+
 ```
 A modern, minimal technical illustration showing code variable naming concepts.
 Split composition: left side shows messy, confusing variable names (like 'data', 'temp', 'obj')
@@ -39,6 +40,7 @@ Photorealistic rendering. 1200x600px landscape format.
 **Article Summary**: How to organize HTML head tags for optimal performance. Discusses ordering of meta tags, scripts, stylesheets, and preloading for better page speed.
 
 **Prompt**:
+
 ```
 A technical diagram showing HTML document structure with emphasis on the <head> section.
 Abstract visualization of nested tags flowing in organized layers from top to bottom:
@@ -58,6 +60,7 @@ Modern developer tool aesthetic. 1200x600px landscape format.
 **Article Summary**: Best practices for writing clear Git commit messages. Guidelines for creating commits that help with collaboration and make Git history useful.
 
 **Prompt**:
+
 ```
 A modern Git-themed illustration showing commit history and messages. Split composition:
 left side displays messy, unclear commit messages ('fix', 'wip', 'asdf') in faded
@@ -73,17 +76,21 @@ modern developer tools style. 1200x600px landscape format.
 ## Alternative Generators
 
 ### Free Options
+
 - **Ideogram** (ideogram.ai) - Good for technical illustrations
 - **Leonardo.ai** - Free tier available
 - **Bing Image Creator** (DALL-E 3) - Free with Microsoft account
 
 ### Paid Options
+
 - **DALL-E 3** (via ChatGPT Plus) - Excellent for technical concepts
 - **Midjourney** - Great artistic quality
 - **Stable Diffusion** - Customizable, local generation
 
 ### Quick Canva Alternative
+
 If AI generation isn't working, you can create simple hero images in Canva:
+
 1. Create 1200x600px canvas
 2. Use dark neutral background (#171717 or #262626)
 3. Add relevant icon or shape in blue/teal gradient
@@ -95,6 +102,7 @@ If AI generation isn't working, you can create simple hero images in Canva:
 ## Placement Instructions
 
 Once generated, place images in:
+
 ```
 /public/images/
   ├── creating-readable-names.webp
@@ -103,13 +111,14 @@ Once generated, place images in:
 ```
 
 Then update the frontmatter in each corresponding MDX file:
+
 ```yaml
 ---
-title: "..."
-date: "..."
-description: "..."
+title: '...'
+date: '...'
+description: '...'
 tags: [...]
-coverImage: "/images/FILENAME.webp"
+coverImage: '/images/FILENAME.webp'
 ---
 ```
 

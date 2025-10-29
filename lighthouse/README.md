@@ -18,6 +18,7 @@ pnpm run test:lhci
 ```
 
 This will:
+
 1. Build the Next.js application
 2. Start a local server
 3. Run Lighthouse audits on multiple pages
@@ -32,6 +33,7 @@ git push --no-verify
 ```
 
 **Use sparingly!** This should only be used in true emergencies when:
+
 - Production is down and you need a hotfix
 - Lighthouse CI is failing due to infrastructure issues
 - Time-sensitive deployment is required
@@ -39,6 +41,7 @@ git push --no-verify
 ## GitHub Actions
 
 The Lighthouse CI runs automatically on:
+
 - **Pull Requests** to `main` branch
 - **Pushes** to `main` branch
 
@@ -62,6 +65,7 @@ To get PR status checks and comments:
 The configuration file defines:
 
 **Audited URLs:**
+
 - Home: `/`
 - About: `/about`
 - Projects: `/projects`
@@ -70,11 +74,13 @@ The configuration file defines:
 - Contact: `/contact`
 
 **Error-level assertions:**
+
 - Performance score ≥ 95
 - Accessibility score = 100
 - LCP ≤ 2500ms
 
 **Warning-level assertions:**
+
 - Best Practices score ≥ 90
 - SEO score ≥ 90
 - FCP (First Contentful Paint) ≤ 1800ms
@@ -105,6 +111,7 @@ This is normal. The config runs 3 audits per URL and averages the results. For m
 ### GitHub Action fails but local passes
 
 CI environments may have:
+
 - Different CPU/memory resources
 - Network latency differences
 - Different Chrome versions
@@ -114,6 +121,7 @@ If CI consistently fails while local passes, consider adjusting thresholds sligh
 ## Continuous Improvement
 
 Monitor trends over time:
+
 - Review Lighthouse artifacts in GitHub Actions
 - Use temporary public storage URLs to compare reports
 - Track Core Web Vitals in Vercel Analytics

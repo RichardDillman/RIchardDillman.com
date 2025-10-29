@@ -162,7 +162,6 @@
     ]
   }
 }
-
 ```
 
 /blog — Blog Index (Blog)
@@ -179,7 +178,6 @@
     "name": "Richard Dillman"
   }
 }
-
 ```
 
 🧾 /blog/{slug} — Individual Blog Post (BlogPosting)
@@ -217,16 +215,16 @@ If you’re using next/script:
 import Script from "next/script"
 
 export default function AboutPage() {
-  return (
-    <>
-      <Script
-        id="ld-json-about"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
+return (
+<>
+
+<Script
+id="ld-json-about"
+type="application/ld+json"
+dangerouslySetInnerHTML={{
           __html: JSON.stringify(aboutSchema)
         }}
-      />
-    </>
-  )
+/>
+</>
+)
 }
-

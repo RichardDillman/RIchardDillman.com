@@ -3,7 +3,8 @@ import { DefaultSeoProps } from 'next-seo';
 const config: DefaultSeoProps = {
   titleTemplate: '%s | Richard Dillman',
   defaultTitle: 'Richard Dillman',
-  description: 'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
+  description:
+    'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
 
   openGraph: {
     type: 'website',

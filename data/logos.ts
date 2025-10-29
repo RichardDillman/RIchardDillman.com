@@ -19,7 +19,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'media',
     prominence: 'major',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'The New Yorker',
@@ -29,7 +29,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'media',
     prominence: 'major',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'Wired',
@@ -39,7 +39,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'tech',
     prominence: 'major',
     width: 840,
-    height: 859
+    height: 859,
   },
   {
     name: 'GQ',
@@ -49,7 +49,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'media',
     prominence: 'major',
     width: 97,
-    height: 51
+    height: 51,
   },
   {
     name: 'Vanity Fair',
@@ -59,7 +59,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'media',
     prominence: 'major',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'State of Indiana',
@@ -69,7 +69,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'government',
     prominence: 'major',
     width: 725,
-    height: 725
+    height: 725,
   },
   {
     name: 'Ars Technica',
@@ -79,7 +79,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'tech',
     prominence: 'major',
     width: 128,
-    height: 128
+    height: 128,
   },
 
   // The Muse (Current)
@@ -91,7 +91,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'career',
     prominence: 'major',
     width: 128,
-    height: 128
+    height: 128,
   },
 
   // Other Major Brands
@@ -103,7 +103,7 @@ export const brandLogos: BrandLogo[] = [
     category: 'health',
     prominence: 'major',
     width: 128,
-    height: 128
+    height: 128,
   },
 
   // 1999-2005: Public Health
@@ -114,7 +114,7 @@ export const brandLogos: BrandLogo[] = [
     period: '1999-2005',
     category: 'government',
     width: 200,
-    height: 226
+    height: 226,
   },
 
   // 2005-2007: Client Portfolio
@@ -125,7 +125,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2005-2007',
     category: 'other',
     width: 3132,
-    height: 1661
+    height: 1661,
   },
   {
     name: 'International Medical Group',
@@ -134,7 +134,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2005-2007',
     category: 'health',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'RASK Corporation',
@@ -143,7 +143,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2005-2007',
     category: 'other',
     width: 270,
-    height: 60
+    height: 60,
   },
   {
     name: 'Framing 4 Yourself',
@@ -152,7 +152,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2005-2007',
     category: 'retail',
     width: 1100,
-    height: 317
+    height: 317,
   },
 
   // 2010-2011: Retail
@@ -163,7 +163,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2010-2011',
     category: 'retail',
     width: 128,
-    height: 128
+    height: 128,
   },
 
   // 2012-2015: Health & Wellness Media
@@ -174,7 +174,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2012-2015',
     category: 'health',
     width: 180,
-    height: 180
+    height: 180,
   },
   {
     name: 'MedPage Today',
@@ -183,7 +183,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2012-2015',
     category: 'health',
     width: 34,
-    height: 33
+    height: 33,
   },
   {
     name: 'Diabetes Daily',
@@ -192,7 +192,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2012-2015',
     category: 'health',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'South Beach Diet',
@@ -201,7 +201,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2012-2015',
     category: 'health',
     width: 1024,
-    height: 1024
+    height: 1024,
   },
   {
     name: 'Denise Austin',
@@ -210,7 +210,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2012-2015',
     category: 'health',
     width: 512,
-    height: 512
+    height: 512,
   },
   {
     name: 'Jillian Michaels',
@@ -219,7 +219,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2012-2015',
     category: 'health',
     width: 120,
-    height: 120
+    height: 120,
   },
   {
     name: 'SparkAmerica',
@@ -228,7 +228,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2012-2015',
     category: 'health',
     width: 3601,
-    height: 451
+    height: 451,
   },
 
   // 2015-2018: Condé Nast (Other Brands)
@@ -239,7 +239,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'Allure',
@@ -248,7 +248,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 37
+    height: 37,
   },
   {
     name: 'Bon Appétit',
@@ -257,7 +257,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 497,
-    height: 100
+    height: 100,
   },
   {
     name: 'Condé Nast Traveler',
@@ -266,7 +266,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 48
+    height: 48,
   },
   {
     name: 'Epicurious',
@@ -275,7 +275,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 26
+    height: 26,
   },
   {
     name: 'Glamour',
@@ -284,7 +284,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 567,
-    height: 128
+    height: 128,
   },
   {
     name: 'Pitchfork',
@@ -293,7 +293,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'Self',
@@ -302,7 +302,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'Teen Vogue',
@@ -311,7 +311,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'Them',
@@ -320,7 +320,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'media',
     width: 128,
-    height: 35
+    height: 35,
   },
 
   // 2018-2025: Career Platforms
@@ -331,7 +331,7 @@ export const brandLogos: BrandLogo[] = [
     period: '2018-2025',
     category: 'career',
     width: 128,
-    height: 128
+    height: 128,
   },
   {
     name: 'Purpose Jobs',
@@ -340,19 +340,19 @@ export const brandLogos: BrandLogo[] = [
     period: '2018-2025',
     category: 'career',
     width: 128,
-    height: 128
+    height: 128,
   },
 ];
 
 // Helper functions
 export function getLogosByCategory(category: BrandLogo['category']): BrandLogo[] {
-  return brandLogos.filter(logo => logo.category === category);
+  return brandLogos.filter((logo) => logo.category === category);
 }
 
 export function getLogosByPeriod(period: string): BrandLogo[] {
-  return brandLogos.filter(logo => logo.period === period);
+  return brandLogos.filter((logo) => logo.period === period);
 }
 
 export function getMajorBrands(): BrandLogo[] {
-  return brandLogos.filter(logo => logo.prominence === 'major');
+  return brandLogos.filter((logo) => logo.prominence === 'major');
 }

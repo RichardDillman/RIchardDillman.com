@@ -8,14 +8,12 @@ interface LogoMontageProps {
 }
 
 export function LogoMontage({
-  title = "Trusted by Leading Brands",
-  description = "26 years building high-traffic platforms for world-class organizations",
-  showPeriods = false
+  title = 'Trusted by Leading Brands',
+  description = '26 years building high-traffic platforms for world-class organizations',
+  showPeriods = false,
 }: LogoMontageProps) {
   // Group logos by period if showPeriods is true
-  const groupedLogos = showPeriods
-    ? groupByPeriod(brandLogos)
-    : { all: brandLogos };
+  const groupedLogos = showPeriods ? groupByPeriod(brandLogos) : { all: brandLogos };
 
   return (
     <section className="py-16 bg-neutral-50 dark:bg-neutral-900/50">
@@ -23,9 +21,7 @@ export function LogoMontage({
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">{title}</h2>
-          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            {description}
-          </p>
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">{description}</p>
         </div>
 
         {/* Logo Grid */}
@@ -74,11 +70,14 @@ function LogoItem({ logo }: { logo: BrandLogo }) {
 
 // Helper function to group logos by period
 function groupByPeriod(logos: BrandLogo[]) {
-  return logos.reduce((acc, logo) => {
-    if (!acc[logo.period]) {
-      acc[logo.period] = [];
-    }
-    acc[logo.period].push(logo);
-    return acc;
-  }, {} as Record<string, BrandLogo[]>);
+  return logos.reduce(
+    (acc, logo) => {
+      if (!acc[logo.period]) {
+        acc[logo.period] = [];
+      }
+      acc[logo.period].push(logo);
+      return acc;
+    },
+    {} as Record<string, BrandLogo[]>
+  );
 }
