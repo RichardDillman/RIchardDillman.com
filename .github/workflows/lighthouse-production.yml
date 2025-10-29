@@ -14,9 +14,9 @@ on:
   workflow_dispatch:
     inputs:
       production_url:
-        description: 'Production URL to test (default: richarddillman.com)'
+        description: 'Production URL to test (default: richard-dillman-com.vercel.app)'
         required: false
-        default: 'https://richarddillman.com'
+        default: 'https://richard-dillman-com.vercel.app'
 
 permissions:
   contents: write
@@ -56,7 +56,7 @@ jobs:
 
       - name: Wait for production to be ready
         run: |
-          PROD_URL="${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richarddillman.com' }}"
+          PROD_URL="${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}"
           echo "Testing production URL: $PROD_URL"
 
           # Wait up to 2 minutes for site to be fully ready
@@ -75,7 +75,7 @@ jobs:
         run: pnpm run test:lhci:production
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-          PRODUCTION_URL: ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richarddillman.com' }}
+          PRODUCTION_URL: ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}
 
       - name: Create/Update lighthouse-reports branch
         run: |
@@ -105,7 +105,7 @@ jobs:
             git commit -m "chore: update production Lighthouse baseline - $TIMESTAMP
 
           ## Production Metrics Updated
-          - Tested live production site: ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richarddillman.com' }}
+          - Tested live production site: ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}
           - Run date: $TIMESTAMP
           - Triggered by: ${{ github.event_name }}
 
@@ -130,7 +130,7 @@ jobs:
 
           if [ -n "$EXISTING_PR" ]; then
             echo "PR #$EXISTING_PR already exists, updating..."
-            gh pr comment "$EXISTING_PR" --body "🔄 Updated with latest production Lighthouse results from ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richarddillman.com' }}"
+            gh pr comment "$EXISTING_PR" --body "🔄 Updated with latest production Lighthouse results from ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}"
           else
             gh pr create \
               --title "chore: update production Lighthouse baseline reports" \
