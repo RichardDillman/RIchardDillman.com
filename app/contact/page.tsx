@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Github, Linkedin, BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail, Github as GitHub, Linkedin as LinkedIn, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateContactPageSchema } from "@/lib/structured-data";
 
@@ -43,13 +42,13 @@ const contactLinks = [
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/richarddillman/",
-    icon: Linkedin,
+    icon: LinkedIn,
     description: "Connect with me"
   },
   {
     name: "GitHub",
     href: "https://github.com/richardDillman/",
-    icon: Github,
+    icon: GitHub,
     description: "Check out my code"
   },
   {
