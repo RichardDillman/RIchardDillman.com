@@ -1,8 +1,10 @@
-# Target modern browsers only
-# This affects PostCSS/Autoprefixer CSS output
+# Target modern browsers based on actual user analytics
+# Safari iPhone (21.99%), Chrome Android (18.2%), Chrome 138-140 (25%), Edge 140 (4.65%)
+# All these browsers support ES2022 features natively (no polyfills needed)
 
-Chrome >= 102
-Safari >= 18.5
-Edge >= 138
-iOS >= 18.5
+last 2 Chrome versions
+last 2 Safari versions
+last 2 Edge versions
+last 2 iOS versions
+last 2 ChromeAndroid versions
 not dead
