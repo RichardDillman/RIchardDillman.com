@@ -483,6 +483,58 @@ axe http://localhost:3000/projects
 - 🎯 Image optimization with WebP/AVIF
 - 🎯 Service worker for offline support
 
+### Backlog / Future Enhancements
+
+#### CSS-Only Project Highlighting (Zero JS)
+**Status:** 💡 Proposed
+**Priority:** Low
+**Effort:** Small (~30 min)
+
+Replace the removed JavaScript auto-open functionality with pure CSS highlighting when navigating to projects via hash links (e.g., `/projects#my-project`).
+
+**Benefits:**
+- Visual feedback for hash navigation (`:target` pseudo-class)
+- Enhanced UX without any JavaScript overhead
+- Smooth transitions between states
+- Accessible (keyboard navigation via `:focus-within`)
+
+**Implementation:**
+```css
+details {
+  border: 1px solid transparent;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+/* Initial glow when linked by hash */
+details:target {
+  border-color: #60a5fa; /* blue-400 */
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+}
+
+/* When user interacts with another details element */
+details:focus-within {
+  border-color: #38bdf8; /* sky-400 */
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+}
+
+/* Optional: dim target when focus moves elsewhere */
+details:focus-within ~ details:target {
+  border-color: transparent;
+  box-shadow: none;
+}
+```
+
+**Acceptance Criteria:**
+- ✅ Navigating to `/projects#project-id` highlights the targeted project
+- ✅ Highlight persists until user interacts with another project
+- ✅ Smooth visual transitions (0.3s)
+- ✅ Works without JavaScript
+- ✅ Accessible via keyboard navigation
+
+**Related Work:**
+- Part of Sprint 2 client-side JS elimination
+- Complements the Server Component conversion of ProjectDisclosure
+
 ---
 
 ## Timeline
