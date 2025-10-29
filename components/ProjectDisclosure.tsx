@@ -9,11 +9,11 @@ export function ProjectDisclosure({ title, summary, details, id }: ProjectDisclo
   return (
     <details
       id={id}
-      className="group border rounded-2xl p-6 bg-white dark:bg-neutral-900 transition-shadow duration-300 scroll-mt-24 open:shadow-xl open:border-blue-200 dark:open:border-blue-800 shadow-sm hover:shadow-md"
+      className="group border rounded-2xl p-6 bg-white dark:bg-neutral-900 transition-all duration-300 scroll-mt-24 open:shadow-xl open:border-blue-200 dark:open:border-blue-800 shadow-sm hover:shadow-md target:border-blue-400 dark:target:border-blue-600 target:shadow-lg target:ring-2 target:ring-blue-200 dark:target:ring-blue-900"
     >
       <summary className="flex justify-between items-center cursor-pointer select-none list-none">
         <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h2 className="text-lg font-semibold">{title}</h2>
           <p className="text-sm text-neutral-500">{summary}</p>
         </div>
         <span className="text-blue-600 text-sm transition-colors group-open:text-blue-400">

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Github, Linkedin, BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail, Github as GitHub, Linkedin as LinkedIn, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateContactPageSchema } from "@/lib/structured-data";
 
@@ -31,6 +30,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = 'force-static';
+
 const contactLinks = [
   {
     name: "Email",
@@ -41,13 +42,13 @@ const contactLinks = [
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/richarddillman/",
-    icon: Linkedin,
+    icon: LinkedIn,
     description: "Connect with me"
   },
   {
     name: "GitHub",
     href: "https://github.com/richardDillman/",
-    icon: Github,
+    icon: GitHub,
     description: "Check out my code"
   },
   {
@@ -101,18 +102,6 @@ export default function ContactPage() {
                     </a>
                   );
                 })}
-              </div>
-
-              <div className="pt-6 border-t border-border">
-                <Button
-                  asChild
-                  size="lg"
-                  className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  <a href="https://calendly.com/richarddillman" target="_blank" rel="noopener noreferrer">
-                    Schedule a Call
-                  </a>
-                </Button>
               </div>
             </CardContent>
           </Card>

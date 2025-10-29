@@ -29,6 +29,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = 'force-static';
+
 export default function Home() {
   const personSchema = generatePersonSchema();
   const websiteSchema = generateWebSiteSchema();

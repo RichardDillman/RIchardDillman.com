@@ -33,6 +33,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = 'force-static';
+
 export default function ExperiencePage() {
   const experienceSchema = generateExperienceItemListSchema(experiences);
 
