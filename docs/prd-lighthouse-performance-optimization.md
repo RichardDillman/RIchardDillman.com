@@ -402,6 +402,43 @@ axe http://localhost:3000/projects
 
 ---
 
+## Current Infrastructure
+
+### Lighthouse CI Setup (Implemented)
+
+**Smart Testing Strategy:**
+- **Feature branches/PRs:** 1 run per URL (fast feedback, <5 min)
+- **Merge to main:** 3 runs per URL (comprehensive quality gate, statistical accuracy)
+
+**Report Storage & History:**
+- **PRs:** Results uploaded to `temporary-public-storage` (7-day retention)
+  - Shareable URLs in GitHub Actions logs
+  - Fast feedback without polluting git history
+- **Main branch:** Reports saved to `lighthouse-reports/` directory
+  - HTML and JSON files with timestamps
+  - Automatically committed via `github-actions[bot]`
+  - Permanent historical record for regression tracking
+
+**Configuration:**
+- Located in `lighthouse/lighthouserc.js`
+- Workflow: `.github/workflows/lighthouse-ci.yml`
+- Tests 8 URLs: home, about, projects, blog, blog post, experience, contact, stack
+- Desktop preset with throttling disabled for consistent CI results
+
+**Current Metrics Tracked:**
+- Performance scores
+- Accessibility compliance
+- JavaScript bundle sizes
+- HTML document sizes
+- Core Web Vitals (LCP, FCP, TBT, CLS)
+
+**What's Missing:**
+- ❌ Automated regression detection (comparing new reports to baseline)
+- ❌ Alert notifications when performance degrades
+- ❌ Trend visualization over time
+
+---
+
 ## Testing Strategy
 
 ### Pre-Deployment Testing
@@ -426,7 +463,7 @@ axe http://localhost:3000/projects
 ### Post-Deployment Monitoring
 - Vercel Analytics for real-user metrics
 - Sentry for error tracking
-- Lighthouse CI on every PR
+- Lighthouse CI on every PR with historical tracking on main
 
 ---
 
