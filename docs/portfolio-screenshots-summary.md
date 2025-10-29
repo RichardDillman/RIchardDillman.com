@@ -59,6 +59,7 @@ These sites timed out during capture (networkidle wait exceeded 60s):
 See [`docs/logo-collection-guide.md`](./logo-collection-guide.md) for detailed logo sourcing instructions.
 
 **Priority brands to collect first**:
+
 1. **Major Condé Nast brands** (Vogue, GQ, Wired, New Yorker, Vanity Fair)
 2. **The Muse** (longest tenure, most recent)
 3. **Everyday Health**
@@ -70,6 +71,7 @@ See [`docs/logo-collection-guide.md`](./logo-collection-guide.md) for detailed l
 ### Usage
 
 Add to any page:
+
 ```tsx
 import { LogoMontage } from '@/components/LogoMontage';
 
@@ -77,7 +79,7 @@ import { LogoMontage } from '@/components/LogoMontage';
   title="Trusted by Leading Brands"
   description="26 years building high-traffic platforms for world-class organizations"
   showPeriods={false} // or true to group by era
-/>
+/>;
 ```
 
 ---

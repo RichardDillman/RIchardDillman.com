@@ -3,6 +3,7 @@
 ## ✅ Completed
 
 ### Infrastructure & Setup
+
 - [x] Next.js 15 with App Router initialized
 - [x] TypeScript 5 with strict mode configured
 - [x] Tailwind CSS 3 with dark mode support (class-based)
@@ -18,6 +19,7 @@
 - [x] Directory structure created (app routes, components, content, public)
 
 ### Documentation
+
 - [x] `docs/setup.prd` - Original PRD from user
 - [x] `docs/implementation.prd` - Detailed implementation backlog
 - [x] `docs/Resume.pdf` - User's resume for content reference
@@ -26,6 +28,7 @@
 - [x] `README.md` - Project documentation
 
 ### Data & Content
+
 - [x] `data/experience.ts` - Structured experience data extracted from resume
   - The Muse (4 roles, 28+ achievements)
   - Condé Nast (1 role, 7 achievements)
@@ -37,6 +40,7 @@
   - Full tech stack and metrics for each project
 
 ### Components
+
 - [x] `components/Header.tsx` - Site navigation header
 - [x] `components/Footer.tsx` - Site footer with copyright
 - [x] `components/ExperienceCard.tsx` - Individual experience card with roles and achievements
@@ -47,6 +51,7 @@
   - Clean expandable drawer UX
 
 ### Pages (Completed)
+
 - [x] `app/layout.tsx` - Root layout with Header/Footer, Inter font
 - [x] `app/globals.css` - Global styles with Tailwind directives
 - [x] `app/page.tsx` - **Home page with Hero and TechStackPreview**
@@ -79,6 +84,7 @@
   - Static generation for all posts
 
 ### Content
+
 - [x] **7 blog posts imported from dev.to**:
   - "Why Your React Component Is a Hot Mess (and How to Fix It)" (2025) - with hero image
   - "Hero Image Optimization Techniques" (2023) - with hero image
@@ -93,6 +99,7 @@
   - Full-width display on individual posts
 
 ### Configuration Files
+
 - [x] `package.json` - All dependencies configured (including date-fns for blog)
 - [x] `tsconfig.json` - TypeScript configuration
 - [x] `next.config.ts` - Next.js config with Contentlayer
@@ -107,11 +114,13 @@
 ## 🚧 In Progress / Not Started
 
 ### Pages (Empty Routes)
+
 - [x] `app/stack/page.tsx` - **Full tech stack page with 60+ technologies**
   - Complete TechStack component with all categories
   - SEO optimized for tech skills and tools
 
 ### Components Needed
+
 - [x] `components/Hero.tsx` - Main hero section with headshot and CTAs
 - [x] `components/TechStack.tsx` - Tech stack showcase with 60+ technologies
 - [x] `components/TechStackPreview.tsx` - Condensed preview for home page with CTA
@@ -121,54 +130,60 @@
 - [ ] `components/SEO.tsx` - SEO meta tags component (or use next-seo directly)
 
 ### Data Structures Needed
+
 - [x] `data/techStack.ts` - Tech stack, tools, frameworks data (60+ technologies across 7 categories)
 - [x] `data/logos.ts` - Brand logos for portfolio montage (32 companies)
 
 ### Content Needed
+
 - [x] Improve home page with proper Hero component
 - [x] Document tech stack for home page
 - [x] Add profile photo to `/public/images/` (homepage-hero.webp)
 - [ ] Write additional blog posts (currently have 7 from dev.to)
 
 ### Features & Integrations
+
 - [ ] Dark mode theme toggle (next-themes integration)
-- [X] **SEO configuration complete**
-  - [X] Enhanced metadata with OpenGraph and Twitter cards on all pages
-  - [X] Dynamic OG image generation route (`/api/og`)
-  - [X] Sitemap generation (`/sitemap.xml`)
-  - [X] Robots.txt configuration
-  - [X] metadataBase configured in root layout
-  - [X] Blog post-specific OG images with title and description
+- [x] **SEO configuration complete**
+  - [x] Enhanced metadata with OpenGraph and Twitter cards on all pages
+  - [x] Dynamic OG image generation route (`/api/og`)
+  - [x] Sitemap generation (`/sitemap.xml`)
+  - [x] Robots.txt configuration
+  - [x] metadataBase configured in root layout
+  - [x] Blog post-specific OG images with title and description
 - [ ] Vercel Analytics integration
 - [ ] Plausible tracker setup
-- [X] Blog post MDX rendering with syntax highlighting
-- [X] Blog post pagination (if needed)
+- [x] Blog post MDX rendering with syntax highlighting
+- [x] Blog post pagination (if needed)
 
 ### Performance & Optimization
-- [X] **Lighthouse CI Setup Complete**
-  - [X] `lighthouse/lighthouserc.ts` configuration with strict thresholds
-  - [X] GitHub Actions workflow (`.github/workflows/lighthouse-ci.yml`)
-  - [X] Pre-push git hook with `--no-verify` escape hatch
-  - [X] `pnpm run test:lhci` script for local testing
-  - [X] @lhci/cli package installed
+
+- [x] **Lighthouse CI Setup Complete**
+  - [x] `lighthouse/lighthouserc.ts` configuration with strict thresholds
+  - [x] GitHub Actions workflow (`.github/workflows/lighthouse-ci.yml`)
+  - [x] Pre-push git hook with `--no-verify` escape hatch
+  - [x] `pnpm run test:lhci` script for local testing
+  - [x] @lhci/cli package installed
 - [ ] Run initial Lighthouse audit and fix any issues
-- [X] Optimize images (add profile photo, optimize loading)
+- [x] Optimize images (add profile photo, optimize loading)
 - [ ] Font optimization review
 - [ ] Code splitting review
-- [X] Web Vitals monitoring setup (Lighthouse CI configured)
-- [X] Target: LCP < 2.5s (enforced in Lighthouse CI)
-- [X] Target: Lighthouse Performance 95+ (enforced in Lighthouse CI)
-- [X] Target: Lighthouse Accessibility 100 (enforced in Lighthouse CI)
-- [X] Target: Build time < 60s on Vercel (monitored in GitHub Actions)
+- [x] Web Vitals monitoring setup (Lighthouse CI configured)
+- [x] Target: LCP < 2.5s (enforced in Lighthouse CI)
+- [x] Target: Lighthouse Performance 95+ (enforced in Lighthouse CI)
+- [x] Target: Lighthouse Accessibility 100 (enforced in Lighthouse CI)
+- [x] Target: Build time < 60s on Vercel (monitored in GitHub Actions)
 
 ### Accessibility
+
 - [ ] Keyboard navigation testing
 - [ ] ARIA labels audit
 - [ ] Screen reader testing
 - [ ] WCAG AA compliance verification
 
 ### Deployment
-- [X] Deploy to Vercel
+
+- [x] Deploy to Vercel
 - [ ] Configure custom domain (richarddillman.com)
 - [ ] Set up environment variables (if needed for analytics)
 - [ ] Configure Vercel Analytics

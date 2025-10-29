@@ -9,7 +9,8 @@ export default function TechStackPreview() {
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-4">Core Technologies</h2>
         <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl">
-          26 years of experience with modern frameworks, performance optimization, and scalable architecture.
+          26 years of experience with modern frameworks, performance optimization, and scalable
+          architecture.
         </p>
       </div>
 
@@ -34,12 +35,7 @@ export default function TechStackPreview() {
           className="inline-flex items-center gap-2 text-neutral-900 dark:text-neutral-100 font-semibold hover:underline"
         >
           View Full Tech Stack
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"

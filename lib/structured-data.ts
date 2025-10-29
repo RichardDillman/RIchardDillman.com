@@ -1,4 +1,14 @@
-import type { Person, WithContext, BlogPosting, Organization, WebSite, ProfilePage, ItemList, ContactPage, Blog } from 'schema-dts';
+import type {
+  Person,
+  WithContext,
+  BlogPosting,
+  Organization,
+  WebSite,
+  ProfilePage,
+  ItemList,
+  ContactPage,
+  Blog,
+} from 'schema-dts';
 
 /**
  * Generates JSON-LD structured data for a Person (Richard Dillman)
@@ -11,7 +21,8 @@ export function generatePersonSchema(): WithContext<Person> {
     url: 'https://richarddillman.com',
     image: 'https://richarddillman.com/api/og',
     jobTitle: 'Senior Director of Engineering',
-    description: 'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
+    description:
+      'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
     sameAs: [
       'https://github.com/richarddillman',
       'https://www.linkedin.com/in/richarddillman/',
@@ -44,7 +55,8 @@ export function generateWebSiteSchema(): WithContext<WebSite> {
     '@type': 'WebSite',
     name: 'Richard Dillman',
     url: 'https://richarddillman.com',
-    description: 'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
+    description:
+      'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
     author: {
       '@type': 'Person',
       name: 'Richard Dillman',
@@ -136,7 +148,8 @@ export function generateProfilePageSchema(): WithContext<ProfilePage> {
         name: 'The Muse',
         url: 'https://www.themuse.com',
       },
-      description: 'Engineering leader focused on performance, SEO, mentoring, and modernizing legacy systems into unified, scalable architectures.',
+      description:
+        'Engineering leader focused on performance, SEO, mentoring, and modernizing legacy systems into unified, scalable architectures.',
       sameAs: [
         'https://www.linkedin.com/in/richarddillman/',
         'https://github.com/richarddillman',
@@ -164,7 +177,8 @@ export function generateBlogSchema(): WithContext<Blog> {
     '@type': 'Blog',
     url: 'https://richarddillman.com/blog',
     name: "Richard Dillman's Blog",
-    description: 'Insights on engineering leadership, performance optimization, and AI-augmented development.',
+    description:
+      'Insights on engineering leadership, performance optimization, and AI-augmented development.',
     publisher: {
       '@type': 'Person',
       name: 'Richard Dillman',
@@ -184,10 +198,7 @@ export function generateContactPageSchema(): WithContext<ContactPage> {
       '@type': 'Person',
       name: 'Richard Dillman',
       email: 'mailto:hello@richarddillman.com',
-      sameAs: [
-        'https://www.linkedin.com/in/richarddillman/',
-        'https://github.com/richarddillman',
-      ],
+      sameAs: ['https://www.linkedin.com/in/richarddillman/', 'https://github.com/richarddillman'],
     },
   };
 }

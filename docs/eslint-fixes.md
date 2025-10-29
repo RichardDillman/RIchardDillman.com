@@ -3,6 +3,7 @@
 ## Problem
 
 The Vercel build was failing due to:
+
 1. ESLint module resolution error: `Cannot find package '@eslint/eslintrc'`
 2. Multiple `react/no-unescaped-entities` errors for apostrophes in JSX
 3. Unused import warnings
@@ -12,6 +13,7 @@ The Vercel build was failing due to:
 ### 1. Fixed ESLint Module Resolution
 
 **Added explicit dependency:**
+
 ```bash
 pnpm add -D @eslint/eslintrc
 ```
@@ -19,10 +21,11 @@ pnpm add -D @eslint/eslintrc
 This ensures `@eslint/eslintrc` is available in `node_modules` for the flat config compatibility layer.
 
 **Updated `eslint.config.mjs`:**
+
 ```javascript
-import { FlatCompat } from "@eslint/eslintrc";
-import path from "path";
-import { fileURLToPath } from "url";
+import { FlatCompat } from '@eslint/eslintrc';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,15 +36,9 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   {
-    ignores: [
-      ".next/**",
-      "node_modules/**",
-      ".contentlayer/**",
-      "out/**",
-      "build/**",
-    ],
+    ignores: ['.next/**', 'node_modules/**', '.contentlayer/**', 'out/**', 'build/**'],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
 ];
 
 export default eslintConfig;
@@ -52,11 +49,13 @@ export default eslintConfig;
 Replaced all straight apostrophes (`'`) in JSX text with HTML entities (`&apos;`):
 
 **Files fixed:**
+
 - `app/about/page.tsx` - 11 apostrophes
 - `app/contact/page.tsx` - 1 apostrophe (in heading)
 - `components/Hero.tsx` - 2 apostrophes
 
 **Example:**
+
 ```tsx
 // Before
 <h1>Hi, I'm Richard Dillman</h1>
@@ -68,19 +67,23 @@ Replaced all straight apostrophes (`'`) in JSX text with HTML entities (`&apos;`
 ### 3. Removed Unused Imports
 
 **app/page.tsx:**
+
 - Removed unused `TechStackPreview` import
 
 **components/Hero.tsx:**
+
 - Removed unused lucide-react icons: `Github`, `Linkedin`, `Mail`
 
 ## Results
 
 ### Lint Check
+
 ```bash
 ✔ No ESLint warnings or errors
 ```
 
 ### Build Success
+
 ```bash
 Route (app)                                        Size  First Load JS
 ┌ ○ /                                             174 B         111 kB
@@ -108,6 +111,7 @@ Route (app)                                        Size  First Load JS
 ## Vercel Deployment
 
 The build now passes all ESLint checks during deployment:
+
 - ✅ No module resolution errors
 - ✅ No unescaped entity warnings
 - ✅ No unused import warnings
@@ -116,6 +120,7 @@ The build now passes all ESLint checks during deployment:
 ## Future Considerations
 
 Next.js 16 will deprecate `next lint` in favor of the ESLint CLI. When migrating:
+
 ```bash
 npx @next/codemod@canary next-lint-to-eslint-cli .
 ```

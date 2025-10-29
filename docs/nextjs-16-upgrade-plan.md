@@ -1,6 +1,7 @@
 # Next.js 16 Upgrade Plan
 
 ## Current State
+
 - **Next.js**: 15.5.6
 - **React**: 19.2.0
 - **React DOM**: 19.2.0
@@ -43,14 +44,17 @@ Your codebase is **already compatible** with most Next.js 16 requirements:
 ### 1. ⚠️ `next lint` Removal (IMPACT: LOW)
 
 **What's Changing:**
+
 - `next lint` command is completely removed in Next.js 16
 - Must use ESLint CLI directly
 
 **Current State:**
+
 - `package.json` scripts: `"lint": "next lint"`
 - We already have `@eslint/eslintrc` installed explicitly
 
 **Action Required:**
+
 ```bash
 # Run the codemod
 npx @next/codemod@canary next-lint-to-eslint-cli .
@@ -62,25 +66,30 @@ npx @next/codemod@canary next-lint-to-eslint-cli .
 ### 2. ⚠️ Turbopack Default (IMPACT: NONE)
 
 **What's Changing:**
+
 - Turbopack is now the default bundler
 - No webpack customizations in your config
 
 **Current State:**
+
 - No custom webpack config
 - Currently using default bundler
 
 **Action Required:**
+
 - None! Will automatically use Turbopack
 - Can optionally remove `--turbopack` flags if added later
 
 ### 3. ⚠️ Contentlayer Compatibility (IMPACT: UNKNOWN)
 
 **Potential Issue:**
+
 - Contentlayer may not be compatible with Next.js 16 yet
 - Currently on v0.3.4 (last updated 2023)
 - May need to wait for update or find alternative
 
 **Action Required:**
+
 - Test after upgrade
 - Monitor https://github.com/contentlayerdev/contentlayer for updates
 - Consider alternatives if incompatible:
@@ -113,10 +122,10 @@ Explore new explicit caching with `"use cache"` directive:
 
 ```typescript
 // Example for future optimization
-'use cache'
+'use cache';
 export async function getBlogPosts() {
   // This will be cached with explicit control
-  return allPosts
+  return allPosts;
 }
 ```
 
@@ -127,6 +136,7 @@ Faster subsequent builds with disk caching (beta feature).
 ## Upgrade Steps
 
 ### Step 1: Backup & Preparation
+
 ```bash
 # Create a backup branch
 git checkout -b upgrade/nextjs-16
@@ -136,12 +146,14 @@ git status
 ```
 
 ### Step 2: Run Automated Upgrade
+
 ```bash
 # Use official Next.js upgrade tool
 npx @next/codemod@canary upgrade latest
 ```
 
 This will:
+
 - Upgrade Next.js, React, and React DOM
 - Migrate ESLint configuration
 - Remove `unstable_` prefixes
@@ -150,6 +162,7 @@ This will:
 ### Step 3: Manual Updates
 
 **Update package.json scripts:**
+
 ```json
 {
   "scripts": {
@@ -162,6 +175,7 @@ This will:
 ```
 
 **Optional: Enable React Compiler:**
+
 ```typescript
 // next.config.ts
 const nextConfig: NextConfig = {
@@ -209,22 +223,28 @@ pnpm add next@15.5.6 react@19.2.0 react-dom@19.2.0
 ## Timeline Recommendation
 
 ### Option A: Upgrade Now ✅ RECOMMENDED
+
 **Pros:**
+
 - Your code is already 99% compatible
 - Early adoption = fewer issues later
 - Turbopack performance benefits
 - React Compiler stable
 
 **Cons:**
+
 - Contentlayer compatibility unknown
 - Potential for minor edge cases
 
 ### Option B: Wait for Contentlayer Update
+
 **Pros:**
+
 - Guaranteed compatibility
 - Let others find edge cases first
 
 **Cons:**
+
 - Miss out on performance improvements
 - May be waiting months (Contentlayer inactive)
 - Will eventually need to upgrade anyway
@@ -241,6 +261,7 @@ pnpm add next@15.5.6 react@19.2.0 react-dom@19.2.0
 6. ⚠️ Contentlayer risk can be mitigated with testing
 
 **If Contentlayer breaks**, you have options:
+
 - Wait for update (likely coming soon)
 - Switch to `next-mdx-remote` or `velite`
 - Use the MDX bundler directly

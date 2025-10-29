@@ -7,9 +7,7 @@ export default function TechStack() {
     <section className="border-t border-neutral-200 dark:border-neutral-800">
       {/* Primary Technologies Highlight */}
       <div className="mb-12 p-6 bg-card border border-border rounded-lg shadow-sm">
-        <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-          Primary Focus
-        </h2>
+        <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">Primary Focus</h2>
         <div className="flex flex-wrap gap-3">
           {primaryTech.map((tech) => (
             <span
@@ -25,21 +23,21 @@ export default function TechStack() {
       {/* Full Tech Stack by Category */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {techStack.map((category) => (
-          <div key={category.name} className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              {category.name}
-            </h2>
+          <div
+            key={category.name}
+            className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">{category.name}</h2>
             <ul className="space-y-3">
               {category.items.map((item) => (
                 <li key={item.name} className="group">
                   <div className="flex items-start gap-2">
-                    <span className={`
+                    <span
+                      className={`
                       font-medium transition-colors
-                      ${item.primary
-                        ? 'text-foreground'
-                        : 'text-muted-foreground'
-                      }
-                    `}>
+                      ${item.primary ? 'text-foreground' : 'text-muted-foreground'}
+                    `}
+                    >
                       {item.name}
                     </span>
                     {item.primary && (
@@ -49,9 +47,7 @@ export default function TechStack() {
                     )}
                   </div>
                   {item.description && (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {item.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
                   )}
                 </li>
               ))}

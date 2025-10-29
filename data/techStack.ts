@@ -13,7 +13,11 @@ export const techStack: TechCategory[] = [
   {
     name: 'Languages & Frameworks',
     items: [
-      { name: 'TypeScript', description: 'Primary language for type-safe development', primary: true },
+      {
+        name: 'TypeScript',
+        description: 'Primary language for type-safe development',
+        primary: true,
+      },
       { name: 'JavaScript', description: 'ES6+ for modern web applications', primary: true },
       { name: 'React', description: 'Component-based UI architecture', primary: true },
       { name: 'Next.js', description: 'Full-stack React framework with SSR/SSG', primary: true },
@@ -78,7 +82,11 @@ export const techStack: TechCategory[] = [
       { name: 'Google PageSpeed Insights', description: 'Performance measurement tool' },
       { name: 'WebPageTest', description: 'Detailed performance analysis' },
       { name: 'Screaming Frog', description: 'SEO spider and site auditing' },
-      { name: 'Google Search Console', description: 'Search performance and indexing', primary: true },
+      {
+        name: 'Google Search Console',
+        description: 'Search performance and indexing',
+        primary: true,
+      },
       { name: 'Google Analytics', description: 'Analytics and tracking' },
       { name: 'Snowplow', description: 'Behavioral data collection and analytics' },
       { name: 'Statsig', description: 'Feature flags and experimentation' },
@@ -107,12 +115,10 @@ export const techStack: TechCategory[] = [
 
 // Helper functions
 export function getPrimaryTech(): TechItem[] {
-  return techStack
-    .flatMap(category => category.items)
-    .filter(item => item.primary);
+  return techStack.flatMap((category) => category.items).filter((item) => item.primary);
 }
 
 export function getTechByCategory(categoryName: string): TechItem[] {
-  const category = techStack.find(cat => cat.name === categoryName);
+  const category = techStack.find((cat) => cat.name === categoryName);
   return category ? category.items : [];
 }

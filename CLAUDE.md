@@ -32,6 +32,7 @@ The dev server runs on http://localhost:3000 by default.
 ## Architecture
 
 ### Tech Stack
+
 - **Framework:** Next.js 16 with App Router
 - **Bundler:** Turbopack (default in Next.js 16)
 - **Compiler:** React Compiler (enabled for auto-memoization)
@@ -83,21 +84,26 @@ contentlayer.config.ts # Contentlayer configuration for MDX processing
 ## Important Configuration Details
 
 ### Next.js Config
+
 The `next.config.ts` includes:
+
 - `reactCompiler: true` - Enables the stable React Compiler for automatic memoization
 - `turbopack: {}` - Acknowledges Turbopack as default bundler (compatible with Contentlayer's webpack usage)
 - Wrapped with Contentlayer's `withContentlayer()` function to enable MDX processing
 - Compiler optimizations for production (remove React properties, console statements)
 
 ### Tailwind Config
+
 - Uses `darkMode: "class"` for manual dark mode toggling
 - Content paths include `app/`, `components/`, and `pages/`
 - Extends default theme with custom CSS variables for colors
 
 ### ESLint Config
+
 Uses Next.js 16's ESLint config with TypeScript support via the flat config format (`eslint.config.mjs`). The config directly imports from `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript` instead of using `next lint`.
 
 ### pnpm Notes
+
 After initial install, you may need to run `pnpm approve-builds` to enable build scripts for certain dependencies (contentlayer, esbuild, sharp, protobufjs, unrs-resolver).
 
 ## Known Issues

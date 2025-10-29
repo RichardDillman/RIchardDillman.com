@@ -188,11 +188,13 @@ This document lists all the brands from your career history that need high-quali
 ### Logo Extraction Tips
 
 **For SVG logos:**
+
 ```bash
 # Save as /public/images/logos/{slug}.svg
 ```
 
 **For PNG logos:**
+
 - Download highest resolution available
 - Remove background if needed (use remove.bg or Photoshop)
 - Save at minimum 500px width
@@ -202,6 +204,7 @@ This document lists all the brands from your career history that need high-quali
 ## Display Strategy
 
 The logos will be displayed in a responsive grid/montage:
+
 - Grouped by era/company type
 - Grayscale with color on hover
 - Responsive sizing (larger for major brands like Vogue, GQ, Wired)
