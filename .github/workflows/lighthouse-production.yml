@@ -1,0 +1,178 @@
+name: Lighthouse Production Baseline
+
+# This workflow runs AFTER a PR merges to main and Vercel deploys to production.
+# It creates a historical baseline by:
+# 1. Running Lighthouse against the LIVE production site
+# 2. Committing reports to lighthouse-reports branch
+# 3. Creating a PR back to main for tracking
+#
+# This enables continuous improvement - each PR can compare against real production metrics.
+
+on:
+  # Triggered by Vercel deployment webhook or manually
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      production_url:
+        description: 'Production URL to test (default: richard-dillman-com.vercel.app)'
+        required: false
+        default: 'https://richard-dillman-com.vercel.app'
+
+permissions:
+  contents: write
+  pull-requests: write
+  deployments: read
+
+jobs:
+  production-lighthouse:
+    name: Production Baseline - Lighthouse Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Only run on successful production deployments
+    if: |
+      (github.event_name == 'deployment_status' &&
+       github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'production') ||
+      github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for branch creation
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Wait for production to be ready
+        run: |
+          PROD_URL="${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}"
+          echo "Testing production URL: $PROD_URL"
+
+          # Wait up to 2 minutes for site to be fully ready
+          for i in {1..24}; do
+            if curl -sf "$PROD_URL" > /dev/null; then
+              echo "✅ Production site is ready"
+              exit 0
+            fi
+            echo "Waiting for production... (attempt $i/24)"
+            sleep 5
+          done
+          echo "❌ Production site not ready after 2 minutes"
+          exit 1
+
+      - name: Run Lighthouse against Production
+        run: pnpm run test:lhci:production
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          PRODUCTION_URL: ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}
+
+      - name: Create/Update lighthouse-reports branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # Create or switch to lighthouse-reports branch
+          git fetch origin lighthouse-reports || true
+          if git show-ref --verify --quiet refs/remotes/origin/lighthouse-reports; then
+            git checkout lighthouse-reports
+            git merge --no-ff origin/main -m "Merge main for latest reports"
+          else
+            git checkout -b lighthouse-reports
+          fi
+
+      - name: Commit Lighthouse reports
+        id: commit
+        run: |
+          git add lighthouse-reports/
+
+          # Check if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+            git commit -m "chore: update production Lighthouse baseline - $TIMESTAMP
+
+          ## Production Metrics Updated
+          - Tested live production site: ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}
+          - Run date: $TIMESTAMP
+          - Triggered by: ${{ github.event_name }}
+
+          These reports serve as the baseline for comparing future PRs.
+          Goal: Always be better than former me. 🚀
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          Co-Authored-By: Claude <noreply@anthropic.com>"
+
+            git push origin lighthouse-reports
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create PR to main
+        if: steps.commit.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Check if PR already exists
+          EXISTING_PR=$(gh pr list --head lighthouse-reports --base main --json number --jq '.[0].number')
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already exists, updating..."
+            gh pr comment "$EXISTING_PR" --body "🔄 Updated with latest production Lighthouse results from ${{ github.event.deployment_status.target_url || inputs.production_url || 'https://richard-dillman-com.vercel.app' }}"
+          else
+            gh pr create \
+              --title "chore: update production Lighthouse baseline reports" \
+              --body "$(cat <<'EOF'
+          ## Production Lighthouse Baseline Update
+
+          This PR updates our production performance baseline with the latest Lighthouse reports.
+
+          ### What This Does
+          - **Tests LIVE production**: Not a build, the actual deployed site
+          - **Creates historical tracking**: Future PRs compare against these reports
+          - **Enables continuous improvement**: Always striving to beat the previous baseline
+
+          ### Metrics Included
+          - 🎯 Core Web Vitals (LCP, FCP, CLS, TBT)
+          - 📊 Performance Score
+          - ♿ Accessibility Score
+          - 🔍 SEO Score
+          - ✅ Best Practices Score
+          - 📦 Bundle Sizes (JS, CSS, HTML, Images)
+
+          ### URLs Tested
+          - Homepage
+          - About
+          - Projects
+          - Blog listing
+          - Blog post
+          - Experience
+          - Contact
+          - Stack
+
+          **Goal**: Be better than former me. Each merge should maintain or improve these metrics. 🚀
+
+          ---
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          **Auto-merge recommended**: These are reference reports for comparison.
+          EOF
+          )" \
+              --base main \
+              --head lighthouse-reports \
+              --label "lighthouse" \
+              --label "performance"
+          fi

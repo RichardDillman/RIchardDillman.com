@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "capture:portfolio": "tsx scripts/capture-portfolio-screenshots.ts",
-    "test:lhci": "lhci autorun --config=./lighthouse/lighthouserc.js"
+    "test:lhci": "lhci autorun --config=./lighthouse/lighthouserc.js",
+    "test:lhci:production": "lhci autorun --config=./lighthouse/lighthouserc.production.js"
   },
   "dependencies": {
     "@content-collections/core": "^0.11.1",
