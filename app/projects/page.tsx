@@ -49,7 +49,7 @@ export default function ProjectsPage() {
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          <span>My random thoughts</span>
+          <span>Projects</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           26 years of solving complex technical challenges at scale. From government digital transformation

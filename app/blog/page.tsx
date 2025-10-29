@@ -53,7 +53,7 @@ export default function BlogPage() {
         <div className="max-w-4xl mx-auto">
           <header className="mb-12 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span>Experience & Skills</span>
+              <span>My random thoughts</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
               Technical writing on React, performance optimization, web development, and engineering leadership.
