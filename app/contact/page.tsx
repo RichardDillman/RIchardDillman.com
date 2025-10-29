@@ -104,18 +104,6 @@ export default function ContactPage() {
                   );
                 })}
               </div>
-
-              <div className="pt-6 border-t border-border">
-                <Button
-                  asChild
-                  size="lg"
-                  className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  <a href="https://calendly.com/richarddillman" target="_blank" rel="noopener noreferrer">
-                    Schedule a Call
-                  </a>
-                </Button>
-              </div>
             </CardContent>
           </Card>
 

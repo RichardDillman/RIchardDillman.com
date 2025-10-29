@@ -13,7 +13,7 @@ export function ProjectDisclosure({ title, summary, details, id }: ProjectDisclo
     >
       <summary className="flex justify-between items-center cursor-pointer select-none list-none">
         <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h2 className="text-lg font-semibold">{title}</h2>
           <p className="text-sm text-neutral-500">{summary}</p>
         </div>
         <span className="text-blue-600 text-sm transition-colors group-open:text-blue-400">

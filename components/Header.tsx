@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
 
 const navLinks = [
   { href: "/about", label: "About" },
@@ -10,6 +13,12 @@ const navLinks = [
 ];
 
 export default function Header() {
+  // Reset menu on navigation (pathname change)
+  useEffect(() => {
+    const checkbox = document.getElementById('mobile-menu-toggle') as HTMLInputElement;
+    if (checkbox) checkbox.checked = false;
+  }, []);
+
   return (
     <nav className="sticky top-0 left-0 right-0 z-50 bg-[rgb(30,58,95)] backdrop-blur-md shadow-lg">
       <div className="container mx-auto px-4 sm:px-6">
@@ -52,12 +61,12 @@ export default function Header() {
 
             {/* Mobile Menu Dropdown */}
             <div className="invisible peer-checked:visible opacity-0 peer-checked:opacity-100 absolute top-full left-0 right-0 bg-[rgb(30,58,95)] shadow-xl transition-all duration-200 ease-in-out transform origin-top scale-95 peer-checked:scale-100">
-              <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
+              <div className="container mx-auto px-4 py-4 flex flex-col gap-2 items-end">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="px-4 py-2 text-white hover:bg-white/10 rounded-md transition-colors"
+                    className="px-4 py-2 text-white hover:bg-white/10 rounded-md transition-colors text-right"
                   >
                     {link.label}
                   </Link>
