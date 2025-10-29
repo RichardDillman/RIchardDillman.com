@@ -55,6 +55,19 @@ jobs:
           CI_MERGE_TO_MAIN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           GITHUB_REF: ${{ github.ref }}
 
+      # Debug: Check what files exist before committing
+      - name: Debug - List report directories
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "=== Contents of lighthouse-reports/ ==="
+          ls -lah lighthouse-reports/ || echo "lighthouse-reports/ does not exist"
+          echo ""
+          echo "=== Contents of .lighthouseci/ ==="
+          ls -lah .lighthouseci/ || echo ".lighthouseci/ does not exist"
+          echo ""
+          echo "=== Git status ==="
+          git status
+
       # On main branch: commit reports for regression tracking
       - name: Commit Lighthouse reports
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
