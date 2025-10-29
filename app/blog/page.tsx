@@ -32,6 +32,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = 'force-static';
+
 export default function BlogPage() {
   // Sort posts by date (newest first)
   const posts = allPosts.sort((a, b) =>

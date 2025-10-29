@@ -31,6 +31,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = 'force-static';
+
 export default function ProjectsPage() {
   const tags = getAllTags();
   const projectsSchema = generateProjectsItemListSchema(projects);
