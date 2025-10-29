@@ -14,7 +14,7 @@ export default function TechStack() {
           {primaryTech.map((tech) => (
             <span
               key={tech.name}
-              className="px-4 py-2 bg-accent text-accent-foreground rounded-lg font-medium text-sm"
+              className="px-4 py-2 bg-blue-700 text-white rounded-lg font-semibold text-sm"
             >
               {tech.name}
             </span>
@@ -43,7 +43,7 @@ export default function TechStack() {
                       {item.name}
                     </span>
                     {item.primary && (
-                      <span className="text-xs px-1.5 py-0.5 bg-accent text-accent-foreground rounded">
+                      <span className="text-xs px-1.5 py-0.5 bg-blue-700 text-white font-semibold rounded">
                         Core
                       </span>
                     )}
