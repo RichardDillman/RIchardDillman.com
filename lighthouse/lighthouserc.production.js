@@ -1,8 +1,8 @@
 // Production Lighthouse CI Configuration
-// Tests the LIVE production site at richard-dillman-com.vercel.app
+// Tests the LIVE production site at richarddillman.com
 // Results are committed to lighthouse-reports branch for historical tracking
 
-const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://richard-dillman-com.vercel.app';
+const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://richarddillman.com';
 
 module.exports = {
   ci: {

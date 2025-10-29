@@ -4,7 +4,7 @@ This directory contains historical Lighthouse CI performance reports from **LIVE
 
 ## Purpose
 
-These reports serve as performance baselines for continuous improvement. After each merge to `main`, we test the **live production site** (richard-dillman-com.vercel.app) and store results here. This creates a permanent historical record of:
+These reports serve as performance baselines for continuous improvement. After each merge to `main`, we test the **live production site** (richarddillman.com) and store results here. This creates a permanent historical record of:
 - Performance scores
 - Accessibility compliance
 - JavaScript bundle sizes
@@ -33,7 +33,7 @@ Reports are saved as HTML and JSON files with timestamps, allowing you to:
 ### Automated Updates
 
 - **Trigger:** Successful Vercel production deployment (after merge to main)
-- **What's Tested:** Live production site at richard-dillman-com.vercel.app
+- **What's Tested:** Live production site at richarddillman.com
 - **Frequency:** 3 runs per URL (for statistical accuracy)
 - **Workflow:** Creates PR from `lighthouse-reports` branch to `main`
 - **Committer:** `github-actions[bot]`
@@ -71,7 +71,7 @@ diff lighthouse-reports/[timestamp-1].report.json lighthouse-reports/[timestamp-
 ### Production Baseline (`.github/workflows/lighthouse-production.yml`)
 
 - Triggered by successful Vercel deployment to production
-- Tests the LIVE site at richard-dillman-com.vercel.app
+- Tests the LIVE site at richarddillman.com
 - 3 runs per URL for statistical accuracy
 - Saves reports to `lighthouse-reports` branch
 - Creates PR back to main for review and tracking
