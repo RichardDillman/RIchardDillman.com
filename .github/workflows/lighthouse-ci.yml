@@ -54,13 +54,8 @@ jobs:
           # Run 3x on merge to main, 1x on PRs for fast feedback
           CI_MERGE_TO_MAIN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
 
-      - name: Upload Lighthouse results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: lighthouse-results
-          path: .lighthouseci
-          retention-days: 30
+      # Note: Results are uploaded to temporary-public-storage automatically
+      # and visible in the GitHub Actions logs with shareable URLs
 
   # Optional: Check Vercel build time
   vercel-build-check:
