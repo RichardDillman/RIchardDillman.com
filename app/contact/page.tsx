@@ -113,7 +113,7 @@ export default function ContactPage() {
           </Card>
 
           <p className="text-neutral-700 dark:text-neutral-300 mt-12">
-            Based in Indianapolis, IN • Available for remote opportunities
+            Based in Indianapolis, IN • Available for remote and hybrid opportunities
           </p>
         </div>
       </div>

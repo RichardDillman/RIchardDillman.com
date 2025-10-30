@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "source ~/.nvm/nvm.sh && nvm use 25 > /dev/null 2>&1 && npx chrome-devtools-mcp@latest"
+      ]
+    }
+  }
+}
