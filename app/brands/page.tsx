@@ -46,12 +46,11 @@ export default function BrandsPage() {
             Brands I Have Worked With
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-3">
-            26 years building high-traffic platforms for world-class organizations. Click any brand
-            to view screenshots from when I worked on their platform.
+            For more than two decades I’ve built and led high-traffic platforms for well-known organizations.
+            Click any brand to view screenshots from my time on their sites.
           </p>
           <p className="text-sm text-neutral-500 dark:text-neutral-500 max-w-3xl mx-auto">
-            Note: Sites may have changed significantly since my tenure. These screenshots reflect
-            the work as it appeared during my time with each organization.
+            Note: Screens reflect the work as it appeared during my tenure; current designs may differ.
           </p>
         </header>
 
