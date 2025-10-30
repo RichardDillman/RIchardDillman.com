@@ -21,19 +21,19 @@ export function LogoMontage({
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">{title}</h2>
-          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">{description}</p>
+          <p className="text-muted-foreground max-w-2xl mx-auto">{description}</p>
         </div>
 
         {/* Logo Grid */}
         {Object.entries(groupedLogos).map(([period, logos]) => (
           <div key={period} className="mb-12 last:mb-0">
             {showPeriods && period !== 'all' && (
-              <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-6 text-center">
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-6 text-center">
                 {period}
               </h3>
             )}
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-12 items-center justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 md:gap-10 items-center justify-items-center">
               {logos.map((logo) => (
                 <LogoItem key={logo.slug} logo={logo} />
               ))}
@@ -47,21 +47,21 @@ export function LogoMontage({
 
 function LogoItem({ logo }: { logo: BrandLogo }) {
   return (
-    <div className="group relative transition-all duration-300 flex flex-col items-center justify-center w-full mx-auto">
+    <div className="group relative transition-all duration-300 flex flex-col items-center justify-center w-full max-w-[160px] mx-auto">
       {/* Logo Image */}
-      <span title={logo.name} className="inline-block">
+      <div title={logo.name} className="relative w-full h-auto mb-3">
         <Image
           src={`/images/logos/${logo.file}`}
           alt={`${logo.name} logo`}
           width={logo.width}
           height={logo.height}
-          style={{ width: '140px', height: 'auto' }}
-          className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+          style={{ width: '140px', height: 'auto', margin: '0 auto' }}
+          className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 drop-shadow-sm"
         />
-      </span>
+      </div>
 
       {/* Logo Title */}
-      <div className="mt-2 text-xs text-center text-neutral-600 dark:text-neutral-400">
+      <div className="text-xs text-center text-muted-foreground group-hover:text-foreground transition-colors duration-300 font-medium">
         {logo.name}
       </div>
     </div>
