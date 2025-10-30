@@ -1,5 +1,4 @@
 import ExperienceList from '@/components/ExperienceList';
-import { LogoMontage } from '@/components/LogoMontage';
 import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Metadata } from 'next';
@@ -75,15 +74,6 @@ export default function ExperiencePage() {
         </h2>
 
         <ExperienceList />
-
-        {/* Brand logos montage */}
-        <div className="mt-24">
-          <LogoMontage
-            title="Brands I've Worked With"
-            description="26 years building high-traffic platforms for world-class organizations"
-            showPeriods={false}
-          />
-        </div>
       </div>
     </div>
   );
