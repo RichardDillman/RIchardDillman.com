@@ -48,7 +48,7 @@ export default function BrandsPage() {
             Brands I Have Worked With
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-3">
-            For more than two decades I've built and led high-traffic platforms for well-known organizations.
+            For more than two decades I have built and led high-traffic platforms for well-known organizations.
             Click any brand to view screenshots from my time on their sites.
           </p>
           <p className="text-sm text-neutral-500 dark:text-neutral-500 max-w-3xl mx-auto">
