@@ -32,11 +32,11 @@ export const brandImages: BrandImage[] = [
   // 2015-2018: Condé Nast (Priority)
   {
     brandSlug: 'vogue',
-    images: ['vogue-home.png'],
+    images: ['vogue-home.png', 'vogue-article.png'],
   },
   {
     brandSlug: 'the-new-yorker',
-    images: ['the-new-yorker-home.png'],
+    images: ['the-new-yorker-home.png', 'thenewyorker-article.png'],
   },
   {
     brandSlug: 'ars-technica',
@@ -74,7 +74,7 @@ export const brandImages: BrandImage[] = [
   // 2007-2010: Government
   {
     brandSlug: 'state-of-indiana',
-    images: ['state-of-indiana-home.png'],
+    images: ['state-of-indiana-home.png', 'state-of-indiana-medicaid.png', 'state-of-iniana-dcs.png', 'state-of-indiana-bmv.png', 'state-of-indiana-dnr.png'],
   },
 
   // 2005-2007: Client Portfolio

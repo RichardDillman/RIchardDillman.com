@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { BrandPortfolio } from '@/components/BrandPortfolio';
-import { brandLogos } from '@/data/logos';
+import { getBrandsSortedByYear } from '@/data/logos';
 import { brandImages } from '@/data/brand-images';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -38,6 +38,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export const dynamic = 'force-static';
 
 export default function BrandsPage() {
+  const sortedBrands = getBrandsSortedByYear();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 pt-24 pb-20">
       <div className="container mx-auto px-6">
@@ -46,7 +48,7 @@ export default function BrandsPage() {
             Brands I Have Worked With
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-3">
-            For more than two decades I’ve built and led high-traffic platforms for well-known organizations.
+            For more than two decades I've built and led high-traffic platforms for well-known organizations.
             Click any brand to view screenshots from my time on their sites.
           </p>
           <p className="text-sm text-neutral-500 dark:text-neutral-500 max-w-3xl mx-auto">
@@ -54,7 +56,7 @@ export default function BrandsPage() {
           </p>
         </header>
 
-        <BrandPortfolio brands={brandLogos} brandImages={brandImages} />
+        <BrandPortfolio brands={sortedBrands} brandImages={brandImages} />
       </div>
     </div>
   );

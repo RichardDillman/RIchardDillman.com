@@ -1,0 +1,79 @@
+RICHARD DILLMAN
+
+Leader • Mentor • Optimizer • Scaling Teams & Systems
+
+Indianapolis, IN | (317) 586-2365 | rdillman@gmail.com
+linkedin.com/in/richarddillman | github.com/richardDillman | richarddillman.com
+
+================================================================================
+
+EXECUTIVE SUMMARY
+
+Engineering leader and performance optimizer with deep expertise in scaling high-performance teams, complex systems, and high-volume revenue platforms. Proven expertise in integrating AI into development workflows, notably by formalizing Claude Code as the industry's first structured AI contributor to GitHub repositories. Consistently delivered significant operational improvements, including boosting build speed by 30%, enhancing site performance by 40%, and increasing developer velocity by 25%. Track record of technical leadership, fostering growth-oriented teams, and aligning engineering execution directly with measurable business outcomes and operational excellence.
+
+================================================================================
+
+PROFESSIONAL EXPERIENCE
+
+THE MUSE | Remote | December 2018 - September 2025
+Career Progression: Senior Application Engineer → Staff Engineer → Director of Application Development → Senior Director of Engineering
+
+Led engineering strategy and execution for The Muse, a high-traffic career platform helping millions of users find meaningful work. Drove platform modernization, AI adoption, and performance transformation while mentoring multi-level teams across disciplines.
+
+Leadership and Execution
+- Introduced structured AI integration, formalizing Claude Code as the company's first AI contributor to GitHub issues, PRs, and code reviews.
+- Mentored and advanced engineers from junior ICs to senior architects, building a high-performance, learning-focused culture.
+- Standardized code quality through org-wide ESLint, Prettier, Jest, and Pytest pipelines, reducing bugs and increasing delivery velocity.
+
+Business and Technical Impact
+- Generated $153K-$230K annual revenue per tenant by architecting a white-label multi-tenant job platform, creating a new B2B SaaS line.
+- Increased annual ad revenue by $994K through strategic vendor coordination and layout optimizations.
+- Achieved +74K monthly SEO visits by replacing infinite scroll with server-side pagination, improving Google indexability.
+- Raised applications per user by 50% with a two-pane job search redesign, boosting engagement and conversion.
+- Improved CTR by 22% and conversions by 13% through iterative UX experiments and Trending Search modules.
+- Reduced build times from 45+ minutes to 75 seconds by migrating legacy Python/Tornado/CoffeeScript systems to Next.js/TypeScript.
+- Delivered 10x traffic growth via performance refactors and JSON-LD structured data.
+
+--------------------------------------------------------------------------------
+
+CONDE NAST | New York, NY | July 2015 - November 2018
+Senior Software Engineer, Ad Tech and Monetization
+
+Modernized ad delivery and monetization infrastructure across global brands including Vogue, GQ, Wired, Vanity Fair, and The New Yorker, supporting more than 229 million monthly users.
+
+- Increased ad visibility from 45% to 85% by rebuilding cross-brand ad delivery systems for 30+ global publications.
+- Improved inventory fill and programmatic yield for 1B+ monthly video views through scalable pipeline enhancements.
+- Drove 80%+ test coverage and documentation standards across editorial engineering teams.
+- Mentored developers and authored RFCs guiding ad platform evolution.
+
+--------------------------------------------------------------------------------
+
+EVERYDAY HEALTH | New York, NY | January 2012 - July 2015
+Front End Engineer
+
+Developed and optimized consumer health platforms reaching 30M+ monthly users across Everyday Health, What to Expect, and MedPage Today.
+
+- Improved load performance by 54% and reduced requests by 53%, enhancing Core Web Vitals and SEO.
+- Delivered +86% CTR through streamlined ad integrations with Google, Swoop, and Taboola.
+- Presented emerging frontend practices in internal engineering forums, elevating team standards.
+
+--------------------------------------------------------------------------------
+
+CATALPASOFT | Indianapolis, IN | January 2003 - January 2012
+Senior Software Engineer / CEO (Founder)
+
+Founded and led a software firm delivering digital platforms for foster care and child welfare agencies across Indiana and the Midwest.
+
+- Accelerated placements for 12,000+ children across 3,000 households by digitizing foster/adoption processing.
+- Reduced manual workloads and saved $400K+ annually through automation and workflow modernization.
+- Expanded product adoption regionally, collaborating with state agencies on recruitment initiatives.
+
+================================================================================
+
+TECHNICAL SKILLS
+
+Languages and Frameworks: TypeScript, JavaScript, Python, React, Next.js, Node.js, HTML5, CSS3
+Performance and SEO: Core Web Vitals, Lighthouse, JSON-LD, Schema.org, Google Search Console
+Infrastructure: AWS, Docker, Vercel, CircleCI, GitHub Actions
+Testing: Jest, Cypress, Playwright, ESLint, Prettier
+Data: PostgreSQL, MySQL, Redis, REST APIs, GraphQL

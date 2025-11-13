@@ -8,35 +8,26 @@ interface BrandPortfolioProps {
 }
 
 export function BrandPortfolio({ brands, brandImages }: BrandPortfolioProps) {
-  // Filter brands to only show those with portfolio images
-  const brandsWithImages = brands
-    .filter((brand) => brandImages.some((bi) => bi.brandSlug === brand.slug))
+  // Filter brands to only show those marked for /brands page
+  const brandsToShow = brands
+    .filter((brand) => brand.showOnBrandsPage)
     .map((brand) => ({
       brand,
       images: brandImages.find((bi) => bi.brandSlug === brand.slug)?.images || [],
-    }))
-    .filter((item) => item.images.length > 0); // Extra safety check
+    }));
 
-  if (brandsWithImages.length === 0) {
+  if (brandsToShow.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-muted-foreground">
-          Portfolio screenshots coming soon...
-        </p>
+        <p className="text-muted-foreground">Brand portfolio coming soon...</p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 md:gap-10 items-start justify-items-center">
-      {brandsWithImages.map(({ brand, images }, index) => (
-        <div
-          key={brand.slug}
-          className="animate-fade-in"
-          style={{ animationDelay: `${index * 50}ms` }}
-        >
-          <BrandCard brand={brand} images={images} />
-        </div>
+    <div className="flex flex-wrap mb-8 md:mb-16 px-4 md:px-8 max-w-7xl mx-auto">
+      {brandsToShow.map(({ brand, images }) => (
+        <BrandCard key={brand.slug} brand={brand} images={images} />
       ))}
     </div>
   );
