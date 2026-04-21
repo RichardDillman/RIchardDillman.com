@@ -7,7 +7,7 @@ Indianapolis, IN (Remote) | [(317) 586-2365](tel:+13175862365) | [rdillman@gmail
 
 ## Summary
 
-Full-stack architect and mentor with decades of experience bridging legacy systems and modern frameworks. I’ve led modernization efforts from Python, Tornado, and WordPress into unified React, Next.js, and TypeScript platforms that improved performance, SEO, and developer velocity. I’m comfortable working across the stack, from database tuning and API design to front-end optimization and accessibility. I thrive on mentoring engineers, guiding architectural decisions, and helping teams connect their code to business goals.
+Engineering leader with a track record of modernizing front-end systems using React and TypeScript, achieving 95+ Lighthouse scores and 50% conversion rate boosts. Passionate about creating seamless user experiences and mentoring teams to drive impactful results in high-traffic environments.
 
 ## Professional Experience
 

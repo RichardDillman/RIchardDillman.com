@@ -8,7 +8,7 @@ rdillman@gmail.com | richarddillman.com
 
 ## EXECUTIVE SUMMARY
 
-Engineering leader with more than two decades building scalable, high-performance web platforms. Known for aligning technology and business strategy, mentoring high-impact teams, and modernizing legacy systems with measurable results. Passionate about mentorship, clean scalable code, and bridging engineering execution with meaningful business outcomes.
+Engineering leader with a track record of modernizing front-end systems using React and TypeScript, achieving 95+ Lighthouse scores and 50% conversion rate boosts. Passionate about creating seamless user experiences and mentoring teams to drive impactful results in high-traffic environments.
 
 ## PROFESSIONAL EXPERIENCE
 

@@ -6,7 +6,7 @@ Indianapolis, IN (Remote) | [(317) 586-2365](tel:+13175862365) | [rdillman@gmail
 
 ## Summary
 
-Hands-on engineer and mentor with years of experience who works effectively with C-staff to new college graduates and across functions. Design, SEO, Product, & key business metrics all matter when architecting engineering solutions.
+Engineering leader with a track record of modernizing front-end systems using React and TypeScript, achieving 95+ Lighthouse scores and 50% conversion rate boosts. Passionate about creating seamless user experiences and mentoring teams to drive impactful results in high-traffic environments.
 
 ## Professional Experience
 
