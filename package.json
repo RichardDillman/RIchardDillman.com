@@ -78,6 +78,7 @@
       "esbuild": "^0.18.20"
     },
     "onlyBuiltDependencies": [
+      "@vercel/speed-insights",
       "contentlayer",
       "esbuild",
       "sharp",
