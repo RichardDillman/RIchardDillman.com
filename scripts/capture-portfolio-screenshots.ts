@@ -102,7 +102,7 @@ const websites: Website[] = [
   // 2015-2018: Condé Nast
   {
     name: 'Architectural Digest',
-    url: 'https://www.ad.com/',
+    url: 'https://www.architecturaldigest.com/',
     endYear: '2018',
     slug: 'architectural-digest',
   },
@@ -132,6 +132,20 @@ const websites: Website[] = [
   { name: 'Vogue', url: 'https://www.vogue.com', endYear: '2018', slug: 'vogue' },
   { name: 'Wired', url: 'https://www.wired.com', endYear: '2018', slug: 'wired' },
 
+  // 2012-2015 (missing)
+  {
+    name: 'South Beach Diet',
+    url: 'https://southbeachdiet.com/',
+    endYear: '2015',
+    slug: 'south-beach-diet',
+  },
+  {
+    name: 'Denise Austin',
+    url: 'https://deniseaustin.com/',
+    endYear: '2015',
+    slug: 'denise-austin',
+  },
+
   // 2018-2025
   { name: 'The Muse', url: 'https://www.themuse.com/', endYear: '2025', slug: 'the-muse' },
   {
@@ -144,6 +158,23 @@ const websites: Website[] = [
 ];
 
 async function captureScreenshot(website: Website): Promise<void> {
+  const outputPath = path.join(
+    process.cwd(),
+    'public',
+    'images',
+    'portfolio',
+    `${website.slug}-home.png`
+  );
+
+  // Skip if already captured
+  try {
+    await fs.access(outputPath);
+    console.log(`\n⏭  Skipping ${website.name} (already exists)`);
+    return;
+  } catch {
+    // file does not exist, proceed
+  }
+
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
     viewport: { width: 1200, height: 1200 },
@@ -166,10 +197,18 @@ async function captureScreenshot(website: Website): Promise<void> {
       timeout: 60000,
     });
 
-    // Wait for page to become fully interactive and completely finished loading
-    console.log('   ⏳ Waiting for page to fully load (networkidle)...');
-    await page.waitForLoadState('networkidle', { timeout: 60000 });
-    console.log('   ✓ Page fully loaded');
+    // Wait for networkidle, but tolerate timeouts — editorial sites with ads
+    // and analytics beacons often never fully idle; the page is usually
+    // visually complete well before that.
+    console.log('   ⏳ Waiting for page to settle (networkidle, best-effort)...');
+    try {
+      await page.waitForLoadState('networkidle', { timeout: 30000 });
+      console.log('   ✓ Page settled');
+    } catch {
+      console.log('   ⚠ networkidle never reached — proceeding anyway');
+      // Give the DOM a little extra time to paint after load
+      await page.waitForTimeout(3000);
+    }
 
     // Remove or hide Wayback Machine toolbar
     await page.evaluate(() => {
@@ -180,14 +219,6 @@ async function captureScreenshot(website: Website): Promise<void> {
     });
 
     // Take screenshot of visible area (1200x1200)
-    const outputPath = path.join(
-      process.cwd(),
-      'public',
-      'images',
-      'portfolio',
-      `${website.slug}-${website.endYear}.png`
-    );
-
     await page.screenshot({
       path: outputPath,
       clip: { x: 0, y: 0, width: 1200, height: 1200 },
@@ -231,8 +262,8 @@ async function main() {
       console.log(`   ⚠️  Will need manual capture`);
     }
 
-    // Small delay between requests to be respectful
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Wayback Machine rate-limits and is slow — be generous with spacing
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 
   console.log('\n✨ Portfolio screenshot capture complete!');

@@ -14,6 +14,18 @@ export interface BrandImage {
 }
 
 export const brandImages: BrandImage[] = [
+  // 2025-present: Current
+  {
+    brandSlug: 'talent-com',
+    images: [
+      'talent-com-home.png',
+      'talent-com-jobs.png',
+      'talent-com-salary.png',
+      'talent-com-view.png',
+      'talent-com-tax-calculator.png',
+    ],
+  },
+
   // 2018-2025: Career Platforms (Most Recent - Priority)
   {
     brandSlug: 'the-muse',
@@ -32,17 +44,64 @@ export const brandImages: BrandImage[] = [
   // 2015-2018: Condé Nast (Priority)
   {
     brandSlug: 'vogue',
-    images: ['vogue-home.png'],
+    images: ['vogue-home.png', 'vogue-article.png'],
   },
   {
     brandSlug: 'the-new-yorker',
-    images: ['the-new-yorker-home.png'],
+    images: ['the-new-yorker-home.png', 'thenewyorker-article.png'],
   },
   {
     brandSlug: 'ars-technica',
     images: ['ars-technica-home.png'],
   },
-
+  {
+    brandSlug: 'wired',
+    images: ['wired-home.png'],
+  },
+  {
+    brandSlug: 'allure',
+    images: ['allure-home.png'],
+  },
+  {
+    brandSlug: 'bon-appetit',
+    images: ['bon-appetit-home.png'],
+  },
+  {
+    brandSlug: 'self',
+    images: ['self-home.png'],
+  },
+  {
+    brandSlug: 'pitchfork',
+    images: ['pitchfork-home.png'],
+  },
+  {
+    brandSlug: 'conde-nast-traveler',
+    images: ['conde-nast-traveler-home.png'],
+  },
+  {
+    brandSlug: 'purpose-jobs',
+    images: ['purpose-jobs-home.png'],
+  },
+  {
+    brandSlug: 'epicurious',
+    images: ['epicurious-home.png'],
+  },
+  {
+    brandSlug: 'gq',
+    images: ['gq-home.png'],
+  },
+  {
+    brandSlug: 'architectural-digest',
+    images: ['architectural-digest-home.png'],
+  },
+  {
+    brandSlug: 'vanity-fair',
+    images: ['vanity-fair-home.png'],
+  },
+  {
+    brandSlug: 'them',
+    images: ['them-home.png'],
+  },
   // 2012-2015: Everyday Health Group (Priority)
   {
     brandSlug: 'everyday-health',
@@ -74,7 +133,7 @@ export const brandImages: BrandImage[] = [
   // 2007-2010: Government
   {
     brandSlug: 'state-of-indiana',
-    images: ['state-of-indiana-home.png'],
+    images: ['state-of-indiana-home.png', 'state-of-indiana-medicaid.png', 'state-of-iniana-dcs.png', 'state-of-indiana-bmv.png', 'state-of-indiana-dnr.png'],
   },
 
   // 2005-2007: Client Portfolio
@@ -89,6 +148,10 @@ export const brandImages: BrandImage[] = [
   {
     brandSlug: 'framing-4-yourself',
     images: ['framing-4-yourself-home.png'],
+  },
+  {
+    brandSlug: 'indiana-heart-gallery',
+    images: ['indiana-heart-gallery-home.png'],
   },
 
   // 1999-2005: Public Health

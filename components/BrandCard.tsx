@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { BrandLogo } from '@/data/logos';
 import dynamic from 'next/dynamic';
+import { SVG_COMPONENTS } from './BrandLogos';
 
 // Code-split the carousel component - only load when needed
 const BrandCarousel = dynamic(() => import('./BrandCarousel'), { ssr: false });
@@ -16,47 +17,95 @@ interface BrandCardProps {
 
 export default function BrandCard({ brand, images }: BrandCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const hasPortfolioImages = images.length > 0;
+
+  const handleClick = () => {
+    if (hasPortfolioImages) {
+      setIsOpen(true);
+    }
+  };
 
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        onMouseEnter={() => import('./BrandCarousel')} // Preload carousel on hover
-        className="group relative transition-all duration-300 flex flex-col items-center justify-center w-full max-w-[160px] mx-auto hover:scale-105 focus-visible:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg p-3"
-        aria-label={`View ${brand.name} portfolio (${images.length} screenshot${images.length > 1 ? 's' : ''})`}
+      {/* Parent container with negative margins for border overlap */}
+      <div
+        style={{ marginLeft: '-1px', marginTop: '-1px' }}
+        className="w-6/12 md:w-1/3 lg:w-1/5 relative overflow-hidden group"
       >
-        {/* Logo Image */}
-        <div className="relative w-full h-auto mb-3">
-          <Image
-            src={`/images/logos/${brand.file}`}
-            alt={`${brand.name} logo`}
-            width={brand.width}
-            height={brand.height}
-            style={{ width: '160px', height: 'auto', margin: '0 auto' }}
-            className="grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 drop-shadow-sm"
-          />
-        </div>
+        {/* Inner container with border and hover effects */}
+        <div className="border border-neutral-300 dark:border-neutral-700 hover:text-white hover:bg-black transition-all duration-300">
+          {/* Background cover image - shows on hover */}
+          {brand.hoverBackground ? (
+            <figure className="absolute top-0 left-0 h-full w-full opacity-0 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none z-0">
+              <Image
+                src={`/images/brand-backgrounds/${brand.hoverBackground}`}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+              />
+            </figure>
+          ) : (
+            /* Fallback: 70% black background when no image */
+            <div className="absolute top-0 left-0 h-full w-full bg-black opacity-0 group-hover:opacity-70 transition-opacity duration-300 pointer-events-none z-0" />
+          )}
 
-        {/* Logo Title */}
-        <div className="text-xs text-center text-muted-foreground group-hover:text-foreground transition-colors duration-300 font-semibold">
-          {brand.name}
-        </div>
-
-        {/* Image count badge - only show if multiple images */}
-        {images.length > 1 && (
-          <div
-            className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-6 h-6 flex items-center justify-center font-semibold shadow-md ring-2 ring-background"
-            aria-label={`${images.length} screenshots`}
+          {/* Button container with aspect ratio */}
+          <button
+            onClick={handleClick}
+            onMouseEnter={hasPortfolioImages ? () => import('./BrandCarousel') : undefined}
+            className={`inline-block w-full align-middle aspect-[4/3] relative overflow-hidden ${hasPortfolioImages ? 'cursor-pointer' : 'cursor-default'}`}
+            title={brand.name}
+            aria-label={hasPortfolioImages ? `View ${brand.name} portfolio (${images.length} screenshot${images.length > 1 ? 's' : ''})` : brand.name}
+            disabled={!hasPortfolioImages}
           >
-            {images.length}
-          </div>
-        )}
-      </button>
+            {/* Logo + brand name */}
+            <div className="h-full relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4 gap-2">
+              <figure
+                className={`flex-1 w-full min-h-0 flex items-center justify-center transition-[filter,color] duration-300 ${
+                  brand.invertOnHover && brand.svgComponent ? 'text-black group-hover:text-white' : ''
+                } ${
+                  brand.invertOnHover && !brand.svgComponent ? 'group-hover:invert' : ''
+                }`}
+              >
+                {brand.svgComponent && SVG_COMPONENTS[brand.svgComponent] ? (
+                  React.createElement(SVG_COMPONENTS[brand.svgComponent], {
+                    className: 'max-w-full max-h-full w-auto h-auto object-contain',
+                  })
+                ) : (
+                  <Image
+                    src={`/images/logos/${brand.file}`}
+                    alt={`${brand.name} logo`}
+                    width={brand.width}
+                    height={brand.height}
+                    className="max-w-full max-h-full w-auto h-auto object-contain"
+                  />
+                )}
+              </figure>
+              <span className="text-xs sm:text-sm font-medium text-black group-hover:text-white transition-colors duration-300 text-center leading-tight">
+                {brand.name}
+              </span>
+            </div>
 
-      {/* Modal slideshow - rendered via portal to document body */}
+            {/* Image count badge - shown whenever portfolio images exist */}
+            {images.length > 0 && (
+              <div
+                className="absolute top-2 right-2 text-xs rounded-full w-6 h-6 flex items-center justify-center font-semibold shadow-md ring-2 ring-background z-20"
+                style={{ backgroundColor: 'hsl(var(--muted-foreground))', color: 'hsl(var(--background))' }}
+                aria-label={`${images.length} screenshot${images.length > 1 ? 's' : ''}`}
+              >
+                {images.length}
+              </div>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Modal slideshow - only if has portfolio images */}
       {isOpen &&
+        hasPortfolioImages &&
         createPortal(
-          <BrandCarousel brandName={brand.name} images={images} onClose={() => setIsOpen(false)} />,
+          <BrandCarousel brand={brand} images={images} onClose={() => setIsOpen(false)} />,
           document.body
         )}
     </>

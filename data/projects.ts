@@ -14,6 +14,102 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'talent-claude-code-multi-agent-review',
+    title: 'Team-Shared Multi-Agent AI Code Review Pipeline',
+    summary: 'Talent.com - Claude Code skill fanning out specialist agents on every MR',
+    company: 'Talent.com',
+    period: '2025-2026',
+    problem:
+      'Code review at team scale was bottlenecked on a handful of senior engineers, and the depth of review varied with whoever picked it up. Security, accessibility, coverage, and architectural concerns were easy to miss when the reviewer was rushed. The team needed consistent, comprehensive review on every MR without slowing the merge cadence or creating more review load for the seniors.',
+    solution:
+      'Designed and built a shared Claude Code review pipeline. The /code-review skill fans out to specialist sub-agents (unit tests, lint, types, coverage, security, performance, simplification) in parallel, then consolidates findings by severity. Checked the entire .claude/ directory into the monorepo with a teammate README and tracked skill paths so any engineer gets the same review without local setup. Added a typed auto-memory system, routing rules, and fan-out chains so context persists across sessions without bloating the window. Same architecture also powers /diagnose-ci, which triages failing GitLab pipelines in one command.',
+    outcome:
+      'Turned a single command into a senior-level, multi-dimensional review that runs in minutes. Freed senior engineers from routine review load and raised the floor on every MR across the team. A CI post-MR review hook is built and ready to flip on once the API key is provisioned, extending the same pipeline to every MR automatically.',
+    metrics: '~100 reviewer-hours saved per week. 15-min bot feedback auto-triggered on every commit. Every line of code reviewed for security, a11y, tests, and architecture.',
+    stack: ['Claude Code', 'Claude API', 'Anthropic SDK', 'TypeScript', 'Bash', 'GitLab CI'],
+    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Leadership'],
+  },
+  {
+    id: 'talent-location-service-consolidation',
+    title: 'Location Service Consolidation - $60K+ Annual Geocode Savings',
+    summary: 'Talent.com - PRD and platform plan eliminating redundant Google Geocoding API spend',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'Multiple backend services were independently calling the Google Geocoding API to resolve locations for jobs, search, and SEO. There was no shared cache or canonical location representation, so the same postal codes and cities were resolved over and over. Finance confirmed this was costing $5K per month in geocode spend alone, with growth expected as ingestion volume increased.',
+    solution:
+      'Authored and published the Location Service Consolidation PRD as the anchor doc for the 2026 SEO/GFJ priorities. Mapped every current consumer of location data, designed a single service with a shared cache and canonical schema, and sequenced the migration so each caller could adopt it independently. Partnered with Finance to lock in the cost baseline and the ROI story before engineering touched any code.',
+    outcome:
+      '$5K per month ($60K per year) in direct API spend identified as recoverable, confirmed by Finance. The PRD became the single source of truth for the consolidation effort and unblocked the engineering roadmap for the quarter. Removed a hidden dependency on an un-cached third-party on a critical path for a high-traffic site.',
+    metrics: '$60K+ annual savings confirmed with Finance',
+    stack: ['TypeScript', 'Go', 'PostgreSQL', 'Google Geocoding API', 'Confluence'],
+    tags: ['Architecture', 'Cost Savings', 'Technical Leadership', 'PRD'],
+  },
+  {
+    id: 'talent-better-auth-migration',
+    title: 'Better Auth Migration Across 4 Frontend Services',
+    summary: 'Talent.com - Replaced next-auth on jobseeker, publishers, employers, and internal-tools',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'next-auth had become a liability across four frontend services: security advisories accumulating, Microsoft Entra support requiring brittle patches, and middleware-based RBAC that was hard to reason about. Replacing it piecemeal would fracture the login experience; replacing it all at once would be an all-or-nothing cutover on production auth.',
+    solution:
+      'Built a dual-implementation behind an AUTH_IMPL flag so both next-auth and Better Auth ran side-by-side in a dedicated QA environment. Ported RBAC parity to Better Auth middlewares, switched the Microsoft provider to Entra-only via genericOAuth, and moved AZURE_AD_TENANT_ID validation from module load to runtime so builds stopped failing when the secret rotated. Once parity was confirmed, collapsed the dispatcher across all four services and dropped next-auth from package.json.',
+    outcome:
+      'Cut over four frontends with a dual-impl flag that made rollback a one-line toggle instead of a deploy. Eliminated the next-auth dependency entirely, closed the outstanding advisories, and unified auth on a single modern library with better RBAC ergonomics. The dual-impl pattern became the template for the next round of high-risk library swaps.',
+    metrics: '4 frontends migrated, next-auth removed, zero auth downtime',
+    stack: ['Better Auth', 'Next.js', 'TypeScript', 'Microsoft Entra', 'OAuth'],
+    tags: ['Security', 'Migration', 'Architecture', 'Technical Leadership'],
+  },
+  {
+    id: 'talent-nextjs-staged-migration',
+    title: 'Staged Next.js / React 19 / next-intl v4 / Nx 22 Upgrade',
+    summary: 'Talent.com - Multi-phase frontend platform upgrade at 5-8M pageviews/day',
+    company: 'Talent.com',
+    period: '2025-2026',
+    problem:
+      'The jobseeker frontend, serving 5-8M page views per day, was multiple major versions behind on Next.js, one behind on React, and carrying a next-intl v3 layer whose v4 migration was a breaking API change. Attempting it all in one branch would have been weeks of merge hell with no way to de-risk. A single regression could cost hundreds of thousands of pages in indexing or conversion on launch day.',
+    solution:
+      'Broke the upgrade into a six-phase staged rollout on a long-lived feature branch: Nx 18 → 22, React 18 → 19, next-intl v3 → v4, Next.js 14 → 15 → 16. Each phase merged dev into the feature branch, repaired test drift, and deployed to a dedicated QA environment before the next phase started. Repaired roughly 30 test suites broken by the React 19 and next-intl v4 API changes, and caught prod-build type errors that dev mode had silently tolerated.',
+    outcome:
+      'Carried the full jobseeker frontend through React 19 and next-intl v4 without a production regression. Each phase shipped independently through QA, so rollback blast radius stayed small. The same branch picked up RBAC parity, the Better Auth migration, and a coverage jump from 59% to 90.92% along the way.',
+    metrics: '5-8M page views/day, 4 major framework upgrades, zero production regressions',
+    stack: ['Next.js', 'React 19', 'next-intl 4', 'Nx 22', 'TypeScript', 'Jest', 'GitLab CI'],
+    tags: ['Migration', 'Scale', 'Performance', 'Technical Leadership'],
+  },
+  {
+    id: 'talent-jobseeker-coverage-revival',
+    title: 'Jobseeker Test Coverage 59% to 90.92%',
+    summary: 'Talent.com - Revived and wrote ~90 Jest suites across the Next.js frontend',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'The jobseeker frontend had 59% test coverage with dozens of suites hidden behind .exclusions, a growing pile of stale tests skipped during prior migrations, and a local-vs-CI coverage mismatch that hid real gaps. New features were shipping without tests because the existing suite could not be trusted to catch regressions. A Next.js and React 19 upgrade was looming that would hit every mocked component in the repo.',
+    solution:
+      'Drove the coverage initiative in roughly 50 commits across a week. Revived 60+ suites across modals, job cards, SERP components, and provider wrappers. Wrote new branch-coverage tests for auth flows, A/B branches, and server actions. Fixed the Babel and Jest transform so React Testing Library actually rendered. Aligned local coverage reporting with CI via .exclusions pass-through so the numbers stopped lying. Co-located every new test next to its component.',
+    outcome:
+      'Coverage climbed from 59% to 90.92% with zero failing suites. Branch and function coverage both crossed the 80% CI threshold. The team could land the React 19 and next-intl v4 upgrade with real confidence instead of hope, and ~90 newly-reliable suites became the regression net for every subsequent change on a site serving 5-8M pageviews per day.',
+    metrics: 'Coverage 59% → 90.92%, ~90 suites revived or written, 0 failing suites',
+    stack: ['Jest', 'React Testing Library', 'TypeScript', 'React 19', 'Babel'],
+    tags: ['Testing', 'Quality', 'Migration', 'Technical Leadership'],
+  },
+  {
+    id: 'talent-seo-rescue-view-page',
+    title: 'SEO Rescue on /view at 5-8M Pageviews/Day',
+    summary: 'Talent.com - Soft-404 fix, batched indexing, and dual-gated JSON-LD on job detail pages',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'The /view job detail page, the single most valuable organic landing page on jobseeker, was losing indexing signal to Google in three ways. Googlebot was hitting RSC flight-data URLs and getting soft-404s. The Google Indexing API was being called per-job in a loop, hitting quota and timing out. And JobPosting JSON-LD was emitting for jobs that were technically available but not actually indexable, polluting the schema signal.',
+    solution:
+      'Moved the bot redirect out of middleware into next.config.js redirects so it ran at the edge before RSC ever saw the request. Batched Google Indexing API calls in the jobs-seo-index service and added a VirtualService timeout so a slow batch could not cascade. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the DB. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually cleared both SEO flags.',
+    outcome:
+      'Eliminated the soft-404 class of errors on Googlebot traffic. Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of lost landing pages per day.',
+    metrics: '5-8M page views/day protected, soft-404s eliminated, indexing API timeouts eliminated',
+    stack: ['Next.js', 'TypeScript', 'NestJS', 'Google Indexing API', 'JSON-LD', 'Istio'],
+    tags: ['SEO', 'Scale', 'Performance', 'Backend'],
+  },
+  {
     id: 'the-muse-migration',
     title: 'Legacy Platform Migration to Next.js/TypeScript',
     summary: 'The Muse - Complete replatforming from Python/Tornado/CoffeeScript to modern stack',
