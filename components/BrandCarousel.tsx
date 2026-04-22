@@ -1,18 +1,22 @@
 'use client';
 
-import { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Fade from 'embla-carousel-fade';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { BrandLogo } from '@/data/logos';
+import { SVG_COMPONENTS } from './BrandLogos';
 
 interface BrandCarouselProps {
-  brandName: string;
+  brand: BrandLogo;
   images: string[];
   onClose: () => void;
 }
 
-export default function BrandCarousel({ brandName, images, onClose }: BrandCarouselProps) {
+export default function BrandCarousel({ brand, images, onClose }: BrandCarouselProps) {
+  const brandName = brand.name;
+  const LogoComponent = brand.svgComponent ? SVG_COMPONENTS[brand.svgComponent] : undefined;
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Fade()]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -81,12 +85,23 @@ export default function BrandCarousel({ brandName, images, onClose }: BrandCarou
 
       {/* Carousel container */}
       <div className="w-full max-w-4xl mx-auto">
-        {/* Brand title above image */}
+        {/* Brand title / logo above image */}
         <h2
           id="carousel-title"
-          className="text-white text-2xl md:text-3xl font-bold mb-4 text-center"
+          className="text-white mb-4 flex items-center justify-center h-12 md:h-14"
         >
-          {brandName}
+          <span className="sr-only">{brandName}</span>
+          {LogoComponent ? (
+            <LogoComponent className="h-full w-auto text-white" />
+          ) : (
+            <Image
+              src={`/images/logos/${brand.file}`}
+              alt=""
+              width={brand.width}
+              height={brand.height}
+              className="h-full w-auto object-contain filter invert-0 dark:invert-0 brightness-0 invert"
+            />
+          )}
         </h2>
         {/* Image container with fade transitions */}
         <div className="overflow-hidden rounded-lg bg-muted/30 backdrop-blur-sm" ref={emblaRef}>

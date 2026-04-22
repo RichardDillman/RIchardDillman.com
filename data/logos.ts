@@ -10,9 +10,25 @@ export interface BrandLogo {
   width: number; // Original image width in pixels
   height: number; // Original image height in pixels
   showOnBrandsPage?: boolean; // Whether to show on the /brands page grid
+  invertOnHover?: boolean; // Black-on-transparent logo — invert to white on card hover
 }
 
 export const brandLogos: BrandLogo[] = [
+  // Talent.com (Current)
+  {
+    name: 'Talent.com',
+    slug: 'talent-com',
+    file: 'talent-com.svg',
+    svgComponent: 'TalentDotCom',
+    hoverBackground: 'talent-com-bg.webp',
+    period: '2025-2026',
+    category: 'career',
+    prominence: 'major',
+    width: 107,
+    height: 20,
+    showOnBrandsPage: true,
+  },
+
   // Premiere Clients - Featured First
   {
     name: 'Vogue',
@@ -26,6 +42,7 @@ export const brandLogos: BrandLogo[] = [
     width: 582,
     height: 150,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'The New Yorker',
@@ -39,6 +56,7 @@ export const brandLogos: BrandLogo[] = [
     width: 128,
     height: 128,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'Wired',
@@ -52,6 +70,7 @@ export const brandLogos: BrandLogo[] = [
     width: 840,
     height: 859,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'GQ',
@@ -78,6 +97,7 @@ export const brandLogos: BrandLogo[] = [
     width: 128,
     height: 128,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'State of Indiana',
@@ -99,8 +119,8 @@ export const brandLogos: BrandLogo[] = [
     period: '2015-2018',
     category: 'tech',
     prominence: 'major',
-    width: 128,
-    height: 128,
+    width: 400,
+    height: 400,
     showOnBrandsPage: true,
   },
 
@@ -110,6 +130,7 @@ export const brandLogos: BrandLogo[] = [
     slug: 'the-muse',
     file: 'the-muse.png',
     svgComponent: 'TheMuse',
+    hoverBackground: 'the-muse-bg.jpg',
     period: '2018-2025',
     category: 'career',
     prominence: 'major',
@@ -157,11 +178,11 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'International Medical Group',
     slug: 'img-global',
-    file: 'img-global.png',
+    file: 'img-global.svg',
     period: '2005-2007',
     category: 'health',
-    width: 128,
-    height: 128,
+    width: 130,
+    height: 55,
     showOnBrandsPage: true,
   },
   {
@@ -183,6 +204,7 @@ export const brandLogos: BrandLogo[] = [
     width: 1100,
     height: 317,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
 
   // 2010-2011: Retail
@@ -251,17 +273,19 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Jillian Michaels',
     slug: 'jillian-michaels',
-    file: 'jillian-michaels.png',
+    file: 'jillian-michaels.svg',
     period: '2012-2015',
     category: 'health',
-    width: 120,
-    height: 120,
+    width: 1644,
+    height: 360,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'SparkAmerica',
     slug: 'spark-america',
     file: 'spark-america.png',
+    hoverBackground: 'spark-america-bg.jpg',
     period: '2012-2015',
     category: 'health',
     width: 3601,
@@ -291,6 +315,7 @@ export const brandLogos: BrandLogo[] = [
     width: 128,
     height: 37,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'Bon Appétit',
@@ -302,6 +327,7 @@ export const brandLogos: BrandLogo[] = [
     width: 497,
     height: 100,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'Condé Nast Traveler',
@@ -313,6 +339,7 @@ export const brandLogos: BrandLogo[] = [
     width: 128,
     height: 48,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'Epicurious',
@@ -335,28 +362,31 @@ export const brandLogos: BrandLogo[] = [
     width: 567,
     height: 128,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'Pitchfork',
     slug: 'pitchfork',
-    file: 'pitchfork.png',
+    file: 'pitchfork.svg',
     hoverBackground: 'pitchfork-bg.jpg',
     period: '2015-2018',
     category: 'media',
-    width: 128,
-    height: 128,
+    width: 60,
+    height: 60,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'Self',
     slug: 'self',
-    file: 'self.png',
+    file: 'self-black.png',
     hoverBackground: 'self-bg.jpg',
     period: '2015-2018',
     category: 'media',
-    width: 128,
-    height: 128,
+    width: 2023,
+    height: 668,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
   {
     name: 'Teen Vogue',
@@ -372,13 +402,14 @@ export const brandLogos: BrandLogo[] = [
   {
     name: 'Them',
     slug: 'them',
-    file: 'them.png',
+    file: 'them.svg',
     hoverBackground: 'them-bg.jpg',
     period: '2015-2018',
     category: 'media',
-    width: 128,
-    height: 35,
+    width: 91,
+    height: 50,
     showOnBrandsPage: true,
+    invertOnHover: true,
   },
 
   // 2018-2025: Career Platforms

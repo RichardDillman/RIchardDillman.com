@@ -5,25 +5,10 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { BrandLogo } from '@/data/logos';
 import dynamic from 'next/dynamic';
-import { Vogue } from './BrandLogos/Vogue';
-import { Wired } from './BrandLogos/Wired';
-import { Gq } from './BrandLogos/Gq';
-import { VanityFair } from './BrandLogos/VanityFair';
-import { TheNewYorker } from './BrandLogos/TheNewYorker';
-import { TheMuse } from './BrandLogos/TheMuse';
+import { SVG_COMPONENTS } from './BrandLogos';
 
 // Code-split the carousel component - only load when needed
 const BrandCarousel = dynamic(() => import('./BrandCarousel'), { ssr: false });
-
-// Map of SVG components
-const SVG_COMPONENTS: Record<string, React.ComponentType<{ className?: string }>> = {
-  Vogue,
-  Wired,
-  Gq,
-  VanityFair,
-  TheNewYorker,
-  TheMuse,
-};
 
 interface BrandCardProps {
   brand: BrandLogo;
@@ -74,36 +59,40 @@ export default function BrandCard({ brand, images }: BrandCardProps) {
             aria-label={hasPortfolioImages ? `View ${brand.name} portfolio (${images.length} screenshot${images.length > 1 ? 's' : ''})` : brand.name}
             disabled={!hasPortfolioImages}
           >
-            {/* Text/Logo container */}
-            <div className="h-full relative z-10">
-              <div className="h-full flex justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4">
-                {/* Logo with invert filter (black by default, white on hover) or SVG with fill control */}
-                <figure className="w-full h-full relative z-10">
-                  {brand.svgComponent && SVG_COMPONENTS[brand.svgComponent] ? (
-                    // Render SVG component with fill control via currentColor
-                    React.createElement(SVG_COMPONENTS[brand.svgComponent], {
-                      className: 'w-full h-full object-contain text-black dark:text-white group-hover:text-white transition-colors duration-300',
-                    })
-                  ) : (
-                    // Fallback to Image with invert filter
-                    <Image
-                      src={`/images/logos/${brand.file}`}
-                      alt={`${brand.name} logo`}
-                      width={brand.width}
-                      height={brand.height}
-                      className="object-contain object-center h-full w-full filter invert dark:invert-0 group-hover:invert-0 transition-all duration-300"
-                    />
-                  )}
-                </figure>
-              </div>
+            {/* Logo + brand name */}
+            <div className="h-full relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4 gap-2">
+              <figure
+                className={`flex-1 w-full min-h-0 flex items-center justify-center transition-[filter,color] duration-300 ${
+                  brand.invertOnHover && brand.svgComponent ? 'text-black group-hover:text-white' : ''
+                } ${
+                  brand.invertOnHover && !brand.svgComponent ? 'group-hover:invert' : ''
+                }`}
+              >
+                {brand.svgComponent && SVG_COMPONENTS[brand.svgComponent] ? (
+                  React.createElement(SVG_COMPONENTS[brand.svgComponent], {
+                    className: 'max-w-full max-h-full w-auto h-auto object-contain',
+                  })
+                ) : (
+                  <Image
+                    src={`/images/logos/${brand.file}`}
+                    alt={`${brand.name} logo`}
+                    width={brand.width}
+                    height={brand.height}
+                    className="max-w-full max-h-full w-auto h-auto object-contain"
+                  />
+                )}
+              </figure>
+              <span className="text-xs sm:text-sm font-medium text-black group-hover:text-white transition-colors duration-300 text-center leading-tight">
+                {brand.name}
+              </span>
             </div>
 
-            {/* Image count badge - only show if multiple images */}
-            {images.length > 1 && (
+            {/* Image count badge - shown whenever portfolio images exist */}
+            {images.length > 0 && (
               <div
                 className="absolute top-2 right-2 text-xs rounded-full w-6 h-6 flex items-center justify-center font-semibold shadow-md ring-2 ring-background z-20"
                 style={{ backgroundColor: 'hsl(var(--muted-foreground))', color: 'hsl(var(--background))' }}
-                aria-label={`${images.length} screenshots`}
+                aria-label={`${images.length} screenshot${images.length > 1 ? 's' : ''}`}
               >
                 {images.length}
               </div>
@@ -116,7 +105,7 @@ export default function BrandCard({ brand, images }: BrandCardProps) {
       {isOpen &&
         hasPortfolioImages &&
         createPortal(
-          <BrandCarousel brandName={brand.name} images={images} onClose={() => setIsOpen(false)} />,
+          <BrandCarousel brand={brand} images={images} onClose={() => setIsOpen(false)} />,
           document.body
         )}
     </>

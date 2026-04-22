@@ -6,7 +6,7 @@ interface LogoIconAttributes {
 
 export const TheMuse: React.FC<LogoIconAttributes> = ({ className = '' }: LogoIconAttributes) => {
     return (
-        <svg className={className} xmlns="http://www.w3.org/2000/svg" aria-labelledby="MuseColorLogo" aria-describedby="MuseColorLogoDesc" viewBox="0 0 103 33" width="1em" height="1em">
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" aria-labelledby="MuseColorLogo" aria-describedby="MuseColorLogoDesc" viewBox="0 0 103 33" width="103" height="33">
             <title id="MuseColorLogo">The Muse Logo</title>
             <desc id="MuseColorLogoDesc">A logo with &amp;quat;the muse&amp;quat; in dark blue text.</desc>
             <path fill="#1D2D5A" d="M48.0115 15.3357V7.68611H46.248V7.2835C48.2884 6.55237 49.991 5.10037 51.0351 3.20105H51.5383V6.78024H54.8155V7.68611H51.5383V15.0458C51.5383 16.306 52.0456 17.2641 53.1004 17.2641C53.6868 17.2517 54.2465 17.0171 54.6666 16.6079L54.9685 16.7085C54.3123 18.0694 53.2011 19.2772 51.2887 19.2772C49.2193 19.1524 48.0115 17.7513 48.0115 15.3357Z" />

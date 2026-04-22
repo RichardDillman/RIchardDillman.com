@@ -25,7 +25,7 @@ export const projects: Project[] = [
       'Designed and built a shared Claude Code review pipeline. The /code-review skill fans out to specialist sub-agents (unit tests, lint, types, coverage, security, performance, simplification) in parallel, then consolidates findings by severity. Checked the entire .claude/ directory into the monorepo with a teammate README and tracked skill paths so any engineer gets the same review without local setup. Added a typed auto-memory system, routing rules, and fan-out chains so context persists across sessions without bloating the window. Same architecture also powers /diagnose-ci, which triages failing GitLab pipelines in one command.',
     outcome:
       'Turned a single command into a senior-level, multi-dimensional review that runs in minutes. Freed senior engineers from routine review load and raised the floor on every MR across the team. A CI post-MR review hook is built and ready to flip on once the API key is provisioned, extending the same pipeline to every MR automatically.',
-    metrics: 'Multi-agent review on every MR, shared across the engineering team',
+    metrics: '~100 reviewer-hours saved per week. 15-min bot feedback auto-triggered on every commit. Every line of code reviewed for security, a11y, tests, and architecture.',
     stack: ['Claude Code', 'Claude API', 'Anthropic SDK', 'TypeScript', 'Bash', 'GitLab CI'],
     tags: ['AI/ML', 'Developer Experience', 'Automation', 'Leadership'],
   },
