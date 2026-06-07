@@ -30,6 +30,24 @@ export const projects: Project[] = [
     tags: ['AI/ML', 'Developer Experience', 'Automation', 'Leadership'],
   },
   {
+    id: 'talent-claude-code-dev-platform',
+    title: 'Self-Built AI Development Platform Across the Full Toolchain',
+    summary:
+      'Talent.com - Claude Code skills, agents, and scripts wrapping every third-party system the team touches',
+    company: 'Talent.com',
+    period: '2025-2026',
+    problem:
+      'Day-to-day engineering meant context-switching across a dozen disconnected systems, each with its own CLI, auth, and quirks: GitLab for code and CI, Jira for tickets, Confluence for PRDs, Grafana/Loki/Prometheus for observability, Kafka for event pipelines, AWS and kubectl for infrastructure, Teams for comms, Statsig for experiments. Routine work, diagnosing a failing pipeline, drafting an MR, searching logs mid-incident, meant remembering the exact incantation for each tool, and that knowledge lived in individual engineers heads instead of anywhere reusable.',
+    solution:
+      'Designed and built a personal AI development platform on Claude Code, checked into the monorepo so it could be shared with the team. A routing layer maps plain-language intent to 30+ purpose-built skills, each wrapping one system end to end: create an MR with team defaults, diagnose CI, deploy to QA or a personal dev environment, search Jira/Confluence/Teams, query Grafana logs and Prometheus metrics, inspect Kafka topics, run Athena and Redshift, read Kubernetes state. Hardened it for sharing: per-user secrets stay local, a SessionStart hook reports which integrations are configured, and a PreToolUse gate blocks any skill whose config is missing and points the user at setup docs. Added a typed auto-memory system and on-touch context files so project conventions persist across sessions.',
+    outcome:
+      'Collapsed a dozen tool-specific workflows into one conversational interface where the routing layer picks the right specialist automatically. Tribal knowledge that used to live in chat threads, the exact glab flags, the JQL, the Loki query, became codified, versioned, and reviewable like any other code. The whole toolbox ships through normal MR review, so improvements compound for anyone who adopts it instead of dying in a single session.',
+    metrics:
+      '30+ skills across 10+ integrated systems (GitLab, Jira, Confluence, Grafana, Kafka, AWS, kubectl, Teams, Statsig)',
+    stack: ['Claude Code', 'Claude API', 'TypeScript', 'Bash', 'Python', 'GitLab', 'AWS'],
+    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Platform'],
+  },
+  {
     id: 'talent-location-service-consolidation',
     title: 'Location Service Consolidation - $60K+ Annual Geocode Savings',
     summary: 'Talent.com - PRD and platform plan eliminating redundant Google Geocoding API spend',
@@ -57,23 +75,25 @@ export const projects: Project[] = [
       'Built a dual-implementation behind an AUTH_IMPL flag so both next-auth and Better Auth ran side-by-side in a dedicated QA environment. Ported RBAC parity to Better Auth middlewares, switched the Microsoft provider to Entra-only via genericOAuth, and moved AZURE_AD_TENANT_ID validation from module load to runtime so builds stopped failing when the secret rotated. Once parity was confirmed, collapsed the dispatcher across all four services and dropped next-auth from package.json.',
     outcome:
       'Cut over four frontends with a dual-impl flag that made rollback a one-line toggle instead of a deploy. Eliminated the next-auth dependency entirely, closed the outstanding advisories, and unified auth on a single modern library with better RBAC ergonomics. The dual-impl pattern became the template for the next round of high-risk library swaps.',
-    metrics: '4 frontends migrated, next-auth removed, zero auth downtime',
+    metrics: '4 frontends migrated (including the 5-8M pageviews/day jobseeker app), next-auth removed, zero auth downtime',
     stack: ['Better Auth', 'Next.js', 'TypeScript', 'Microsoft Entra', 'OAuth'],
     tags: ['Security', 'Migration', 'Architecture', 'Technical Leadership'],
   },
   {
     id: 'talent-nextjs-staged-migration',
-    title: 'Staged Next.js / React 19 / next-intl v4 / Nx 22 Upgrade',
-    summary: 'Talent.com - Multi-phase frontend platform upgrade at 5-8M pageviews/day',
+    title: 'Modernizing a 3-Years-Behind Frontend, Live in Production',
+    summary:
+      'Talent.com - Full dependency overhaul (Next.js 14→16, React 19, next-intl v4, Nx 22) shipped to a 5-8M pageviews/day site',
     company: 'Talent.com',
     period: '2025-2026',
     problem:
-      'The jobseeker frontend, serving 5-8M page views per day, was multiple major versions behind on Next.js, one behind on React, and carrying a next-intl v3 layer whose v4 migration was a breaking API change. Attempting it all in one branch would have been weeks of merge hell with no way to de-risk. A single regression could cost hundreds of thousands of pages in indexing or conversion on launch day.',
+      'The jobseeker frontend, serving 5-8M page views per day, had drifted roughly three years behind across its dependency tree: Next.js multiple majors back, React a major behind, a next-intl v3 layer whose v4 migration was a breaking API change, an aging Nx workspace, and a long tail of transitive packages carrying security advisories and blocking each other. Attempting it all in one branch would have been weeks of merge hell with no way to de-risk, and a single regression on a critical organic-traffic site could cost hundreds of thousands of pages in indexing or conversion on launch day.',
     solution:
-      'Broke the upgrade into a six-phase staged rollout on a long-lived feature branch: Nx 18 → 22, React 18 → 19, next-intl v3 → v4, Next.js 14 → 15 → 16. Each phase merged dev into the feature branch, repaired test drift, and deployed to a dedicated QA environment before the next phase started. Repaired roughly 30 test suites broken by the React 19 and next-intl v4 API changes, and caught prod-build type errors that dev mode had silently tolerated.',
+      'Broke the modernization into a six-phase staged rollout on a long-lived feature branch: Nx 18 → 22, React 18 → 19, next-intl v3 → v4, Next.js 14 → 15 → 16, plus the dependent packages each major dragged with it. Every phase merged dev into the feature branch, repaired test drift, and deployed to a dedicated QA environment before the next one started. Repaired roughly 30 test suites broken by the React 19 and next-intl v4 API changes, and caught prod-build type errors that dev mode had silently tolerated.',
     outcome:
-      'Carried the full jobseeker frontend through React 19 and next-intl v4 without a production regression. Each phase shipped independently through QA, so rollback blast radius stayed small. The same branch picked up RBAC parity, the Better Auth migration, and a coverage jump from 59% to 90.92% along the way.',
-    metrics: '5-8M page views/day, 4 major framework upgrades, zero production regressions',
+      'Now live in production. Carried the full jobseeker frontend from three years behind to current, through React 19, next-intl v4, and Next.js 16, without a production regression. Each phase shipped independently through QA, so rollback blast radius stayed small. The same branch picked up RBAC parity, the Better Auth migration, and a coverage jump from 59% to 90.92% along the way.',
+    metrics:
+      'Next.js 14→16, React 18→19, next-intl v3→v4, Nx 18→22, shipped live to 5-8M page views/day with zero production regressions',
     stack: ['Next.js', 'React 19', 'next-intl 4', 'Nx 22', 'TypeScript', 'Jest', 'GitLab CI'],
     tags: ['Migration', 'Scale', 'Performance', 'Technical Leadership'],
   },
@@ -89,25 +109,68 @@ export const projects: Project[] = [
       'Drove the coverage initiative in roughly 50 commits across a week. Revived 60+ suites across modals, job cards, SERP components, and provider wrappers. Wrote new branch-coverage tests for auth flows, A/B branches, and server actions. Fixed the Babel and Jest transform so React Testing Library actually rendered. Aligned local coverage reporting with CI via .exclusions pass-through so the numbers stopped lying. Co-located every new test next to its component.',
     outcome:
       'Coverage climbed from 59% to 90.92% with zero failing suites. Branch and function coverage both crossed the 80% CI threshold. The team could land the React 19 and next-intl v4 upgrade with real confidence instead of hope, and ~90 newly-reliable suites became the regression net for every subsequent change on a site serving 5-8M pageviews per day.',
-    metrics: 'Coverage 59% → 90.92%, ~90 suites revived or written, 0 failing suites',
+    metrics: 'Coverage 59% → 90.92%, ~90 suites revived or written, 0 failing suites, protecting a 5-8M pageviews/day site',
     stack: ['Jest', 'React Testing Library', 'TypeScript', 'React 19', 'Babel'],
     tags: ['Testing', 'Quality', 'Migration', 'Technical Leadership'],
   },
   {
-    id: 'talent-seo-rescue-view-page',
-    title: 'SEO Rescue on /view at 5-8M Pageviews/Day',
-    summary: 'Talent.com - Soft-404 fix, batched indexing, and dual-gated JSON-LD on job detail pages',
+    id: 'talent-jobseeker-e2e-from-zero',
+    title: 'First End-to-End and Integration Test Suite on Jobseeker',
+    summary:
+      'Talent.com - Built Playwright e2e and integration coverage from zero on a 5-8M pageviews/day frontend',
     company: 'Talent.com',
     period: '2026',
     problem:
-      'The /view job detail page, the single most valuable organic landing page on jobseeker, was losing indexing signal to Google in three ways. Googlebot was hitting RSC flight-data URLs and getting soft-404s. The Google Indexing API was being called per-job in a loop, hitting quota and timing out. And JobPosting JSON-LD was emitting for jobs that were technically available but not actually indexable, polluting the schema signal.',
+      'The jobseeker frontend had no end-to-end tests and no integration tests at all. Unit tests checked components in isolation, but nothing exercised a real user journey, search to job detail to apply, across the actual rendered app. Critical flows like sign-in, the /view job page, and A/B-gated experiences could break in production without a single test failing first, on a site serving 5-8M page views per day. A major Next.js and React 19 upgrade was in flight, exactly the kind of change that breaks integration seams unit tests cannot see.',
     solution:
-      'Moved the bot redirect out of middleware into next.config.js redirects so it ran at the edge before RSC ever saw the request. Batched Google Indexing API calls in the jobs-seo-index service and added a VirtualService timeout so a slow batch could not cascade. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the DB. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually cleared both SEO flags.',
+      'Stood up the first Playwright end-to-end suite for the app, covering the highest-value journeys: job search and SERP, the /view job detail page, sign-in and auth, and direct-apply flows. Built a regression harness with a fixed NUUID so Statsig experiment bucketing stayed deterministic across runs, making A/B-gated UI testable instead of flaky. Established selector conventions (text, role, and test-id rather than styled-components hashed class names) so tests survived styling changes. Wired the suite into CI so the journeys ran on every change, not just on demand.',
     outcome:
-      'Eliminated the soft-404 class of errors on Googlebot traffic. Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of lost landing pages per day.',
-    metrics: '5-8M page views/day protected, soft-404s eliminated, indexing API timeouts eliminated',
+      'Took the frontend from zero integration coverage to a real safety net across its core conversion paths. The e2e suite caught regressions at the seams between routing, auth, and rendering that unit tests structurally could not, and made the staged framework upgrade safe to ship phase by phase. Deterministic Statsig bucketing turned previously untestable A/B branches into reliable, repeatable checks.',
+    metrics:
+      'First e2e + integration coverage on a 5-8M pageviews/day frontend; core journeys (search, /view, auth, apply) under CI',
+    stack: ['Playwright', 'TypeScript', 'Statsig', 'Next.js', 'GitLab CI'],
+    tags: ['Testing', 'Quality', 'E2E', 'Automation'],
+  },
+  {
+    id: 'talent-seo-rescue-view-page',
+    title: 'Reliable Job Indexing and JSON-LD on /view at 5-8M Pageviews/Day',
+    summary: 'Talent.com - Batched Google Indexing API and dual-gated JSON-LD on job detail pages',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'The /view job detail page, the single most valuable organic landing page on jobseeker, was losing indexing signal to Google in two structural ways. The Google Indexing API was being called per-job in a loop, hitting quota and timing out, so submissions silently failed. And JobPosting JSON-LD was emitting for jobs that were technically available but not actually indexable, polluting the schema signal that Google relies on to surface jobs in Google for Jobs.',
+    solution:
+      'Batched Google Indexing API calls in the jobs-seo-index service and added a VirtualService timeout so a slow batch could not cascade into a full request failure. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the DB, so structured data only emitted for genuinely indexable jobs. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually cleared both SEO flags and dropped the job from the feed.',
+    outcome:
+      'Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of landing pages per day. The invalidation endpoint closed the loop so expired jobs left the index instead of lingering as stale entries.',
+    metrics: '5-8M page views/day protected, indexing API timeouts eliminated, JSON-LD gated to indexable jobs',
     stack: ['Next.js', 'TypeScript', 'NestJS', 'Google Indexing API', 'JSON-LD', 'Istio'],
     tags: ['SEO', 'Scale', 'Performance', 'Backend'],
+  },
+  {
+    id: 'talent-soft-404-saga',
+    title: 'The Soft-404 Hunt: Recovering Tens of Millions of Deindexed Job Pages',
+    summary:
+      'Talent.com - Multi-month investigation and fix campaign cutting Google soft-404s on /view',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'Google Search Console was reporting a massive volume of soft-404s on talent.com, peaking at 39.5 million URLs, the bulk of them on /view job detail pages. A soft-404 is a page that returns HTTP 200 but Google judges as empty or missing, and at that scale it was actively suppressing indexation and organic traffic on the site’s most valuable landing page. An initial fix knocked the count down to 10-12 million, then it stalled and crept back up. The issue had persisted for 3+ months and was effectively un-debuggable: a URL Googlebot classified as soft-404 on its scheduled crawl returned full, healthy HTML when tested live in Search Console, so the team was troubleshooting blind.',
+    solution:
+      'Drove the technical investigation across a multi-ticket epic. Pushed for and got a scoped one-hour Googlebot-only log capture on /view, the minimum data needed to stop guessing, which revealed Googlebot was issuing POST requests to /view and the backend was answering with tiny 500-650 byte HTTP 200 bodies, an infra-measured ~14.5 million soft-404s per day. Traced a second class to React Server Component flight-data URLs (the _rsc query param) returning JSON instead of HTML, and fixed it by detecting bot crawlers on _rsc requests and 301-redirecting them to the canonical HTML, with an X-Robots-Tag: noindex safety net for unrecognized agents. The campaign also widened bot detection (case-insensitive matching, Google Inspection Tool, a catch-all for unidentified crawlers), suppressed the "No longer accepting applications" banner for search engines so expired-but-live jobs stopped reading as empty, defined correct 404/410 handling for expired jobs with a matching Google-for-Jobs delete call, and migrated the page onto canonical 18-char job IDs across canonical tags, redirects, and JSON-LD.',
+    outcome:
+      'Converted a three-month, un-debuggable indexation crisis into a sequence of root-caused, shipped fixes. The scoped-log push surfaced the POST tiny-response root cause the team had been unable to see, and the _rsc redirect plus bot-banner fixes removed two entire classes of false soft-404 on the highest-value organic page on a site serving 5-8M page views per day, where a 1% indexing shift is tens of thousands of landing pages.',
+    metrics:
+      '39.5M soft-404s at peak, ~14.5M/day from the POST/_rsc class, root-caused via scoped Googlebot logs and fixed across /view',
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'React Server Components',
+      'Google Search Console',
+      'Google Indexing API',
+      'Middleware',
+    ],
+    tags: ['SEO', 'Scale', 'Backend', 'Technical Leadership'],
   },
   {
     id: 'the-muse-migration',
