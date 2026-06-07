@@ -21,6 +21,66 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    company: 'Talent.com',
+    companyLogos: ['talent-com.svg'],
+    location: 'Remote',
+    period: 'Dec 2025 - Present',
+    roles: [
+      {
+        title: 'SEO Engineer',
+        period: 'Dec 2025 - Present',
+        description:
+          "SEO and frontend engineering on Talent.com's jobseeker platform at 5-8M pageviews/day: organic indexation recovery, structured data, full-stack platform modernization, and AI-assisted developer tooling.",
+        achievements: [
+          {
+            text: 'Root-caused a soft-404 crisis on /view that peaked at 39.5M URLs in Search Console, pushing for scoped Googlebot logs that exposed POST and RSC flight-data requests returning tiny 200s (~14.5M/day) and shipping the redirect and bot-detection fixes',
+            metrics: '39.5M peak, ~14.5M/day root-caused',
+            projectId: 'talent-soft-404-saga',
+          },
+          {
+            text: 'Identified $60K/year in recoverable Google Geocoding spend authoring the Location Service Consolidation PRD, baseline confirmed with Finance',
+            metrics: '$60K/year savings',
+            projectId: 'talent-location-service-consolidation',
+          },
+          {
+            text: 'Carried the 5-8M pageviews/day jobseeker frontend from 3 years behind to current (Next.js 14→16, React 19, next-intl v4, Nx 22) through a staged rollout, live in production with zero regressions',
+            metrics: 'Next.js 14→16, 5-8M views/day',
+            projectId: 'talent-nextjs-staged-migration',
+          },
+          {
+            text: 'Made Google job indexing reliable on the highest-traffic organic page by batching the Indexing API and dual-gating JobPosting JSON-LD to genuinely indexable jobs',
+            metrics: '5-8M pageviews/day',
+            projectId: 'talent-seo-rescue-view-page',
+          },
+          {
+            text: 'Migrated 4 frontends (including the 5-8M pageviews/day jobseeker app) off next-auth to Better Auth behind a dual-impl flag with zero auth downtime',
+            metrics: '4 frontends, zero downtime',
+            projectId: 'talent-better-auth-migration',
+          },
+          {
+            text: 'Raised jobseeker test coverage from 59% to 90.92% reviving and writing ~90 Jest suites, building a regression net for a 5-8M pageviews/day site',
+            metrics: '59% → 90.92%',
+            projectId: 'talent-jobseeker-coverage-revival',
+          },
+          {
+            text: 'Built the first end-to-end and integration test suite for the jobseeker frontend (Playwright) covering search, /view, auth, and apply flows under CI',
+            metrics: 'First e2e + integration coverage',
+            projectId: 'talent-jobseeker-e2e-from-zero',
+          },
+          {
+            text: 'Built a self-serve AI development platform of 30+ Claude Code skills wrapping GitLab, Jira, Confluence, Grafana, Kafka, AWS, and kubectl behind a routing layer, checked into the monorepo for the team',
+            metrics: '30+ skills, 10+ systems',
+            projectId: 'talent-claude-code-dev-platform',
+          },
+          {
+            text: 'Built a team-shared multi-agent AI code review pipeline that fans out specialist checks (tests, security, accessibility, performance) on every merge request',
+            projectId: 'talent-claude-code-multi-agent-review',
+          },
+        ],
+      },
+    ],
+  },
+  {
     company: 'The Muse',
     companyLogos: ['the-muse.png', 'fairy-god-boss.png', 'purpose-jobs.png'],
     location: 'Remote',
