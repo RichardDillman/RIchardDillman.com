@@ -158,7 +158,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="text-sm text-neutral-500">
             Originally published on{' '}
             <a
-              href="https://dev.to/richarddillman"
+              href={post.devToUrl || 'https://dev.to/richarddillman'}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
