@@ -12,7 +12,153 @@ export interface Project {
   tags: string[];
 }
 
-export const projects: Project[] = [
+const projectEntries: Project[] = [
+  {
+    id: 'talent-indexing-pipeline-recovery',
+    title: 'Google Jobs Indexing Outage: From 100% Rejected Submissions to 9.5x Daily Volume',
+    summary:
+      'Talent.com - Summer-long research and recovery of the pipeline that puts job listings in Google search',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      "Talent.com is a job search site with listings in many countries, and many job seekers find it through Google's job listings. A job only appears there after the site sends it to Google's indexing service. In late June Google began rejecting every submission. Over six days the pipeline logged 15.9 million rejections, new jobs stopped reaching Google, expired jobs stayed listed, and the working theory inside the company was that the site was sending too fast. Underneath, the pipeline had silent failures of its own, and no alert covered any of it.",
+    solution:
+      'Tested the working theory against the data before anyone changed limits. Minute-by-minute logs showed the rejections began in an ordinary 1,093-call minute, after days of serving up to 73,092 calls a minute without error, and an hour later even a slow 415 calls a minute was rejected 100% of the time. That is the signature of a daily ceiling, not a speed limit, which pointed the fix at quota instead of throttling. Then fixed what the outage exposed inside the pipeline: a data replay that overloaded a shared cache and froze processing, almost a million jobs stuck because crashed runs never released them, a throttle set three orders of magnitude below the real ceiling, duplicate requests, and an eligibility rule tied to a flag Google had stopped updating. Redesigned how work is claimed so an interrupted run releases everything automatically, without a risky change to a 483 GB table. When the backlog later stopped shrinking, proved Kafka had quietly discarded unread data and that none of 222 existing alerts would have caught it, and showed that half of the jobs sent to Google are gone within three days, which explains why Google holds far fewer jobs than the site sends.',
+    outcome:
+      'Successful submissions per day rose 9.5x once the fixes and the quota change shipped, and about 17% of active jobs became eligible for Google listings again. Since recovery the pipeline has peaked at 71,023 submissions in a minute with only 7 rejections across 49,624 active minutes. After the removal gate deployed, 0 of 49,927 sampled removals were duplicates. The research also produced a sizing proposal that halves the time to clear the removal backlog, from 36 days to 18, and a concrete ask for longer data retention and a lag alert.',
+    metrics:
+      '15.9M rejections diagnosed as a daily quota, not a rate limit. 9.5x daily submissions after recovery. 7 rejections in 49,624 active minutes since. ~17% of active jobs re-qualified.',
+    stack: [
+      'PostgreSQL',
+      'Kafka',
+      'Redis',
+      'AWS Athena',
+      'Node.js',
+      'NestJS',
+      'TypeScript',
+      'Go',
+      'Prometheus',
+      'Grafana',
+    ],
+    tags: ['Data Engineering', 'Incident Response', 'Data Pipelines', 'Event-Driven Architecture'],
+  },
+  {
+    id: 'talent-postgres-600gb-table',
+    title: 'Database Performance Tuning at 600 GB: A 15-Second Query Cut to 87 Milliseconds',
+    summary:
+      'Talent.com - PostgreSQL tuning and capacity diagnosis on the largest table behind job listings',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      "The database table behind Google job listings had grown to about 600 GB. A job that runs every few minutes kept timing out after 30 seconds, so it never finished its work. At the same time, the database's automatic cleanup had stopped running, over 60% of the table was dead space, and a safety counter that eventually forces the database into read-only mode was climbing.",
+    solution:
+      "Read the database's own query plans in production and found it was badly misjudging how many rows matched (about 17.9 million when the truth was 3.28 million), so it chose to scan the entire table. Rewrote the query so the database had to use the right index, and added tests so the fix cannot be undone by accident. Measured which indexes were actually used and removed three that were not. Traced the stalled cleanup to a stuck replication process that was blocking the whole database server, and gave the infrastructure team the evidence and the order of fixes.",
+    outcome:
+      'The query went from 15.8 seconds to 87 milliseconds, 181 times faster, and the related removal query to 1.4 milliseconds. Once infrastructure cleared the stuck process, the backlog of retained change logs fell from 1030 GB to under 1 GB and the read-only safety counter dropped 89%. Removing unused indexes freed about 78 GB.',
+    metrics:
+      '181x faster query (15.8 s to 87 ms). Change-log backlog 1030 GB to under 1 GB. ~78 GB of unused indexes removed.',
+    stack: ['PostgreSQL', 'AWS Aurora', 'AWS DMS', 'TypeORM', 'NestJS'],
+    tags: ['Database', 'Performance Tuning', 'Data Engineering', 'Scalability'],
+  },
+  {
+    id: 'talent-duplicate-jobs-across-feeds',
+    title: 'Data Governance for Duplicate Listings: Measured 45% Duplication Across Sources',
+    summary:
+      'Talent.com - Data analysis and a cross-team decision on showing one copy of each job without losing revenue',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'Job sites receive the same job from many sources, such as employers, job boards, and recruiting platforms, and each copy can pay a different amount when someone clicks apply. Showing every copy clutters search results and can hurt how Google ranks the site. Showing only one risks sending the click to a source that pays less. A duplicate filter already existed for three countries, but nobody had checked whether it worked.',
+    solution:
+      'Measured the problem before proposing a fix. Analyzed a multi-million-job sample to find how many jobs were duplicated, how many duplicates came from different job boards, and how often the same job is re-imported. Found the existing filter had three separate bugs and had never removed a single job. Wrote a decision document for SEO and marketing leaders, not engineers, that splits the problem in two: which copy is shown is a search decision, and where the apply click goes is a revenue decision made at the moment of the click. That avoided a database redesign. Set a data quality bar for the new matching key before anything goes live.',
+    outcome:
+      'Established that 45% of jobs are duplicated and about 28% of pages could be merged, with 59% of duplicate groups spanning different job boards. Leadership adopted the decision, the new matching key shipped, and every job imported since carries it at 100% coverage in each measured country. Merging is sequenced behind that data quality bar.',
+    metrics:
+      '45% of jobs duplicated. ~28% of pages mergeable. Prior filter had removed 0 jobs. 100% coverage on the new matching key.',
+    stack: ['PostgreSQL', 'Elasticsearch', 'Go', 'TypeScript', 'Confluence'],
+    tags: ['Data Governance', 'Data Modeling', 'Architecture', 'Stakeholder Alignment'],
+  },
+  {
+    id: 'talent-v8-heap-not-a-leak',
+    title: 'Cloud Reliability: Proving a Suspected Memory Leak Was a Configuration Problem',
+    summary:
+      'Talent.com - Kubernetes and Node.js diagnosis that avoided weeks of debugging, validated with a load test',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'The servers behind the main job search app kept using more memory and never gave it back. Because of that, the system that automatically adds and removes servers stayed pinned at its maximum, and pages served to Google had slowed from about 300 milliseconds to between 750 and 1,000. Everyone assumed a memory leak in the code, which usually means weeks of investigation.',
+    solution:
+      'Measured first. Each server container was allowed 14 GB, but Node.js read the memory of the whole underlying machine instead, so each of the four app processes in a container assumed it could use about 2 GB, more than the container could hold under the memory target the autoscaler uses. A memory map confirmed the growth was that built-in allowance filling up, not a leak. Set an explicit memory limit per process sized to fit the container, then ran a one-hour load test on a test environment before merging. Separately traced the slowdown to a switch to a cheaper ARM server type and gave the infrastructure team the evidence.',
+    outcome:
+      'During the load test the busiest process peaked at 82% of its new limit, no process crashed or restarted, and the container never ran out of memory. Response time held flat at the 95th percentile, only 0.024% of 58,392 requests failed, and 53% to 63% of memory was released within 15 minutes after the load stopped. The fix was merged after the test.',
+    metrics:
+      'Per-process memory ceiling cut from ~2 GB to ~0.8 GB. 0 crashes under a 1-hour load test. Up to 63% of memory released at idle.',
+    stack: ['Kubernetes', 'Node.js', 'Next.js', 'Helm', 'AWS', 'Prometheus', 'Grafana'],
+    tags: ['Reliability', 'SRE', 'Load Testing', 'Cloud Infrastructure'],
+  },
+  {
+    id: 'talent-bot-traffic-analytics-integrity',
+    title: 'Bot Detection and Analytics Integrity: Scrapers Were 22.5% of "Human" Traffic',
+    summary:
+      'Talent.com - Security and data analysis that corrected business reporting and explained a traffic surge outage',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'The site told bots from people using a label each browser sends about itself, which is trivial to fake. Scrapers routed through thousands of home internet connections with a normal Chrome label were counted as real visitors. That quietly distorted traffic reports, regional numbers, and revenue forecasts, and wasted server capacity. In September a sudden flood of this traffic, mostly counted as human, took the site down.',
+    solution:
+      'Sampled 1,000 requests per page from the server logs and compared the suspicious pages with a normal job page. The suspicious pages came from 96% unique addresses using only 17 browser labels, the pattern of a rented proxy network, against 22% unique addresses on the normal page. Published corrections to earlier analysis that had used the inflated numbers. Put limits on the page inputs scrapers were cycling through, and improved bot detection. For the outage, rebuilt the timeline from logs, showed six networks caused about 47% of the surge while traffic flagged as bots actually fell, and measured the firewall signals the company already paid for, so the fix could start without buying a new security product.',
+    outcome:
+      "Proved one scraped page accounted for 22.5% of all traffic counted as human. Removing the scraped pages changed North America's share of real traffic from 30.9% to 42.0%, which changes where the business should invest. The outage review sized a 3.2x jump in hourly traffic, named its sources, and produced a block and rate-limit plan using existing tools.",
+    metrics:
+      'Scrapers were 22.5% of "human" traffic. North America share corrected from 30.9% to 42.0%. 3.2x traffic surge root-caused.',
+    stack: ['AWS WAF', 'CloudFront', 'Istio', 'Loki', 'Grafana', 'Elasticsearch', 'Next.js'],
+    tags: ['Security', 'Data Analysis', 'Observability', 'Incident Response'],
+  },
+  {
+    id: 'talent-deploy-safety-secure-coding',
+    title: 'Safe Releases and Secure Coding: Stopped Deploys From Dropping 45.7% of Apply Clicks',
+    summary:
+      'Talent.com - DevOps, secure coding, and root-cause analysis on a job site serving 5-8M page views a day',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'When a new version of the job search app went live, a large share of people clicking "apply" hit an error. The team was also chasing server errors Google reported on search pages, intermittent errors on the job page blamed on the search database, and a shutdown fix that did not seem to do anything.',
+    solution:
+      'Measured a release minute by minute and found about 18,800 failed requests in four minutes. The framework generated a new secret key on every build, so people still on the previous version sent requests the new servers no longer recognized. Made the key stable per environment, loaded the production key from AWS Secrets Manager in a way that keeps it out of the shipped software image, and made the build refuse to ship without it. Found that a setting meant to allow a clean shutdown was silently ignored, fixed it, and added an automated check that rejects unsupported settings. Sampled 100 of the job page errors and traced every one to the network layer, not the database. Traced every sampled Google-reported error to one place where user search text was used unsafely, and fixed two more places where user input could be injected into redirects and logs.',
+    outcome:
+      'The release before the fix lost 45.7% of apply clicks; at the next release clicks held flat. In repeated builds of the same code, stable request keys went from 0 of 182 to 182 of 182. All 23 Google-reported errors in a 1,000-page sample traced to one fix, verified by regression tests that fail 19 of 25 on the old code and pass 25 of 25 on the new. All 100 sampled job page errors had one cause, which cleared the search database as a suspect.',
+    metrics:
+      'Release click loss 45.7% to flat. 23 of 23 Google-reported errors and 100 of 100 sampled job page errors root-caused. Production secret kept out of the build image.',
+    stack: [
+      'CI/CD',
+      'GitLab CI',
+      'Docker',
+      'AWS Secrets Manager',
+      'Kubernetes',
+      'Next.js',
+      'Node.js',
+      'Go',
+    ],
+    tags: ['DevOps', 'Secure Coding', 'Reliability', 'Root Cause Analysis'],
+  },
+  {
+    id: 'talent-self-healing-ai-toolbox',
+    title: 'Self-Improving Generative AI Engineering Platform: 17 New Skills in One Quarter',
+    summary:
+      'Talent.com - Agentic AI workflows with guardrails that detect their own gaps and turn them into new automation',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'AI coding assistants fail quietly in two ways. When no tool exists for a task, they improvise, so the same workaround gets rebuilt every time and never becomes reusable. When they get something wrong, the correction stays in one conversation and the next one repeats the mistake. Once AI agents can reach code, tickets, logs, and databases, that silent improvising is also a safety risk.',
+    solution:
+      "Built a feedback loop into the AI platform itself. Standing rules require the AI agent to say plainly when no existing skill covers a task, finish the job anyway, and name what should be built. The second time a task is done by hand, the agent asks whether it should become a reusable skill. Every mistake gets a note left exactly where the next person or agent will hit it, and a shared memory skill saves lessons to the team's repository instead of one person's laptop. Guardrails block the AI from writing to production databases, committing passwords or keys, or running tools that are not set up, and the skill index is generated automatically and checked so it never goes stale.",
+    outcome:
+      "Since June the platform took 230 changes and gained 17 new skills. It now includes 59 skills, 21 specialized AI agents, and 4 automated guardrails, with 24 tracked known issues and 18 changes made purely to record a lesson for next time. One cleanup moved 68 of 112 facts out of a single engineer's private AI memory into shared team documentation. Seven other engineers have contributed.",
+    metrics:
+      '17 new skills in one quarter. 59 skills, 21 AI agents, 4 guardrails. 68 of 112 private facts moved into shared team knowledge.',
+    stack: ['Claude Code', 'Claude API', 'Python', 'Bash', 'GitLab CI'],
+    tags: ['Generative AI', 'Agentic Workflows', 'Workflow Automation', 'Developer Productivity'],
+  },
   {
     id: 'talent-claude-code-multi-agent-review',
     title: 'Team-Shared Multi-Agent AI Code Review Pipeline',
@@ -25,7 +171,8 @@ export const projects: Project[] = [
       'Designed and built a shared Claude Code review pipeline. The /code-review skill fans out to specialist sub-agents (unit tests, lint, types, coverage, security, performance, simplification) in parallel, then consolidates findings by severity. Checked the entire .claude/ directory into the monorepo with a teammate README and tracked skill paths so any engineer gets the same review without local setup. Added a typed auto-memory system, routing rules, and fan-out chains so context persists across sessions without bloating the window. Same architecture also powers /diagnose-ci, which triages failing GitLab pipelines in one command.',
     outcome:
       'Turned a single command into a senior-level, multi-dimensional review that runs in minutes. Freed senior engineers from routine review load and raised the floor on every MR across the team. A CI post-MR review hook is built and ready to flip on once the API key is provisioned, extending the same pipeline to every MR automatically.',
-    metrics: '~100 reviewer-hours saved per week. 15-min bot feedback auto-triggered on every commit. Every line of code reviewed for security, a11y, tests, and architecture.',
+    metrics:
+      '~100 reviewer-hours saved per week. 15-min bot feedback auto-triggered on every commit. Every line of code reviewed for security, a11y, tests, and architecture.',
     stack: ['Claude Code', 'Claude API', 'Anthropic SDK', 'TypeScript', 'Bash', 'GitLab CI'],
     tags: ['AI/ML', 'Developer Experience', 'Automation', 'Leadership'],
   },
@@ -66,7 +213,8 @@ export const projects: Project[] = [
   {
     id: 'talent-better-auth-migration',
     title: 'Better Auth Migration Across 4 Frontend Services',
-    summary: 'Talent.com - Replaced next-auth on jobseeker, publishers, employers, and internal-tools',
+    summary:
+      'Talent.com - Replaced next-auth on jobseeker, publishers, employers, and internal-tools',
     company: 'Talent.com',
     period: '2026',
     problem:
@@ -75,7 +223,8 @@ export const projects: Project[] = [
       'Built a dual-implementation behind an AUTH_IMPL flag so both next-auth and Better Auth ran side-by-side in a dedicated QA environment. Ported RBAC parity to Better Auth middlewares, switched the Microsoft provider to Entra-only via genericOAuth, and moved AZURE_AD_TENANT_ID validation from module load to runtime so builds stopped failing when the secret rotated. Once parity was confirmed, collapsed the dispatcher across all four services and dropped next-auth from package.json.',
     outcome:
       'Cut over four frontends with a dual-impl flag that made rollback a one-line toggle instead of a deploy. Eliminated the next-auth dependency entirely, closed the outstanding advisories, and unified auth on a single modern library with better RBAC ergonomics. The dual-impl pattern became the template for the next round of high-risk library swaps.',
-    metrics: '4 frontends migrated (including the 5-8M pageviews/day jobseeker app), next-auth removed, zero auth downtime',
+    metrics:
+      '4 frontends migrated (including the 5-8M pageviews/day jobseeker app), next-auth removed, zero auth downtime',
     stack: ['Better Auth', 'Next.js', 'TypeScript', 'Microsoft Entra', 'OAuth'],
     tags: ['Security', 'Migration', 'Architecture', 'Technical Leadership'],
   },
@@ -109,7 +258,8 @@ export const projects: Project[] = [
       'Drove the coverage initiative in roughly 50 commits across a week. Revived 60+ suites across modals, job cards, SERP components, and provider wrappers. Wrote new branch-coverage tests for auth flows, A/B branches, and server actions. Fixed the Babel and Jest transform so React Testing Library actually rendered. Aligned local coverage reporting with CI via .exclusions pass-through so the numbers stopped lying. Co-located every new test next to its component.',
     outcome:
       'Coverage climbed from 59% to 90.92% with zero failing suites. Branch and function coverage both crossed the 80% CI threshold. The team could land the React 19 and next-intl v4 upgrade with real confidence instead of hope, and ~90 newly-reliable suites became the regression net for every subsequent change on a site serving 5-8M pageviews per day.',
-    metrics: 'Coverage 59% → 90.92%, ~90 suites revived or written, 0 failing suites, protecting a 5-8M pageviews/day site',
+    metrics:
+      'Coverage 59% → 90.92%, ~90 suites revived or written, 0 failing suites, protecting a 5-8M pageviews/day site',
     stack: ['Jest', 'React Testing Library', 'TypeScript', 'React 19', 'Babel'],
     tags: ['Testing', 'Quality', 'Migration', 'Technical Leadership'],
   },
@@ -143,7 +293,8 @@ export const projects: Project[] = [
       'Batched Google Indexing API calls in the jobs-seo-index service and added a VirtualService timeout so a slow batch could not cascade into a full request failure. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the DB, so structured data only emitted for genuinely indexable jobs. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually cleared both SEO flags and dropped the job from the feed.',
     outcome:
       'Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of landing pages per day. The invalidation endpoint closed the loop so expired jobs left the index instead of lingering as stale entries.',
-    metrics: '5-8M page views/day protected, indexing API timeouts eliminated, JSON-LD gated to indexable jobs',
+    metrics:
+      '5-8M page views/day protected, indexing API timeouts eliminated, JSON-LD gated to indexable jobs',
     stack: ['Next.js', 'TypeScript', 'NestJS', 'Google Indexing API', 'JSON-LD', 'Istio'],
     tags: ['SEO', 'Scale', 'Performance', 'Backend'],
   },
@@ -185,7 +336,17 @@ export const projects: Project[] = [
     outcome:
       'Build times dropped from 45+ minutes to 75 seconds, enabling multiple daily deployments. Development velocity increased significantly with modern tooling, type safety, and improved developer experience. Reduced production incidents and accelerated feature delivery.',
     metrics: 'Build times: 45+ min → 75 sec',
-    stack: ['Next.js', 'TypeScript', 'React', 'SCSS', 'Node.js', 'AWS', 'Docker', 'CircleCI'],
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'React',
+      'SCSS',
+      'Node.js',
+      'AWS',
+      'Docker',
+      'CircleCI',
+      'Datadog',
+    ],
     tags: ['Migration', 'Performance', 'DevOps', 'Leadership'],
   },
   {
@@ -298,7 +459,7 @@ export const projects: Project[] = [
     outcome:
       'Achieved 90%+ green Core Web Vitals scores across all pages. Improved SEO rankings, increased organic traffic, and higher conversion rates. Established performance culture with ongoing monitoring and optimization.',
     metrics: '90%+ green Web Vitals, improved LCP + conversions',
-    stack: ['Next.js', 'React', 'Performance API', 'Lighthouse', 'Web Vitals'],
+    stack: ['Next.js', 'React', 'Performance API', 'Lighthouse', 'Web Vitals', 'Datadog'],
     tags: ['Performance', 'SEO', 'User Experience'],
   },
   {
@@ -399,6 +560,19 @@ export const projects: Project[] = [
     tags: ['UX', 'Performance', 'Product', 'Architecture'],
   },
 ];
+
+/** Splits a period like '2023-2025' or '2026' into [startYear, endYear]. */
+function periodYears(period: string): [number, number] {
+  const [start, end = start] = period.split('-').map(Number);
+  return [start, end];
+}
+
+/** Newest first: by end year, then start year. Array sort is stable, so ties keep source order. */
+export const projects: Project[] = [...projectEntries].sort((a, b) => {
+  const [aStart, aEnd] = periodYears(a.period);
+  const [bStart, bEnd] = periodYears(b.period);
+  return bEnd - aEnd || bStart - aStart;
+});
 
 // Helper function to get projects by tag
 export function getProjectsByTag(tag: string): Project[] {
