@@ -33,8 +33,8 @@ export const experiences: Experience[] = [
           "SEO and frontend engineering on Talent.com's jobseeker platform at 5-8M pageviews/day: organic indexation recovery, structured data, full-stack platform modernization, and AI-assisted developer tooling.",
         achievements: [
           {
-            text: 'Led the research and recovery of a Google Jobs indexing outage, proving 15.9M rejections were a daily quota rather than a rate limit and restoring 9.5x daily submissions',
-            metrics: '9.5x daily submissions',
+            text: 'Led the research and recovery of a Google Jobs indexing outage, proving 15.9M rejections were a daily quota rather than a rate limit and restoring new job submissions from zero to 1.5M+ a day',
+            metrics: '0 to 1.5M+ jobs a day',
             projectId: 'talent-indexing-pipeline-recovery',
           },
           {
