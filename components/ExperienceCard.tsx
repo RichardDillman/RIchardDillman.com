@@ -1,6 +1,29 @@
-import { Role } from '@/data/experience';
+import { Achievement, Role } from '@/data/experience';
+import { projects } from '@/data/projects';
 import { ChevronRight, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+
+/** Position of each project in the newest-first projects list. */
+const projectRank = new Map(projects.map((project, index) => [project.id, index]));
+
+/** Rank of an achievement's linked project, or undefined when it has none. */
+function rankOf(achievement: Achievement): number | undefined {
+  return achievement.projectId === undefined ? undefined : projectRank.get(achievement.projectId);
+}
+
+/**
+ * Orders achievements that link to a project newest first, matching /projects.
+ * Achievements without a project keep their slots, so hand-ordered bullets stay put.
+ */
+function sortAchievements(achievements: Achievement[]): Achievement[] {
+  const linked = achievements
+    .filter((achievement) => rankOf(achievement) !== undefined)
+    .sort((a, b) => (rankOf(a) ?? 0) - (rankOf(b) ?? 0));
+  let next = 0;
+  return achievements.map((achievement) =>
+    rankOf(achievement) === undefined ? achievement : linked[next++]
+  );
+}
 
 interface ExperienceCardProps {
   role: Role;
@@ -30,7 +53,7 @@ export default function ExperienceCard({ role }: ExperienceCardProps) {
 
       {/* Achievements with chevron bullets */}
       <ul className="space-y-2">
-        {role.achievements.map((achievement, achIndex) => (
+        {sortAchievements(role.achievements).map((achievement, achIndex) => (
           <li
             key={achIndex}
             className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed"
