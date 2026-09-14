@@ -33,6 +33,41 @@ export const experiences: Experience[] = [
           "SEO and frontend engineering on Talent.com's jobseeker platform at 5-8M pageviews/day: organic indexation recovery, structured data, full-stack platform modernization, and AI-assisted developer tooling.",
         achievements: [
           {
+            text: 'Led the research and recovery of a Google Jobs indexing outage, proving 15.9M rejections were a daily quota rather than a rate limit and restoring new job submissions from zero to 1.5M+ a day',
+            metrics: '0 to 1.5M+ jobs a day',
+            projectId: 'talent-indexing-pipeline-recovery',
+          },
+          {
+            text: 'Tuned PostgreSQL performance on a 600 GB table, cutting a failing 15.8-second query to 87 milliseconds and finding the stuck process that blocked database cleanup',
+            metrics: '181x faster query',
+            projectId: 'talent-postgres-600gb-table',
+          },
+          {
+            text: 'Measured 45% duplication across job data sources and led a cross-team decision on showing one copy of each job without losing revenue',
+            metrics: '45% of jobs duplicated',
+            projectId: 'talent-duplicate-jobs-across-feeds',
+          },
+          {
+            text: 'Proved a suspected memory leak in Kubernetes was a Node.js configuration problem, then validated the fix with a one-hour load test and zero crashes',
+            metrics: '0 crashes under load',
+            projectId: 'talent-v8-heap-not-a-leak',
+          },
+          {
+            text: 'Found scrapers made up 22.5% of traffic counted as human, corrected business analytics, and root-caused a 3.2x traffic surge outage',
+            metrics: '22.5% of "human" traffic',
+            projectId: 'talent-bot-traffic-analytics-integrity',
+          },
+          {
+            text: 'Stopped software releases from dropping 45.7% of apply clicks, secured the production key in AWS Secrets Manager, and fixed injection risks in user input handling',
+            metrics: '45.7% click loss to flat',
+            projectId: 'talent-deploy-safety-secure-coding',
+          },
+          {
+            text: 'Built a self-improving generative AI engineering platform whose agents flag missing skills and turn repeated manual work into new automation',
+            metrics: '17 new skills since June',
+            projectId: 'talent-self-healing-ai-toolbox',
+          },
+          {
             text: 'Root-caused a soft-404 crisis on /view that peaked at 39.5M URLs in Search Console, pushing for scoped Googlebot logs that exposed POST and RSC flight-data requests returning tiny 200s (~14.5M/day) and shipping the redirect and bot-detection fixes',
             metrics: '39.5M peak, ~14.5M/day root-caused',
             projectId: 'talent-soft-404-saga',
