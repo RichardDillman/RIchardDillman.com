@@ -17,7 +17,8 @@
     "generate:resume:frontend": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Frontend-Engineer-Resume",
     "generate:resume:fullstack": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Fullstack-Engineer-Resume",
     "generate:resume:director": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Director-Resume",
-    "generate:resume:all": "pnpm generate:resume:frontend && pnpm generate:resume:fullstack && pnpm generate:resume:director",
+    "generate:resume:engineer": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Engineer-Resume",
+    "generate:resume:all": "pnpm generate:resume:director && pnpm generate:resume:engineer",
     "test:lhci": "lhci autorun --config=./lighthouse/lighthouserc.js",
     "test:lhci:production": "lhci autorun --config=./lighthouse/lighthouserc.production.js"
   },

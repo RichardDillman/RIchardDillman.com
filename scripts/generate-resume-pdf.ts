@@ -8,13 +8,22 @@ import html from 'remark-html';
 const RESUME_DIR = join(process.cwd(), 'resume');
 
 // Accept filename as CLI argument (without .md extension)
-const resumeName = process.argv[2] || 'Richard-Dillman-Resume';
+const resumeName = process.argv[2] || 'Richard-Dillman-Engineer-Resume';
 const MARKDOWN_FILE = join(RESUME_DIR, `${resumeName}.md`);
 const OUTPUT_PDF = join(RESUME_DIR, `${resumeName}.pdf`);
 
 async function markdownToHtml(markdown: string): Promise<string> {
   const result = await remark().use(html).process(markdown);
-  return result.toString();
+  return splitRoleDates(result.toString());
+}
+
+// Markdown has no right-aligned column, so a role heading is written as
+// `#### Title | Date` and split here into a title and a right-aligned date.
+function splitRoleDates(htmlContent: string): string {
+  return htmlContent.replace(
+    /<h4>(.*) \| ([^|]*)<\/h4>/g,
+    '<h4><span class="role">$1</span><span class="date">$2</span></h4>'
+  );
 }
 
 function wrapHtmlWithStyles(htmlContent: string): string {
@@ -26,223 +35,111 @@ function wrapHtmlWithStyles(htmlContent: string): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Richard Dillman - Resume</title>
   <style>
-    @page {
-      size: letter;
-      margin: 1in;
-    }
-
     body {
-      font-family: 'Arial', 'Calibri', sans-serif;
-      font-size: 10.5pt;
-      line-height: 1.42;
-      color: #000;
-      max-width: 100%;
+      font-family: 'Helvetica Neue', 'Arial', sans-serif;
+      font-size: 9.75pt;
+      line-height: 1.38;
+      color: #222;
       margin: 0;
       padding: 0;
     }
 
     h1 {
+      font-family: 'Georgia', 'Times New Roman', serif;
       font-size: 24pt;
-      font-weight: bold;
-      margin: 0 0 4pt 0;
+      font-weight: normal;
       text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5pt;
-      color: #14b8a6;
+      margin: 0 0 4pt 0;
+      color: #111;
     }
 
+    /* Headline */
     h1 + p {
       text-align: center;
-      color: #14b8a6;
-      margin-bottom: 2pt;
-      font-size: 11.5pt;
-      font-weight: 500;
+      font-size: 10.5pt;
+      color: #111;
+      margin: 0 0 3pt 0;
     }
 
-    h1 + p strong {
-      color: #14b8a6 !important;
-      font-size: 11.5pt !important;
-      font-weight: 600 !important;
-    }
-
-    /* Subtitle/tagline styling */
-    p:first-of-type strong {
-      color: #14b8a6 !important;
-      font-size: 11.5pt !important;
-    }
-
+    /* Contact line */
     h1 + p + p {
       text-align: center;
-      margin-top: 0;
-      margin-bottom: 2pt;
-    }
-
-    h1 + p + p + p {
-      text-align: center;
-      margin-top: 0;
+      font-size: 9pt;
+      color: #333;
+      margin: 0 0 10pt 0;
     }
 
     h2 {
+      font-family: 'Georgia', 'Times New Roman', serif;
       font-size: 12.5pt;
-      font-weight: bold;
-      margin: 16pt 0 10pt 0;
-      border-bottom: 2px solid #14b8a6;
+      font-weight: normal;
+      color: #111;
+      margin: 12pt 0 6pt 0;
       padding-bottom: 3pt;
-      text-transform: uppercase;
-      text-align: center;
-      letter-spacing: 0.5pt;
-      color: #14b8a6;
+      border-bottom: 1px solid #999;
+      break-after: avoid;
     }
 
+    /* Company */
     h3 {
-      font-size: 11.5pt;
-      font-weight: bold;
-      margin: 15pt 0 6pt 0;
-      color: #14b8a6;
-      page-break-before: auto;
-      text-transform: uppercase;
+      font-size: 10.25pt;
+      font-weight: 600;
+      color: #111;
+      margin: 10pt 0 1pt 0;
+      break-after: avoid;
+    }
+
+    h2 + h3 {
+      margin-top: 4pt;
+    }
+
+    /* Role title with right-aligned dates */
+    h4 {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-    }
-
-    h3 .date {
+      font-size: 9.75pt;
       font-weight: normal;
-      color: #000;
-      font-size: 10.75pt;
+      color: #333;
+      margin: 4pt 0 2pt 0;
+      break-after: avoid;
     }
 
-    /* Force Condé Nast section to start on new page */
-    h3:nth-of-type(2) {
-      page-break-before: always;
+    h3 + h4 {
       margin-top: 0;
     }
 
-    h4 {
-      font-size: 10.75pt;
-      font-weight: bold;
-      margin: 10pt 0 5pt 0;
-      font-style: italic;
-      color: #14b8a6;
+    h4 .date {
+      white-space: nowrap;
+      padding-left: 12pt;
     }
 
     p {
-      margin: 0 0 8pt 0;
-    }
-
-    strong {
-      font-weight: bold;
+      margin: 0 0 6pt 0;
     }
 
     ul {
-      margin: 5pt 0 10pt 0;
-      padding-left: 20pt;
-      list-style-type: none;
+      margin: 2pt 0 6pt 0;
+      padding-left: 14pt;
+      list-style: none;
     }
 
     li {
-      margin-bottom: 5pt;
       position: relative;
-      padding-left: 0;
+      margin-bottom: 2pt;
+      break-inside: avoid;
     }
 
     li::before {
-      content: "•";
+      content: "\\00B7";
       position: absolute;
-      left: -15pt;
+      left: -10pt;
       font-weight: bold;
     }
 
     a {
-      color: #000;
+      color: inherit;
       text-decoration: none;
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid #ccc;
-      margin: 8pt 0;
-    }
-
-    span::after {
-      content: "\\A";
-      white-space: pre;
-    }
-
-    /* Header styling */
-    h1 + p strong {
-      font-size: 10pt;
-      color: #333;
-    }
-
-    /* Contact info styling */
-    h1 ~ p:first-of-type {
-      font-size: 10pt;
-      margin-bottom: 0;
-      text-align: center;
-    }
-
-    h1 + p + p {
-      font-size: 10pt;
-      margin-top: 0;
-      margin-bottom: 4pt;
-      text-align: center;
-    }
-
-    /* Two-column competencies */
-    h2:has(+ p > strong:first-child) + p {
-      column-count: 2;
-      column-gap: 20pt;
-      margin-bottom: 12pt;
-    }
-
-    /* Allow page breaks but prevent orphans/widows */
-    h2 {
-      page-break-after: auto;
-      page-break-inside: avoid;
-    }
-
-    h3, h4 {
-      page-break-after: auto;
-      page-break-inside: avoid;
-    }
-
-    p {
-      orphans: 2;
-      widows: 2;
-    }
-
-    ul {
-      page-break-inside: auto;
-    }
-
-    li {
-      page-break-inside: avoid;
-    }
-
-    /* Ensure content fits on pages */
-    @media print {
-      body {
-        font-size: 11pt;
-        line-height: 1.4;
-      }
-
-      h2 {
-        text-align: center;
-        margin: 16pt 0 8pt 0;
-      }
-
-      h3 {
-        margin: 14pt 0 6pt 0;
-      }
-
-      ul {
-        margin: 5pt 0 10pt 0;
-      }
-
-      li {
-        margin-bottom: 5pt;
-      }
     }
   </style>
 </head>
@@ -274,10 +171,10 @@ async function generatePDF() {
     format: 'Letter',
     printBackground: true,
     margin: {
-      top: '0.5in',
-      right: '0.75in',
-      bottom: '0.5in',
-      left: '0.75in',
+      top: '0.55in',
+      right: '0.6in',
+      bottom: '0.55in',
+      left: '0.6in',
     },
   });
 
