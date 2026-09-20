@@ -27,7 +27,7 @@ export const experiences: Experience[] = [
     period: 'Dec 2025 - Present',
     roles: [
       {
-        title: 'SEO Engineer',
+        title: 'Fractional SEO Engineer',
         period: 'Dec 2025 - Present',
         description:
           "SEO and frontend engineering on Talent.com's jobseeker platform at 5-8M pageviews/day: organic indexation recovery, structured data, full-stack platform modernization, and AI-assisted developer tooling.",
@@ -188,7 +188,7 @@ export const experiences: Experience[] = [
             projectId: 'the-muse-search-ux-refresh',
           },
           {
-            text: 'Generated $994K annual revenue integrating display ads across The Muse platform',
+            text: 'Generated $994K annual revenue replacing a 10+ year-old display ad system (predating Google Ad Manager, with unfiltered AdSense) with a modern ad integration across The Muse platform',
             metrics: '$994K annual revenue',
           },
           {

@@ -1,6 +1,5 @@
 import ExperienceList from '@/components/ExperienceList';
-import { Download } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import ResumeDownload from '@/components/ResumeDownload';
 import type { Metadata } from 'next';
 import { experiences } from '@/data/experience';
 import { generateExperienceItemListSchema } from '@/lib/structured-data';
@@ -57,16 +56,7 @@ export default function ExperiencePage() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
             A decade of building and leading engineering teams
           </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-blue-700 hover:bg-blue-800 text-white font-semibold"
-          >
-            <a href="/images/resume.pdf" download className="flex items-center">
-              <Download className="w-4 h-4 mr-2" aria-hidden="true" />
-              Download Full Resume
-            </a>
-          </Button>
+          <ResumeDownload />
         </header>
 
         <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">

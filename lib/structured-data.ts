@@ -23,7 +23,7 @@ export function generatePersonSchema(): WithContext<Person> {
     name: 'Richard Dillman',
     url: 'https://richarddillman.com',
     image: 'https://richarddillman.com/api/og',
-    jobTitle: 'Senior Director of Engineering',
+    jobTitle: 'Fractional SEO Engineer',
     description:
       'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
     sameAs: [
@@ -43,8 +43,8 @@ export function generatePersonSchema(): WithContext<Person> {
     ],
     worksFor: {
       '@type': 'Organization',
-      name: 'The Muse',
-      url: 'https://www.themuse.com',
+      name: 'Talent.com',
+      url: 'https://www.talent.com',
     },
   };
 }
@@ -145,11 +145,11 @@ export function generateProfilePageSchema(): WithContext<ProfilePage> {
       name: 'Richard Dillman',
       alternateName: 'Rick Dillman',
       image: 'https://richarddillman.com/api/og',
-      jobTitle: 'Senior Director of Engineering',
+      jobTitle: 'Fractional SEO Engineer',
       worksFor: {
         '@type': 'Organization',
-        name: 'The Muse',
-        url: 'https://www.themuse.com',
+        name: 'Talent.com',
+        url: 'https://www.talent.com',
       },
       description:
         'Engineering leader focused on performance, SEO, mentoring, and modernizing legacy systems into unified, scalable architectures.',
