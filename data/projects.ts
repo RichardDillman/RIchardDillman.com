@@ -55,11 +55,11 @@ const projectEntries: Project[] = [
     problem:
       "The database table behind Google job listings had grown to about 600 GB. A job that runs every few minutes kept timing out after 30 seconds, so it never finished its work. At the same time, the database's automatic cleanup had stopped running, over 60% of the table was dead space, and a safety counter that eventually forces the database into read-only mode was climbing.",
     solution:
-      "Read the database's own query plans in production and found a design problem, not a tuning problem. No index matched the query, and the table's statistics had never been collected with ANALYZE, so the database had nothing to plan with and scanned the entire table. Built the missing indexes and ran ANALYZE, but the database still misjudged how many rows matched (about 17.9 million when the truth was 3.28 million) and kept choosing the full scan. Adding an ORDER BY on the indexed column was what finally made it use the index at all, so added tests that fail if that line is ever removed. Measured which indexes were actually used and removed three that were not. Traced the stalled cleanup to a stuck replication process that was blocking the whole database server, and gave the infrastructure team the evidence and the order of fixes.",
+      "Read the database's own query plans in production and found a design problem, not a tuning problem. No index matched the query, and the table's statistics had never been collected with ANALYZE, so the database had nothing to plan with and scanned the entire table. Built the missing indexes and ran ANALYZE, but the database still misjudged how many rows matched (about 17.9 million when the truth was 3.28 million) and kept choosing the full scan. Adding an ORDER BY on the indexed column was what finally made it use the index at all, so added tests that fail if that line is ever removed. Measured which indexes were actually used and removed three that were not. Traced the stalled cleanup to a stuck replication process that was blocking the whole database server, and gave the infrastructure team the evidence and the order of fixes. Later found the same kind of problem in the job that deletes expired paid job listings: converting the expiry date before comparing it stopped the database from using an index at all. Rewrote the condition so the comparison can use the existing indexes, with no schema change.",
     outcome:
-      'The query went from 15.8 seconds to 87 milliseconds, 181 times faster, and the related removal query to 1.4 milliseconds. Once infrastructure cleared the stuck process, the backlog of retained change logs fell from 1030 GB to under 1 GB and the read-only safety counter dropped 89%. Removing unused indexes freed about 78 GB.',
+      'The query went from 15.8 seconds to 87 milliseconds, 181 times faster, and the related removal query to 1.4 milliseconds. Once infrastructure cleared the stuck process, the backlog of retained change logs fell from 1030 GB to under 1 GB and the read-only safety counter dropped 89%. Removing unused indexes freed about 78 GB. The expired-listings delete went from 151.7 seconds to 22.75 milliseconds per 5,000-row batch, measured on a production replica.',
     metrics:
-      '181x faster query (15.8 s to 87 ms). Change-log backlog 1030 GB to under 1 GB. ~78 GB of unused indexes removed.',
+      '181x faster query (15.8 s to 87 ms). Change-log backlog 1030 GB to under 1 GB. ~78 GB of unused indexes removed. Expired-listings delete 151.7 s to 22.75 ms per batch.',
     stack: ['PostgreSQL', 'AWS Aurora', 'AWS DMS', 'TypeORM', 'NestJS'],
     tags: ['Database', 'Performance Tuning', 'Data Engineering', 'Scalability'],
   },
@@ -143,6 +143,42 @@ const projectEntries: Project[] = [
       'Go',
     ],
     tags: ['DevOps', 'Secure Coding', 'Reliability', 'Root Cause Analysis'],
+  },
+  {
+    id: 'talent-ci-unit-test-speed',
+    title: 'Faster, Trustworthy CI Across a 100-Service Monorepo: A 392-Second Suite Cut to 43',
+    summary:
+      'Talent.com - CI/CD performance work that made unit tests faster, offline, and type-checked without dropping a single test',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'Every merge request in the monorepo waits on unit tests split across parallel CI jobs. Across the last 40 merge requests a test job took a median of 4.4 minutes and up to 15.1. Nobody knew where the time went. Some tests also reached live services such as AWS and Redshift, so they could pass or fail depending on the network, and tests in more than 20 services had quietly stopped passing.',
+    solution:
+      "Measured before changing anything. Added per-step and per-project timing to the pipeline, then ran a probe with one test in every project to see the full cost. Found that every CI job reused none of its 3,055 packages because the runner had no shared cache, that the work was split by project count rather than by run time so one slow project held up a whole job, and that four Python services never ran their tests in CI at all. Switched Jest to compile without type checking, which is where most of its time went, and added a separate type-check job that fails if any project's error count rises above its recorded baseline, so the speedup did not cost type safety. Blocked tests from making real network calls and ran Go and Python tests offline, mocking the services they had been reaching. Replaced tests that slept on real timers with adjustable intervals. When a smarter way to split the work measured slower, reverted it and left a note explaining why. Fixed the broken tests in 22 services in separate, reviewable changes.",
+    outcome:
+      'The ui suite went from 392 seconds to 43 with the same 728 tests. The jobs-ingestion Go tests went from 126 seconds to 10 locally. The type-check job covers 47 projects and matched every baseline on its first run. Unit tests no longer depend on the network, and 22 services that had stopped passing were fixed.',
+    metrics:
+      'ui suite 392 s to 43 s. jobs-ingestion Go tests 126 s to 10 s. Type-check gate on 47 projects. 22 services restored to passing. 0 tests dropped.',
+    stack: ['GitLab CI', 'Nx', 'Jest', 'TypeScript', 'Go', 'Python', 'pytest', 'pnpm'],
+    tags: ['DevOps', 'CI/CD', 'Developer Productivity', 'Testing'],
+  },
+  {
+    id: 'talent-system-map-alerting-audit',
+    title: 'System Map and Alerting Audit: 17 of 21 Alert Channels Were Failing Silently',
+    summary:
+      'Talent.com - Mapped 409 production workloads and proved most alerts could not reach a person',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'After a run of outages, there was no up-to-date picture of what actually ran in production, who owned it, or whether anyone would be told when it broke. The documentation was kept by one person against 26 people committing code. The monorepo had about 100 services, and the alerting system had over 200 active rules that everyone assumed were working.',
+    solution:
+      'Built a census by reading the live Kubernetes cluster and matching every workload to its folder in the repository, so the picture came from what was running rather than from old documents. Wrote a plain-language system map that follows a job, a click, and a dollar through the system, with one card per service in a shared format, each backed by file evidence. Then audited the alerting end to end: a rule notices a problem, it is sent to a contact point such as a Teams channel or PagerDuty, and the contact point delivers it. Checked the delivery records for every contact point instead of assuming that a rule being on meant someone was told.',
+    outcome:
+      "Of the 21 contact points that had tried to send since Grafana's alert sender last restarted, 17 failed and 4 worked. Every older-style Teams connector that tried to send failed. Of 202 live alert rules, 83 point to a contact point whose last send failed, including every live Google for Jobs rule, and 21 rules have no contact point at all, so they cannot reach anyone. The census found 409 workloads across 22 namespaces, 12 with no home in the repository and 50 switched off. The findings went to infrastructure and the team, and the map is now the starting point for anyone touching an unfamiliar service.",
+    metrics:
+      '17 of 21 alert channels failing. 83 of 202 live rules routed to a failing channel. 409 workloads mapped to 101 service folders. 12 workloads with no owner in the repo.',
+    stack: ['Kubernetes', 'Grafana', 'PagerDuty', 'Microsoft Teams', 'Python', 'Helm'],
+    tags: ['Observability', 'SRE', 'Documentation', 'Technical Leadership'],
   },
   {
     id: 'talent-self-healing-ai-toolbox',
