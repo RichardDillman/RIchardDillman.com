@@ -10,7 +10,9 @@ Hands-on engineering leader who builds high-traffic web platforms and the teams 
 
 ## Skills
 
-Engineering Leadership · Mentoring and Career Growth · Technical Strategy · Platform Modernization · PRDs and RFCs · AI-Assisted Development · Technical SEO · Core Web Vitals · TypeScript · React · Next.js · Node.js · Python · PostgreSQL · AWS · Kubernetes · Kafka · Datadog · Grafana
+**Leadership:** Engineering Leadership · Mentoring and Career Growth · Technical Strategy · Platform Modernization · PRDs and RFCs · AI-Assisted Development\
+**Platform:** TypeScript · React · Next.js · Node.js · Python · PostgreSQL · AWS · Kubernetes · Kafka · Datadog · Grafana\
+**SEO and Growth:** Technical SEO · Structured Data · Google Search Console · Core Web Vitals
 
 ## Work Experience
 
