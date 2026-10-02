@@ -12,7 +12,47 @@ export interface Project {
   tags: string[];
 }
 
-const projectEntries: Project[] = [
+/**
+ * Shown on the site in this exact order, newest first. Nothing sorts it.
+ * Add a new project at the top.
+ */
+export const projects: Project[] = [
+  {
+    id: 'talent-ci-unit-test-speed',
+    title: 'Faster, Trustworthy CI Across a 100-Service Monorepo: A 392-Second Suite Cut to 43',
+    summary:
+      'Talent.com - CI/CD performance work that made unit tests faster, offline, and type-checked without dropping a single test',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'Every merge request in the monorepo waits on unit tests split across parallel CI jobs. Across the last 40 merge requests a test job took a median of 4.4 minutes and up to 15.1. Nobody knew where the time went. Some tests also reached live services such as AWS and Redshift, so they could pass or fail depending on the network, and tests in more than 20 services had quietly stopped passing.',
+    solution:
+      "Measured before changing anything. Added per-step and per-project timing to the pipeline, then ran a probe with one test in every project to see the full cost. Found that every CI job reused none of its 3,055 packages because the runner had no shared cache, that the work was split by project count rather than by run time so one slow project held up a whole job, and that four Python services never ran their tests in CI at all. Switched Jest to compile without type checking, which is where most of its time went, and added a separate type-check job that fails if any project's error count rises above its recorded baseline, so the speedup did not cost type safety. Blocked tests from making real network calls and ran Go and Python tests offline, mocking the services they had been reaching. Replaced tests that slept on real timers with adjustable intervals. When a smarter way to split the work measured slower, reverted it and left a note explaining why. Fixed the broken tests in 22 services in separate, reviewable changes.",
+    outcome:
+      'The ui suite went from 392 seconds to 43 with the same 728 tests. The jobs-ingestion Go tests went from 126 seconds to 10 locally. The type-check job covers 47 projects and matched every baseline on its first run. Unit tests no longer depend on the network, and 22 services that had stopped passing were fixed.',
+    metrics:
+      'ui suite 392 s to 43 s. jobs-ingestion Go tests 126 s to 10 s. Type-check gate on 47 projects. 22 services restored to passing. 0 tests dropped.',
+    stack: ['GitLab CI', 'Nx', 'Jest', 'TypeScript', 'Go', 'Python', 'pytest', 'pnpm'],
+    tags: ['DevOps', 'CI/CD', 'Developer Productivity', 'Testing'],
+  },
+  {
+    id: 'talent-system-map-alerting-audit',
+    title: 'System Map and Alerting Audit: 17 of 21 Alert Channels Were Failing Silently',
+    summary:
+      'Talent.com - Mapped 409 production workloads and proved most alerts could not reach a person',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'After a run of outages, there was no up-to-date picture of what actually ran in production, who owned it, or whether anyone would be told when it broke. The documentation was kept by one person against 26 people committing code. The monorepo had about 100 services, and the alerting system had over 200 active rules that everyone assumed were working.',
+    solution:
+      'Built a census by reading the live Kubernetes cluster and matching every workload to its folder in the repository, so the picture came from what was running rather than from old documents. Wrote a plain-language system map that follows a job, a click, and a dollar through the system, with one card per service in a shared format, each backed by file evidence. Then audited the alerting end to end: a rule notices a problem, it is sent to a contact point such as a Teams channel or PagerDuty, and the contact point delivers it. Checked the delivery records for every contact point instead of assuming that a rule being on meant someone was told.',
+    outcome:
+      "Of the 21 contact points that had tried to send since Grafana's alert sender last restarted, 17 failed and 4 worked. Every older-style Teams connector that tried to send failed. Of 202 live alert rules, 83 point to a contact point whose last send failed, including every live Google for Jobs rule, and 21 rules have no contact point at all, so they cannot reach anyone. The census found 409 workloads across 22 namespaces, 12 with no home in the repository and 50 switched off. The findings went to infrastructure and the team, and the map is now the starting point for anyone touching an unfamiliar service.",
+    metrics:
+      '17 of 21 alert channels failing. 83 of 202 live rules routed to a failing channel. 409 workloads mapped to 101 service folders. 12 workloads with no owner in the repo.',
+    stack: ['Kubernetes', 'Grafana', 'PagerDuty', 'Microsoft Teams', 'Python', 'Helm'],
+    tags: ['Observability', 'SRE', 'Documentation', 'Technical Leadership'],
+  },
   {
     id: 'talent-indexing-pipeline-recovery',
     title: 'Google Jobs Indexing Outage: From Zero New Jobs Reaching Google to 1.5M+ a Day',
@@ -46,6 +86,24 @@ const projectEntries: Project[] = [
     tags: ['Data Engineering', 'Incident Response', 'Data Pipelines', 'Event-Driven Architecture'],
   },
   {
+    id: 'talent-duplicate-jobs-across-feeds',
+    title: 'Data Governance for Duplicate Listings: Measured 45% Duplication Across Sources',
+    summary:
+      'Talent.com - Data analysis and a cross-team decision on showing one copy of each job without losing revenue',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'Job sites receive the same job from many sources, such as employers, job boards, and recruiting platforms, and each copy can pay a different amount when someone clicks apply. Showing every copy clutters search results and can hurt how Google ranks the site. Showing only one risks sending the click to a source that pays less. A duplicate filter already existed for three countries, but nobody had checked whether it worked.',
+    solution:
+      'Measured the problem before proposing a fix. Analyzed a multi-million-job sample to find how many jobs were duplicated, how many duplicates came from different job boards, and how often the same job is re-imported. Found the existing filter had three separate bugs and had never removed a single job. Designed the fix around canonicalization: every duplicate points search engines to the oldest matching copy of the job as the original, so Google sees one listing instead of many. Wrote a decision document for SEO and marketing leaders, not engineers, that keeps the revenue question separate: which copy is shown is a search decision, and where the apply click goes is decided at the moment of the click, so it can still reach the best-paying source. That avoided a database redesign. Set a data quality bar for the new matching key before anything goes live.',
+    outcome:
+      'Established that 45% of jobs are duplicated and about 28% of pages could be consolidated into their oldest matching copy, with 59% of duplicate groups spanning different job boards. Leadership adopted the decision, the new matching key shipped, and every job imported since carries it at 100% coverage in each measured country. Canonicalization rolls out behind that data quality bar.',
+    metrics:
+      '45% of jobs duplicated. ~28% of pages mergeable. Prior filter had removed 0 jobs. 100% coverage on the new matching key.',
+    stack: ['PostgreSQL', 'Elasticsearch', 'Go', 'TypeScript', 'Confluence'],
+    tags: ['Data Governance', 'Data Modeling', 'Architecture', 'Stakeholder Alignment'],
+  },
+  {
     id: 'talent-postgres-600gb-table',
     title: 'Database Performance Tuning at 600 GB: A 15-Second Query Cut to 87 Milliseconds',
     summary:
@@ -64,22 +122,21 @@ const projectEntries: Project[] = [
     tags: ['Database', 'Performance Tuning', 'Data Engineering', 'Scalability'],
   },
   {
-    id: 'talent-duplicate-jobs-across-feeds',
-    title: 'Data Governance for Duplicate Listings: Measured 45% Duplication Across Sources',
-    summary:
-      'Talent.com - Data analysis and a cross-team decision on showing one copy of each job without losing revenue',
+    id: 'talent-claude-code-multi-agent-review',
+    title: 'Team-Shared Multi-Agent AI Code Review Pipeline',
+    summary: 'Talent.com - Claude Code skill fanning out specialist agents on every MR',
     company: 'Talent.com',
     period: '2026',
     problem:
-      'Job sites receive the same job from many sources, such as employers, job boards, and recruiting platforms, and each copy can pay a different amount when someone clicks apply. Showing every copy clutters search results and can hurt how Google ranks the site. Showing only one risks sending the click to a source that pays less. A duplicate filter already existed for three countries, but nobody had checked whether it worked.',
+      'Code review at team scale was bottlenecked on a handful of senior engineers, and the depth of review varied with whoever picked it up. Security, accessibility, coverage, and architectural concerns were easy to miss when the reviewer was rushed. The team needed consistent, comprehensive review on every MR without slowing the merge cadence or creating more review load for the seniors.',
     solution:
-      'Measured the problem before proposing a fix. Analyzed a multi-million-job sample to find how many jobs were duplicated, how many duplicates came from different job boards, and how often the same job is re-imported. Found the existing filter had three separate bugs and had never removed a single job. Designed the fix around canonicalization: every duplicate points search engines to the oldest matching copy of the job as the original, so Google sees one listing instead of many. Wrote a decision document for SEO and marketing leaders, not engineers, that keeps the revenue question separate: which copy is shown is a search decision, and where the apply click goes is decided at the moment of the click, so it can still reach the best-paying source. That avoided a database redesign. Set a data quality bar for the new matching key before anything goes live.',
+      'Designed and built a shared Claude Code review pipeline. The /code-review skill fans out to specialist sub-agents (unit tests, lint, types, coverage, security, performance, simplification) in parallel, then consolidates findings by severity. Checked the entire .claude/ directory into the monorepo with a teammate README and tracked skill paths so any engineer gets the same review without local setup. Added a typed auto-memory system, routing rules, and fan-out chains so context persists across sessions without bloating the window. Same architecture also powers /diagnose-ci, which triages failing GitLab pipelines in one command.',
     outcome:
-      'Established that 45% of jobs are duplicated and about 28% of pages could be consolidated into their oldest matching copy, with 59% of duplicate groups spanning different job boards. Leadership adopted the decision, the new matching key shipped, and every job imported since carries it at 100% coverage in each measured country. Canonicalization rolls out behind that data quality bar.',
+      'Turned a single command into a senior-level, multi-dimensional review that runs in minutes. Freed senior engineers from routine review load and raised the floor on every MR across the team. A CI hook now runs the same pipeline automatically on every MR.',
     metrics:
-      '45% of jobs duplicated. ~28% of pages mergeable. Prior filter had removed 0 jobs. 100% coverage on the new matching key.',
-    stack: ['PostgreSQL', 'Elasticsearch', 'Go', 'TypeScript', 'Confluence'],
-    tags: ['Data Governance', 'Data Modeling', 'Architecture', 'Stakeholder Alignment'],
+      '~100 reviewer-hours saved per week. 15-min bot feedback auto-triggered on every commit. Every line of code reviewed for security, a11y, tests, and architecture.',
+    stack: ['Claude Code', 'Claude API', 'Anthropic SDK', 'TypeScript', 'Bash', 'GitLab CI'],
+    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Leadership'],
   },
   {
     id: 'talent-v8-heap-not-a-leak',
@@ -118,6 +175,42 @@ const projectEntries: Project[] = [
     tags: ['Security', 'Data Analysis', 'Observability', 'Incident Response'],
   },
   {
+    id: 'talent-self-healing-ai-toolbox',
+    title: 'Self-Improving Generative AI Engineering Platform: 17 New Skills in One Quarter',
+    summary:
+      'Talent.com - Agentic AI workflows with guardrails that detect their own gaps and turn them into new automation',
+    company: 'Talent.com',
+    period: '2026',
+    problem:
+      'AI coding assistants fail quietly in two ways. When no tool exists for a task, they improvise, so the same workaround gets rebuilt every time and never becomes reusable. When they get something wrong, the correction stays in one conversation and the next one repeats the mistake. Once AI agents can reach code, tickets, logs, and databases, that silent improvising is also a safety risk.',
+    solution:
+      "Built a feedback loop into the AI platform itself. Standing rules require the AI agent to say plainly when no existing skill covers a task, finish the job anyway, and name what should be built. The second time a task is done by hand, the agent asks whether it should become a reusable skill. Every mistake gets a note left exactly where the next person or agent will hit it, and a shared memory skill saves lessons to the team's repository instead of one person's laptop. Guardrails block the AI from writing to production databases, committing passwords or keys, or running tools that are not set up, and the skill index is generated automatically and checked so it never goes stale.",
+    outcome:
+      "Since June the platform took 230 changes and gained 17 new skills. It now includes 59 skills, 21 specialized AI agents, and 4 automated guardrails, with 24 tracked known issues and 18 changes made purely to record a lesson for next time. One cleanup moved 68 of 112 facts out of a single engineer's private AI memory into shared team documentation. Seven other engineers have contributed.",
+    metrics:
+      '17 new skills in one quarter. 59 skills, 21 AI agents, 4 guardrails. 68 of 112 private facts moved into shared team knowledge.',
+    stack: ['Claude Code', 'Claude API', 'Python', 'Bash', 'GitLab CI'],
+    tags: ['Generative AI', 'Agentic Workflows', 'Workflow Automation', 'Developer Productivity'],
+  },
+  {
+    id: 'talent-claude-code-dev-platform',
+    title: 'Self-Built AI Development Platform Across the Full Toolchain',
+    summary:
+      'Talent.com - Claude Code skills, agents, and scripts wrapping every third-party system the team touches',
+    company: 'Talent.com',
+    period: '2025-2026',
+    problem:
+      'Day-to-day engineering meant context-switching across a dozen disconnected systems, each with its own CLI, auth, and quirks: GitLab for code and CI, Jira for tickets, Confluence for PRDs, Grafana/Loki/Prometheus for observability, Kafka for event pipelines, AWS and kubectl for infrastructure, Teams for comms, Statsig for experiments. Routine work, diagnosing a failing pipeline, drafting an MR, searching logs mid-incident, meant remembering the exact incantation for each tool, and that knowledge lived in individual engineers heads instead of anywhere reusable.',
+    solution:
+      'Designed and built a personal AI development platform on Claude Code, checked into the monorepo so it could be shared with the team. A routing layer maps plain-language intent to 30+ purpose-built skills, each wrapping one system end to end: create an MR with team defaults, diagnose CI, deploy to QA or a personal dev environment, search Jira/Confluence/Teams, query Grafana logs and Prometheus metrics, inspect Kafka topics, run Athena and Redshift, read Kubernetes state. Hardened it for sharing: per-user secrets stay local, a SessionStart hook reports which integrations are configured, and a PreToolUse gate blocks any skill whose config is missing and points the user at setup docs. Added a typed auto-memory system and on-touch context files so project conventions persist across sessions.',
+    outcome:
+      'Collapsed a dozen tool-specific workflows into one conversational interface where the routing layer picks the right specialist automatically. Tribal knowledge that used to live in chat threads, the exact glab flags, the JQL, the Loki query, became codified, versioned, and reviewable like any other code. The whole toolbox ships through normal MR review, so improvements compound for anyone who adopts it instead of dying in a single session.',
+    metrics:
+      '30+ skills across 10+ integrated systems (GitLab, Jira, Confluence, Grafana, Kafka, AWS, kubectl, Teams, Statsig)',
+    stack: ['Claude Code', 'Claude API', 'TypeScript', 'Bash', 'Python', 'GitLab', 'AWS'],
+    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Platform'],
+  },
+  {
     id: 'talent-deploy-safety-secure-coding',
     title: 'Safe Releases and Secure Coding: Stopped Deploys From Dropping 45.7% of Apply Clicks',
     summary:
@@ -145,93 +238,29 @@ const projectEntries: Project[] = [
     tags: ['DevOps', 'Secure Coding', 'Reliability', 'Root Cause Analysis'],
   },
   {
-    id: 'talent-ci-unit-test-speed',
-    title: 'Faster, Trustworthy CI Across a 100-Service Monorepo: A 392-Second Suite Cut to 43',
+    id: 'talent-soft-404-saga',
+    title: 'The Soft-404 Hunt: Recovering Tens of Millions of Deindexed Job Pages',
     summary:
-      'Talent.com - CI/CD performance work that made unit tests faster, offline, and type-checked without dropping a single test',
+      'Talent.com - Multi-month investigation and fix campaign cutting Google soft-404s on /view',
     company: 'Talent.com',
     period: '2026',
     problem:
-      'Every merge request in the monorepo waits on unit tests split across parallel CI jobs. Across the last 40 merge requests a test job took a median of 4.4 minutes and up to 15.1. Nobody knew where the time went. Some tests also reached live services such as AWS and Redshift, so they could pass or fail depending on the network, and tests in more than 20 services had quietly stopped passing.',
+      'Google Search Console was reporting a massive volume of soft-404s on talent.com, peaking at 39.5 million URLs, the bulk of them on /view job detail pages. A soft-404 is a page that returns HTTP 200 but Google judges as empty or missing, and at that scale it was actively suppressing indexation and organic traffic on the site’s most valuable landing page. An initial fix knocked the count down to 10-12 million, then it stalled and crept back up. The issue had persisted for 3+ months and was effectively un-debuggable: a URL Googlebot classified as soft-404 on its scheduled crawl returned full, healthy HTML when tested live in Search Console, so the team was troubleshooting blind.',
     solution:
-      "Measured before changing anything. Added per-step and per-project timing to the pipeline, then ran a probe with one test in every project to see the full cost. Found that every CI job reused none of its 3,055 packages because the runner had no shared cache, that the work was split by project count rather than by run time so one slow project held up a whole job, and that four Python services never ran their tests in CI at all. Switched Jest to compile without type checking, which is where most of its time went, and added a separate type-check job that fails if any project's error count rises above its recorded baseline, so the speedup did not cost type safety. Blocked tests from making real network calls and ran Go and Python tests offline, mocking the services they had been reaching. Replaced tests that slept on real timers with adjustable intervals. When a smarter way to split the work measured slower, reverted it and left a note explaining why. Fixed the broken tests in 22 services in separate, reviewable changes.",
+      'Drove the technical investigation across a multi-ticket epic. Pushed for and got a scoped one-hour Googlebot-only log capture on /view, the minimum data needed to stop guessing, which revealed Googlebot was issuing POST requests to /view and the backend was answering with tiny 500-650 byte HTTP 200 bodies, an infra-measured ~14.5 million soft-404s per day. Traced a second class to React Server Component flight-data URLs (the _rsc query param) returning JSON instead of HTML, and fixed it by detecting bot crawlers on _rsc requests and 301-redirecting them to the canonical HTML, with an X-Robots-Tag: noindex safety net for unrecognized agents. The campaign also widened bot detection (case-insensitive matching, Google Inspection Tool, a catch-all for unidentified crawlers), suppressed the "No longer accepting applications" banner for search engines so expired-but-live jobs stopped reading as empty, defined correct 404/410 handling for expired jobs with a matching Google-for-Jobs delete call, and migrated the page onto canonical 18-char job IDs across canonical tags, redirects, and JSON-LD.',
     outcome:
-      'The ui suite went from 392 seconds to 43 with the same 728 tests. The jobs-ingestion Go tests went from 126 seconds to 10 locally. The type-check job covers 47 projects and matched every baseline on its first run. Unit tests no longer depend on the network, and 22 services that had stopped passing were fixed.',
+      'Converted a three-month, un-debuggable indexation crisis into a sequence of root-caused, shipped fixes. The scoped-log push surfaced the POST tiny-response root cause the team had been unable to see, and the _rsc redirect plus bot-banner fixes removed two entire classes of false soft-404 on the highest-value organic page on a site serving 5-8M page views per day, where a 1% indexing shift is tens of thousands of landing pages.',
     metrics:
-      'ui suite 392 s to 43 s. jobs-ingestion Go tests 126 s to 10 s. Type-check gate on 47 projects. 22 services restored to passing. 0 tests dropped.',
-    stack: ['GitLab CI', 'Nx', 'Jest', 'TypeScript', 'Go', 'Python', 'pytest', 'pnpm'],
-    tags: ['DevOps', 'CI/CD', 'Developer Productivity', 'Testing'],
-  },
-  {
-    id: 'talent-system-map-alerting-audit',
-    title: 'System Map and Alerting Audit: 17 of 21 Alert Channels Were Failing Silently',
-    summary:
-      'Talent.com - Mapped 409 production workloads and proved most alerts could not reach a person',
-    company: 'Talent.com',
-    period: '2026',
-    problem:
-      'After a run of outages, there was no up-to-date picture of what actually ran in production, who owned it, or whether anyone would be told when it broke. The documentation was kept by one person against 26 people committing code. The monorepo had about 100 services, and the alerting system had over 200 active rules that everyone assumed were working.',
-    solution:
-      'Built a census by reading the live Kubernetes cluster and matching every workload to its folder in the repository, so the picture came from what was running rather than from old documents. Wrote a plain-language system map that follows a job, a click, and a dollar through the system, with one card per service in a shared format, each backed by file evidence. Then audited the alerting end to end: a rule notices a problem, it is sent to a contact point such as a Teams channel or PagerDuty, and the contact point delivers it. Checked the delivery records for every contact point instead of assuming that a rule being on meant someone was told.',
-    outcome:
-      "Of the 21 contact points that had tried to send since Grafana's alert sender last restarted, 17 failed and 4 worked. Every older-style Teams connector that tried to send failed. Of 202 live alert rules, 83 point to a contact point whose last send failed, including every live Google for Jobs rule, and 21 rules have no contact point at all, so they cannot reach anyone. The census found 409 workloads across 22 namespaces, 12 with no home in the repository and 50 switched off. The findings went to infrastructure and the team, and the map is now the starting point for anyone touching an unfamiliar service.",
-    metrics:
-      '17 of 21 alert channels failing. 83 of 202 live rules routed to a failing channel. 409 workloads mapped to 101 service folders. 12 workloads with no owner in the repo.',
-    stack: ['Kubernetes', 'Grafana', 'PagerDuty', 'Microsoft Teams', 'Python', 'Helm'],
-    tags: ['Observability', 'SRE', 'Documentation', 'Technical Leadership'],
-  },
-  {
-    id: 'talent-self-healing-ai-toolbox',
-    title: 'Self-Improving Generative AI Engineering Platform: 17 New Skills in One Quarter',
-    summary:
-      'Talent.com - Agentic AI workflows with guardrails that detect their own gaps and turn them into new automation',
-    company: 'Talent.com',
-    period: '2026',
-    problem:
-      'AI coding assistants fail quietly in two ways. When no tool exists for a task, they improvise, so the same workaround gets rebuilt every time and never becomes reusable. When they get something wrong, the correction stays in one conversation and the next one repeats the mistake. Once AI agents can reach code, tickets, logs, and databases, that silent improvising is also a safety risk.',
-    solution:
-      "Built a feedback loop into the AI platform itself. Standing rules require the AI agent to say plainly when no existing skill covers a task, finish the job anyway, and name what should be built. The second time a task is done by hand, the agent asks whether it should become a reusable skill. Every mistake gets a note left exactly where the next person or agent will hit it, and a shared memory skill saves lessons to the team's repository instead of one person's laptop. Guardrails block the AI from writing to production databases, committing passwords or keys, or running tools that are not set up, and the skill index is generated automatically and checked so it never goes stale.",
-    outcome:
-      "Since June the platform took 230 changes and gained 17 new skills. It now includes 59 skills, 21 specialized AI agents, and 4 automated guardrails, with 24 tracked known issues and 18 changes made purely to record a lesson for next time. One cleanup moved 68 of 112 facts out of a single engineer's private AI memory into shared team documentation. Seven other engineers have contributed.",
-    metrics:
-      '17 new skills in one quarter. 59 skills, 21 AI agents, 4 guardrails. 68 of 112 private facts moved into shared team knowledge.',
-    stack: ['Claude Code', 'Claude API', 'Python', 'Bash', 'GitLab CI'],
-    tags: ['Generative AI', 'Agentic Workflows', 'Workflow Automation', 'Developer Productivity'],
-  },
-  {
-    id: 'talent-claude-code-multi-agent-review',
-    title: 'Team-Shared Multi-Agent AI Code Review Pipeline',
-    summary: 'Talent.com - Claude Code skill fanning out specialist agents on every MR',
-    company: 'Talent.com',
-    period: '2025-2026',
-    problem:
-      'Code review at team scale was bottlenecked on a handful of senior engineers, and the depth of review varied with whoever picked it up. Security, accessibility, coverage, and architectural concerns were easy to miss when the reviewer was rushed. The team needed consistent, comprehensive review on every MR without slowing the merge cadence or creating more review load for the seniors.',
-    solution:
-      'Designed and built a shared Claude Code review pipeline. The /code-review skill fans out to specialist sub-agents (unit tests, lint, types, coverage, security, performance, simplification) in parallel, then consolidates findings by severity. Checked the entire .claude/ directory into the monorepo with a teammate README and tracked skill paths so any engineer gets the same review without local setup. Added a typed auto-memory system, routing rules, and fan-out chains so context persists across sessions without bloating the window. Same architecture also powers /diagnose-ci, which triages failing GitLab pipelines in one command.',
-    outcome:
-      'Turned a single command into a senior-level, multi-dimensional review that runs in minutes. Freed senior engineers from routine review load and raised the floor on every MR across the team. A CI hook now runs the same pipeline automatically on every MR.',
-    metrics:
-      '~100 reviewer-hours saved per week. 15-min bot feedback auto-triggered on every commit. Every line of code reviewed for security, a11y, tests, and architecture.',
-    stack: ['Claude Code', 'Claude API', 'Anthropic SDK', 'TypeScript', 'Bash', 'GitLab CI'],
-    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Leadership'],
-  },
-  {
-    id: 'talent-claude-code-dev-platform',
-    title: 'Self-Built AI Development Platform Across the Full Toolchain',
-    summary:
-      'Talent.com - Claude Code skills, agents, and scripts wrapping every third-party system the team touches',
-    company: 'Talent.com',
-    period: '2025-2026',
-    problem:
-      'Day-to-day engineering meant context-switching across a dozen disconnected systems, each with its own CLI, auth, and quirks: GitLab for code and CI, Jira for tickets, Confluence for PRDs, Grafana/Loki/Prometheus for observability, Kafka for event pipelines, AWS and kubectl for infrastructure, Teams for comms, Statsig for experiments. Routine work, diagnosing a failing pipeline, drafting an MR, searching logs mid-incident, meant remembering the exact incantation for each tool, and that knowledge lived in individual engineers heads instead of anywhere reusable.',
-    solution:
-      'Designed and built a personal AI development platform on Claude Code, checked into the monorepo so it could be shared with the team. A routing layer maps plain-language intent to 30+ purpose-built skills, each wrapping one system end to end: create an MR with team defaults, diagnose CI, deploy to QA or a personal dev environment, search Jira/Confluence/Teams, query Grafana logs and Prometheus metrics, inspect Kafka topics, run Athena and Redshift, read Kubernetes state. Hardened it for sharing: per-user secrets stay local, a SessionStart hook reports which integrations are configured, and a PreToolUse gate blocks any skill whose config is missing and points the user at setup docs. Added a typed auto-memory system and on-touch context files so project conventions persist across sessions.',
-    outcome:
-      'Collapsed a dozen tool-specific workflows into one conversational interface where the routing layer picks the right specialist automatically. Tribal knowledge that used to live in chat threads, the exact glab flags, the JQL, the Loki query, became codified, versioned, and reviewable like any other code. The whole toolbox ships through normal MR review, so improvements compound for anyone who adopts it instead of dying in a single session.',
-    metrics:
-      '30+ skills across 10+ integrated systems (GitLab, Jira, Confluence, Grafana, Kafka, AWS, kubectl, Teams, Statsig)',
-    stack: ['Claude Code', 'Claude API', 'TypeScript', 'Bash', 'Python', 'GitLab', 'AWS'],
-    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Platform'],
+      '39.5M soft-404s at peak, ~14.5M/day from the POST/_rsc class, root-caused via scoped Googlebot logs and fixed across /view',
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'React Server Components',
+      'Google Search Console',
+      'Google Indexing API',
+      'Middleware',
+    ],
+    tags: ['SEO', 'Scale', 'Backend', 'Technical Leadership'],
   },
   {
     id: 'talent-location-service-consolidation',
@@ -250,6 +279,24 @@ const projectEntries: Project[] = [
     tags: ['Architecture', 'Cost Savings', 'Technical Leadership', 'PRD'],
   },
   {
+    id: 'talent-nextjs-staged-migration',
+    title: 'Modernizing a 3-Years-Behind Frontend, Live in Production',
+    summary:
+      'Talent.com - Full dependency overhaul (Next.js 14→15, React 19, next-intl v4, Nx 22) shipped to a 5-8M pageviews/day site',
+    company: 'Talent.com',
+    period: '2025-2026',
+    problem:
+      'The jobseeker frontend, serving 5-8M page views per day, had drifted roughly three years behind across its dependency tree: Next.js multiple majors back, React a major behind, a next-intl v3 layer whose v4 migration was a breaking API change, an aging Nx workspace, and a long tail of transitive packages carrying security advisories and blocking each other. Attempting it all in one branch would have been weeks of merge hell with no way to de-risk, and a single regression on a critical organic-traffic site could cost hundreds of thousands of pages in indexing or conversion on launch day.',
+    solution:
+      'Broke the modernization into a six-phase staged rollout on a long-lived feature branch: Nx 18 → 22, React 18 → 19, next-intl v3 → v4, Next.js 14 → 15 → 16 (the Next.js 16 phase is built and was deployed to QA, not yet merged), plus the dependent packages each major dragged with it. Every phase merged dev into the feature branch, repaired test drift, and deployed to a dedicated QA environment before the next one started. Repaired roughly 30 test suites broken by the React 19 and next-intl v4 API changes, and caught prod-build type errors that dev mode had silently tolerated.',
+    outcome:
+      'Now live in production. Carried the full jobseeker frontend from three years behind through React 19, next-intl v4, Nx 22, and Next.js 15, without a production regression. Each phase shipped independently through QA, so rollback blast radius stayed small. The same branch picked up RBAC parity, the Better Auth migration, and a coverage jump from 59% to 90.92% along the way.',
+    metrics:
+      'Next.js 14→15, React 18→19, next-intl v3→v4, Nx 18→22, shipped live to 5-8M page views/day with zero production regressions',
+    stack: ['Next.js', 'React 19', 'next-intl 4', 'Nx 22', 'TypeScript', 'Jest', 'GitLab CI'],
+    tags: ['Migration', 'Scale', 'Performance', 'Technical Leadership'],
+  },
+  {
     id: 'talent-better-auth-migration',
     title: 'Better Auth Migration Across 4 Frontend Services',
     summary:
@@ -266,41 +313,6 @@ const projectEntries: Project[] = [
       '4 frontends migrated (including the 5-8M pageviews/day jobseeker app), next-auth removed, zero auth downtime',
     stack: ['Better Auth', 'Next.js', 'TypeScript', 'Microsoft Entra', 'OAuth'],
     tags: ['Security', 'Migration', 'Architecture', 'Technical Leadership'],
-  },
-  {
-    id: 'talent-nextjs-staged-migration',
-    title: 'Modernizing a 3-Years-Behind Frontend, Live in Production',
-    summary:
-      'Talent.com - Full dependency overhaul (Next.js 14→16, React 19, next-intl v4, Nx 22) shipped to a 5-8M pageviews/day site',
-    company: 'Talent.com',
-    period: '2025-2026',
-    problem:
-      'The jobseeker frontend, serving 5-8M page views per day, had drifted roughly three years behind across its dependency tree: Next.js multiple majors back, React a major behind, a next-intl v3 layer whose v4 migration was a breaking API change, an aging Nx workspace, and a long tail of transitive packages carrying security advisories and blocking each other. Attempting it all in one branch would have been weeks of merge hell with no way to de-risk, and a single regression on a critical organic-traffic site could cost hundreds of thousands of pages in indexing or conversion on launch day.',
-    solution:
-      'Broke the modernization into a six-phase staged rollout on a long-lived feature branch: Nx 18 → 22, React 18 → 19, next-intl v3 → v4, Next.js 14 → 15 → 16, plus the dependent packages each major dragged with it. Every phase merged dev into the feature branch, repaired test drift, and deployed to a dedicated QA environment before the next one started. Repaired roughly 30 test suites broken by the React 19 and next-intl v4 API changes, and caught prod-build type errors that dev mode had silently tolerated.',
-    outcome:
-      'Now live in production. Carried the full jobseeker frontend from three years behind to current, through React 19, next-intl v4, and Next.js 16, without a production regression. Each phase shipped independently through QA, so rollback blast radius stayed small. The same branch picked up RBAC parity, the Better Auth migration, and a coverage jump from 59% to 90.92% along the way.',
-    metrics:
-      'Next.js 14→16, React 18→19, next-intl v3→v4, Nx 18→22, shipped live to 5-8M page views/day with zero production regressions',
-    stack: ['Next.js', 'React 19', 'next-intl 4', 'Nx 22', 'TypeScript', 'Jest', 'GitLab CI'],
-    tags: ['Migration', 'Scale', 'Performance', 'Technical Leadership'],
-  },
-  {
-    id: 'talent-jobseeker-coverage-revival',
-    title: 'Jobseeker Test Coverage 59% to 90.92%',
-    summary: 'Talent.com - Revived and wrote ~90 Jest suites across the Next.js frontend',
-    company: 'Talent.com',
-    period: '2026',
-    problem:
-      'The jobseeker frontend had 59% test coverage with dozens of suites hidden behind .exclusions, a growing pile of stale tests skipped during prior migrations, and a local-vs-CI coverage mismatch that hid real gaps. New features were shipping without tests because the existing suite could not be trusted to catch regressions. A Next.js and React 19 upgrade was looming that would hit every mocked component in the repo.',
-    solution:
-      'Drove the coverage initiative in roughly 50 commits across a week. Revived 60+ suites across modals, job cards, SERP components, and provider wrappers. Wrote new branch-coverage tests for auth flows, A/B branches, and server actions. Fixed the Babel and Jest transform so React Testing Library actually rendered. Aligned local coverage reporting with CI via .exclusions pass-through so the numbers stopped lying. Co-located every new test next to its component.',
-    outcome:
-      'Coverage climbed from 59% to 90.92% with zero failing suites. Branch and function coverage both crossed the 80% CI threshold. The team could land the React 19 and next-intl v4 upgrade with real confidence instead of hope, and ~90 newly-reliable suites became the regression net for every subsequent change on a site serving 5-8M pageviews per day.',
-    metrics:
-      'Coverage 59% → 90.92%, ~90 suites revived or written, 0 failing suites, protecting a 5-8M pageviews/day site',
-    stack: ['Jest', 'React Testing Library', 'TypeScript', 'React 19', 'Babel'],
-    tags: ['Testing', 'Quality', 'Migration', 'Technical Leadership'],
   },
   {
     id: 'talent-jobseeker-e2e-from-zero',
@@ -338,29 +350,21 @@ const projectEntries: Project[] = [
     tags: ['SEO', 'Scale', 'Performance', 'Backend'],
   },
   {
-    id: 'talent-soft-404-saga',
-    title: 'The Soft-404 Hunt: Recovering Tens of Millions of Deindexed Job Pages',
-    summary:
-      'Talent.com - Multi-month investigation and fix campaign cutting Google soft-404s on /view',
+    id: 'talent-jobseeker-coverage-revival',
+    title: 'Jobseeker Test Coverage 59% to 90.92%',
+    summary: 'Talent.com - Revived and wrote ~90 Jest suites across the Next.js frontend',
     company: 'Talent.com',
     period: '2026',
     problem:
-      'Google Search Console was reporting a massive volume of soft-404s on talent.com, peaking at 39.5 million URLs, the bulk of them on /view job detail pages. A soft-404 is a page that returns HTTP 200 but Google judges as empty or missing, and at that scale it was actively suppressing indexation and organic traffic on the site’s most valuable landing page. An initial fix knocked the count down to 10-12 million, then it stalled and crept back up. The issue had persisted for 3+ months and was effectively un-debuggable: a URL Googlebot classified as soft-404 on its scheduled crawl returned full, healthy HTML when tested live in Search Console, so the team was troubleshooting blind.',
+      'The jobseeker frontend had 59% test coverage with dozens of suites hidden behind .exclusions, a growing pile of stale tests skipped during prior migrations, and a local-vs-CI coverage mismatch that hid real gaps. New features were shipping without tests because the existing suite could not be trusted to catch regressions. A Next.js and React 19 upgrade was looming that would hit every mocked component in the repo.',
     solution:
-      'Drove the technical investigation across a multi-ticket epic. Pushed for and got a scoped one-hour Googlebot-only log capture on /view, the minimum data needed to stop guessing, which revealed Googlebot was issuing POST requests to /view and the backend was answering with tiny 500-650 byte HTTP 200 bodies, an infra-measured ~14.5 million soft-404s per day. Traced a second class to React Server Component flight-data URLs (the _rsc query param) returning JSON instead of HTML, and fixed it by detecting bot crawlers on _rsc requests and 301-redirecting them to the canonical HTML, with an X-Robots-Tag: noindex safety net for unrecognized agents. The campaign also widened bot detection (case-insensitive matching, Google Inspection Tool, a catch-all for unidentified crawlers), suppressed the "No longer accepting applications" banner for search engines so expired-but-live jobs stopped reading as empty, defined correct 404/410 handling for expired jobs with a matching Google-for-Jobs delete call, and migrated the page onto canonical 18-char job IDs across canonical tags, redirects, and JSON-LD.',
+      'Drove the coverage initiative in roughly 50 commits across a week. Revived 60+ suites across modals, job cards, SERP components, and provider wrappers. Wrote new branch-coverage tests for auth flows, A/B branches, and server actions. Fixed the Babel and Jest transform so React Testing Library actually rendered. Aligned local coverage reporting with CI via .exclusions pass-through so the numbers stopped lying. Co-located every new test next to its component.',
     outcome:
-      'Converted a three-month, un-debuggable indexation crisis into a sequence of root-caused, shipped fixes. The scoped-log push surfaced the POST tiny-response root cause the team had been unable to see, and the _rsc redirect plus bot-banner fixes removed two entire classes of false soft-404 on the highest-value organic page on a site serving 5-8M page views per day, where a 1% indexing shift is tens of thousands of landing pages.',
+      'Coverage climbed from 59% to 90.92% with zero failing suites. Branch and function coverage both crossed the 80% CI threshold. The team could land the React 19 and next-intl v4 upgrade with real confidence instead of hope, and ~90 newly-reliable suites became the regression net for every subsequent change on a site serving 5-8M pageviews per day.',
     metrics:
-      '39.5M soft-404s at peak, ~14.5M/day from the POST/_rsc class, root-caused via scoped Googlebot logs and fixed across /view',
-    stack: [
-      'Next.js',
-      'TypeScript',
-      'React Server Components',
-      'Google Search Console',
-      'Google Indexing API',
-      'Middleware',
-    ],
-    tags: ['SEO', 'Scale', 'Backend', 'Technical Leadership'],
+      'Coverage 59% → 90.92%, ~90 suites revived or written, 0 failing suites, protecting a 5-8M pageviews/day site',
+    stack: ['Jest', 'React Testing Library', 'TypeScript', 'React 19', 'Babel'],
+    tags: ['Testing', 'Quality', 'Migration', 'Technical Leadership'],
   },
   {
     id: 'the-muse-migration',
@@ -387,135 +391,6 @@ const projectEntries: Project[] = [
       'Datadog',
     ],
     tags: ['Migration', 'Performance', 'DevOps', 'Leadership'],
-  },
-  {
-    id: 'the-muse-white-label',
-    title: 'Multi-Tenant White-Label Job Search Platform',
-    summary:
-      'The Muse - Scalable B2B SaaS product enabling partners to launch branded job search sites',
-    company: 'The Muse',
-    period: '2022-2023',
-    problem:
-      'The Muse wanted to expand revenue beyond job seeker platform by enabling partners to leverage job search technology. Required building scalable multi-tenant architecture that could handle custom branding, domains, and configuration while maintaining single codebase.',
-    solution:
-      'Architected and led development of white-label platform with tenant isolation, dynamic configuration, custom domain mapping, and brand theming. Built admin tooling for tenant provisioning and management. Designed data isolation strategy ensuring security and performance across tenants.',
-    outcome:
-      'Successfully launched B2B SaaS product opening new revenue stream. Platform enabled partners to launch branded job search sites within days instead of months. Architecture supports unlimited tenants with minimal overhead.',
-    metrics: 'Projected: $153K-$230K annual revenue per tenant',
-    stack: ['Next.js', 'TypeScript', 'React', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'],
-    tags: ['Architecture', 'B2B SaaS', 'Multi-Tenant', 'Product Leadership'],
-  },
-  {
-    id: 'the-muse-seo-pagination',
-    title: 'SEO Architecture Overhaul - Infinite Scroll to Pagination',
-    summary: 'The Muse - Replaced infinite scroll with paginated search for improved crawlability',
-    company: 'The Muse',
-    period: '2021-2022',
-    problem:
-      'Infinite scroll job search prevented Google from discovering and indexing deep job listings. Search engines could only crawl the initial page load, leaving thousands of job postings invisible to organic search traffic and costing significant potential revenue.',
-    solution:
-      'Redesigned search UX from infinite scroll to paginated results with proper SEO implementation (canonical URLs, rel=prev/next, XML sitemaps). Collaborated with Product/Design to maintain user experience while optimizing for crawlability. Implemented progressive enhancement ensuring functionality without JavaScript.',
-    outcome:
-      'Google began indexing entire job catalog. Organic search traffic increased dramatically as job listings became discoverable. Improved rankings for job-related queries and reduced dependency on paid acquisition.',
-    metrics: '+74K monthly SEO visits',
-    stack: ['Next.js', 'React', 'SEO', 'JavaScript', 'Server-Side Rendering'],
-    tags: ['SEO', 'Product', 'UX', 'Growth'],
-  },
-  {
-    id: 'the-muse-ad-optimization',
-    title: 'Ad Platform Migration & Revenue Optimization',
-    summary: 'The Muse - Migrated to new ad partner with improved layouts and formats',
-    company: 'The Muse',
-    period: '2020-2021',
-    problem:
-      'Existing ad partner provided limited formats and poor viewability. Ad revenue was plateauing and user experience suffered from intrusive placements. Needed better monetization without degrading Core Web Vitals or user experience.',
-    solution:
-      'Led evaluation and migration to new ad partner with modern formats (native, video, rich media). Redesigned ad integration with lazy loading, viewability optimization, and performance budgets. Implemented A/B testing framework to validate revenue impact and user experience metrics.',
-    outcome:
-      'Revenue increased 15% with better user experience. Improved ad viewability and CTR while maintaining excellent Core Web Vitals. Established framework for ongoing ad optimization experiments.',
-    metrics: '+15% revenue increase',
-    stack: ['JavaScript', 'React', 'Next.js', 'Google Ad Manager', 'A/B Testing'],
-    tags: ['Monetization', 'Performance', 'Optimization'],
-  },
-  {
-    id: 'conde-nast-ad-platform',
-    title: 'Global Ad Platform for 30+ Premium Publications',
-    summary: 'Condé Nast - Rebuilt cross-brand ad delivery infrastructure at massive scale',
-    company: 'Condé Nast',
-    period: '2015-2018',
-    problem:
-      'Legacy ad platform across Vogue, The New Yorker, Wired, GQ, Bon Appétit, and 25+ other brands had poor viewability (45%), slow render times, and inconsistent implementation. Every millisecond of latency impacted global revenue across 229M+ monthly users.',
-    solution:
-      'Architected and implemented unified ad platform serving all Condé Nast brands. Removed jQuery dependencies, optimized bundle size, implemented lazy loading and viewability tracking. Created shared UI tooling and plugin architecture. Standardized testing achieving 80%+ coverage.',
-    outcome:
-      'Ad viewability jumped from 45% to 85%, dramatically increasing revenue. Faster render times improved user experience and Core Web Vitals. Reduced integration defects and accelerated feature delivery across all brands.',
-    metrics: 'Ad viewability: 45% → 85%, 229M+ monthly users, 1B+ monthly video views',
-    stack: ['JavaScript', 'React', 'Node.js', 'Google Ad Manager', 'Prebid', 'AWS'],
-    tags: ['Scale', 'Monetization', 'Architecture', 'Performance'],
-  },
-  {
-    id: 'everyday-health-performance',
-    title: 'Health Platform Performance Optimization',
-    summary: 'Everyday Health - Reduced page load time and network requests for 30M+ monthly users',
-    company: 'Everyday Health',
-    period: '2012-2015',
-    problem:
-      'Slow page loads (5+ seconds) and excessive network requests (100+ per page) created poor user experience, hurt SEO rankings, and reduced ad revenue. Mobile users particularly impacted, with high bounce rates on slow connections.',
-    solution:
-      'Implemented comprehensive performance optimization: lazy loading, image optimization, critical CSS, code splitting, CDN optimization, and reduced third-party scripts. Built responsive mobile-first architecture using SASS (BEM) and modular JavaScript. Established performance budgets and monitoring.',
-    outcome:
-      'Page load time decreased 54% and network requests cut 53%. Improved engagement metrics, better Core Web Vitals, higher SEO rankings, and increased ad revenue. Mobile experience dramatically improved.',
-    metrics: '-54% load time, -53% requests, +86% ad CTR',
-    stack: ['JavaScript', 'SASS', 'Bootstrap', 'Responsive Design', 'Performance Optimization'],
-    tags: ['Performance', 'Mobile', 'SEO', 'User Experience'],
-  },
-  {
-    id: 'catalpasoft-foster-care',
-    title: 'Statewide Foster Care & Adoption Platform',
-    summary: 'CatalpaSoft - Digital transformation for Indiana foster care system',
-    company: 'CatalpaSoft',
-    period: '2003-2012',
-    problem:
-      'Indiana foster care system relied on manual paperwork, spreadsheets, and email to manage 12K+ children and 3K+ foster households. Processing took months, data was inconsistent, and staff spent significant time on data entry instead of helping families.',
-    solution:
-      'Founded software firm and built comprehensive platform handling parent recruitment, child placement, training compliance, mentorship forums, and developmental evaluations. Replaced paper/spreadsheet workflows with automated systems. Implemented secure single sign-on and encrypted remote access for field staff.',
-    outcome:
-      'Cut statewide foster/adoption processing time by 50%+, accelerating placements for vulnerable children. Eliminated manual paperwork and data entry roles, saving $400K+ annually. Platform expanded across state lines and served as model for child welfare digital transformation.',
-    metrics: '50%+ faster processing for 12K+ children, $400K+ annual savings',
-    stack: ['ColdFusion', 'SQL Server', 'JavaScript', 'Exchange SSO', 'Encryption'],
-    tags: ['Social Impact', 'Government', 'Enterprise', 'Founder'],
-  },
-  {
-    id: 'the-muse-core-web-vitals',
-    title: 'Core Web Vitals Optimization to Google Green',
-    summary: 'The Muse - Performance refactors improving rankings and conversions',
-    company: 'The Muse',
-    period: '2020-2021',
-    problem:
-      "Google Core Web Vitals scores in red/orange range hurt SEO rankings and conversion rates. LCP, FID, and CLS metrics failed Google's thresholds, directly impacting search visibility and user experience during critical job search moments.",
-    solution:
-      'Implemented comprehensive Web Vitals optimization: image optimization with next/image, font loading optimization, code splitting, lazy loading, server-side rendering improvements, and third-party script optimization. Established monitoring and performance budgets to prevent regression.',
-    outcome:
-      'Achieved 90%+ green Core Web Vitals scores across all pages. Improved SEO rankings, increased organic traffic, and higher conversion rates. Established performance culture with ongoing monitoring and optimization.',
-    metrics: '90%+ green Web Vitals, improved LCP + conversions',
-    stack: ['Next.js', 'React', 'Performance API', 'Lighthouse', 'Web Vitals', 'Datadog'],
-    tags: ['Performance', 'SEO', 'User Experience'],
-  },
-  {
-    id: 'the-muse-structured-data',
-    title: 'Structured Data Implementation & SEO Growth',
-    summary: 'The Muse - JSON-LD structured data driving 10x organic traffic increase',
-    company: 'The Muse',
-    period: '2019-2020',
-    problem:
-      'Job listings and articles not appearing in Google rich results (job cards, article snippets). Search engines struggled to understand content structure, limiting visibility in competitive job search market.',
-    solution:
-      'Implemented comprehensive JSON-LD structured data across all content types (JobPosting, Article, Organization, BreadcrumbList). Worked with SEO team to optimize schema markup and validate in Search Console. Built automated testing to prevent schema regression.',
-    outcome:
-      'Organic SEO traffic increased 10x as content appeared in Google rich results. Job listings displayed with salary, location, and company in search. Articles featured in Top Stories and article carousels. Dramatically reduced dependency on paid acquisition.',
-    metrics: '10x increase in organic SEO traffic',
-    stack: ['Next.js', 'JSON-LD', 'Schema.org', 'SEO', 'Server-Side Rendering'],
-    tags: ['SEO', 'Growth', 'Structured Data'],
   },
   {
     id: 'the-muse-ai-search-maya',
@@ -582,6 +457,39 @@ const projectEntries: Project[] = [
     tags: ['Performance', 'SEO', 'Migration', 'Accessibility'],
   },
   {
+    id: 'the-muse-white-label',
+    title: 'Multi-Tenant White-Label Job Search Platform',
+    summary:
+      'The Muse - Scalable B2B SaaS product enabling partners to launch branded job search sites',
+    company: 'The Muse',
+    period: '2022-2023',
+    problem:
+      'The Muse wanted to expand revenue beyond job seeker platform by enabling partners to leverage job search technology. Required building scalable multi-tenant architecture that could handle custom branding, domains, and configuration while maintaining single codebase.',
+    solution:
+      'Architected and led development of white-label platform with tenant isolation, dynamic configuration, custom domain mapping, and brand theming. Built admin tooling for tenant provisioning and management. Designed data isolation strategy ensuring security and performance across tenants.',
+    outcome:
+      'Successfully launched B2B SaaS product opening new revenue stream. Platform enabled partners to launch branded job search sites within days instead of months. Architecture supports unlimited tenants with minimal overhead.',
+    metrics: 'Projected: $153K-$230K annual revenue per tenant',
+    stack: ['Next.js', 'TypeScript', 'React', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'],
+    tags: ['Architecture', 'B2B SaaS', 'Multi-Tenant', 'Product Leadership'],
+  },
+  {
+    id: 'the-muse-seo-pagination',
+    title: 'SEO Architecture Overhaul - Infinite Scroll to Pagination',
+    summary: 'The Muse - Replaced infinite scroll with paginated search for improved crawlability',
+    company: 'The Muse',
+    period: '2021-2022',
+    problem:
+      'Infinite scroll job search prevented Google from discovering and indexing deep job listings. Search engines could only crawl the initial page load, leaving thousands of job postings invisible to organic search traffic and costing significant potential revenue.',
+    solution:
+      'Redesigned search UX from infinite scroll to paginated results with proper SEO implementation (canonical URLs, rel=prev/next, XML sitemaps). Collaborated with Product/Design to maintain user experience while optimizing for crawlability. Implemented progressive enhancement ensuring functionality without JavaScript.',
+    outcome:
+      'Google began indexing entire job catalog. Organic search traffic increased dramatically as job listings became discoverable. Improved rankings for job-related queries and reduced dependency on paid acquisition.',
+    metrics: '+74K monthly SEO visits',
+    stack: ['Next.js', 'React', 'SEO', 'JavaScript', 'Server-Side Rendering'],
+    tags: ['SEO', 'Product', 'UX', 'Growth'],
+  },
+  {
     id: 'the-muse-search-ux-refresh',
     title: 'Job Search Experience Complete UX & Technical Rebuild',
     summary:
@@ -598,20 +506,103 @@ const projectEntries: Project[] = [
     stack: ['Next.js', 'TypeScript', 'Koa', 'Storybook', 'CSS Modules', 'Docker'],
     tags: ['UX', 'Performance', 'Product', 'Architecture'],
   },
+  {
+    id: 'the-muse-ad-optimization',
+    title: 'Ad Platform Migration & Revenue Optimization',
+    summary: 'The Muse - Migrated to new ad partner with improved layouts and formats',
+    company: 'The Muse',
+    period: '2020-2021',
+    problem:
+      'Existing ad partner provided limited formats and poor viewability. Ad revenue was plateauing and user experience suffered from intrusive placements. Needed better monetization without degrading Core Web Vitals or user experience.',
+    solution:
+      'Led evaluation and migration to new ad partner with modern formats (native, video, rich media). Redesigned ad integration with lazy loading, viewability optimization, and performance budgets. Implemented A/B testing framework to validate revenue impact and user experience metrics.',
+    outcome:
+      'Revenue increased 15% with better user experience. Improved ad viewability and CTR while maintaining excellent Core Web Vitals. Established framework for ongoing ad optimization experiments.',
+    metrics: '+15% revenue increase',
+    stack: ['JavaScript', 'React', 'Next.js', 'Google Ad Manager', 'A/B Testing'],
+    tags: ['Monetization', 'Performance', 'Optimization'],
+  },
+  {
+    id: 'the-muse-core-web-vitals',
+    title: 'Core Web Vitals Optimization to Google Green',
+    summary: 'The Muse - Performance refactors improving rankings and conversions',
+    company: 'The Muse',
+    period: '2020-2021',
+    problem:
+      "Google Core Web Vitals scores in red/orange range hurt SEO rankings and conversion rates. LCP, FID, and CLS metrics failed Google's thresholds, directly impacting search visibility and user experience during critical job search moments.",
+    solution:
+      'Implemented comprehensive Web Vitals optimization: image optimization with next/image, font loading optimization, code splitting, lazy loading, server-side rendering improvements, and third-party script optimization. Established monitoring and performance budgets to prevent regression.',
+    outcome:
+      'Achieved 90%+ green Core Web Vitals scores across all pages. Improved SEO rankings, increased organic traffic, and higher conversion rates. Established performance culture with ongoing monitoring and optimization.',
+    metrics: '90%+ green Web Vitals, improved LCP + conversions',
+    stack: ['Next.js', 'React', 'Performance API', 'Lighthouse', 'Web Vitals', 'Datadog'],
+    tags: ['Performance', 'SEO', 'User Experience'],
+  },
+  {
+    id: 'the-muse-structured-data',
+    title: 'Structured Data Implementation & SEO Growth',
+    summary: 'The Muse - JSON-LD structured data driving 10x organic traffic increase',
+    company: 'The Muse',
+    period: '2019-2020',
+    problem:
+      'Job listings and articles not appearing in Google rich results (job cards, article snippets). Search engines struggled to understand content structure, limiting visibility in competitive job search market.',
+    solution:
+      'Implemented comprehensive JSON-LD structured data across all content types (JobPosting, Article, Organization, BreadcrumbList). Worked with SEO team to optimize schema markup and validate in Search Console. Built automated testing to prevent schema regression.',
+    outcome:
+      'Organic SEO traffic increased 10x as content appeared in Google rich results. Job listings displayed with salary, location, and company in search. Articles featured in Top Stories and article carousels. Dramatically reduced dependency on paid acquisition.',
+    metrics: '10x increase in organic SEO traffic',
+    stack: ['Next.js', 'JSON-LD', 'Schema.org', 'SEO', 'Server-Side Rendering'],
+    tags: ['SEO', 'Growth', 'Structured Data'],
+  },
+  {
+    id: 'conde-nast-ad-platform',
+    title: 'Global Ad Platform for 30+ Premium Publications',
+    summary: 'Condé Nast - Rebuilt cross-brand ad delivery infrastructure at massive scale',
+    company: 'Condé Nast',
+    period: '2015-2018',
+    problem:
+      'Legacy ad platform across Vogue, The New Yorker, Wired, GQ, Bon Appétit, and 25+ other brands had poor viewability (45%), slow render times, and inconsistent implementation. Every millisecond of latency impacted global revenue across 229M+ monthly users.',
+    solution:
+      'Architected and implemented unified ad platform serving all Condé Nast brands. Removed jQuery dependencies, optimized bundle size, implemented lazy loading and viewability tracking. Created shared UI tooling and plugin architecture. Standardized testing achieving 80%+ coverage.',
+    outcome:
+      'Ad viewability jumped from 45% to 85%, dramatically increasing revenue. Faster render times improved user experience and Core Web Vitals. Reduced integration defects and accelerated feature delivery across all brands.',
+    metrics: 'Ad viewability: 45% → 85%, 229M+ monthly users, 1B+ monthly video views',
+    stack: ['JavaScript', 'React', 'Node.js', 'Google Ad Manager', 'Prebid', 'AWS'],
+    tags: ['Scale', 'Monetization', 'Architecture', 'Performance'],
+  },
+  {
+    id: 'everyday-health-performance',
+    title: 'Health Platform Performance Optimization',
+    summary: 'Everyday Health - Reduced page load time and network requests for 30M+ monthly users',
+    company: 'Everyday Health',
+    period: '2012-2015',
+    problem:
+      'Slow page loads (5+ seconds) and excessive network requests (100+ per page) created poor user experience, hurt SEO rankings, and reduced ad revenue. Mobile users particularly impacted, with high bounce rates on slow connections.',
+    solution:
+      'Implemented comprehensive performance optimization: lazy loading, image optimization, critical CSS, code splitting, CDN optimization, and reduced third-party scripts. Built responsive mobile-first architecture using SASS (BEM) and modular JavaScript. Established performance budgets and monitoring.',
+    outcome:
+      'Page load time decreased 54% and network requests cut 53%. Improved engagement metrics, better Core Web Vitals, higher SEO rankings, and increased ad revenue. Mobile experience dramatically improved.',
+    metrics: '-54% load time, -53% requests, +86% ad CTR',
+    stack: ['JavaScript', 'SASS', 'Bootstrap', 'Responsive Design', 'Performance Optimization'],
+    tags: ['Performance', 'Mobile', 'SEO', 'User Experience'],
+  },
+  {
+    id: 'catalpasoft-foster-care',
+    title: 'Statewide Foster Care & Adoption Platform',
+    summary: 'CatalpaSoft - Digital transformation for Indiana foster care system',
+    company: 'CatalpaSoft',
+    period: '2003-2012',
+    problem:
+      'Indiana foster care system relied on manual paperwork, spreadsheets, and email to manage 12K+ children and 3K+ foster households. Processing took months, data was inconsistent, and staff spent significant time on data entry instead of helping families.',
+    solution:
+      'Founded software firm and built comprehensive platform handling parent recruitment, child placement, training compliance, mentorship forums, and developmental evaluations. Replaced paper/spreadsheet workflows with automated systems. Implemented secure single sign-on and encrypted remote access for field staff.',
+    outcome:
+      'Cut statewide foster/adoption processing time by 50%+, accelerating placements for vulnerable children. Eliminated manual paperwork and data entry roles, saving $400K+ annually. Platform expanded across state lines and served as model for child welfare digital transformation.',
+    metrics: '50%+ faster processing for 12K+ children, $400K+ annual savings',
+    stack: ['ColdFusion', 'SQL Server', 'JavaScript', 'Exchange SSO', 'Encryption'],
+    tags: ['Social Impact', 'Government', 'Enterprise', 'Founder'],
+  },
 ];
-
-/** Splits a period like '2023-2025' or '2026' into [startYear, endYear]. */
-function periodYears(period: string): [number, number] {
-  const [start, end = start] = period.split('-').map(Number);
-  return [start, end];
-}
-
-/** Newest first: by end year, then start year. Array sort is stable, so ties keep source order. */
-export const projects: Project[] = [...projectEntries].sort((a, b) => {
-  const [aStart, aEnd] = periodYears(a.period);
-  const [bStart, bEnd] = periodYears(b.period);
-  return bEnd - aEnd || bStart - aStart;
-});
 
 // Helper function to get projects by tag
 export function getProjectsByTag(tag: string): Project[] {
