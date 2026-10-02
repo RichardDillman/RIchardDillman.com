@@ -30,7 +30,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Stopped releases from dropping 45.7% of apply clicks by keeping the server key stable across builds and loading it from AWS Secrets Manager.
 - Corrected business analytics after finding scrapers made up 22.5% of traffic counted as human.
 
-### The Muse
+### The Muse | Dec 2018 - Sep 2025
 
 #### Senior Director of Engineering | Jan 2022 - Sep 2025
 

@@ -30,7 +30,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Migrated 4 frontends to a new authentication library behind a dual-implementation flag with zero auth downtime.
 - Launched a team-shared AI development platform of 30+ Claude Code skills and a multi-agent review pipeline that checks tests, security, accessibility, and performance on every merge request.
 
-### The Muse
+### The Muse | Dec 2018 - Sep 2025
 
 #### Senior Director of Engineering | Jan 2022 - Sep 2025
 
