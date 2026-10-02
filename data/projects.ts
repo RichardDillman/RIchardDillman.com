@@ -126,7 +126,7 @@ export const projects: Project[] = [
     title: 'Team-Shared Multi-Agent AI Code Review Pipeline',
     summary: 'Talent.com - Claude Code skill fanning out specialist agents on every MR',
     company: 'Talent.com',
-    period: '2025-2026',
+    period: '2026',
     problem:
       'Code review at team scale was bottlenecked on a handful of senior engineers, and the depth of review varied with whoever picked it up. Security, accessibility, coverage, and architectural concerns were easy to miss when the reviewer was rushed. The team needed consistent, comprehensive review on every MR without slowing the merge cadence or creating more review load for the seniors.',
     solution:
@@ -282,17 +282,17 @@ export const projects: Project[] = [
     id: 'talent-nextjs-staged-migration',
     title: 'Modernizing a 3-Years-Behind Frontend, Live in Production',
     summary:
-      'Talent.com - Full dependency overhaul (Next.js 14→16, React 19, next-intl v4, Nx 22) shipped to a 5-8M pageviews/day site',
+      'Talent.com - Full dependency overhaul (Next.js 14→15, React 19, next-intl v4, Nx 22) shipped to a 5-8M pageviews/day site',
     company: 'Talent.com',
     period: '2025-2026',
     problem:
       'The jobseeker frontend, serving 5-8M page views per day, had drifted roughly three years behind across its dependency tree: Next.js multiple majors back, React a major behind, a next-intl v3 layer whose v4 migration was a breaking API change, an aging Nx workspace, and a long tail of transitive packages carrying security advisories and blocking each other. Attempting it all in one branch would have been weeks of merge hell with no way to de-risk, and a single regression on a critical organic-traffic site could cost hundreds of thousands of pages in indexing or conversion on launch day.',
     solution:
-      'Broke the modernization into a six-phase staged rollout on a long-lived feature branch: Nx 18 → 22, React 18 → 19, next-intl v3 → v4, Next.js 14 → 15 → 16, plus the dependent packages each major dragged with it. Every phase merged dev into the feature branch, repaired test drift, and deployed to a dedicated QA environment before the next one started. Repaired roughly 30 test suites broken by the React 19 and next-intl v4 API changes, and caught prod-build type errors that dev mode had silently tolerated.',
+      'Broke the modernization into a six-phase staged rollout on a long-lived feature branch: Nx 18 → 22, React 18 → 19, next-intl v3 → v4, Next.js 14 → 15 → 16 (the Next.js 16 phase is built and was deployed to QA, not yet merged), plus the dependent packages each major dragged with it. Every phase merged dev into the feature branch, repaired test drift, and deployed to a dedicated QA environment before the next one started. Repaired roughly 30 test suites broken by the React 19 and next-intl v4 API changes, and caught prod-build type errors that dev mode had silently tolerated.',
     outcome:
-      'Now live in production. Carried the full jobseeker frontend from three years behind to current, through React 19, next-intl v4, and Next.js 16, without a production regression. Each phase shipped independently through QA, so rollback blast radius stayed small. The same branch picked up RBAC parity, the Better Auth migration, and a coverage jump from 59% to 90.92% along the way.',
+      'Now live in production. Carried the full jobseeker frontend from three years behind through React 19, next-intl v4, Nx 22, and Next.js 15, without a production regression. Each phase shipped independently through QA, so rollback blast radius stayed small. The same branch picked up RBAC parity, the Better Auth migration, and a coverage jump from 59% to 90.92% along the way.',
     metrics:
-      'Next.js 14→16, React 18→19, next-intl v3→v4, Nx 18→22, shipped live to 5-8M page views/day with zero production regressions',
+      'Next.js 14→15, React 18→19, next-intl v3→v4, Nx 18→22, shipped live to 5-8M page views/day with zero production regressions',
     stack: ['Next.js', 'React 19', 'next-intl 4', 'Nx 22', 'TypeScript', 'Jest', 'GitLab CI'],
     tags: ['Migration', 'Scale', 'Performance', 'Technical Leadership'],
   },

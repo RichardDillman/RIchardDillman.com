@@ -78,8 +78,8 @@ export const experiences: Experience[] = [
             projectId: 'talent-location-service-consolidation',
           },
           {
-            text: 'Carried the 5-8M pageviews/day jobseeker frontend from 3 years behind to current (Next.js 14→16, React 19, next-intl v4, Nx 22) through a staged rollout, live in production with zero regressions',
-            metrics: 'Next.js 14→16, 5-8M views/day',
+            text: 'Carried the 5-8M pageviews/day jobseeker frontend from 3 years behind (Next.js 14→15, React 19, next-intl v4, Nx 22) through a staged rollout, live in production with zero regressions',
+            metrics: 'Next.js 14→15, 5-8M views/day',
             projectId: 'talent-nextjs-staged-migration',
           },
           {
