@@ -16,7 +16,7 @@ Hands-on engineering leader who builds high-traffic web platforms and the teams 
 
 ## Work Experience
 
-### Talent.com
+### Talent.com | Dec 2025 - Present
 
 #### Fractional SEO Engineer | Dec 2025 - Present
 
@@ -30,7 +30,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Migrated 4 frontends to a new authentication library behind a dual-implementation flag with zero auth downtime.
 - Launched a team-shared AI development platform of 30+ Claude Code skills and a multi-agent review pipeline that checks tests, security, accessibility, and performance on every merge request.
 
-### The Muse
+### The Muse | Dec 2018 - Sep 2025
 
 #### Senior Director of Engineering | Jan 2022 - Sep 2025
 
@@ -59,7 +59,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 - Cut new project setup from 2-3 weeks to 2-3 days with a Next.js, Koa, Docker, and CircleCI template adopted org-wide.
 
-### Condé Nast
+### Condé Nast | Jul 2015 - Nov 2018
 
 #### Senior Software Engineer, Ad Tech and Monetization | Jul 2015 - Nov 2018
 

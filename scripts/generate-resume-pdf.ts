@@ -18,11 +18,12 @@ async function markdownToHtml(markdown: string): Promise<string> {
 }
 
 // Markdown has no right-aligned column, so a role heading is written as
-// `#### Title | Date` and split here into a title and a right-aligned date.
+// `#### Title | Date` (and a multi-role company as `### Company | Span`) and
+// split here into a name and a right-aligned date.
 function splitRoleDates(htmlContent: string): string {
   return htmlContent.replace(
-    /<h4>(.*) \| ([^|]*)<\/h4>/g,
-    '<h4><span class="role">$1</span><span class="date">$2</span></h4>'
+    /<(h[34])>(.*) \| ([^|]*)<\/h[34]>/g,
+    '<$1><span class="role">$2</span><span class="date">$3</span></$1>'
   );
 }
 
@@ -87,6 +88,18 @@ function wrapHtmlWithStyles(htmlContent: string): string {
       color: #111;
       margin: 10pt 0 1pt 0;
       break-after: avoid;
+    }
+
+    /* Company span, right-aligned like role dates */
+    h3:has(.date) {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    h3 .date {
+      white-space: nowrap;
+      padding-left: 12pt;
     }
 
     h2 + h3 {
