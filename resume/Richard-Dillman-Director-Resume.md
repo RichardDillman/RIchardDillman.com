@@ -32,7 +32,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 #### Senior Director of Engineering | Jan 2022 - Sep 2025
 
-- Led an engineering team of up to 15 and promoted 6 engineers to senior or lead roles through mentorship and quarterly growth reviews.
+- Led a 15-engineer team and promoted 6 engineers to senior or lead roles through mentorship and quarterly growth reviews.
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
 - Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.
