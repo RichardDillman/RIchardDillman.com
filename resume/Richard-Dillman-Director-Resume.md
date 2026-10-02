@@ -19,7 +19,7 @@ Engineering Leadership · Mentoring and Career Growth · Technical Strategy · P
 #### Fractional SEO Engineer | Dec 2025 - Present
 
 - Led the research and recovery of a Google Jobs indexing outage, proving 15.9M rejections were a daily quota rather than a rate limit and restoring new job submissions from zero to 1.5M+ a day.
-- Led a quality and modernization program on the 5-8M pageviews/day jobseeker frontend: raised test coverage from 59% to 90.92%, built the first Playwright end-to-end suite, and shipped a six-phase upgrade (Nx 22, React 19, next-intl v4, Next.js 16) alongside it with zero production regressions.
+- Led a quality and modernization program on the 5-8M pageviews/day jobseeker frontend: raised test coverage from 59% to 90.92%, built the first Playwright end-to-end suite, and shipped a staged upgrade (Next.js 15, Nx 22, React 19, next-intl v4) alongside it with zero production regressions.
 - Measured 45% duplication across job data sources and led a cross-team decision on showing one copy of each job without losing revenue.
 - Identified $60K/year in recoverable Google Geocoding spend while authoring the Location Service Consolidation PRD, with the baseline confirmed by Finance.
 - Root-caused a soft-404 crisis on /view that peaked at 39.5M URLs in Search Console, then shipped the redirect and bot-detection fixes.
