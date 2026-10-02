@@ -17,7 +17,7 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 
 ## Work Experience
 
-### Talent.com
+### Talent.com | Dec 2025 - Present
 
 #### Fractional SEO Engineer | Dec 2025 - Present
 
@@ -58,7 +58,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 - Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.
 
-### Condé Nast
+### Condé Nast | Jul 2015 - Nov 2018
 
 #### Senior Software Engineer, Ad Tech and Monetization | Jul 2015 - Nov 2018
 
