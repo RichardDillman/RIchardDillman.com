@@ -21,7 +21,7 @@ TypeScript · JavaScript · React · Next.js · Node.js · Python · Bash · Pos
 - Led the research and recovery of a Google Jobs indexing outage, proving 15.9M rejections were a daily quota rather than a rate limit and restoring new job submissions from zero to 1.5M+ a day.
 - Root-caused a soft-404 crisis on /view that peaked at 39.5M URLs in Search Console, using scoped Googlebot logs to expose POST and RSC flight-data requests returning tiny 200s (~14.5M/day), then shipped the redirect and bot-detection fixes.
 - Made Google job indexing reliable on the highest-traffic organic page by batching the Indexing API and gating JobPosting JSON-LD to genuinely indexable jobs.
-- Led a quality and modernization program on the 5-8M pageviews/day jobseeker frontend: raised test coverage from 59% to 90.92%, built the first Playwright end-to-end suite, and shipped a six-phase upgrade (Nx 22, React 19, next-intl v4, Next.js 16) alongside it with zero production regressions.
+- Led a quality and modernization program on the 5-8M pageviews/day jobseeker frontend: raised test coverage from 59% to 90.92%, built the first Playwright end-to-end suite, and shipped a staged upgrade (Next.js 15, Nx 22, React 19, next-intl v4) alongside it with zero production regressions.
 - Migrated 4 frontends off next-auth to Better Auth behind a dual-implementation flag with zero auth downtime.
 - Tuned PostgreSQL on a 600 GB table, cutting a failing 15.8-second query to 87 milliseconds (181x) and finding the stuck process that blocked database cleanup.
 - Proved a suspected Kubernetes memory leak was a Node.js heap configuration problem, then validated the fix with a one-hour load test and zero crashes.
