@@ -10,7 +10,10 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 
 ## Skills
 
-TypeScript · JavaScript · React · Next.js · Node.js · Python · Bash · PostgreSQL · MySQL · Redis · REST and GraphQL APIs · AWS · Docker · Kubernetes · Kafka · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Technical SEO · JSON-LD / Schema.org · Google Search Console · Google for Jobs · GTM · GA4 · Core Web Vitals · Lighthouse · Claude Code
+**Languages and Frameworks:** TypeScript · JavaScript · Python · Bash · React · Next.js · Node.js\
+**Data and APIs:** PostgreSQL · MySQL · Redis · Kafka · REST and GraphQL APIs\
+**Infrastructure and Tooling:** AWS · Docker · Kubernetes · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Claude Code\
+**SEO and Analytics:** Technical SEO · JSON-LD / Schema.org · Google Search Console · Google for Jobs · GTM · GA4 · Core Web Vitals · Lighthouse
 
 ## Work Experience
 
