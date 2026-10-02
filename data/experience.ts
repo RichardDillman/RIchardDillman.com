@@ -282,7 +282,7 @@ export const experiences: Experience[] = [
       'epicurious.png',
       'glamour.png',
       'pitchfork.png',
-      'self.png',
+      'self-black.png',
       'teen-vogue.png',
       'them.png',
     ],
