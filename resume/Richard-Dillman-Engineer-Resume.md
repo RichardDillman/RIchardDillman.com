@@ -1,6 +1,6 @@
 # Richard Dillman
 
-**Fractional SEO Engineer • Technical SEO • Next.js • Web Performance**
+**Staff Software Engineer • Web Performance • Technical SEO • Next.js**
 
 Indianapolis, IN | (317) 586-2365 | <rdillman@gmail.com> | [richarddillman.com](https://richarddillman.com) | [linkedin.com/in/richarddillman](https://www.linkedin.com/in/richarddillman/) | [github.com/richarddillman](https://github.com/richarddillman)
 
