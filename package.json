@@ -14,8 +14,6 @@
     "capture:portfolio": "tsx scripts/capture-portfolio-screenshots.ts",
     "capture:current": "tsx scripts/capture-current-screenshots.ts",
     "generate:resume": "tsx scripts/generate-resume-pdf.ts",
-    "generate:resume:frontend": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Frontend-Engineer-Resume",
-    "generate:resume:fullstack": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Fullstack-Engineer-Resume",
     "generate:resume:director": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Director-Resume",
     "generate:resume:engineer": "tsx scripts/generate-resume-pdf.ts Richard-Dillman-Engineer-Resume",
     "generate:resume:all": "pnpm generate:resume:director && pnpm generate:resume:engineer",
