@@ -339,14 +339,22 @@ export const projects: Project[] = [
     company: 'Talent.com',
     period: '2026',
     problem:
-      'The /view job detail page, the single most valuable organic landing page on jobseeker, was losing indexing signal to Google in three ways. Job feeds deliver everything as a "job": the same listing translated into several languages, high-volume retail and gig postings from employers like Walmart, Kroger and DoorDash, and job fairs, courses and services. None of those belongs in Google for Jobs, and presenting them as jobs dilutes the signal Google uses to trust the rest. The Google Indexing API was being called once per job in a loop, hitting quota and timing out, so submissions failed silently. And JobPosting JSON-LD was emitted for jobs that were technically available but not actually indexable.',
+      'The /view job detail page, the single most valuable organic landing page on jobseeker, was losing indexing signal to Google in three ways. Job feeds deliver everything as a "job": high-volume retail and gig postings from employers like Walmart, Kroger and DoorDash, job fairs, courses and services. None of those belongs in Google for Jobs, and presenting them as jobs dilutes the signal Google uses to trust the rest. The same job also arrives translated into several languages, and without anything tying the copies together, Google sees competing duplicates. The Google Indexing API was being called once per job in a loop, hitting quota and timing out, so submissions failed silently. And JobPosting JSON-LD was emitted for jobs that were technically available but not actually indexable.',
     solution:
-      'Separated what the site shows from what it tells Google is a job. Feeds stay unfiltered, so every listing still appears in on-site search and earns advertising revenue. Only genuine jobs reach the Google Indexing API or get JobPosting structured data: translated duplicates, high-volume retail and gig postings, job fairs, courses and services are held back. Batched Google Indexing API calls in the jobs-seo-index service, and added a VirtualService timeout so a slow batch could not cascade into a full request failure. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the database, so structured data is only emitted for genuinely indexable jobs. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually clear both SEO flags and drop the job from the feed.',
+      "Separated what the site shows from what it tells Google is a job. Feeds stay unfiltered, so every listing still appears in on-site search and earns advertising revenue. Only genuine jobs reach the Google Indexing API or get JobPosting structured data: high-volume retail and gig postings, job fairs, courses and services are held back, and translated copies aren't submitted as separate jobs. The translations stay in the sitemap, and each page links to its siblings with hreflang alternate links, so Google reads them as one job in several languages. Batched Google Indexing API calls in the jobs-seo-index service, and added a VirtualService timeout so a slow batch could not cascade into a full request failure. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the database, so structured data is only emitted for genuinely indexable jobs. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually clear both SEO flags and drop the job from the feed.",
     outcome:
-      'Google now receives jobs and only jobs, and the listings it shouldn\'t see still earn on the site. Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of landing pages per day. The invalidation endpoint closed the loop, so expired jobs leave the index instead of lingering as stale entries.',
+      'Google now receives jobs and only jobs, translations are tied together as language versions instead of duplicates, and the listings Google shouldn\'t see still earn on the site. Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of landing pages per day. The invalidation endpoint closed the loop, so expired jobs leave the index instead of lingering as stale entries.',
     metrics:
       '5-8M page views/day protected. Indexing API timeouts eliminated. Only genuine jobs sent to Google; non-job listings kept for on-site search and ads.',
-    stack: ['Next.js', 'TypeScript', 'NestJS', 'Google Indexing API', 'JSON-LD', 'Istio'],
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'NestJS',
+      'Google Indexing API',
+      'JSON-LD',
+      'hreflang',
+      'Istio',
+    ],
     tags: ['SEO', 'Scale', 'Performance', 'Backend'],
   },
   {
