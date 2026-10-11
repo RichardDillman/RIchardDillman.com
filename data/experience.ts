@@ -88,6 +88,11 @@ export const experiences: Experience[] = [
             projectId: 'talent-seo-rescue-view-page',
           },
           {
+            text: 'Decided what counts as a job for Google: kept non-job listings (high-volume retail and gig postings from employers like Walmart, Kroger and DoorDash, plus job fairs, courses and services) out of the Google Indexing API and JobPosting structured data while they stay in on-site search and advertising, and linked translated copies of each job with hreflang alternates so Google reads them as one job in several languages',
+            metrics: 'Google gets jobs only, revenue kept',
+            projectId: 'talent-seo-rescue-view-page',
+          },
+          {
             text: 'Migrated 4 frontends (including the 5-8M pageviews/day jobseeker app) off next-auth to Better Auth behind a dual-impl flag with zero auth downtime',
             metrics: '4 frontends, zero downtime',
             projectId: 'talent-better-auth-migration',

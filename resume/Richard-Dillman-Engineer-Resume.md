@@ -13,7 +13,7 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 **Languages and Frameworks:** TypeScript · JavaScript · HTML · CSS · Python · Bash · React · Next.js · Node.js · Accessibility (WCAG)\
 **Data and APIs:** PostgreSQL · MySQL · Redis · Kafka · REST and GraphQL APIs\
 **Infrastructure and Tooling:** AWS · Docker · Kubernetes · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Claude Code\
-**SEO and Analytics:** Technical SEO · JSON-LD / Schema.org · Google Search Console · Google for Jobs · GTM · GA4 · Core Web Vitals · Lighthouse
+**SEO and Analytics:** Technical SEO · JSON-LD / Schema.org · hreflang · Google Search Console · Google for Jobs · GTM · GA4 · Core Web Vitals · Lighthouse
 
 ## Work Experience
 
@@ -24,6 +24,7 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 Embedded with a 10-engineer team: find the highest-cost problems, write the fix plan, and route each fix to the team's engineers or ship it directly.
 
 - Restored Google Jobs indexing from zero to 1.5M+ new jobs a day by proving 15.9M rejections came from a daily quota, not a rate limit.
+- Gated non-job listings out of Google for Jobs without losing their on-site search and ad revenue, and linked translations with hreflang.
 - Reduced a failing PostgreSQL query on a 600 GB table from 15.8 seconds to 87 milliseconds (181x) and found the stuck process blocking database cleanup.
 - Traced a soft-404 spike of 39.5M URLs in Search Console to ~14.5M bot requests a day returning near-empty pages, then shipped the redirect and bot-detection fixes.
 - Raised jobseeker test coverage from 59% to 91% and shipped a staged upgrade (Next.js 15, Nx 22, React 19, next-intl v4) with zero production regressions.
@@ -37,7 +38,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
 - Raised Lighthouse Performance from 62 to 91 (Accessibility 100, SEO 96) by replatforming Company Profiles to Next.js.
-- Increased job applies 10% and CTR 15% with dynamic apply forms integrated with multiple ATS partners for Google Jobs.
+- Increased job applies 10% and CTR 15% by replacing Madgex, a third-party apply layer, with in-house ATS-integrated forms.
 - Launched Maya, The Muse's first AI content discovery tool, adding 3,500 article readers a month across 24K+ articles.
 - Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.

@@ -25,6 +25,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Identified $60K/year in recoverable Google Geocoding spend, confirmed by Finance, in a service consolidation plan.
 - Measured 45% duplication across job data sources and drove a cross-team decision to show one copy of each job without losing revenue.
 - Restored Google Jobs indexing from zero to 1.5M+ new jobs a day by finding the real cause behind 15.9M rejected submissions.
+- Gated non-job listings out of Google for Jobs without losing their on-site search and ad revenue, and linked translations with hreflang.
 - Raised jobseeker test coverage from 59% to 91% and shipped a staged framework upgrade on a 5-8M pageviews/day frontend with zero production regressions.
 - Traced a soft-404 spike of 39.5M URLs in Google Search Console to its root cause and shipped the redirect and bot-detection fixes.
 - Migrated 4 frontends to a new authentication library behind a dual-implementation flag with zero auth downtime.
@@ -39,7 +40,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
 - Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.
 - Launched Maya, The Muse's first AI content discovery tool, adding 3,500 article readers a month across 24K+ articles.
-- Increased job applies 10% and CTR 15% with dynamic apply forms integrated with multiple ATS partners for Google Jobs.
+- Increased job applies 10% and CTR 15% by replacing Madgex, a third-party apply layer, with in-house ATS-integrated forms.
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.
 - Introduced Claude as The Muse's first AI contributor, running automated code review and issue management in daily workflows.
 

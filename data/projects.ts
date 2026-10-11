@@ -334,19 +334,28 @@ export const projects: Project[] = [
   },
   {
     id: 'talent-seo-rescue-view-page',
-    title: 'Reliable Job Indexing and JSON-LD on /view at 5-8M Pageviews/Day',
-    summary: 'Talent.com - Batched Google Indexing API and dual-gated JSON-LD on job detail pages',
+    title: 'Google for Jobs Gating and Reliable Indexing on /view at 5-8M Pageviews/Day',
+    summary:
+      'Talent.com - Kept non-job listings out of Google for Jobs, linked translations with hreflang, and batched the Indexing API',
     company: 'Talent.com',
     period: '2026',
     problem:
-      'The /view job detail page, the single most valuable organic landing page on jobseeker, was losing indexing signal to Google in two structural ways. The Google Indexing API was being called per-job in a loop, hitting quota and timing out, so submissions silently failed. And JobPosting JSON-LD was emitting for jobs that were technically available but not actually indexable, polluting the schema signal that Google relies on to surface jobs in Google for Jobs.',
+      'The /view job detail page, the single most valuable organic landing page on jobseeker, was losing indexing signal to Google in three ways. Job feeds deliver everything as a "job": high-volume retail and gig postings from employers like Walmart, Kroger and DoorDash, job fairs, courses and services. None of those belongs in Google for Jobs, and presenting them as jobs dilutes the signal Google uses to trust the rest. The same job also arrives translated into several languages, and without anything tying the copies together, Google sees competing duplicates. The Google Indexing API was being called once per job in a loop, hitting quota and timing out, so submissions failed silently. And JobPosting JSON-LD was emitted for jobs that were technically available but not actually indexable.',
     solution:
-      'Batched Google Indexing API calls in the jobs-seo-index service and added a VirtualService timeout so a slow batch could not cascade into a full request failure. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the DB, so structured data only emitted for genuinely indexable jobs. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually cleared both SEO flags and dropped the job from the feed.',
+      "Separated what the site shows from what it tells Google is a job. Feeds stay unfiltered, so every listing still appears in on-site search and earns advertising revenue. Only genuine jobs reach the Google Indexing API or get JobPosting structured data: high-volume retail and gig postings, job fairs, courses and services are held back, and translated copies aren't submitted as separate jobs. The translations stay in the sitemap, and each page links to its siblings with hreflang alternate links, so Google reads them as one job in several languages. Batched Google Indexing API calls in the jobs-seo-index service, and added a VirtualService timeout so a slow batch could not cascade into a full request failure. Dual-gated JobPosting JSON-LD on robots=index AND google_indexed=1, both sourced from the SEO Index service instead of the database, so structured data is only emitted for genuinely indexable jobs. Added a /v1/gfj/invalidate-jobs endpoint so takedowns actually clear both SEO flags and drop the job from the feed.",
     outcome:
-      'Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of landing pages per day. The invalidation endpoint closed the loop so expired jobs left the index instead of lingering as stale entries.',
+      'Google now receives jobs and only jobs, translations are tied together as language versions instead of duplicates, and the listings Google shouldn\'t see still earn on the site. Indexing API calls stopped timing out and started succeeding in batches. JSON-LD became a reliable proxy for "this job is actually indexable," which matters on a site where a 1% indexing shift is tens of thousands of landing pages per day. The invalidation endpoint closed the loop, so expired jobs leave the index instead of lingering as stale entries.',
     metrics:
-      '5-8M page views/day protected, indexing API timeouts eliminated, JSON-LD gated to indexable jobs',
-    stack: ['Next.js', 'TypeScript', 'NestJS', 'Google Indexing API', 'JSON-LD', 'Istio'],
+      '5-8M page views/day protected. Indexing API timeouts eliminated. Only genuine jobs sent to Google; non-job listings kept for on-site search and ads.',
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'NestJS',
+      'Google Indexing API',
+      'JSON-LD',
+      'hreflang',
+      'Istio',
+    ],
     tags: ['SEO', 'Scale', 'Performance', 'Backend'],
   },
   {
@@ -427,18 +436,19 @@ export const projects: Project[] = [
   {
     id: 'the-muse-direct-apply-forms',
     title: 'Dynamic Direct Apply Forms with Multi-ATS Integration',
-    summary: 'The Muse - JSON-driven application forms integrated with partner ATS platforms',
+    summary:
+      'The Muse - Replaced a third-party apply layer with JSON-driven application forms integrated with partner ATS platforms',
     company: 'The Muse',
     period: '2023',
     problem:
-      "Google prioritizes sites with direct application capability in Google Jobs search results. The Muse needed to enable on-site applications without rebuilding forms for each partner's unique requirements. Each ATS had different fields, validation rules, and security requirements for handling PII.",
+      "Google prioritizes sites with direct application capability in Google Jobs search results. The Muse's apply flow ran through Madgex, a third-party GraphQL layer between the internal apply process and external applicant tracking systems. Owning that layer meant enabling on-site applications without rebuilding forms for each partner's unique requirements: each ATS had different fields, validation rules, and security requirements for handling PII.",
     solution:
-      'Partnered with multiple third-party applicant tracking systems and built dynamic form generator consuming JSON schema definitions. Created system supporting custom fields, validation rules, display ordering, and PII security. Implemented multi-phase approach with technical documentation, partner coordination, and POC variants for each ATS integration.',
+      'Replaced Madgex with an in-house integration. Partnered with multiple third-party applicant tracking systems and built a dynamic form generator consuming JSON schema definitions. Created a system supporting custom fields, validation rules, display ordering, and PII security. Implemented a multi-phase approach with technical documentation, partner coordination, and POC variants for each ATS integration, then removed the Madgex integration.',
     outcome:
-      'Clickthrough rate increased 15% and job applications increased 10% by reducing friction. Achieved Google Jobs prioritization improving organic discovery. Built scalable platform supporting unlimited ATS partners without custom development for each integration.',
+      'Clickthrough rate increased 15% and job applications increased 10% by reducing friction. Achieved Google Jobs prioritization, improving organic discovery. Built a scalable platform supporting unlimited ATS partners without custom development for each integration, and removed the dependency on a third-party apply layer.',
     metrics: '+15% CTR, +10% job applies',
-    stack: ['React.js', 'Next.js', 'TypeScript', 'JSON', 'APIs', 'Jest'],
-    tags: ['Integration', 'Product', 'Conversion', 'APIs'],
+    stack: ['React.js', 'Next.js', 'TypeScript', 'JSON Schema', 'GraphQL', 'APIs', 'Jest'],
+    tags: ['Integration', 'Build vs Buy', 'Conversion', 'APIs'],
   },
   {
     id: 'the-muse-company-profiles',
