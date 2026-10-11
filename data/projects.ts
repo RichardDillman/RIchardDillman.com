@@ -334,8 +334,9 @@ export const projects: Project[] = [
   },
   {
     id: 'talent-seo-rescue-view-page',
-    title: 'Reliable Job Indexing and JSON-LD on /view at 5-8M Pageviews/Day',
-    summary: 'Talent.com - Batched Google Indexing API and dual-gated JSON-LD on job detail pages',
+    title: 'Google for Jobs Gating and Reliable Indexing on /view at 5-8M Pageviews/Day',
+    summary:
+      'Talent.com - Kept non-job listings out of Google for Jobs, linked translations with hreflang, and batched the Indexing API',
     company: 'Talent.com',
     period: '2026',
     problem:
