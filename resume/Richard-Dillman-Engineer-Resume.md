@@ -31,26 +31,25 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### The Muse | Dec 2018 - Sep 2025
 
-#### Senior Director of Engineering | Jan 2022 - Sep 2025
+#### Senior Director of Engineering | Apr 2024 - Sep 2025
 
 - Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
-- Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
 - Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing.
+
+#### Director of Application Development | Dec 2023 - Mar 2024
+
+#### Staff Engineer | Apr 2021 - Nov 2023
+
+- Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
-
-#### Staff Engineer, Director of Application Development | Jun 2020 - Dec 2021
-
 - Increased job tile clicks 21.9% and views per user 20% with a search UX refresh that passed Core Web Vitals.
-
-#### Staff Engineer | Mar 2019 - May 2020
-
 - Grew organic SEO traffic 10x with JSON-LD structured data and performance refactors.
 - Cut build times from 45 minutes to 75 seconds by modularizing repos and rebuilding the CI/CD pipelines.
 - Cut sitewide load time by 4 seconds and reached 90%+ green Core Web Vitals.
 
-#### Senior Application Engineer | Dec 2018 - Feb 2019
+#### Senior Application Engineer | Dec 2018 - Mar 2021
 
 - Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.
 
