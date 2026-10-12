@@ -26,6 +26,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Measured 45% duplication across job data sources and drove a cross-team decision to show one copy of each job without losing revenue.
 - Restored Google Jobs indexing from zero to 1.5M+ new jobs a day by proving 15.9M rejections came from a daily quota, not a rate limit.
 - Raised jobseeker test coverage from 59% to 91% and shipped a staged upgrade (Next.js 15, Nx 22, React 19, next-intl v4) with zero production regressions.
+- Migrated 4 frontends to a new authentication library behind a dual-implementation flag with zero auth downtime.
 - Launched a team-shared AI development platform of 30+ Claude Code skills and a multi-agent review pipeline that checks tests, security, accessibility, and performance on every merge request.
 
 ### The Muse | Dec 2018 - Sep 2025
