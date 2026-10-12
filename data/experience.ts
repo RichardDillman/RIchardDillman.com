@@ -208,6 +208,11 @@ export const experiences: Experience[] = [
             metrics: '3.5s → 800ms',
           },
           {
+            text: "Designed the web client's data layer: SWR hooks on a shared fetcher and 6-hour ISR on search, replacing stacked server caches",
+            resume:
+              "Designed the web client's data layer: SWR hooks on a shared fetcher and 6-hour ISR on search, replacing stacked server caches.",
+          },
+          {
             text: 'Increased ad revenue 15% migrating to Raptive with improved layouts and formats',
             resume:
               'Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.',
@@ -242,7 +247,7 @@ export const experiences: Experience[] = [
           {
             text: 'Boosted job applies 10% and CTR 15% through dynamic forms integrating multiple ATS partners for Google Jobs',
             resume:
-              'Increased job applies 10% and CTR 15% by replacing Madgex, a third-party apply layer, with in-house ATS-integrated forms.',
+              'Increased job applies 10% and CTR 15% by replacing Madgex, a third-party GraphQL apply layer, with in-house ATS-integrated forms.',
             metrics: '+15% CTR, +10% applies',
             projectId: 'the-muse-direct-apply-forms',
           },
