@@ -192,10 +192,10 @@ export const experiences: Experience[] = [
             metrics: '+22% CTR',
           },
           {
-            text: 'Increased job search conversions 13% launching Trending Search module through end-to-end ownership',
+            text: 'Increased conversions to the job marketplace 138% launching a Trending Search module on article pages',
             resume:
-              'Increased job search conversions 13% with a Trending Search module and CTR 22% through UX experiments.',
-            metrics: '+13% conversions',
+              'Increased article-to-marketplace conversions 138% with a Trending Search module, and Apply button CTR 22% through UX experiments.',
+            metrics: '+138% conversions',
           },
           {
             text: 'Improved searches per user 13% through personalized search features',
