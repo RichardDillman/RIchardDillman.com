@@ -38,6 +38,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
 - Raised Lighthouse Performance from 62 to 91 (Accessibility 100, SEO 96) by replatforming Company Profiles to Next.js.
+- Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing.
 - Increased job applies 10% and CTR 15% by replacing Madgex, a third-party apply layer, with in-house ATS-integrated forms.
 - Launched Maya, The Muse's first AI content discovery tool, adding 3,500 article readers a month across 24K+ articles.
 - Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.

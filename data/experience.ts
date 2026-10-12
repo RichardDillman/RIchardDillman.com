@@ -158,6 +158,10 @@ export const experiences: Experience[] = [
             projectId: 'the-muse-company-profiles',
           },
           {
+            text: 'Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing',
+            metrics: '3.5s → 800ms',
+          },
+          {
             text: 'Launched white-label job search platform generating projected $153K-$230K annual revenue per partner tenant',
             metrics: '$153K-$230K/year/tenant',
             projectId: 'the-muse-white-label',
