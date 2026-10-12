@@ -152,7 +152,7 @@ export const experiences: Experience[] = [
     roles: [
       {
         title: 'Senior Director of Engineering',
-        period: 'Jan 2022 - Sep 2025',
+        period: 'Apr 2024 - Sep 2025',
         description:
           'Led engineering at The Muse, building job search platforms that help people find work they actually want. Spanned technical planning, mentoring, hands-on architecture, and cross-functional collaboration with Product, Design, and leadership.',
         achievements: [
@@ -188,6 +188,58 @@ export const experiences: Experience[] = [
             projectId: 'the-muse-migration',
           },
           {
+            text: 'Improved CTR 22% through systematic UX experiments',
+            metrics: '+22% CTR',
+          },
+          {
+            text: 'Increased job search conversions 13% launching Trending Search module through end-to-end ownership',
+            resume:
+              'Increased job search conversions 13% with a Trending Search module and CTR 22% through UX experiments.',
+            metrics: '+13% conversions',
+          },
+          {
+            text: 'Improved searches per user 13% through personalized search features',
+            metrics: '+13% searches per user',
+          },
+          {
+            text: 'Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing',
+            resume:
+              'Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing.',
+            metrics: '3.5s → 800ms',
+          },
+          {
+            text: 'Increased ad revenue 15% migrating to Raptive with improved layouts and formats',
+            resume:
+              'Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.',
+            metrics: '+15% revenue',
+            projectId: 'the-muse-ad-optimization',
+          },
+          {
+            text: "Formalized Claude as The Muse's first AI contributor handling GitHub issues, code review, and autonomous tasks",
+            resume:
+              "Introduced Claude as The Muse's first AI contributor, running automated code review and issue management in daily workflows.",
+          },
+        ],
+      },
+      {
+        title: 'Director of Application Development',
+        period: 'Dec 2023 - Mar 2024',
+        description:
+          'Led engineering strategy and product delivery across The Muse. Set architectural direction, guided roadmap priorities, mentored engineers, and improved development velocity.',
+        achievements: [],
+      },
+      {
+        title: 'Staff Engineer',
+        period: 'Apr 2021 - Nov 2023',
+        achievements: [
+          {
+            text: 'Launched white-label job search platform generating projected $153K-$230K annual revenue per partner tenant',
+            resume:
+              'Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.',
+            metrics: '$153K-$230K/year/tenant',
+            projectId: 'the-muse-white-label',
+          },
+          {
             text: 'Boosted job applies 10% and CTR 15% through dynamic forms integrating multiple ATS partners for Google Jobs',
             resume:
               'Increased job applies 10% and CTR 15% by replacing Madgex, a third-party apply layer, with in-house ATS-integrated forms.',
@@ -202,19 +254,6 @@ export const experiences: Experience[] = [
             projectId: 'the-muse-company-profiles',
           },
           {
-            text: 'Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing',
-            resume:
-              'Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing.',
-            metrics: '3.5s → 800ms',
-          },
-          {
-            text: 'Launched white-label job search platform generating projected $153K-$230K annual revenue per partner tenant',
-            resume:
-              'Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.',
-            metrics: '$153K-$230K/year/tenant',
-            projectId: 'the-muse-white-label',
-          },
-          {
             text: 'Increased SEO visits 74K/month by replacing infinite scroll with server-side pagination',
             resume:
               'Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.',
@@ -222,61 +261,12 @@ export const experiences: Experience[] = [
             projectId: 'the-muse-seo-pagination',
           },
           {
-            text: 'Increased ad revenue 15% migrating to Raptive with improved layouts and formats',
-            resume:
-              'Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.',
-            metrics: '+15% revenue',
-            projectId: 'the-muse-ad-optimization',
-          },
-          {
-            text: 'Improved searches per user 13% through personalized search features',
-            metrics: '+13% searches per user',
-          },
-          {
-            text: "Formalized Claude as The Muse's first AI contributor handling GitHub issues, code review, and autonomous tasks",
-            resume:
-              "Introduced Claude as The Muse's first AI contributor, running automated code review and issue management in daily workflows.",
-          },
-        ],
-      },
-      {
-        title: 'Staff Engineer, Director of Application Development',
-        period: 'Jun 2020 - Dec 2021',
-        description:
-          'Led engineering strategy and product delivery across The Muse. Set architectural direction, guided roadmap priorities, mentored engineers, and improved development velocity.',
-        achievements: [
-          {
             text: 'Increased job tile clicks 21.9% and views per user 20% through complete UX refresh achieving perfect Web Vitals',
             resume:
               'Increased job tile clicks 21.9% and views per user 20% with a search UX refresh that passed Core Web Vitals.',
             metrics: '+21.9% clicks, +20% views/user',
             projectId: 'the-muse-search-ux-refresh',
           },
-          {
-            text: 'Improved CTR 22% through systematic UX experiments',
-            metrics: '+22% CTR',
-          },
-          {
-            text: 'Increased job search conversions 13% launching Trending Search module through end-to-end ownership',
-            resume:
-              'Increased job search conversions 13% with a Trending Search module and CTR 22% through UX experiments.',
-            metrics: '+13% conversions',
-          },
-          {
-            text: 'Accelerated code review velocity 30% and reduced bugs standardizing ESLint and Jest across all teams',
-            metrics: '30% faster reviews',
-          },
-          {
-            text: 'Modernized page templates extracting from legacy Tornado/Python monolith and rebuilding as scalable microservices',
-            resume:
-              'Extracted page templates from a legacy Tornado/Python monolith and rebuilt them as scalable services.',
-          },
-        ],
-      },
-      {
-        title: 'Staff Engineer',
-        period: 'Mar 2019 - May 2020',
-        achievements: [
           {
             text: 'Increased organic SEO traffic 10x deploying JSON-LD structured data and performance refactors',
             resume:
@@ -301,22 +291,13 @@ export const experiences: Experience[] = [
             metrics: '-4 seconds load time',
           },
           {
-            text: 'Reduced regression bugs 30%+ championing test automation, linting, and CI/CD',
-            resume:
-              'Reduced regression bugs 30%+ by standardizing on ESLint, Jest, and Puppeteer and mentoring the team on them.',
-            metrics: '30%+ fewer bugs',
-          },
-          {
-            text: 'Scaled team delivery through standardization (ESLint, Jest, Puppeteer, CLA) and mentorship',
-          },
-          {
             text: 'Owned full-stack performance monitoring (Web Vitals, GA, SEO, Datadog)',
           },
         ],
       },
       {
         title: 'Senior Application Engineer',
-        period: 'Dec 2018 - Feb 2019',
+        period: 'Dec 2018 - Mar 2021',
         description:
           'Worked with Director of Engineering to shape technical strategy, extend platforms, and lead new product development. Modernized legacy systems using Node, React, Python, AWS, Postgres.',
         achievements: [
@@ -337,6 +318,20 @@ export const experiences: Experience[] = [
           },
           {
             text: 'Modernized job search, article rendering, and homepage rebuilding as scalable microservices',
+          },
+          {
+            text: 'Modernized page templates extracting from legacy Tornado/Python monolith and rebuilding as scalable microservices',
+            resume:
+              'Extracted page templates from a legacy Tornado/Python monolith and rebuilt them as scalable services.',
+          },
+          {
+            text: 'Reduced regression bugs 30%+ championing test automation, linting, and CI/CD',
+            resume:
+              'Reduced regression bugs 30%+ by standardizing on ESLint, Jest, and Puppeteer and mentoring the team on them.',
+            metrics: '30%+ fewer bugs',
+          },
+          {
+            text: 'Scaled team delivery through standardization (ESLint, Jest, Puppeteer, CLA) and mentorship',
           },
         ],
       },
