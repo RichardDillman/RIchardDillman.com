@@ -163,6 +163,12 @@ export const experiences: Experience[] = [
               'Led a 15-engineer team and promoted 6 engineers to senior or lead roles through mentorship and quarterly growth reviews.',
           },
           {
+            text: 'Generated $994K in new revenue in a year by launching on-site advertising with third-party vendors, without hurting page speed',
+            resume:
+              'Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.',
+            metrics: '$994K new revenue',
+          },
+          {
             text: "Increased article pageviews 3,500 users/month launching Maya, The Muse's first AI-powered content discovery tool surfacing 24K+ articles",
             resume:
               "Launched Maya, The Muse's first AI content discovery tool, adding 3,500 article readers a month across 24K+ articles.",
@@ -245,12 +251,6 @@ export const experiences: Experience[] = [
               'Increased job tile clicks 21.9% and views per user 20% with a search UX refresh that passed Core Web Vitals.',
             metrics: '+21.9% clicks, +20% views/user',
             projectId: 'the-muse-search-ux-refresh',
-          },
-          {
-            text: 'Generated $994K annual revenue replacing a 10+ year-old display ad system (predating Google Ad Manager, with unfiltered AdSense) with a modern ad integration across The Muse platform',
-            resume:
-              'Generated $994K in annual revenue by replacing a 10+ year-old ad system that predated Google Ad Manager with a modern display ad integration.',
-            metrics: '$994K annual revenue',
           },
           {
             text: 'Improved CTR 22% through systematic UX experiments',
