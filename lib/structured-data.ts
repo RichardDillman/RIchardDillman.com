@@ -23,7 +23,7 @@ export function generatePersonSchema(): WithContext<Person> {
     name: 'Richard Dillman',
     url: 'https://richarddillman.com',
     image: 'https://richarddillman.com/api/og',
-    jobTitle: 'Fractional SEO Engineer',
+    jobTitle: 'Staff Software Engineer',
     description:
       'Engineering leadership, performance, and mentorship. Building high-performing teams and scalable systems.',
     sameAs: [
@@ -145,7 +145,7 @@ export function generateProfilePageSchema(): WithContext<ProfilePage> {
       name: 'Richard Dillman',
       alternateName: 'Rick Dillman',
       image: 'https://richarddillman.com/api/og',
-      jobTitle: 'Fractional SEO Engineer',
+      jobTitle: 'Staff Software Engineer',
       worksFor: {
         '@type': 'Organization',
         name: 'Talent.com',

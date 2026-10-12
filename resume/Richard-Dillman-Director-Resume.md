@@ -18,7 +18,7 @@ Hands-on engineering leader who builds high-traffic web platforms and the teams 
 
 ### Talent.com | Dec 2025 - Present
 
-#### Fractional SEO Engineer | Dec 2025 - Present
+#### Staff Software Engineer | Dec 2025 - Present
 
 Embedded with a 10-engineer team: find the highest-cost problems, write the fix plan, and route each fix to the team's engineers or ship it directly.
 

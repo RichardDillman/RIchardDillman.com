@@ -27,7 +27,7 @@ export const experiences: Experience[] = [
     period: 'Dec 2025 - Present',
     roles: [
       {
-        title: 'Fractional SEO Engineer',
+        title: 'Staff Software Engineer',
         period: 'Dec 2025 - Present',
         description:
           "SEO and frontend engineering on Talent.com's jobseeker platform at 5-8M pageviews/day: organic indexation recovery, structured data, full-stack platform modernization, and AI-assisted developer tooling.",
