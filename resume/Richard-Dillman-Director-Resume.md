@@ -6,7 +6,7 @@ Indianapolis, IN | (317) 586-2365 | <rdillman@gmail.com> | [richarddillman.com](
 
 ## Summary
 
-Hands-on engineering leader who builds high-traffic web platforms and the teams behind them. Rose from Senior Application Engineer to Senior Director of Engineering at The Muse, promoted 6 engineers to senior or lead roles, and generated $994K in annual revenue by replacing a decade-old ad platform. At Talent.com (5-8M pageviews/day), restored Google Jobs indexing from zero to 1.5M+ jobs a day and raised test coverage from 59% to 91%. Open to full-time and fractional engineering leadership roles.
+Hands-on engineering leader who builds high-traffic web platforms and the teams behind them. Rose from Senior Application Engineer to Senior Director of Engineering at The Muse, promoted 6 engineers to senior or lead roles, and generated $994K in new ad revenue by launching on-site advertising. At Talent.com (5-8M pageviews/day), restored Google Jobs indexing from zero to 1.5M+ jobs a day and raised test coverage from 59% to 91%. Open to full-time and fractional engineering leadership roles.
 
 ## Skills
 
@@ -34,6 +34,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 #### Senior Director of Engineering | Jan 2022 - Sep 2025
 
 - Led a 15-engineer team and promoted 6 engineers to senior or lead roles through mentorship and quarterly growth reviews.
+- Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
 - Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
@@ -41,7 +42,6 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 #### Staff Engineer, Director of Application Development | Jun 2020 - Dec 2021
 
-- Generated $994K in annual revenue by replacing a 10+ year-old ad system that predated Google Ad Manager with a modern display ad integration.
 - Increased job tile clicks 21.9% and views per user 20% with a search UX refresh that passed Core Web Vitals.
 - Increased job search conversions 13% with a Trending Search module and CTR 22% through UX experiments.
 
