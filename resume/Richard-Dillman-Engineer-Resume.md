@@ -19,7 +19,7 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 
 ### Talent.com | Dec 2025 - Present
 
-#### Fractional SEO Engineer | Dec 2025 - Present
+#### Staff Software Engineer | Dec 2025 - Present
 
 Embedded with a 10-engineer team: find the highest-cost problems, write the fix plan, and route each fix to the team's engineers or ship it directly.
 

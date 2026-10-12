@@ -1,12 +1,12 @@
 # Richard Dillman
 
-**Fractional Engineering Leader • Scaling Teams & Systems**
+**Engineering Leader • Scaling Teams & Systems**
 
 Indianapolis, IN | (317) 586-2365 | <rdillman@gmail.com> | [richarddillman.com](https://richarddillman.com) | [linkedin.com/in/richarddillman](https://www.linkedin.com/in/richarddillman/) | [github.com/richarddillman](https://github.com/richarddillman)
 
 ## Summary
 
-Hands-on engineering leader who builds high-traffic web platforms and the teams behind them. Rose from Senior Application Engineer to Senior Director of Engineering at The Muse, promoted 6 engineers to senior or lead roles, and generated $994K in annual revenue by replacing a decade-old ad platform. At Talent.com (5-8M pageviews/day), restored Google Jobs indexing from zero to 1.5M+ jobs a day and raised test coverage from 59% to 91%. Open to fractional engineering leadership engagements.
+Hands-on engineering leader who builds high-traffic web platforms and the teams behind them. Rose from Senior Application Engineer to Senior Director of Engineering at The Muse, promoted 6 engineers to senior or lead roles, and generated $994K in annual revenue by replacing a decade-old ad platform. At Talent.com (5-8M pageviews/day), restored Google Jobs indexing from zero to 1.5M+ jobs a day and raised test coverage from 59% to 91%. Open to full-time and fractional engineering leadership roles.
 
 ## Skills
 
@@ -18,7 +18,7 @@ Hands-on engineering leader who builds high-traffic web platforms and the teams 
 
 ### Talent.com | Dec 2025 - Present
 
-#### Fractional SEO Engineer | Dec 2025 - Present
+#### Staff Software Engineer | Dec 2025 - Present
 
 Embedded with a 10-engineer team: find the highest-cost problems, write the fix plan, and route each fix to the team's engineers or ship it directly.
 
