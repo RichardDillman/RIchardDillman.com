@@ -326,9 +326,9 @@ export const experiences: Experience[] = [
             text: 'Generated $994K in new revenue in a year by launching on-site advertising with third-party vendors, without hurting page speed',
             tier: 1,
             engineer:
-              'Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.',
+              'Generated $994K in annualized new ad revenue by launching on-site advertising with third-party vendors without slowing the site.',
             director:
-              'Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.',
+              'Generated $994K in annualized new ad revenue by launching on-site advertising with third-party vendors without slowing the site.',
             metrics: '$994K new revenue',
           },
           {
@@ -359,9 +359,9 @@ export const experiences: Experience[] = [
             text: 'Launched white-label job search platform generating projected $153K-$230K annual revenue per partner tenant',
             tier: 1,
             engineer:
-              'Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.',
+              'Architected a white-label, multi-tenant job search platform modeled at $153K-$230K annual revenue per partner tenant.',
             director:
-              'Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.',
+              'Architected a white-label, multi-tenant job search platform modeled at $153K-$230K annual revenue per partner tenant.',
             metrics: '$153K-$230K/year/tenant',
             projectId: 'the-muse-white-label',
           },

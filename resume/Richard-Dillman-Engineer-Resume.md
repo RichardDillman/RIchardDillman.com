@@ -43,13 +43,13 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 #### Director of Application Development | Dec 2023 - Mar 2024
 
-- Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
+- Generated $994K in annualized new ad revenue by launching on-site advertising with third-party vendors without slowing the site.
 - Increased the job posting crawl budget 49K by converting links to non-indexed offsite pages into buttons.
 - Reduced Interaction to Next Paint (INP) by 300ms through Google Tag Manager cleanup.
 
 #### Staff Engineer | Apr 2021 - Nov 2023
 
-- Architected a white-label, multi-tenant job search platform projected at $153K-$230K annual revenue per partner tenant.
+- Architected a white-label, multi-tenant job search platform modeled at $153K-$230K annual revenue per partner tenant.
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
 - Increased job tile clicks 21.9% and views per user 20% with a search UX refresh that passed Core Web Vitals.
 - Grew organic SEO traffic 10x with JSON-LD structured data and performance refactors.
