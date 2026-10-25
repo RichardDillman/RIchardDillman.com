@@ -49,7 +49,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 #### Staff Engineer | Apr 2021 - Nov 2023
 
-- Architected a white-label, multi-tenant job search platform modeled at $153K–$230K annual revenue per partner tenant.
+- Architected a white-label, multi-tenant job search platform modeled at $153K-$230K annual revenue per partner tenant.
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
 - Increased job tile clicks 21.9% and views per user 20% with a search UX refresh that passed Core Web Vitals.
 - Grew organic SEO traffic 10x with JSON-LD structured data and performance refactors.

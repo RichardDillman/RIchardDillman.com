@@ -359,9 +359,9 @@ export const experiences: Experience[] = [
             text: 'Launched white-label job search platform generating projected $153K-$230K annual revenue per partner tenant',
             tier: 1,
             engineer:
-              'Architected a white-label, multi-tenant job search platform modeled at $153K–$230K annual revenue per partner tenant.',
+              'Architected a white-label, multi-tenant job search platform modeled at $153K-$230K annual revenue per partner tenant.',
             director:
-              'Architected a white-label, multi-tenant job search platform modeled at $153K–$230K annual revenue per partner tenant.',
+              'Architected a white-label, multi-tenant job search platform modeled at $153K-$230K annual revenue per partner tenant.',
             metrics: '$153K-$230K/year/tenant',
             projectId: 'the-muse-white-label',
           },
