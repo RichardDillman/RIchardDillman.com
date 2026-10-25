@@ -191,7 +191,20 @@
 
 ---
 
+## 📈 Talent.com work waiting on an "after" number (added 2026-10-25)
+
+Shipped Talent.com work that could become a project and achievement once a before/after number exists. The bar: it moved a measurable number, the change can be traced, and it moved the right way. Drop anything that doesn't clear it. Each item names the check that produces the number. Ticket keys are in the talent repo's Jira.
+
+- [ ] **Job expiry, no-crawl pass (ADTECH-718).** First real run is Tue 2026-10-27 after 5:00 AM Eastern. Check the jobs-ingestion cron log for the expired count. The 2026-10-19 dry run said 36,142 jobs from 460 scanIDs; that is a plan, not a result.
+- [ ] **AdSense click tracking (ADTECH-730).** Not on main as of 2026-10-25. Once in prod, compare daily `adsense_clicked` in `datalake.user_event` with AdSense console clicks. Before: 107,423 events against 129,118 clicks, Oct 8 to 21.
+- [ ] **Job type and salary in JobPosting data (ADTECH-724, BUGT-15862).** Final fix db8ee2a498 not on main as of 2026-10-25. Compare the Search Console Job posting enhancement report (valid and warnings) before and after it reaches main.
+- [ ] **Google for Jobs ping timing (ADTECH-697, 703, 720).** On main. Measure the share of newly pinged URLs that URL Inspection reports as "Excluded by noindex", before against after 2026-10-20. Before: 17,553 of 20,000 sampled comeback pings went out under 30 minutes after the job came back (ADTECH-720).
+
+Considered and left out: /view performance (ADTECH-677), about 100 ms faster at the median, judged too small to feature.
+
 ## 📋 Priority Next Steps
+
+> As of 2026-10-25 this list looks out of date: the projects page and deploy are done. Verify each item against the site before acting on it.
 
 Based on PRD and current state, here's the recommended order:
 
