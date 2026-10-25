@@ -22,6 +22,7 @@ export interface Role {
 export interface Experience {
   company: string;
   companyLogos?: string[]; // Array of filenames in /public/images/logos/
+  scale?: string; // Shown under the company name on the site and on both resumes. Keep them identical.
   location: string;
   period: string;
   roles: Role[];
@@ -30,6 +31,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: 'Talent.com',
+    scale: '12M monthly unique visitors, 70M monthly page views, 46.8M active jobs',
     companyLogos: ['talent-com.svg'],
     location: 'Remote',
     period: 'Dec 2025 - Present',
@@ -211,6 +213,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'The Muse',
+    scale: '16M monthly users',
     companyLogos: ['the-muse.png', 'fairy-god-boss.png', 'purpose-jobs.png'],
     location: 'Remote',
     period: 'Dec 2018 - Sep 2025',
@@ -494,6 +497,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'Condé Nast',
+    scale: '30+ brands, 229M monthly users, 1B+ monthly video views',
     companyLogos: [
       'vogue.png',
       'the-new-yorker.png',
