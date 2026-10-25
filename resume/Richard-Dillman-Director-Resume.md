@@ -37,7 +37,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
-- Increased job search conversions 13% with a Trending Search module and CTR 22% through UX experiments.
+- Increased article-to-marketplace conversions 138% with a Trending Search module, and Apply button CTR 22% through UX experiments.
 
 #### Director of Application Development | Dec 2023 - Mar 2024
 
