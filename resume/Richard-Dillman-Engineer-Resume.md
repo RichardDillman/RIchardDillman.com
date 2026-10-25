@@ -6,7 +6,7 @@ Indianapolis, IN | (317) 586-2365 | <rdillman@gmail.com> | [richarddillman.com](
 
 ## Summary
 
-Hands-on engineer for high-traffic web platforms, specializing in technical SEO, performance, and Next.js. At Talent.com (5-8M pageviews/day), restored Google Jobs indexing from zero to 1.5M+ jobs a day, cut a failing PostgreSQL query from 15.8 seconds to 87 milliseconds, and raised test coverage from 59% to 91%. Earlier, grew organic traffic 10x at The Muse and raised ad viewability from 45% to 85% across Condé Nast's 30+ publications. Proves root cause with data before anyone changes code.
+Hands-on engineer for high-traffic web platforms, specializing in technical SEO, performance, and Next.js. At Talent.com, restored Google Jobs indexing from zero to 1.5M+ jobs a day, cut a failing PostgreSQL query from 15.8 seconds to 87 milliseconds, and raised test coverage from 59% to 91%. Earlier, grew organic traffic 10x at The Muse and raised ad viewability from 45% to 85% across Condé Nast's 30+ publications. Proves root cause with data before anyone changes code. Comfortable shipping to platforms with millions of monthly users.
 
 ## Skills
 
@@ -18,6 +18,8 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 ## Work Experience
 
 ### Talent.com | Dec 2025 - Present
+
+*12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
 
 #### Staff Software Engineer | Dec 2025 - Present
 
@@ -31,14 +33,19 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### The Muse | Dec 2018 - Sep 2025
 
+*16M monthly users*
+
 #### Senior Director of Engineering | Apr 2024 - Sep 2025
 
-- Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
 - Cut page load from 3.5s to 800ms with Redis caching layers and PostgreSQL indexing.
 
 #### Director of Application Development | Dec 2023 - Mar 2024
+
+- Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
+- Increased the job posting crawl budget 49K by converting links to non-indexed offsite pages into buttons.
+- Reduced Interaction to Next Paint (INP) by 300ms through Google Tag Manager cleanup.
 
 #### Staff Engineer | Apr 2021 - Nov 2023
 
@@ -55,13 +62,9 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### Condé Nast | Jul 2015 - Nov 2018
 
+*30+ brands, 229M monthly users, 1B+ monthly video views*
+
 #### Senior Software Engineer, Ad Tech and Monetization | Jul 2015 - Nov 2018
 
-- Increased ad viewability from 45% to 85% by rebuilding ad infrastructure for 30+ global publications (Vogue, The New Yorker, Wired, GQ, Vanity Fair) serving 229M+ monthly users.
+- Increased ad viewability from 45% to 85% by rebuilding ad infrastructure for 30+ global publications (Vogue, The New Yorker, Wired, GQ, Vanity Fair).
 - Designed shared UI tooling and a plugin architecture adopted across editorial brands.
-
-## Open-Source Projects
-
-- **[seo-audit-mcp](https://github.com/RichardDillman/seo-audit-mcp):** MCP server for technical SEO audits of job boards: page analysis, site crawling, Lighthouse, sitemaps, and JobPosting schema validation.
-- **[googlebot-simulator-mcp](https://github.com/RichardDillman/googlebot-simulator-mcp):** MCP server that crawls pages as Googlebot to verify bot detection and analytics tracking.
-- **[innerVoice](https://github.com/RichardDillman/innerVoice):** MCP server for two-way messaging between Claude and Telegram.
