@@ -101,14 +101,14 @@ export const experiences: Experience[] = [
             projectId: 'talent-deploy-safety-secure-coding',
           },
           {
-            text: 'Built a self-improving generative AI engineering platform whose agents flag missing skills and turn repeated manual work into new automation',
+            text: 'Built a self-improving AI engineering platform on Claude Code: 59 skills and 21 agents wrapping GitLab, Jira, Confluence, Grafana, Kafka, AWS, and kubectl, a multi-agent review on every merge request, and guardrails that turn its own gaps into new skills (17 in one quarter)',
             tier: 3,
             engineer:
-              'Built a self-improving AI engineering platform whose agents flag missing skills and turn repeated manual work into new automation, adding 17 skills since June.',
+              'Built a self-improving AI engineering platform of 59 Claude Code skills and 21 agents, including multi-agent code review on every merge request, that turns its own gaps into new skills.',
             director:
-              'Built a self-improving AI engineering platform whose agents flag missing skills and turn repeated manual work into new automation, adding 17 skills since June.',
-            metrics: '17 new skills since June',
-            projectId: 'talent-self-healing-ai-toolbox',
+              'Launched a team-shared AI engineering platform of 59 Claude Code skills and 21 agents, with multi-agent code review on every merge request, and seven other engineers have contributed to it.',
+            metrics: '59 skills, 21 agents',
+            projectId: 'talent-claude-code-dev-platform',
           },
           {
             text: 'Root-caused a soft-404 crisis on /view that peaked at 39.5M URLs in Search Console, pushing for scoped Googlebot logs that exposed POST and RSC flight-data requests returning tiny 200s (~14.5M/day) and shipping the redirect and bot-detection fixes',
@@ -186,21 +186,24 @@ export const experiences: Experience[] = [
             projectId: 'talent-jobseeker-e2e-from-zero',
           },
           {
-            text: 'Built a self-serve AI development platform of 30+ Claude Code skills wrapping GitLab, Jira, Confluence, Grafana, Kafka, AWS, and kubectl behind a routing layer, checked into the monorepo for the team',
+            text: 'Cut the ui unit test suite from 392 seconds to 43 with the same 728 tests, took unit tests off the network, added a type-check gate on 47 projects, and restored 22 services whose tests had stopped passing',
             tier: 3,
             engineer:
-              'Built a self-serve AI development platform of 30+ Claude Code skills wrapping GitLab, Jira, Confluence, Grafana, Kafka, AWS, and kubectl for the team.',
+              'Cut a unit test suite from 392 to 43 seconds with all 728 tests kept, took tests off the network, and restored 22 services whose tests had stopped passing.',
             director:
-              'Launched a team-shared AI development platform of 30+ Claude Code skills and a multi-agent review pipeline that checks tests, security, accessibility, and performance on every merge request.',
-            metrics: '30+ skills, 10+ systems',
-            projectId: 'talent-claude-code-dev-platform',
+              'Cut CI time on the shared UI test suite from 392 to 43 seconds without dropping a test, and restored 22 services whose tests had stopped passing.',
+            metrics: '392 s to 43 s',
+            projectId: 'talent-ci-unit-test-speed',
           },
           {
-            text: 'Built a team-shared multi-agent AI code review pipeline that fans out specialist checks (tests, security, accessibility, performance) on every merge request',
+            text: 'Mapped 409 production workloads to their code and audited alerting end to end, finding 17 of 21 alert channels failing silently and 83 of 202 live rules routed to a failing channel',
             tier: 3,
             engineer:
-              'Built a multi-agent AI code review pipeline that runs specialist checks for tests, security, accessibility, and performance on every merge request.',
-            projectId: 'talent-claude-code-multi-agent-review',
+              'Mapped 409 production workloads to their code and found 17 of 21 alert channels failing silently, with 83 of 202 live alert rules routed to a failing channel.',
+            director:
+              'Mapped 409 production workloads to their code and found 17 of 21 alert channels failing silently, with 83 of 202 live alert rules routed to a failing channel.',
+            metrics: '17 of 21 alert channels failing',
+            projectId: 'talent-system-map-alerting-audit',
           },
         ],
       },

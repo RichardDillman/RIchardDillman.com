@@ -122,23 +122,6 @@ export const projects: Project[] = [
     tags: ['Database', 'Performance Tuning', 'Data Engineering', 'Scalability'],
   },
   {
-    id: 'talent-claude-code-multi-agent-review',
-    title: 'Team-Shared Multi-Agent AI Code Review Pipeline',
-    summary: 'Talent.com - Claude Code skill fanning out specialist agents on every MR',
-    company: 'Talent.com',
-    period: '2026',
-    problem:
-      'Code review at team scale was bottlenecked on a handful of senior engineers, and the depth of review varied with whoever picked it up. Security, accessibility, coverage, and architectural concerns were easy to miss when the reviewer was rushed. The team needed consistent, comprehensive review on every MR without slowing the merge cadence or creating more review load for the seniors.',
-    solution:
-      'Designed and built a shared Claude Code review pipeline. The /code-review skill fans out to specialist sub-agents (unit tests, lint, types, coverage, security, performance, simplification) in parallel, then consolidates findings by severity. Checked the entire .claude/ directory into the monorepo with a teammate README and tracked skill paths so any engineer gets the same review without local setup. Added a typed auto-memory system, routing rules, and fan-out chains so context persists across sessions without bloating the window. Same architecture also powers /diagnose-ci, which triages failing GitLab pipelines in one command.',
-    outcome:
-      'Turned a single command into a senior-level, multi-dimensional review that runs in minutes. Freed senior engineers from routine review load and raised the floor on every MR across the team. A CI hook now runs the same pipeline automatically on every MR.',
-    metrics:
-      '~100 reviewer-hours saved per week. 15-min bot feedback auto-triggered on every commit. Every line of code reviewed for security, a11y, tests, and architecture.',
-    stack: ['Claude Code', 'Claude API', 'Anthropic SDK', 'TypeScript', 'Bash', 'GitLab CI'],
-    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Leadership'],
-  },
-  {
     id: 'talent-v8-heap-not-a-leak',
     title: 'Cloud Reliability: Proving a Suspected Memory Leak Was a Configuration Problem',
     summary:
@@ -175,40 +158,32 @@ export const projects: Project[] = [
     tags: ['Security', 'Data Analysis', 'Observability', 'Incident Response'],
   },
   {
-    id: 'talent-self-healing-ai-toolbox',
-    title: 'Self-Improving Generative AI Engineering Platform: 17 New Skills in One Quarter',
-    summary:
-      'Talent.com - Agentic AI workflows with guardrails that detect their own gaps and turn them into new automation',
-    company: 'Talent.com',
-    period: '2026',
-    problem:
-      'AI coding assistants fail quietly in two ways. When no tool exists for a task, they improvise, so the same workaround gets rebuilt every time and never becomes reusable. When they get something wrong, the correction stays in one conversation and the next one repeats the mistake. Once AI agents can reach code, tickets, logs, and databases, that silent improvising is also a safety risk.',
-    solution:
-      "Built a feedback loop into the AI platform itself. Standing rules require the AI agent to say plainly when no existing skill covers a task, finish the job anyway, and name what should be built. The second time a task is done by hand, the agent asks whether it should become a reusable skill. Every mistake gets a note left exactly where the next person or agent will hit it, and a shared memory skill saves lessons to the team's repository instead of one person's laptop. Guardrails block the AI from writing to production databases, committing passwords or keys, or running tools that are not set up, and the skill index is generated automatically and checked so it never goes stale.",
-    outcome:
-      "Since June the platform took 230 changes and gained 17 new skills. It now includes 59 skills, 21 specialized AI agents, and 4 automated guardrails, with 24 tracked known issues and 18 changes made purely to record a lesson for next time. One cleanup moved 68 of 112 facts out of a single engineer's private AI memory into shared team documentation. Seven other engineers have contributed.",
-    metrics:
-      '17 new skills in one quarter. 59 skills, 21 AI agents, 4 guardrails. 68 of 112 private facts moved into shared team knowledge.',
-    stack: ['Claude Code', 'Claude API', 'Python', 'Bash', 'GitLab CI'],
-    tags: ['Generative AI', 'Agentic Workflows', 'Workflow Automation', 'Developer Productivity'],
-  },
-  {
     id: 'talent-claude-code-dev-platform',
-    title: 'Self-Built AI Development Platform Across the Full Toolchain',
+    title:
+      'Self-Improving AI Engineering Platform: 59 Skills, 21 Agents, and Code Review on Every MR',
     summary:
-      'Talent.com - Claude Code skills, agents, and scripts wrapping every third-party system the team touches',
+      "Talent.com - Claude Code platform that wraps the team's toolchain, reviews every merge request, and turns its own gaps into new automation",
     company: 'Talent.com',
     period: '2025-2026',
     problem:
-      'Day-to-day engineering meant context-switching across a dozen disconnected systems, each with its own CLI, auth, and quirks: GitLab for code and CI, Jira for tickets, Confluence for PRDs, Grafana/Loki/Prometheus for observability, Kafka for event pipelines, AWS and kubectl for infrastructure, Teams for comms, Statsig for experiments. Routine work, diagnosing a failing pipeline, drafting an MR, searching logs mid-incident, meant remembering the exact incantation for each tool, and that knowledge lived in individual engineers heads instead of anywhere reusable.',
+      "Day-to-day engineering meant context-switching across a dozen disconnected systems, each with its own CLI, auth, and quirks: GitLab for code and CI, Jira for tickets, Confluence for PRDs, Grafana/Loki/Prometheus for observability, Kafka for event pipelines, AWS and kubectl for infrastructure, Teams for comms, Statsig for experiments. That knowledge lived in individual engineers' heads. Code review was bottlenecked on a handful of senior engineers, and its depth varied with whoever picked it up. And AI coding assistants fail quietly: when no tool exists for a task they improvise, so the same workaround gets rebuilt every time, and when they get something wrong the correction stays in one conversation. Once AI agents can reach code, tickets, logs, and databases, that silent improvising is also a safety risk.",
     solution:
-      'Designed and built a personal AI development platform on Claude Code, checked into the monorepo so it could be shared with the team. A routing layer maps plain-language intent to 30+ purpose-built skills, each wrapping one system end to end: create an MR with team defaults, diagnose CI, deploy to QA or a personal dev environment, search Jira/Confluence/Teams, query Grafana logs and Prometheus metrics, inspect Kafka topics, run Athena and Redshift, read Kubernetes state. Hardened it for sharing: per-user secrets stay local, a SessionStart hook reports which integrations are configured, and a PreToolUse gate blocks any skill whose config is missing and points the user at setup docs. Added a typed auto-memory system and on-touch context files so project conventions persist across sessions.',
+      'Designed and built an AI development platform on Claude Code, checked into the monorepo so the whole team gets it. A routing layer maps plain-language intent to purpose-built skills, each wrapping one system end to end: create an MR with team defaults, diagnose CI, deploy to QA or a personal dev environment, search Jira/Confluence/Teams, query Grafana logs and Prometheus metrics, inspect Kafka topics, run Athena and Redshift, read Kubernetes state. Per-user secrets stay local, a SessionStart hook reports which integrations are configured, and a gate blocks any skill whose config is missing. The /code-review skill fans out to specialist sub-agents (unit tests, lint, types, coverage, security, performance, simplification) in parallel and consolidates findings by severity, and a CI hook runs it on every MR. Then built a feedback loop into the platform itself: standing rules require the agent to say plainly when no skill covers a task, finish the job anyway, and name what should be built; the second time a task is done by hand, it asks whether that should become a skill; every mistake gets a note left where the next person or agent will hit it, and a shared memory skill saves lessons to the repository instead of one laptop. Guardrails block writes to production databases, committing passwords or keys, and running tools that are not set up, and the skill index is generated and checked so it never goes stale.',
     outcome:
-      'Collapsed a dozen tool-specific workflows into one conversational interface where the routing layer picks the right specialist automatically. Tribal knowledge that used to live in chat threads, the exact glab flags, the JQL, the Loki query, became codified, versioned, and reviewable like any other code. The whole toolbox ships through normal MR review, so improvements compound for anyone who adopts it instead of dying in a single session.',
+      "Since June the platform took 230 changes and gained 17 new skills. It now includes 59 skills, 21 specialized AI agents, and 4 automated guardrails, with 24 tracked known issues and 18 changes made purely to record a lesson for next time. Every MR gets the multi-agent review automatically. One cleanup moved 68 of 112 facts out of a single engineer's private AI memory into shared team documentation. Tribal knowledge that used to live in chat threads, the exact glab flags, the JQL, the Loki query, is now versioned and reviewed like any other code, and seven other engineers have contributed.",
     metrics:
-      '30+ skills across 10+ integrated systems (GitLab, Jira, Confluence, Grafana, Kafka, AWS, kubectl, Teams, Statsig)',
-    stack: ['Claude Code', 'Claude API', 'TypeScript', 'Bash', 'Python', 'GitLab', 'AWS'],
-    tags: ['AI/ML', 'Developer Experience', 'Automation', 'Platform'],
+      '59 skills, 21 AI agents, 4 guardrails. 17 new skills in one quarter. Multi-agent review on every MR. 68 of 112 private facts moved into shared team knowledge.',
+    stack: [
+      'Claude Code',
+      'Claude API',
+      'Anthropic SDK',
+      'TypeScript',
+      'Python',
+      'Bash',
+      'GitLab CI',
+      'AWS',
+    ],
+    tags: ['Generative AI', 'Agentic Workflows', 'Developer Experience', 'Automation', 'Platform'],
   },
   {
     id: 'talent-deploy-safety-secure-coding',
