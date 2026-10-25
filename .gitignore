@@ -347,3 +347,6 @@ next-env.d.ts
 
 # lighthouse ci reports
 .lighthouseci
+
+# Local review drafts
+review/

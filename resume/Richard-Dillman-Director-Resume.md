@@ -6,7 +6,7 @@ Indianapolis, IN | (317) 586-2365 | <rdillman@gmail.com> | [richarddillman.com](
 
 ## Summary
 
-Hands-on engineering leader who builds high-traffic web platforms and the teams behind them. Rose from Senior Application Engineer to Senior Director of Engineering at The Muse, promoted 6 engineers to senior or lead roles, and generated $994K in new ad revenue by launching on-site advertising. At Talent.com (5-8M pageviews/day), restored Google Jobs indexing from zero to 1.5M+ jobs a day and raised test coverage from 59% to 91%. Open to full-time and fractional engineering leadership roles.
+Hands-on engineering leader who builds high-traffic web platforms and the teams behind them. Rose from Senior Application Engineer to Senior Director of Engineering at The Muse, promoted 6 engineers to senior or lead roles, and generated $994K in new ad revenue by launching on-site advertising. At Talent.com, restored Google Jobs indexing from zero to 1.5M+ jobs a day and raised test coverage from 59% to 91%. Comfortable shipping to platforms with millions of monthly users. Open to full-time and fractional engineering leadership roles.
 
 ## Skills
 
@@ -17,6 +17,8 @@ Hands-on engineering leader who builds high-traffic web platforms and the teams 
 ## Work Experience
 
 ### Talent.com | Dec 2025 - Present
+
+*12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
 
 #### Staff Software Engineer | Dec 2025 - Present
 
@@ -31,15 +33,20 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### The Muse | Dec 2018 - Sep 2025
 
+*16M monthly users*
+
 #### Senior Director of Engineering | Apr 2024 - Sep 2025
 
 - Led a 15-engineer team and promoted 6 engineers to senior or lead roles through mentorship and quarterly growth reviews.
-- Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
 - Increased article-to-marketplace conversions 138% with a Trending Search module, and Apply button CTR 22% through UX experiments.
 
 #### Director of Application Development | Dec 2023 - Mar 2024
+
+- Generated $994K in new ad revenue in a year by launching on-site advertising with third-party vendors without slowing the site.
+- Increased the job posting crawl budget 49K by converting links to non-indexed offsite pages into buttons.
+- Reduced Interaction to Next Paint (INP) by 300ms through Google Tag Manager cleanup.
 
 #### Staff Engineer | Apr 2021 - Nov 2023
 
@@ -56,11 +63,9 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### Condé Nast | Jul 2015 - Nov 2018
 
+*30+ brands, 229M monthly users, 1B+ monthly video views*
+
 #### Senior Software Engineer, Ad Tech and Monetization | Jul 2015 - Nov 2018
 
-- Increased ad viewability from 45% to 85% by rebuilding ad infrastructure for 30+ global publications (Vogue, The New Yorker, Wired, GQ, Vanity Fair) serving 229M+ monthly users.
+- Increased ad viewability from 45% to 85% by rebuilding ad infrastructure for 30+ global publications (Vogue, The New Yorker, Wired, GQ, Vanity Fair).
 - Reached 80%+ test coverage across a 45-engineer editorial engineering org through standardized testing and documentation.
-
-## Open-Source Projects
-
-- **[seo-audit-mcp](https://github.com/RichardDillman/seo-audit-mcp)** and **[googlebot-simulator-mcp](https://github.com/RichardDillman/googlebot-simulator-mcp):** MCP servers for technical SEO audits and verifying bot detection and analytics as Googlebot.

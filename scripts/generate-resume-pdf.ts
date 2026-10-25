@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 import { chromium } from 'playwright';
-import { readFileSync } from 'fs';
+import { copyFileSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { remark } from 'remark';
 import html from 'remark-html';
@@ -11,6 +11,7 @@ const RESUME_DIR = join(process.cwd(), 'resume');
 const resumeName = process.argv[2] || 'Richard-Dillman-Engineer-Resume';
 const MARKDOWN_FILE = join(RESUME_DIR, `${resumeName}.md`);
 const OUTPUT_PDF = join(RESUME_DIR, `${resumeName}.pdf`);
+const PUBLIC_PDF = join(process.cwd(), 'public', 'resume', `${resumeName}.pdf`);
 
 async function markdownToHtml(markdown: string): Promise<string> {
   const result = await remark().use(html).process(markdown);
@@ -106,6 +107,18 @@ function wrapHtmlWithStyles(htmlContent: string): string {
       margin-top: 4pt;
     }
 
+    /* Company scale line, written as an italic paragraph under the company */
+    h3 + p {
+      font-size: 9pt;
+      color: #555;
+      margin: 0 0 2pt 0;
+      break-after: avoid;
+    }
+
+    h3 + p + h4 {
+      margin-top: 0;
+    }
+
     /* Role title with right-aligned dates */
     h4 {
       display: flex;
@@ -193,8 +206,12 @@ async function generatePDF() {
 
   await browser.close();
 
+  // The site serves the copy in public/, so keep it in step with the source PDF.
+  copyFileSync(OUTPUT_PDF, PUBLIC_PDF);
+
   console.log('✅ PDF generated successfully!');
   console.log(`📂 Location: ${OUTPUT_PDF}`);
+  console.log(`🌐 Published: ${PUBLIC_PDF}`);
 }
 
 // Run the generator
