@@ -55,8 +55,24 @@ for (const [kind, name] of Object.entries(RESUMES) as [keyof typeof RESUMES, str
 
   for (const line of lines) {
     if (line.startsWith('## ')) company = role = '';
-    if (line.startsWith('### ')) company = line.slice(4).split(' | ')[0];
+    if (line.startsWith('### ')) {
+      company = line.slice(4).split(' | ')[0];
+      role = '';
+    }
     if (line.startsWith('#### ')) role = line.slice(5).split(' | ')[0];
+
+    // The italic line under a company heading must match that company's `scale` on the site.
+    const scaleLine = /^\*([^*].*[^*])\*$/.exec(line);
+    if (scaleLine && company && !role) {
+      const scale = experiences.find((e) => e.company === company)?.scale;
+      if (scaleLine[1] !== scale) {
+        failures++;
+        console.log(
+          `❌ ${kind}: ${company} scale line does not match data/experience.ts:\n   resume: ${scaleLine[1]}\n   data:   ${scale ?? '(none)'}`
+        );
+      }
+    }
+
     if (!line.startsWith('- ') || !company || !role) continue;
 
     const bullet = line.slice(2);

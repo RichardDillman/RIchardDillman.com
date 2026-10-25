@@ -18,6 +18,11 @@ export default function ExperienceList() {
             <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-3">
               {experience.company}
             </h2>
+            {experience.scale && (
+              <p className="-mt-2 mb-3 text-sm italic text-neutral-600 dark:text-neutral-400">
+                {experience.scale}
+              </p>
+            )}
             {experience.companyLogos && experience.companyLogos.length > 0 && (
               <div className="flex flex-wrap items-center gap-3">
                 {experience.companyLogos.map((logoFilename, idx) => {
