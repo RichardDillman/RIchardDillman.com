@@ -1,10 +1,12 @@
 #!/usr/bin/env tsx
 // Every bullet on a resume must be the `engineer` or `director` line of an achievement in the
 // same company and role in data/experience.ts. The reverse is not checked: tapering cuts
-// eligible lines for space.
+// eligible lines for space. Also: every project in data/projects.ts must be linked from an
+// achievement.
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { experiences } from '../data/experience';
+import { projects } from '../data/projects';
 
 const RESUMES = {
   engineer: 'Richard-Dillman-Engineer-Resume',
@@ -21,12 +23,25 @@ const norm = (s: string) =>
 
 let failures = 0;
 
+// A project worth a write-up is worth an achievement, so every project must be linked from one.
+const linked = new Set(
+  experiences.flatMap((e) => e.roles.flatMap((r) => r.achievements.map((a) => a.projectId)))
+);
+for (const p of projects) {
+  if (!linked.has(p.id)) {
+    failures++;
+    console.log(`❌ project "${p.id}" has no achievement in data/experience.ts linking to it`);
+  }
+}
+
 for (const e of experiences) {
   for (const r of e.roles) {
     for (const a of r.achievements) {
       if ((a.engineer || a.director) && !a.tier) {
         failures++;
-        console.log(`❌ ${e.company} / ${r.title}: eligible achievement has no tier:\n   ${a.text}`);
+        console.log(
+          `❌ ${e.company} / ${r.title}: eligible achievement has no tier:\n   ${a.text}`
+        );
       }
     }
   }
@@ -55,7 +70,9 @@ for (const [kind, name] of Object.entries(RESUMES) as [keyof typeof RESUMES, str
       console.log(`❌ ${kind}: no role "${role}" at "${company}" in data/experience.ts`);
     } else if (!roleData.achievements.some((a) => a[kind] === bullet)) {
       failures++;
-      console.log(`❌ ${kind}: ${company} / ${role}: no achievement has this ${kind} line:\n   ${bullet}`);
+      console.log(
+        `❌ ${kind}: ${company} / ${role}: no achievement has this ${kind} line:\n   ${bullet}`
+      );
     }
   }
 
@@ -63,7 +80,9 @@ for (const [kind, name] of Object.entries(RESUMES) as [keyof typeof RESUMES, str
 }
 
 if (failures) {
-  console.log(`\n${failures} bullet(s) do not match data/experience.ts`);
+  console.log(
+    `\n${failures} problem(s) between the resumes, data/experience.ts and data/projects.ts`
+  );
   process.exit(1);
 }
 console.log('✅ Every resume bullet matches data/experience.ts');
