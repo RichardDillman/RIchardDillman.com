@@ -24,7 +24,7 @@ Hands-on engineering leader who builds high-traffic web platforms and the teams 
 
 Embedded with a 10-engineer team: find the highest-cost problems, write the fix plan, and route each fix to the team's engineers or ship it directly.
 
-- Identified $60K/year in recoverable Google Geocoding spend, confirmed by Finance, in a service consolidation plan.
+- Identified $60K/year in recoverable Google Geocoding spend, confirmed by Finance, in a location service consolidation PRD.
 - Measured 45% duplication across job data sources and drove a cross-team decision to show one copy of each job without losing revenue.
 - Restored Google Jobs indexing from zero to 1.5M+ new jobs a day by proving 15.9M rejections came from a daily quota, not a rate limit.
 - Raised jobseeker test coverage from 59% to 91% and shipped a staged upgrade (Next.js 15, Nx 22, React 19, next-intl v4) with zero production regressions.
