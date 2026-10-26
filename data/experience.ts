@@ -234,6 +234,8 @@ export const experiences: Experience[] = [
             metrics: '6 engineers promoted',
           },
           {
+            // The 2024 accomplishments log (Drive, "Spank Bank 2024") says "14,000+ articles". Richard chose
+            // 24K+ on 2026-10-26; keep 24K+ unless a newer source says otherwise.
             text: "Increased article pageviews 3,500 users/month launching Maya, The Muse's first AI-powered content discovery tool surfacing 24K+ articles",
             tier: 2,
             engineer:

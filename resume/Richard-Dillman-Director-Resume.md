@@ -41,6 +41,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Increased ad revenue 15% by migrating to Raptive with improved layouts and formats.
 - Increased job applications per user 50% by redesigning search into a two-pane layout with inline browsing.
 - Increased article-to-marketplace conversions 138% with a Trending Search module, and Apply button CTR 22% through UX experiments.
+- Launched Maya, The Muse's first AI content discovery tool, adding 3,500 article readers a month across 24K+ articles.
 
 #### Director of Application Development | Dec 2023 - Mar 2024
 
