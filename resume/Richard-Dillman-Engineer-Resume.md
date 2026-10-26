@@ -23,7 +23,7 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 
 #### Staff Software Engineer | Dec 2025 - Present
 
-Embedded with a 10-engineer team: find the highest-cost problems, write the fix plan, and route each fix to the team's engineers or ship it directly.
+Embedded with a 10-engineer team: find the highest-cost problems, write the fix plan, and route each fix to the team's engineers or ship it directly. Built the team's AI-assisted development platform on Claude Code.
 
 - Restored Google Jobs indexing from zero to 1.5M+ new jobs a day by proving 15.9M rejections came from a daily quota, not a rate limit.
 - Reduced a failing PostgreSQL query on a 600 GB table from 15.8 seconds to 87 milliseconds (181x) and found the stuck process blocking database cleanup.
@@ -53,7 +53,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 - Grew SEO visits 74K/month by replacing infinite scroll with server-side pagination.
 - Increased job tile clicks 21.9% and views per user 20% with a search UX refresh that passed Core Web Vitals.
 - Grew organic SEO traffic 10x with JSON-LD structured data and performance refactors.
-- Cut build times from 45 minutes to 75 seconds by modularizing repos and rebuilding the CI/CD pipelines.
+- Cut build times from 45 minutes to 75 seconds by migrating off a legacy Python/Tornado monolith and rebuilding the CI/CD pipelines.
 - Cut sitewide load time by 4 seconds and reached 90%+ green Core Web Vitals.
 
 #### Senior Application Engineer | Dec 2018 - Mar 2021

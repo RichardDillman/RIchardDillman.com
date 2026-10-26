@@ -128,7 +128,7 @@ export const experiences: Experience[] = [
             engineer:
               'Identified $60K/year in recoverable Google Geocoding spend, confirmed by Finance, in a location service consolidation PRD.',
             director:
-              'Identified $60K/year in recoverable Google Geocoding spend, confirmed by Finance, in a service consolidation plan.',
+              'Identified $60K/year in recoverable Google Geocoding spend, confirmed by Finance, in a location service consolidation PRD.',
             metrics: '$60K/year savings',
             projectId: 'talent-location-service-consolidation',
           },
@@ -424,7 +424,7 @@ export const experiences: Experience[] = [
             text: 'Cut build times from 45 min to 75 sec modularizing repos and overhauling CI/CD pipelines',
             tier: 3,
             engineer:
-              'Cut build times from 45 minutes to 75 seconds by modularizing repos and rebuilding the CI/CD pipelines.',
+              'Cut build times from 45 minutes to 75 seconds by migrating off a legacy Python/Tornado monolith and rebuilding the CI/CD pipelines.',
             director:
               'Cut build times from 45 minutes to 75 seconds by modularizing repos and rebuilding the CI/CD pipelines.',
             metrics: '45 min → 75 sec',
