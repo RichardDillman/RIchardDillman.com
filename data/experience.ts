@@ -581,6 +581,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'Everyday Health',
+    scale: '30M+ monthly users',
     companyLogos: [
       'everyday-health.png',
       'medpage-today.png',
