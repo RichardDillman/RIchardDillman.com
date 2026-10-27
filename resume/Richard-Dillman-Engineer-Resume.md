@@ -6,14 +6,14 @@ Indianapolis, IN | (317) 586-2365 | <rdillman@gmail.com> | [richarddillman.com](
 
 ## Summary
 
-Hands-on engineer with 7+ years in recruiting tech, building high-traffic job marketplaces and specializing in technical SEO, performance, and Next.js. At Talent.com, restored Google Jobs indexing from zero to 1.5M+ jobs a day, cut a failing PostgreSQL query from 15.8 seconds to 87 milliseconds, and raised test coverage from 59% to 91%. Earlier, grew organic traffic 10x at The Muse and raised ad viewability from 45% to 85% across Condé Nast's 30+ publications. Proves root cause with data before anyone changes code. Comfortable shipping to platforms with millions of monthly users.
+Hands-on engineer for high-traffic web platforms, specializing in technical SEO, performance, and Next.js. At Talent.com, restored Google Jobs indexing from zero to 1.5M+ jobs a day, cut a failing PostgreSQL query from 15.8 seconds to 87 milliseconds, and raised test coverage from 59% to 91%. Earlier, grew organic traffic 10x at The Muse and raised ad viewability from 45% to 85% across Condé Nast's 30+ publications. Proves root cause with data before anyone changes code. Comfortable shipping to platforms with millions of monthly users.
 
 ## Skills
 
 **Languages and Frameworks:** TypeScript · JavaScript · HTML · CSS · Python · Bash · React · Next.js · Node.js · Accessibility (WCAG)\
 **Data and APIs:** PostgreSQL · MySQL · Redis · Kafka · REST and GraphQL APIs\
-**Infrastructure and Tooling:** AWS · Docker · Kubernetes · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Claude Code\
-**SEO and Analytics:** Technical SEO · JSON-LD / Schema.org · hreflang · Google Search Console · Google for Jobs · GTM · GA4 · Core Web Vitals · Lighthouse
+**Infrastructure and Tooling:** AWS · Docker · Kubernetes · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Claude Code · axe-core\
+**SEO, Ad Tech and Analytics:** Technical SEO · JSON-LD / Schema.org · hreflang · Google Search Console · Google for Jobs · Google Ad Manager · Prebid · GTM · GA4 · Core Web Vitals · Lighthouse
 
 ## Work Experience
 
