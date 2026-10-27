@@ -6,7 +6,7 @@ Indianapolis, IN | (317) 586-2365 | <rdillman@gmail.com> | [richarddillman.com](
 
 ## Summary
 
-Hands-on engineer for high-traffic web platforms, specializing in technical SEO, performance, and Next.js. At Talent.com, restored Google Jobs indexing from zero to 1.5M+ jobs a day, cut a failing PostgreSQL query from 15.8 seconds to 87 milliseconds, and raised test coverage from 59% to 91%. Earlier, grew organic traffic 10x at The Muse and raised ad viewability from 45% to 85% across Condé Nast's 30+ publications. Proves root cause with data before anyone changes code. Comfortable shipping to platforms with millions of monthly users.
+Hands-on engineer with 7+ years in recruiting tech, building high-traffic job marketplaces and specializing in technical SEO, performance, and Next.js. At Talent.com, restored Google Jobs indexing from zero to 1.5M+ jobs a day, cut a failing PostgreSQL query from 15.8 seconds to 87 milliseconds, and raised test coverage from 59% to 91%. Earlier, grew organic traffic 10x at The Muse and raised ad viewability from 45% to 85% across Condé Nast's 30+ publications. Proves root cause with data before anyone changes code. Comfortable shipping to platforms with millions of monthly users.
 
 ## Skills
 
@@ -19,7 +19,7 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 
 ### Talent.com | Dec 2025 - Present
 
-*12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
+*Job search marketplace connecting employers and jobseekers: 12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
 
 #### Staff Software Engineer | Dec 2025 - Present
 
@@ -33,7 +33,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### The Muse | Dec 2018 - Sep 2025
 
-*16M monthly users*
+*Career platform and employer branding marketplace for hiring companies: 16M monthly users*
 
 #### Senior Director of Engineering | Apr 2024 - Sep 2025
 

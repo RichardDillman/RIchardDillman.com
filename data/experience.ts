@@ -31,7 +31,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: 'Talent.com',
-    scale: '12M monthly unique visitors, 70M monthly page views, 46.8M active jobs',
+    scale: 'Job search marketplace connecting employers and jobseekers: 12M monthly unique visitors, 70M monthly page views, 46.8M active jobs',
     companyLogos: ['talent-com.svg'],
     location: 'Remote',
     period: 'Dec 2025 - Present',
@@ -213,7 +213,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'The Muse',
-    scale: '16M monthly users',
+    scale: 'Career platform and employer branding marketplace for hiring companies: 16M monthly users',
     companyLogos: ['the-muse.png', 'fairy-god-boss.png', 'purpose-jobs.png'],
     location: 'Remote',
     period: 'Dec 2018 - Sep 2025',
