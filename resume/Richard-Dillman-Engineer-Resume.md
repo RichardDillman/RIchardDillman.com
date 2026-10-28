@@ -11,7 +11,7 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 ## Skills
 
 **Languages and Frameworks:** TypeScript · JavaScript · HTML · CSS · Python · Bash · React · Next.js · Node.js · Accessibility (WCAG)\
-**Data and APIs:** PostgreSQL · MySQL · Redis · Kafka · REST and GraphQL APIs\
+**Data and APIs:** PostgreSQL · MySQL · Redis · Kafka · REST and GraphQL APIs · Headless CMS (Craft)\
 **Infrastructure and Tooling:** AWS · Docker · Kubernetes · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Claude Code · axe-core\
 **SEO, Ad Tech and Analytics:** Technical SEO · JSON-LD / Schema.org · hreflang · Google Search Console · Google for Jobs · Google Ad Manager · Prebid · GTM · GA4 · Core Web Vitals · Lighthouse
 
@@ -59,7 +59,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 #### Senior Application Engineer | Dec 2018 - Mar 2021
 
-- Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.
+- Accelerated deployments 50% by replatforming the Craft CMS and article renderer on Koa, React, and Docker.
 
 ### Condé Nast | Jul 2015 - Nov 2018
 

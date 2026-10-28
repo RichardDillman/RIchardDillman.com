@@ -450,12 +450,12 @@ export const experiences: Experience[] = [
           'Worked with Director of Engineering to shape technical strategy, extend platforms, and lead new product development. Modernized legacy systems using Node, React, Python, AWS, Postgres.',
         achievements: [
           {
-            text: 'Accelerated deployments 50% and reduced incidents replatforming CMS and article renderer using KOA, React, Docker',
+            text: 'Accelerated deployments 50% and reduced incidents replatforming Craft CMS and article renderer using KOA, React, Docker',
             tier: 3,
             engineer:
-              'Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.',
+              'Accelerated deployments 50% by replatforming the Craft CMS and article renderer on Koa, React, and Docker.',
             director:
-              'Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.',
+              'Accelerated deployments 50% by replatforming the Craft CMS and article renderer on Koa, React, and Docker.',
             metrics: '50% faster deployments',
           },
           {
