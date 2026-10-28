@@ -11,15 +11,15 @@ Hands-on engineer for high-traffic web platforms, specializing in technical SEO,
 ## Skills
 
 **Languages and Frameworks:** TypeScript · JavaScript · HTML · CSS · Python · Bash · React · Next.js · Node.js · Accessibility (WCAG)\
-**Data and APIs:** PostgreSQL · MySQL · Redis · Kafka · REST and GraphQL APIs\
-**Infrastructure and Tooling:** AWS · Docker · Kubernetes · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Claude Code\
-**SEO and Analytics:** Technical SEO · JSON-LD / Schema.org · hreflang · Google Search Console · Google for Jobs · GTM · GA4 · Core Web Vitals · Lighthouse
+**Data and APIs:** PostgreSQL · MySQL · Redis · Kafka · REST and GraphQL APIs · Headless CMS (Craft)\
+**Infrastructure and Tooling:** AWS · Docker · Kubernetes · Nx · Jest · Playwright · Puppeteer · GitLab CI · CircleCI · Datadog · Grafana · Claude Code · axe-core\
+**SEO, Ad Tech and Analytics:** Technical SEO · JSON-LD / Schema.org · hreflang · Google Search Console · Google for Jobs · Google Ad Manager · Prebid · GTM · GA4 · Core Web Vitals · Lighthouse
 
 ## Work Experience
 
 ### Talent.com | Dec 2025 - Present
 
-*12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
+*Job search marketplace connecting employers and jobseekers: 12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
 
 #### Staff Software Engineer | Dec 2025 - Present
 
@@ -33,7 +33,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### The Muse | Dec 2018 - Sep 2025
 
-*16M monthly users*
+*Career platform and employer branding marketplace for hiring companies: 16M monthly users*
 
 #### Senior Director of Engineering | Apr 2024 - Sep 2025
 
@@ -59,7 +59,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 #### Senior Application Engineer | Dec 2018 - Mar 2021
 
-- Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.
+- Accelerated deployments 50% by moving the Craft CMS and article renderer off Tornado templates onto Koa, React, and Docker.
 
 ### Condé Nast | Jul 2015 - Nov 2018
 

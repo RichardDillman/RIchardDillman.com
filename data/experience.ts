@@ -31,7 +31,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: 'Talent.com',
-    scale: '12M monthly unique visitors, 70M monthly page views, 46.8M active jobs',
+    scale: 'Job search marketplace connecting employers and jobseekers: 12M monthly unique visitors, 70M monthly page views, 46.8M active jobs',
     companyLogos: ['talent-com.svg'],
     location: 'Remote',
     period: 'Dec 2025 - Present',
@@ -213,7 +213,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'The Muse',
-    scale: '16M monthly users',
+    scale: 'Career platform and employer branding marketplace for hiring companies: 16M monthly users',
     companyLogos: ['the-muse.png', 'fairy-god-boss.png', 'purpose-jobs.png'],
     location: 'Remote',
     period: 'Dec 2018 - Sep 2025',
@@ -450,12 +450,12 @@ export const experiences: Experience[] = [
           'Worked with Director of Engineering to shape technical strategy, extend platforms, and lead new product development. Modernized legacy systems using Node, React, Python, AWS, Postgres.',
         achievements: [
           {
-            text: 'Accelerated deployments 50% and reduced incidents replatforming CMS and article renderer using KOA, React, Docker',
+            text: 'Accelerated deployments 50% and reduced incidents moving Craft CMS and article renderer off Tornado templates onto KOA, React, Docker',
             tier: 3,
             engineer:
-              'Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.',
+              'Accelerated deployments 50% by moving the Craft CMS and article renderer off Tornado templates onto Koa, React, and Docker.',
             director:
-              'Accelerated deployments 50% by replatforming the CMS and article renderer on Koa, React, and Docker.',
+              'Accelerated deployments 50% by moving the Craft CMS and article renderer off Tornado templates onto Koa, React, and Docker.',
             metrics: '50% faster deployments',
           },
           {

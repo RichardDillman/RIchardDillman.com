@@ -12,13 +12,13 @@ Hands-on engineering leader who builds high-traffic web platforms and the teams 
 
 **Leadership:** Engineering Leadership · Mentoring and Career Growth · Technical Strategy · Platform Modernization · PRDs and RFCs · AI-Assisted Development\
 **Platform:** TypeScript · React · Next.js · Node.js · Python · PostgreSQL · AWS · Kubernetes · Kafka · Datadog · Grafana\
-**SEO and Growth:** Technical SEO · Structured Data · Google Search Console · Core Web Vitals
+**SEO, Ad Tech and Growth:** Technical SEO · Structured Data · Google Search Console · Core Web Vitals · Google Ad Manager · Prebid
 
 ## Work Experience
 
 ### Talent.com | Dec 2025 - Present
 
-*12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
+*Job search marketplace connecting employers and jobseekers: 12M monthly unique visitors, 70M monthly page views, 46.8M active jobs*
 
 #### Staff Software Engineer | Dec 2025 - Present
 
@@ -33,7 +33,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 ### The Muse | Dec 2018 - Sep 2025
 
-*16M monthly users*
+*Career platform and employer branding marketplace for hiring companies: 16M monthly users*
 
 #### Senior Director of Engineering | Apr 2024 - Sep 2025
 
