@@ -59,7 +59,7 @@ Embedded with a 10-engineer team: find the highest-cost problems, write the fix 
 
 #### Senior Application Engineer | Dec 2018 - Mar 2021
 
-- Accelerated deployments 50% by replatforming the Craft CMS and article renderer on Koa, React, and Docker.
+- Accelerated deployments 50% by moving the Craft CMS and article renderer off Tornado templates onto Koa, React, and Docker.
 
 ### Condé Nast | Jul 2015 - Nov 2018
 
