@@ -50,7 +50,7 @@ export function buildFields(): Field[] {
   const action = (id: string) => {
     const a = actions.find((x) => x.id === id);
     if (!a) throw new Error(`data/linkedin.ts: no action "${id}"`);
-    fields.push({ id: a.id, label: a.id.replace(/-/g, ' '), instruction: a.text, text: '' });
+    fields.push({ id: a.id, label: a.label, instruction: a.text, text: '' });
   };
 
   action('open-to-work');

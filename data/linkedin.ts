@@ -106,13 +106,15 @@ Built and optimized consumer health platforms reaching 30M+ monthly unique users
 export const untouchedCompanies = ['CatalpaSoft'];
 
 // Changes with nothing to paste. Each shows as pending until recorded done.
-export const actions: { id: string; text: string }[] = [
+export const actions: { id: string; label: string; text: string }[] = [
   {
     id: 'open-to-work',
+    label: 'Open to Work: switch to Recruiters only',
     text: 'Profile, Open to, edit Open to Work, set visibility to Recruiters only. That also removes the green photo frame.',
   },
   {
     id: 'delete-dillman-engineering',
+    label: 'Dillman Engineering: delete this position',
     text: 'Delete the Dillman Engineering (Owner) position. The LLC has no other clients, and its description implies it does.',
   },
 ];
