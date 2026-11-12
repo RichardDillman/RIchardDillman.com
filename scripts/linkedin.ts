@@ -53,6 +53,7 @@ const items = pending
   <pre id="t${i}">${esc(f.text)}</pre>`
       : '<p class="none">Nothing to paste.</p>'
   }
+  ${f.skills ? `<p class="how"><b>Skills for this position:</b> ${f.skills.map(esc).join(', ')}</p>` : ''}
 </section>`
   )
   .join('\n');

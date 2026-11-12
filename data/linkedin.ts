@@ -123,3 +123,55 @@ export const actions: { id: string; label: string; text: string }[] = [
 export const employmentType: Record<string, string> = {
   'Talent.com|Staff Software Engineer': 'Contract',
 };
+
+// Keyed `company|role title`. LinkedIn asks for skills on each position, most important first.
+// Every skill here is backed by a bullet in that role's LinkedIn description.
+export const roleSkills: Record<string, string[]> = {
+  'Talent.com|Staff Software Engineer': [
+    'Technical SEO',
+    'Google for Jobs',
+    'PostgreSQL',
+    'Next.js',
+    'AI-Assisted Development',
+    'Google Search Console',
+    'Structured Data (JSON-LD / Schema.org)',
+    'TypeScript',
+    'Claude Code',
+    'Product Requirements (PRDs)',
+  ],
+  'The Muse|Senior Director of Engineering': [
+    'Engineering Leadership',
+    'Mentoring',
+    'Ad Tech',
+    'Redis',
+    'PostgreSQL',
+  ],
+  'The Muse|Director of Application Development': [
+    'Ad Tech',
+    'Technical SEO',
+    'Core Web Vitals',
+    'Google Tag Manager',
+  ],
+  'The Muse|Staff Engineer': [
+    'Technical SEO',
+    'Structured Data (JSON-LD / Schema.org)',
+    'Core Web Vitals',
+    'Web Performance Optimization',
+    'CI/CD',
+  ],
+  'The Muse|Senior Application Engineer': [
+    'Next.js',
+    'React.js',
+    'Node.js',
+    'Docker',
+    'CI/CD',
+    'Jest',
+  ],
+  'Condé Nast|Senior Software Engineer, Ad Tech, Monetization': [
+    'Ad Tech',
+    'Web Performance Optimization',
+    'Technical Strategy',
+    'Mentoring',
+  ],
+  'Everyday Health|Front End Engineer': ['Web Performance Optimization', 'Ad Tech', 'Mentoring'],
+};

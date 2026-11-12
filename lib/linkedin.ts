@@ -12,6 +12,7 @@ import {
   headline,
   pinnedSkills,
   roleIntro,
+  roleSkills,
   roleVerbatim,
   skills,
   untouchedCompanies,
@@ -25,6 +26,8 @@ export interface Field {
   // The text to paste. Empty for an action with nothing to paste.
   text: string;
   limit?: number;
+  // Skills to add on this position, one at a time.
+  skills?: string[];
 }
 
 const LIVE = join(process.cwd(), 'data', 'linkedin-live.json');
@@ -102,6 +105,7 @@ export function buildFields(): Field[] {
         instruction: `Title "${r.title}". ${r.period.replace(' - ', ' to ')}.${type ? ` Employment type ${type}.` : ''} Replace the description.`,
         text,
         limit: LIMITS.position,
+        skills: roleSkills[key],
       });
     });
   }
@@ -125,7 +129,8 @@ export const writeLive = (live: Record<string, string>) =>
   writeFileSync(LIVE, `${JSON.stringify(live, null, 2)}\n`);
 
 // The record for a field: its instruction carries title, dates and type, so a date change is stale too.
-export const recordOf = (f: Field) => (f.text ? `${f.instruction}\n\n${f.text}` : 'done');
+export const recordOf = (f: Field) =>
+  f.text ? [f.instruction, f.text, ...(f.skills ?? [])].join('\n\n') : 'done';
 
 export const pendingFields = () => {
   const live = readLive();
