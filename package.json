@@ -14,6 +14,7 @@
     "capture:portfolio": "tsx scripts/capture-portfolio-screenshots.ts",
     "capture:current": "tsx scripts/capture-current-screenshots.ts",
     "check:resume": "tsx scripts/check-resume-bullets.ts",
+    "linkedin": "tsx scripts/linkedin.ts",
     "generate:resume": "pnpm check:resume && tsx scripts/generate-resume-pdf.ts",
     "generate:resume:director": "pnpm check:resume && tsx scripts/generate-resume-pdf.ts Richard-Dillman-Director-Resume",
     "generate:resume:engineer": "pnpm check:resume && tsx scripts/generate-resume-pdf.ts Richard-Dillman-Engineer-Resume",

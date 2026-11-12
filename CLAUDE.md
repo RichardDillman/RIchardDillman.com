@@ -81,6 +81,17 @@ contentlayer.config.ts # Contentlayer configuration for MDX processing
 
 **Type Safety:** The project uses TypeScript with strict mode enabled. Contentlayer generates types for all content automatically in `.contentlayer/generated`.
 
+## Adding an Achievement or Role
+
+`data/experience.ts` is the one source for the experience page, both resumes, and LinkedIn.
+
+1. Add the achievement with its `text`, and an `engineer` and/or `director` line if it belongs on a resume.
+2. When either line is present, set `tier` and `linkedin` (which line and its position in that role's LinkedIn description, or `false`). `pnpm check:resume` fails until both are set.
+3. Update the resume `.md` files if the bullet goes on them, then `pnpm generate:resume:all`.
+4. Run `pnpm linkedin`. It lists only the LinkedIn fields that now differ from `data/linkedin-live.json` (the record of what is pasted on the profile), opens them as a page and copies the first one. Paste it, run `pnpm linkedin done`, repeat. Commit `data/linkedin-live.json` with the change.
+
+Text that has no home in the experience data (headline, About, skills, the Talent.com intro line, Everyday Health's existing description, one-time actions) lives in `data/linkedin.ts`. LinkedIn has no profile write API, so pasting stays manual.
+
 ## Important Configuration Details
 
 ### Next.js Config

@@ -7,6 +7,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { experiences } from '../data/experience';
 import { projects } from '../data/projects';
+import { pendingFields } from '../lib/linkedin';
 
 const RESUMES = {
   engineer: 'Richard-Dillman-Engineer-Resume',
@@ -43,6 +44,18 @@ for (const e of experiences) {
           `❌ ${e.company} / ${r.title}: eligible achievement has no tier:\n   ${a.text}`
         );
       }
+      // Adding an achievement means deciding whether it goes on LinkedIn, the same as the resumes.
+      if ((a.engineer || a.director) && a.linkedin === undefined) {
+        failures++;
+        console.log(
+          `❌ ${e.company} / ${r.title}: eligible achievement has no linkedin decision (a line and position, or false):\n   ${a.text}`
+        );
+      }
+    }
+    const positions = r.achievements.flatMap((a) => (a.linkedin ? [a.linkedin.position] : []));
+    if (new Set(positions).size !== positions.length) {
+      failures++;
+      console.log(`❌ ${e.company} / ${r.title}: two achievements share a linkedin position`);
     }
   }
 }
@@ -94,6 +107,14 @@ for (const [kind, name] of Object.entries(RESUMES) as [keyof typeof RESUMES, str
 
   console.log(`${kind}: checked ${checked} bullets`);
 }
+
+// Not a failure: the profile is updated by hand, so it can lag the data. Say so every run.
+const stale = pendingFields();
+console.log(
+  stale.length
+    ? `⚠️  LinkedIn: ${stale.length} field(s) differ from what is live (${stale.map((f) => f.id).join(', ')}). Run pnpm linkedin.`
+    : 'LinkedIn: matches the data.'
+);
 
 if (failures) {
   console.log(
