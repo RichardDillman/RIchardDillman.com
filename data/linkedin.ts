@@ -41,7 +41,6 @@ Node.js
 Core Web Vitals
 Structured Data (JSON-LD / Schema.org)
 Google Search Console
-Google for Jobs
 Ad Tech
 Google Ad Manager
 Prebid
@@ -129,7 +128,6 @@ export const employmentType: Record<string, string> = {
 export const roleSkills: Record<string, string[]> = {
   'Talent.com|Staff Software Engineer': [
     'Technical SEO',
-    'Google for Jobs',
     'PostgreSQL',
     'Next.js',
     'AI-Assisted Development',
