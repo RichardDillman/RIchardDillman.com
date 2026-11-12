@@ -9,6 +9,7 @@ import { execFileSync } from 'child_process';
 import { mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { buildFields, chars, pendingFields, readLive, recordOf, writeLive } from '../lib/linkedin';
+import { roleSkills, skills } from '../data/linkedin';
 
 const PAGE = join(process.cwd(), 'drafts', 'linkedin', 'index.html');
 const cmd = process.argv[2];
@@ -42,6 +43,16 @@ if (cmd) {
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// LinkedIn asks which positions each skill applies to as you add it, so list it skill by skill.
+const skillTable = `<table>${skills
+  .map((skill) => {
+    const roles = Object.entries(roleSkills)
+      .filter(([, list]) => list.includes(skill))
+      .map(([key]) => key.replace('|', ': '));
+    return `<tr><td><b>${esc(skill)}</b></td><td>${roles.length ? roles.map(esc).join('<br>') : '<span class="none">no position</span>'}</td></tr>`;
+  })
+  .join('')}</table>`;
+
 const items = pending
   .map(
     (f, i) => `<section>
@@ -53,7 +64,7 @@ const items = pending
   <pre id="t${i}">${esc(f.text)}</pre>`
       : '<p class="none">Nothing to paste.</p>'
   }
-  ${f.skills ? `<p class="how"><b>Skills for this position:</b> ${f.skills.map(esc).join(', ')}</p>` : ''}
+  ${f.id === 'skills' ? skillTable : ''}
 </section>`
   )
   .join('\n');
@@ -70,7 +81,7 @@ h1{font-size:1.5rem;margin:0 0 4px}h2{font-size:1.1rem;margin:0 0 4px}
 .bar{display:flex;gap:12px;align-items:center;margin:8px 0}
 button{background:var(--btn);color:#fff;border:0;border-radius:6px;padding:6px 16px;font:inherit;cursor:pointer}
 button.ok{background:#2e7d32}
-pre{background:var(--box);padding:12px;border-radius:6px;white-space:pre-wrap;word-wrap:break-word;font:14px/1.5 system-ui,sans-serif;margin:0}
+table{border-collapse:collapse;width:100%;margin-top:12px}td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top}\npre{background:var(--box);padding:12px;border-radius:6px;white-space:pre-wrap;word-wrap:break-word;font:14px/1.5 system-ui,sans-serif;margin:0}
 </style></head><body>
 <h1>LinkedIn changes</h1>
 <p class="lead">${pending.length} change(s), in order. Copy each one into LinkedIn. When you are done with all of them, tell Claude "done".</p>
